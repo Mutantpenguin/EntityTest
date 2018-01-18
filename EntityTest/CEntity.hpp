@@ -9,6 +9,7 @@
 #include "CLogger.hpp"
 
 #include "CTransform.hpp"
+#include "CBoundingBox.hpp"
 
 class CBaseComponent;
 
@@ -104,6 +105,7 @@ public:
 	const std::uint32_t Id = ++s_lastId;
 
 	CTransform Transform;
+	CBoundingBox BoundingBox;
 
 private:
 	std::unordered_map< std::type_index, const std::shared_ptr< CBaseComponent > > m_components;

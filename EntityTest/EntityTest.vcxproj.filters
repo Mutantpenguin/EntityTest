@@ -63,6 +63,12 @@
     <ClInclude Include="CPlayerComponent.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="CBoundingBox.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="COcTree.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -99,6 +105,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerComponent.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoundingBox.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="COcTree.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

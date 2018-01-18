@@ -147,11 +147,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBaseComponent.hpp" />
+    <ClInclude Include="CBoundingBox.hpp" />
     <ClInclude Include="CCameraComponent.hpp" />
     <ClInclude Include="CCameraFreeComponent.hpp" />
     <ClInclude Include="CEntity.hpp" />
     <ClInclude Include="CFrustum.hpp" />
     <ClInclude Include="CLogger.hpp" />
+    <ClInclude Include="COcTree.hpp" />
     <ClInclude Include="CPhysicsComponent.hpp" />
     <ClInclude Include="CPlane.hpp" />
     <ClInclude Include="CPlayerComponent.hpp" />
@@ -163,10 +165,12 @@
     <ClInclude Include="CWorld.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="CCameraComponent.cpp" />
     <ClCompile Include="CCameraFreeComponent.cpp" />
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CFrustum.cpp" />
+    <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPhysicsComponent.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CPlayerComponent.cpp" />
