@@ -55,19 +55,25 @@ int main()
 			}
 		}
 
-		for (int i = 10; i < 1000; i++)
 		{
-			auto ent = scene->CreateEntity("entity_" + std::to_string(i));
-
-			if (rand() % 10 == 2)
+			const auto start = std::chrono::system_clock::now();
+			for (int i = 10; i < 100000; i++)
 			{
-				ent->Add<CPhysicsComponent>();
-			}
+				auto ent = scene->CreateEntity("entity_" + std::to_string(i));
 
-			if (rand() % 10 > 4 )
-			{
-				ent->Add<CPlayerComponent>();
+				if (rand() % 10 == 2)
+				{
+					ent->Add<CPhysicsComponent>();
+				}
+
+				if (rand() % 10 > 4)
+				{
+					ent->Add<CPlayerComponent>();
+				}
 			}
+			const auto end = std::chrono::system_clock::now();
+			const std::chrono::duration<double> diff = end - start;
+			CLogger::Log("creating entities : " + std::to_string(diff.count()) + " s\n");
 		}
 
 		{
@@ -103,9 +109,8 @@ int main()
 				}
 			}
 		}
+	
+		return 0;
 	}
-
-
-    return 0;
 }
 

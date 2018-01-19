@@ -159,6 +159,7 @@
     <ClInclude Include="CPlayerComponent.hpp" />
     <ClInclude Include="CScene.hpp" />
     <ClInclude Include="CSize.hpp" />
+    <ClInclude Include="EComponentIndex.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="CTransform.hpp" />

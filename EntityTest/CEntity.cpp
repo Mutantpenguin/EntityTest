@@ -13,7 +13,10 @@ CEntity::CEntity(const std::string &name, const std::uint16_t sceneId) :
 
 CEntity::~CEntity()
 {
-	m_components.clear();
+	for (auto &component : m_components)
+	{
+		component = nullptr;
+	}
 }
 
 const std::string &CEntity::Name(void) const

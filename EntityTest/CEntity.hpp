@@ -3,10 +3,12 @@
 
 #include <string>
 #include <memory>
-#include <unordered_map>
+#include <array>
 #include <typeindex>
 
 #include "CLogger.hpp"
+
+#include "EComponentIndex.hpp"
 
 #include "CTransform.hpp"
 #include "CBoundingBox.hpp"
@@ -26,11 +28,7 @@ public:
 	template< typename T, typename... Args >
 	std::shared_ptr<T> Add( Args... args )
 	{
-		auto type_index = std::type_index(typeid(T));
-
-		const auto it = m_components.find(type_index);
-
-		if (it != std::cend(m_components))
+		if (m_components[ T::Index ] != nullptr)
 		{
 			CLogger::Log("entity '" + m_name + "' with id '" + std::to_string(Id) + "' already has a component of type '" + typeid(T).name() + "'" );
 
@@ -39,7 +37,7 @@ public:
 		else
 		{
 			auto component = std::make_shared< T >(shared_from_this(), args...);
-			m_components.insert( std::make_pair(type_index, component ) );
+			m_components[T::Index] = component;
 
 			return(component);
 		}
@@ -81,12 +79,10 @@ public:
 		}
 	};
 
-	template < typename Last >
+	template < typename T >
 	bool HasComponents() const
 	{
-		const auto it = m_components.find(std::type_index(typeid(Last)));
-
-		if (it == std::cend(m_components))
+		if (m_components[T::Index]==nullptr)
 		{
 			return(false);
 		}
@@ -108,7 +104,7 @@ public:
 	CBoundingBox BoundingBox;
 
 private:
-	std::unordered_map< std::type_index, const std::shared_ptr< CBaseComponent > > m_components;
+	std::array< std::shared_ptr< CBaseComponent >, static_cast< std::uint16_t>( EComponentIndex::MAX) > m_components;
 
 	const std::string m_name;
 
