@@ -39,7 +39,7 @@ public:
 		{
 			if (entity->HasComponents<T_Components...>())
 			{
-				entities.emplace_back(entity);
+				entities.push_back(entity);
 			}
 		}
 
