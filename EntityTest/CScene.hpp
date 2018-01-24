@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <set>
+#include <functional>
 
 #include "CEntity.hpp"
 
@@ -44,6 +45,18 @@ public:
 		}
 
 		return(entities);
+	};
+
+	template<typename... T_Components>
+	void Each( std::function<void(const std::shared_ptr<const CEntity>&)> lambda)
+	{
+		for ( const auto &entity : m_entities)
+		{
+			if (entity->HasComponents<T_Components...>())
+			{
+				lambda( entity );
+			}
+		}
 	};
 
 private:
