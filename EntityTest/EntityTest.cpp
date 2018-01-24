@@ -57,7 +57,7 @@ int main()
 
 		{
 			const auto start = std::chrono::system_clock::now();
-			for (int i = 10; i < 100000; i++)
+			for (int i = 10; i < 10000; i++)
 			{
 				auto ent = scene->CreateEntity("entity_" + std::to_string(i));
 
@@ -68,7 +68,17 @@ int main()
 
 				if (rand() % 10 > 4)
 				{
-					ent->Add<CPlayerComponent>();
+					auto comp = ent->Add<CPlayerComponent>();
+
+					if (rand() % 10 > 4)
+					{
+						comp->Team = 1;
+					}
+					else
+					{
+						comp->Team = 2;
+					}
+
 				}
 			}
 			const auto end = std::chrono::system_clock::now();
@@ -109,7 +119,30 @@ int main()
 				}
 			}
 		}
-	
+
+		{
+			const auto start = std::chrono::system_clock::now();
+			//scene->Each<CCameraFreeComponent>([](const std::shared_ptr<const CEntity> &entity)
+			scene->Each<CPhysicsComponent, CPlayerComponent>([](const std::shared_ptr<const CEntity> &entity)
+			{
+				//CLogger::Log("\t - " + entity->Name() + " / " + entity->Get<CPlayerComponent>()->Team);
+				const auto blah1 = entity->Get<CPlayerComponent>();
+				const auto mult = blah1->Team * blah1->Team;
+				//const auto blah1 = entity->Get<CPlayerComponent>();
+
+				const auto blah3 = entity->Get<CCameraFreeComponent>();
+			});
+			const auto end = std::chrono::system_clock::now();
+			const std::chrono::duration<double> diff = end - start;
+			CLogger::Log("Time iterate: " + std::to_string(diff.count()) + " s\n");
+		}
+
+		/*
+		for (std::uint16_t i = 0; i < 100000; i++)
+		{
+
+		}
+	*/
 		return 0;
 	}
 }
