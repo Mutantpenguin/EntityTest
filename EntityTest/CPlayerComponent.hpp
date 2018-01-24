@@ -11,5 +11,7 @@ public:
 	virtual ~CPlayerComponent();
 
 	static const std::uint16_t Index = static_cast<std::uint16_t>(EComponentIndex::PLAYER);
+
+	std::uint8_t Team;
 };
 
