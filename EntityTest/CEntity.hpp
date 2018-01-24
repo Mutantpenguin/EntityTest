@@ -43,31 +43,25 @@ public:
 		}
 	};
 
-	template< typename T, typename... Args >
+	template< typename T >
 	void Remove()
 	{
-		auto type_index = std::type_index(typeid(T));
-
-		const auto it = m_components.find(type_index);
-
-		if (it == std::cend(m_components))
+		if (!HasComponents<T>())
 		{
 			CLogger::Log("entity '" + m_name + "' with id '" + std::to_string(Id) + "' does not have a component of type '" + typeid(T).name() + "'");
 		}
 		else
 		{
-			m_components.erase(it);
+			m_components[T::Index] = nullptr;
 		}
 	};
 
-	template< typename T, typename... Args >
-	std::shared_ptr< T > Get()
+	template< typename T >
+	std::shared_ptr< T > Get() const
 	{
-		auto type_index = std::type_index(typeid(T));
+		const auto component = m_components[T::Index];
 
-		const auto it = m_components.find(type_index);
-
-		if (it == std::cend(m_components))
+		if (nullptr == component)
 		{
 			CLogger::Log("entity '" + m_name + "' with id '" + std::to_string(Id) + "' does not have a component of type '" + typeid(T).name() + "'");
 
@@ -75,7 +69,7 @@ public:
 		}
 		else
 		{
-			return(std::static_cast<T>(*it));
+			return(std::static_pointer_cast<T>(component));
 		}
 	};
 
