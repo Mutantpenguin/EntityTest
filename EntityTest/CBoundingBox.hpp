@@ -15,7 +15,7 @@ public:
 		OUTSIDE
 	};
 
-	eIntersectionType Intersect(const CBoundingBox &boundingBox) const;
+	eIntersectionType Intersect( const CBoundingBox &boundingBox ) const;
 
 	const glm::vec3 &Min() const;
 	const glm::vec3 &Max() const;

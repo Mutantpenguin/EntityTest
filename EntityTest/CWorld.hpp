@@ -6,8 +6,8 @@
 class CWorld final
 {
 private:
-	CWorld(const CWorld& rhs);
-	CWorld& operator=(const CWorld& rhs);
+	CWorld( const CWorld& rhs );
+	CWorld& operator=( const CWorld& rhs );
 
 public:
 	CWorld();

@@ -6,26 +6,26 @@
 class CCameraFreeComponent final : public CCameraComponent
 {
 private:
-	CCameraFreeComponent(const CCameraFreeComponent& rhs);
-	CCameraFreeComponent& operator=(const CCameraFreeComponent& rhs);
+	CCameraFreeComponent( const CCameraFreeComponent& rhs );
+	CCameraFreeComponent& operator=( const CCameraFreeComponent& rhs );
 
 public:
-	CCameraFreeComponent(const std::shared_ptr< CEntity > &parent, float aspectRatio, float fov, float zNear, float zFar);
+	CCameraFreeComponent( const std::shared_ptr< CEntity > &parent, float aspectRatio, float fov, float zNear, float zFar );
 	virtual ~CCameraFreeComponent();
 
-	void FOV(float fov);
-	float FOV(void) const;
+	void FOV( float fov );
+	float FOV( void ) const;
 
-	void	MoveForward(const float distance);
-	void	MoveBackward(const float distance);
-	void	MoveUp(const float distance);
-	void	MoveDown(const float distance);
-	void	MoveLeft(const float distance);
-	void	MoveRight(const float distance);
+	void	MoveForward( const float distance );
+	void	MoveBackward( const float distance );
+	void	MoveUp( const float distance );
+	void	MoveDown( const float distance );
+	void	MoveLeft( const float distance );
+	void	MoveRight( const float distance );
 
-	void Rotate(const float pitchAngle, const float yawAngle);
+	void Rotate( const float pitchAngle, const float yawAngle );
 
-	virtual const glm::mat4 ProjectionMatrix(void) const override;
+	virtual const glm::mat4 ProjectionMatrix( void ) const override;
 
 private:
 	const float	m_aspectRatio;

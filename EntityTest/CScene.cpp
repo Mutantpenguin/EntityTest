@@ -7,43 +7,41 @@
 std::uint16_t CScene::s_lastId = 0;
 
 CScene::CScene()
-{
-}
+{}
 
 CScene::~CScene()
+{}
+
+std::shared_ptr< CEntity > CScene::CreateEntity( const std::string &name )
 {
+	auto entity = std::make_shared< CEntity >( name, m_id );
+
+	m_entities.insert( entity );
+
+	return( entity );
 }
 
-std::shared_ptr< CEntity > CScene::CreateEntity(const std::string &name)
+void CScene::DeleteEntity( const std::shared_ptr< const CEntity > &entity )
 {
-	auto entity = std::make_shared< CEntity >(name, m_id);
-
-	m_entities.insert(entity);
-
-	return(entity);
+	m_entities.erase( entity );
 }
 
-void CScene::DeleteEntity(const std::shared_ptr< const CEntity > &entity)
+const std::shared_ptr< const CEntity > &CScene::Camera( void ) const
 {
-	m_entities.erase(entity);
+	return( m_cameraEntity );
 }
 
-const std::shared_ptr< const CEntity > &CScene::Camera(void) const
+void CScene::Camera( const std::shared_ptr< const CEntity > &cameraEntity )
 {
-	return(m_cameraEntity);
-}
-
-void CScene::Camera(const std::shared_ptr< const CEntity > &cameraEntity )
-{
-	if (!cameraEntity->HasComponents<CCameraComponent>())
+	if( !cameraEntity->HasComponents<CCameraComponent>() )
 	{
-		CLogger::Log("entity '" + cameraEntity->Name() + "' with id '" + std::to_string(cameraEntity->Id) + "' has no CCameraComponent");
+		CLogger::Log( "entity '" + cameraEntity->Name() + "' with id '" + std::to_string( cameraEntity->Id ) + "' has no CCameraComponent" );
 		return;
 	}
 
-	if(cameraEntity->m_sceneId != m_id )
+	if( cameraEntity->m_sceneId != m_id )
 	{
-		CLogger::Log("camera '" + cameraEntity->Name() + "' with id '" + std::to_string(cameraEntity->Id) + "' does not belong to this scene");
+		CLogger::Log( "camera '" + cameraEntity->Name() + "' with id '" + std::to_string( cameraEntity->Id ) + "' does not belong to this scene" );
 	}
 
 	m_cameraEntity = cameraEntity;

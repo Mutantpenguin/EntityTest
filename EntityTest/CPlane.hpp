@@ -6,23 +6,23 @@
 class CPlane
 {
 public:
-	CPlane(void);
+	CPlane( void );
 
-	CPlane(const glm::vec3 &point, const glm::vec3 &normal);
+	CPlane( const glm::vec3 &point, const glm::vec3 &normal );
 
-	void SetNormal(const glm::vec3 &normal);
-	const glm::vec3 &Normal(void) const;
+	void SetNormal( const glm::vec3 &normal );
+	const glm::vec3 &Normal( void ) const;
 
-	void SetDistance(float distance);
-	float Distance(void) const;
+	void SetDistance( float distance );
+	float Distance( void ) const;
 
-	void Normalize(void);
+	void Normalize( void );
 
-	float DistanceToPlane(const glm::vec3 &point) const;
+	float DistanceToPlane( const glm::vec3 &point ) const;
 
 private:
-	glm::vec3	m_normal{ 0.0f, 0.0f, 0.0f };
-	float		m_distance{ 0.0f };
+	glm::vec3	m_normal { 0.0f, 0.0f, 0.0f };
+	float		m_distance { 0.0f };
 };
 
 #endif // CPLANE_HPP

@@ -14,7 +14,7 @@ public:
 	COcTree( const CBoundingBox &region );
 	~COcTree();
 
-	void AddEntity(const std::shared_ptr<CEntity> &entity);
+	void AddEntity( const std::shared_ptr<CEntity> &entity );
 
 private:
 	CBoundingBox m_region;

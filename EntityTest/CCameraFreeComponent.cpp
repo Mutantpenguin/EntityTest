@@ -5,24 +5,22 @@
 
 #include "CWorld.hpp"
 
-CCameraFreeComponent::CCameraFreeComponent(const std::shared_ptr< CEntity > &parent, float aspectRatio, float fov, float zNear, float zFar) :
-	CCameraComponent(parent,zNear, zFar),
-	m_aspectRatio{ aspectRatio },
-	m_fov{ fov }
-{
-}
+CCameraFreeComponent::CCameraFreeComponent( const std::shared_ptr< CEntity > &parent, float aspectRatio, float fov, float zNear, float zFar ) :
+	CCameraComponent( parent, zNear, zFar ),
+	m_aspectRatio { aspectRatio },
+	m_fov { fov }
+{}
 
 CCameraFreeComponent::~CCameraFreeComponent()
-{
-}
+{}
 
-void CCameraFreeComponent::FOV(float fov)
+void CCameraFreeComponent::FOV( float fov )
 {
-	if (fov > 155)
+	if( fov > 155 )
 	{
 		m_fov = 155;
 	}
-	else if (fov < 25)
+	else if( fov < 25 )
 	{
 		m_fov = 25;
 	}
@@ -32,47 +30,47 @@ void CCameraFreeComponent::FOV(float fov)
 	}
 }
 
-float CCameraFreeComponent::FOV(void) const
+float CCameraFreeComponent::FOV( void ) const
 {
-	return(m_fov);
+	return( m_fov );
 }
 
-void CCameraFreeComponent::MoveForward(const float distance)
+void CCameraFreeComponent::MoveForward( const float distance )
 {
-	m_parent->Transform.Position(m_parent->Transform.Position() - (Direction() * distance));
+	m_parent->Transform.Position( m_parent->Transform.Position() - ( Direction() * distance ) );
 }
 
-void CCameraFreeComponent::MoveBackward(const float distance)
+void CCameraFreeComponent::MoveBackward( const float distance )
 {
-	m_parent->Transform.Position(m_parent->Transform.Position() + (Direction() * distance));
+	m_parent->Transform.Position( m_parent->Transform.Position() + ( Direction() * distance ) );
 }
 
-void CCameraFreeComponent::MoveUp(const float distance)
+void CCameraFreeComponent::MoveUp( const float distance )
 {
-	m_parent->Transform.Position(m_parent->Transform.Position() + (CWorld::Y * distance));
+	m_parent->Transform.Position( m_parent->Transform.Position() + ( CWorld::Y * distance ) );
 }
 
-void CCameraFreeComponent::MoveDown(const float distance)
+void CCameraFreeComponent::MoveDown( const float distance )
 {
-	m_parent->Transform.Position(m_parent->Transform.Position() - (CWorld::Y * distance));
+	m_parent->Transform.Position( m_parent->Transform.Position() - ( CWorld::Y * distance ) );
 }
 
-void CCameraFreeComponent::MoveLeft(const float distance)
+void CCameraFreeComponent::MoveLeft( const float distance )
 {
-	m_parent->Transform.Position(m_parent->Transform.Position() - (glm::cross(Up(), Direction()) * distance));
+	m_parent->Transform.Position( m_parent->Transform.Position() - ( glm::cross( Up(), Direction() ) * distance ) );
 }
 
-void CCameraFreeComponent::MoveRight(const float distance)
+void CCameraFreeComponent::MoveRight( const float distance )
 {
-	m_parent->Transform.Position(m_parent->Transform.Position() + (glm::cross(Up(), Direction()) * distance));
+	m_parent->Transform.Position( m_parent->Transform.Position() + ( glm::cross( Up(), Direction() ) * distance ) );
 }
 
-void CCameraFreeComponent::Rotate(const float pitchAngle, const float yawAngle)
+void CCameraFreeComponent::Rotate( const float pitchAngle, const float yawAngle )
 {
-	m_parent->Transform.Orientation(glm::angleAxis(glm::radians(pitchAngle), CWorld::X) * m_parent->Transform.Orientation() * glm::angleAxis(glm::radians(yawAngle), CWorld::Y));
+	m_parent->Transform.Orientation( glm::angleAxis( glm::radians( pitchAngle ), CWorld::X ) * m_parent->Transform.Orientation() * glm::angleAxis( glm::radians( yawAngle ), CWorld::Y ) );
 }
 
-const glm::mat4 CCameraFreeComponent::ProjectionMatrix(void) const
+const glm::mat4 CCameraFreeComponent::ProjectionMatrix( void ) const
 {
-	return(glm::perspective(glm::radians(m_fov), m_aspectRatio, m_zNear, m_zFar));
+	return( glm::perspective( glm::radians( m_fov ), m_aspectRatio, m_zNear, m_zFar ) );
 }

@@ -6,9 +6,9 @@
 class CPhysicsComponent : public CBaseComponent
 {
 public:
-	CPhysicsComponent(const std::shared_ptr< CEntity > parent);
+	CPhysicsComponent( const std::shared_ptr< CEntity > parent );
 	virtual ~CPhysicsComponent();
 
-	static const std::uint16_t Index = static_cast<std::uint16_t>(EComponentIndex::PHYSICS);
+	static const std::uint16_t Index = static_cast<std::uint16_t>( EComponentIndex::PHYSICS );
 };
 

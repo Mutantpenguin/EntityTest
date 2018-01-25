@@ -24,35 +24,35 @@ public:
 	CScene();
 	~CScene();
 
-	std::shared_ptr< CEntity > CreateEntity(const std::string &name );
-	void DeleteEntity(const std::shared_ptr< const CEntity > &entity);
+	std::shared_ptr< CEntity > CreateEntity( const std::string &name );
+	void DeleteEntity( const std::shared_ptr< const CEntity > &entity );
 
-	const std::shared_ptr< const CEntity > &Camera(void) const;
-	void Camera(const std::shared_ptr< const CEntity > &cameraEntity);
+	const std::shared_ptr< const CEntity > &Camera( void ) const;
+	void Camera( const std::shared_ptr< const CEntity > &cameraEntity );
 
 	template<typename... T_Components>
 	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithComponents()
 	{
 		std::vector<std::shared_ptr<const CEntity>> entities;
-		entities.reserve(m_entities.size()/4);
+		entities.reserve( m_entities.size() / 4 );
 
-		for (const auto &entity : m_entities)
+		for( const auto &entity : m_entities )
 		{
-			if (entity->HasComponents<T_Components...>())
+			if( entity->HasComponents<T_Components...>() )
 			{
-				entities.push_back(entity);
+				entities.push_back( entity );
 			}
 		}
 
-		return(entities);
+		return( entities );
 	};
 
 	template<typename... T_Components>
-	void Each( std::function<void(const std::shared_ptr<const CEntity>&)> lambda)
+	void Each( std::function<void( const std::shared_ptr<const CEntity>& )> lambda )
 	{
-		for ( const auto &entity : m_entities)
+		for( const auto &entity : m_entities )
 		{
-			if (entity->HasComponents<T_Components...>())
+			if( entity->HasComponents<T_Components...>() )
 			{
 				lambda( entity );
 			}

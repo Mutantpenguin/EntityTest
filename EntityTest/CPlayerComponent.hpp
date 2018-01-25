@@ -7,10 +7,10 @@ class CPlayerComponent :
 	public CBaseComponent
 {
 public:
-	CPlayerComponent(const std::shared_ptr< CEntity > &parent);
+	CPlayerComponent( const std::shared_ptr< CEntity > &parent );
 	virtual ~CPlayerComponent();
 
-	static const std::uint16_t Index = static_cast<std::uint16_t>(EComponentIndex::PLAYER);
+	static const std::uint16_t Index = static_cast<std::uint16_t>( EComponentIndex::PLAYER );
 
 	std::uint8_t Team;
 };
