@@ -31,7 +31,7 @@ public:
 	void Camera( const std::shared_ptr< const CEntity > &cameraEntity );
 
 	template<typename... T_Components>
-	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithComponents()
+	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithComponents() const
 	{
 		std::vector<std::shared_ptr<const CEntity>> entities;
 		entities.reserve( m_entities.size() / 4 );
@@ -48,7 +48,7 @@ public:
 	};
 
 	template<typename... T_Components>
-	void Each( std::function<void( const std::shared_ptr<const CEntity>& )> lambda )
+	void Each( std::function<void( const std::shared_ptr<const CEntity>& )> lambda ) const
 	{
 		for( const auto &entity : m_entities )
 		{
