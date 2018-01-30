@@ -5,6 +5,8 @@
 #include <set>
 #include <functional>
 
+#include <glm/gtx/norm.hpp>
+
 #include "CEntity.hpp"
 
 #include "CCameraComponent.hpp"
@@ -57,6 +59,22 @@ public:
 				lambda( entity );
 			}
 		}
+	};
+
+	template<typename... T_Components>
+	void EachInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const
+	{
+		const auto radiusSquared = std::pow( radius, 2 );
+
+		Each<T_Components...>( [ &position, &radiusSquared, &lambda2 ] ( const std::shared_ptr<const CEntity> &entity )
+		{
+			// TODO use OcTree
+			// TODO use BoundingSphere/BoundingBox of entity?
+			if( glm::length2( position - entity->Transform.Position() ) <= radiusSquared )
+			{
+				lambda2( entity );
+			}
+		} );
 	};
 
 private:

@@ -63,6 +63,7 @@ int main()
 			if( rand() % 10 == 2 )
 			{
 				ent->Add<CPhysicsComponent>();
+				ent->Transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
 			}
 
 			if( rand() % 10 > 4 )
@@ -129,11 +130,25 @@ int main()
 			const auto mult = blah1->Team * blah1->Team;
 			//const auto blah1 = entity->Get<CPlayerComponent>();
 
-			const auto blah3 = entity->Get<CCameraFreeComponent>();
+			//const auto blah3 = entity->Get<CCameraFreeComponent>();
 		} );
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time iterate: " + std::to_string( diff.count() ) + " s\n" );
+	}
+
+	{
+		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
+		const float radius { 30.0f };
+		const auto start = std::chrono::system_clock::now();
+		std::uint16_t counter = 0;
+		scene->EachInRadius<CPhysicsComponent>( position, radius, [&counter] ( const std::shared_ptr<const CEntity> &entity )
+		{
+			counter++;
+		} );
+		const auto end = std::chrono::system_clock::now();
+		const std::chrono::duration<double> diff = end - start;
+		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() ) + " s\n" );
 	}
 
 	return( 0 );
