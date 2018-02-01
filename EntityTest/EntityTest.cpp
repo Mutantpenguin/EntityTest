@@ -14,49 +14,19 @@
 
 int main()
 {
+	const std::uint32_t numberOfEntities = 10000;
+
 	auto scene = std::make_shared<CScene>();
 
-	{
-		auto gnahEntity = scene->CreateEntity( "gnah" );
+	CLogger::Log( "----------------------------------------------------------------------------------------" );
+	CLogger::Log( "entity count: " + std::to_string( numberOfEntities ) );
+	CLogger::Log( "----------------------------------------------------------------------------------------" );
 
-		auto cam = gnahEntity->Add<CCameraFreeComponent>( 800.0f / 600.0f, 90.0f, 0.0f, 100.f );
-		auto phy = gnahEntity->Add<CPhysicsComponent>();
-
-		// TODO gnahEntity->Remove<CCameraFreeComponent>();
-
-		if( gnahEntity->HasComponents<CPhysicsComponent>() )
-		{
-			CLogger::Log( "has physics" );
-		}
-
-		if( gnahEntity->HasComponents<CCameraFreeComponent>() )
-		{
-			CLogger::Log( "has camera" );
-		}
-
-		if( gnahEntity->HasComponents<CPlayerComponent>() )
-		{
-			CLogger::Log( "is a player" );
-		}
-		else
-		{
-			CLogger::Log( "is a NOT player" );
-		}
-
-		if( gnahEntity->HasComponents<CPhysicsComponent, CCameraFreeComponent>() )
-		{
-			CLogger::Log( "has physics AND camera" );
-		}
-
-		if( gnahEntity->HasComponents<CPhysicsComponent, CPlayerComponent>() )
-		{
-			CLogger::Log( "has physics AND player" );
-		}
-	}
+	CLogger::Log( "" );
 
 	{
 		const auto start = std::chrono::system_clock::now();
-		for( int i = 10; i < 10000; i++ )
+		for( int i = 10; i < numberOfEntities; i++ )
 		{
 			auto ent = scene->CreateEntity( "entity_" + std::to_string( i ) );
 
@@ -83,48 +53,53 @@ int main()
 		}
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "creating entities : " + std::to_string( diff.count() ) + " s\n" );
+		CLogger::Log( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
 	{
+		CLogger::Log( "entities with physics:" );
 		const auto start = std::chrono::system_clock::now();
 		const auto componentsWithPhysics = scene->GetEntitiesWithComponents<CPhysicsComponent>();
-		const auto end = std::chrono::system_clock::now();
-		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "Time to fill and iterate a vector of " + std::to_string( componentsWithPhysics.size() ) + " : " + std::to_string( diff.count() ) + " s\n" );
 
 		if( componentsWithPhysics.size() > 0 )
 		{
-			CLogger::Log( "entities with physics:" );
 			for( const auto entity : componentsWithPhysics )
 			{
 				//CLogger::Log("\t - " + entity->Name());
 			}
 		}
+
+		const auto end = std::chrono::system_clock::now();
+		const std::chrono::duration<double> diff = end - start;
+		CLogger::Log( "Time to fill and iterate a vector of " + std::to_string( componentsWithPhysics.size() ) + " : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
 	{
+		CLogger::Log( "entities with physics and player:" );
 		const auto start = std::chrono::system_clock::now();
 		const auto componentsWithPhysicsAndPlayer = scene->GetEntitiesWithComponents<CPhysicsComponent, CPlayerComponent>();
-		const auto end = std::chrono::system_clock::now();
-		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "Time to fill and iterate a vector of " + std::to_string( componentsWithPhysicsAndPlayer.size() ) + " : " + std::to_string( diff.count() ) + " s\n" );
 
 		if( componentsWithPhysicsAndPlayer.size() > 0 )
 		{
-			CLogger::Log( "entities with physics and player:" );
 			for( const auto entity : componentsWithPhysicsAndPlayer )
 			{
 				//CLogger::Log("\t - " + entity->Name());
 			}
 		}
+
+		const auto end = std::chrono::system_clock::now();
+		const std::chrono::duration<double> diff = end - start;
+		CLogger::Log( "Time to fill and iterate a vector of " + std::to_string( componentsWithPhysicsAndPlayer.size() ) + " : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
 	{
+		CLogger::Log( "entities with physics and player:" );
 		const auto start = std::chrono::system_clock::now();
 		//scene->Each<CCameraFreeComponent>([](const std::shared_ptr<const CEntity> &entity)
-		scene->Each<CPhysicsComponent, CPlayerComponent>( [] ( const std::shared_ptr<const CEntity> &entity )
+		std::uint16_t counter = 0;
+		scene->Each<CPhysicsComponent, CPlayerComponent>( [&counter] ( const std::shared_ptr<const CEntity> &entity )
 		{
+			counter++;
 			//CLogger::Log("\t - " + entity->Name() + " / " + entity->Get<CPlayerComponent>()->Team);
 			const auto blah1 = entity->Get<CPlayerComponent>();
 			const auto mult = blah1->Team * blah1->Team;
@@ -134,10 +109,11 @@ int main()
 		} );
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "Time iterate: " + std::to_string( diff.count() ) + " s\n" );
+		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
 	{
+		CLogger::Log( "entities with physics in radius:" );
 		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
 		const float radius { 30.0f };
 		const auto start = std::chrono::system_clock::now();
@@ -148,7 +124,7 @@ int main()
 		} );
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() ) + " s\n" );
+		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
 	return( 0 );
