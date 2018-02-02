@@ -92,6 +92,12 @@ public:
 		return( HasComponents<First>() && HasComponents<Second, Rest...>() );
 	};
 
+	template < typename First, typename Second, typename ... Rest >
+	bool HasAnyComponents() const
+	{
+		return( HasComponents<First>() || HasComponents<Second, Rest...>() );
+	};
+
 	const std::uint32_t Id = ++s_lastId;
 
 	CTransform Transform;

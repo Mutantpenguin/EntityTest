@@ -50,7 +50,24 @@ public:
 	};
 
 	template<typename... T_Components>
-	void Each( std::function<void( const std::shared_ptr<const CEntity>& )> lambda ) const
+	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithAnyComponent() const
+	{
+		std::vector<std::shared_ptr<const CEntity>> entities;
+		entities.reserve( m_entities.size() / 4 );
+
+		for( const auto &entity : m_entities )
+		{
+			if( entity->HasAnyComponents<T_Components...>() )
+			{
+				entities.push_back( entity );
+			}
+		}
+
+		return( entities );
+	};
+
+	template<typename... T_Components>
+	void EachWithComponents( std::function<void( const std::shared_ptr<const CEntity>& )> lambda ) const
 	{
 		for( const auto &entity : m_entities )
 		{
@@ -62,14 +79,40 @@ public:
 	};
 
 	template<typename... T_Components>
-	void EachInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const
+	void EachWithComponentsInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const
 	{
 		const auto radiusSquared = std::pow( radius, 2 );
 
-		Each<T_Components...>( [ &position, &radiusSquared, &lambda2 ] ( const std::shared_ptr<const CEntity> &entity )
+		EachWithComponents<T_Components...>( [ &position, &radiusSquared, &lambda2 ] ( const std::shared_ptr<const CEntity> &entity )
 		{
 			// TODO use OcTree
-			// TODO use BoundingSphere/BoundingBox of entity?
+			if( glm::length2( position - entity->Transform.Position() ) <= radiusSquared )
+			{
+				lambda2( entity );
+			}
+		} );
+	};
+
+	template<typename... T_Components>
+	void EachWithAnyComponents( std::function<void( const std::shared_ptr<const CEntity>& )> lambda ) const
+	{
+		for( const auto &entity : m_entities )
+		{
+			if( entity->HasAnyComponents<T_Components...>() )
+			{
+				lambda( entity );
+			}
+		}
+	};
+
+	template<typename... T_Components>
+	void EachWithAnyComponentsInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const
+	{
+		const auto radiusSquared = std::pow( radius, 2 );
+
+		EachWithAnyComponents<T_Components...>( [ &position, &radiusSquared, &lambda2 ] ( const std::shared_ptr<const CEntity> &entity )
+		{
+			// TODO use OcTree
 			if( glm::length2( position - entity->Transform.Position() ) <= radiusSquared )
 			{
 				lambda2( entity );

@@ -97,7 +97,7 @@ int main()
 		const auto start = std::chrono::system_clock::now();
 		//scene->Each<CCameraFreeComponent>([](const std::shared_ptr<const CEntity> &entity)
 		std::uint16_t counter = 0;
-		scene->Each<CPhysicsComponent, CPlayerComponent>( [&counter] ( const std::shared_ptr<const CEntity> &entity )
+		scene->EachWithComponents<CPhysicsComponent, CPlayerComponent>( [&counter] ( const std::shared_ptr<const CEntity> &entity )
 		{
 			counter++;
 			//CLogger::Log("\t - " + entity->Name() + " / " + entity->Get<CPlayerComponent>()->Team);
@@ -118,7 +118,22 @@ int main()
 		const float radius { 30.0f };
 		const auto start = std::chrono::system_clock::now();
 		std::uint16_t counter = 0;
-		scene->EachInRadius<CPhysicsComponent>( position, radius, [&counter] ( const std::shared_ptr<const CEntity> &entity )
+		scene->EachWithComponentsInRadius<CPhysicsComponent>( position, radius, [&counter] ( const std::shared_ptr<const CEntity> &entity )
+		{
+			counter++;
+		} );
+		const auto end = std::chrono::system_clock::now();
+		const std::chrono::duration<double> diff = end - start;
+		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
+	}
+
+	{
+		CLogger::Log( "entities with physics and/or player in radius:" );
+		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
+		const float radius { 30.0f };
+		const auto start = std::chrono::system_clock::now();
+		std::uint16_t counter = 0;
+		scene->EachWithAnyComponentsInRadius<CPhysicsComponent, CPlayerComponent>( position, radius, [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
 		{
 			counter++;
 		} );
