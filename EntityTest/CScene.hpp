@@ -1,42 +1,68 @@
-#ifndef CSCENE_HPP
-#define CSCENE_HPP
+#pragma once
 
-#include <vector>
-#include <set>
+#include <unordered_map>
 #include <functional>
 
 #include <glm/gtx/norm.hpp>
 
 #include "CEntity.hpp"
 
-#include "CCameraComponent.hpp"
-
-class CScene
+template <typename... Types>
+class CScene final
 {
 public:
-	struct MeshInstance
+	CScene()
+	{}
+
+	~CScene()
+	{}
+	
+	CEntity &CreateEntity( const std::string &name )
 	{
-		CTransform Transform;
-		float viewDepth;
+		auto id = s_lastId++;
+
+		m_entities.insert( std::make_pair( id, CEntity( name ) ) );
+
+		return( m_entities.at( id ) );
+	}
+
+	void DeleteEntity( const std::uint32_t &id )
+	{
+		m_entities.erase( id );
+
+		// TODO iterate components and delete them
+	}
+
+	template< typename T, typename... Args >
+	T &AddComponent( const CEntity &entity, Args... args )
+	{
+		auto &componentContainer = std::get<Container<T>>( m_components );
+	
+		auto it = componentContainer.find( entity.Id );
+
+		if( it != std::cend( componentContainer ) )
+		{
+			CLogger::Log( "entity '" + entity.Name() + "' with id '" + std::to_string( entity.Id ) + "' already has a component of type '" + typeid( T ).name() + "'" );
+
+			return( it->second );
+		}
+		else
+		{
+			auto it = componentContainer.emplace( entity.Id, T( args... ) );
+
+			return( it.first->second );
+		}
 	};
 
-	using TMeshes = std::vector< MeshInstance >;
+	template<typename T>
+	using Container = std::unordered_map< std::uint32_t, T >;
 
-public:
-	CScene();
-	~CScene();
-
-	std::shared_ptr< CEntity > CreateEntity( const std::string &name );
-	void DeleteEntity( const std::shared_ptr< const CEntity > &entity );
-
-	const std::shared_ptr< const CEntity > &Camera( void ) const;
-	void Camera( const std::shared_ptr< const CEntity > &cameraEntity );
-
+	/* TODO
 	template<typename... T_Components>
-	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithComponents() const
+	std::vector<const CEntity &> GetEntitiesWithComponents() const
 	{
-		std::vector<std::shared_ptr<const CEntity>> entities;
-		entities.reserve( m_entities.size() / 4 );
+		std::vector<const CEntity &> entities;
+		entities.reserve( m_entities.size() / 10 );
 
 		for( const auto &entity : m_entities )
 		{
@@ -49,6 +75,7 @@ public:
 		return( entities );
 	};
 
+	
 	template<typename... T_Components>
 	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithAnyComponent() const
 	{
@@ -119,15 +146,12 @@ public:
 			}
 		} );
 	};
+	*/
 
 private:
-	std::set< std::shared_ptr< const CEntity > > m_entities;
+	Container<CEntity> m_entities;
+	
+	std::tuple<Container<Types>...> m_components;
 
-	std::shared_ptr< const CEntity > m_cameraEntity;
-
-	const std::uint16_t m_id = ++s_lastId;
-
-	static std::uint16_t s_lastId;
+	std::uint32_t s_lastId { 0 };
 };
-
-#endif // CSCENE_HPP

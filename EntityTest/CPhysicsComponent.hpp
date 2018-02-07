@@ -1,14 +1,9 @@
 #pragma once
 
-#include "EComponentIndex.hpp"
-#include "CBaseComponent.hpp"
-
-class CPhysicsComponent : public CBaseComponent
+class CPhysicsComponent final
 {
 public:
-	CPhysicsComponent( const std::shared_ptr< CEntity > parent );
-	virtual ~CPhysicsComponent();
-
-	static const std::uint16_t Index = static_cast<std::uint16_t>( EComponentIndex::PHYSICS );
+	CPhysicsComponent();
+	~CPhysicsComponent();
 };
 

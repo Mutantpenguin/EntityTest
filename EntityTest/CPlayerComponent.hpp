@@ -1,16 +1,12 @@
 #pragma once
 
-#include "EComponentIndex.hpp"
-#include "CBaseComponent.hpp"
+#include <cstdint>
 
-class CPlayerComponent :
-	public CBaseComponent
+class CPlayerComponent final
 {
 public:
-	CPlayerComponent( const std::shared_ptr< CEntity > &parent );
-	virtual ~CPlayerComponent();
-
-	static const std::uint16_t Index = static_cast<std::uint16_t>( EComponentIndex::PLAYER );
+	CPlayerComponent();
+	~CPlayerComponent();
 
 	std::uint8_t Team;
 };

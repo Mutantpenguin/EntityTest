@@ -5,18 +5,18 @@
 
 #include <chrono>
 
+#include <memory>
+
 #include "CScene.hpp"
 
-#include "CCameraFreeComponent.hpp"
 #include "CPhysicsComponent.hpp"
 #include "CPlayerComponent.hpp"
-
 
 int main()
 {
 	const std::uint32_t numberOfEntities = 10000;
 
-	auto scene = std::make_shared<CScene>();
+	auto scene = std::make_shared<CScene<CPhysicsComponent, CPlayerComponent>>();
 
 	CLogger::Log( "----------------------------------------------------------------------------------------" );
 	CLogger::Log( "entity count: " + std::to_string( numberOfEntities ) );
@@ -29,24 +29,25 @@ int main()
 		for( std::uint32_t i = 10; i < numberOfEntities; i++ )
 		{
 			auto ent = scene->CreateEntity( "entity_" + std::to_string( i ) );
-
+			
 			if( rand() % 10 == 2 )
 			{
-				ent->Add<CPhysicsComponent>();
-				ent->Transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
+				scene->AddComponent<CPhysicsComponent>( ent );
+
+				ent.Transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
 			}
 
 			if( rand() % 10 > 4 )
 			{
-				auto comp = ent->Add<CPlayerComponent>();
+				auto comp = scene->AddComponent<CPlayerComponent>( ent );
 
 				if( rand() % 10 > 4 )
 				{
-					comp->Team = 1;
+					comp.Team = 1;
 				}
 				else
 				{
-					comp->Team = 2;
+					comp.Team = 2;
 				}
 
 			}
@@ -55,7 +56,7 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-
+	/*
 	{
 		CLogger::Log( "entities with physics:" );
 		const auto start = std::chrono::system_clock::now();
@@ -95,17 +96,14 @@ int main()
 	{
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
-		//scene->Each<CCameraFreeComponent>([](const std::shared_ptr<const CEntity> &entity)
 		std::uint16_t counter = 0;
-		scene->EachWithComponents<CPhysicsComponent, CPlayerComponent>( [&counter] ( const std::shared_ptr<const CEntity> &entity )
+		scene->EachWithComponents<CPhysicsComponent, CPlayerComponent>( [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
 		{
 			counter++;
 			//CLogger::Log("\t - " + entity->Name() + " / " + entity->Get<CPlayerComponent>()->Team);
 			const auto blah1 = entity->Get<CPlayerComponent>();
 			const auto mult = blah1->Team * blah1->Team;
 			//const auto blah1 = entity->Get<CPlayerComponent>();
-
-			//const auto blah3 = entity->Get<CCameraFreeComponent>();
 		} );
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
@@ -118,7 +116,7 @@ int main()
 		const float radius { 30.0f };
 		const auto start = std::chrono::system_clock::now();
 		std::uint16_t counter = 0;
-		scene->EachWithComponentsInRadius<CPhysicsComponent>( position, radius, [&counter] ( const std::shared_ptr<const CEntity> &entity )
+		scene->EachWithComponentsInRadius<CPhysicsComponent>( position, radius, [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
 		{
 			counter++;
 		} );
@@ -161,6 +159,7 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
+	*/
 
 	return( 0 );
 }

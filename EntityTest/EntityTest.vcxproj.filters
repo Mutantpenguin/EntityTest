@@ -24,9 +24,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="CBaseComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="CWorld.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -51,12 +48,6 @@
     <ClInclude Include="CTransform.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="CCameraComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CCameraFreeComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="CPhysicsComponent.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -69,7 +60,13 @@
     <ClInclude Include="COcTree.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="EComponentIndex.hpp">
+    <ClInclude Include="CDodTest.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CCallDodTest.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CDummyComponent.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,9 +83,6 @@
     <ClCompile Include="CWorld.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="CScene.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="CFrustum.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -96,12 +90,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CTransform.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CCameraComponent.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CCameraFreeComponent.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CPhysicsComponent.cpp">
@@ -114,6 +102,15 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="COcTree.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CDodTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CCallDodTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CDummyComponent.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
