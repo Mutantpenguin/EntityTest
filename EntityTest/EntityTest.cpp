@@ -26,7 +26,7 @@ int main()
 
 	{
 		const auto start = std::chrono::system_clock::now();
-		for( int i = 10; i < numberOfEntities; i++ )
+		for( std::uint32_t i = 10; i < numberOfEntities; i++ )
 		{
 			auto ent = scene->CreateEntity( "entity_" + std::to_string( i ) );
 
@@ -140,6 +140,26 @@ int main()
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
+	}
+
+	{
+		std::uint32_t numIterations { 100 };
+
+		CLogger::Log( "test for a whole frame with '" + std::to_string( numIterations ) + "' iterations:" );
+		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
+		const float radius { 30.0f };
+		const auto start = std::chrono::system_clock::now();
+		std::uint16_t counter = 0;
+		for( std::uint16_t j = 0; j < numIterations; j++ )
+		{
+			scene->EachWithComponents<CPhysicsComponent, CPlayerComponent>( [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
+			{
+				counter++;
+			} );
+		}
+		const auto end = std::chrono::system_clock::now();
+		const std::chrono::duration<double> diff = end - start;
+		CLogger::Log( "Time: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
 	return( 0 );
