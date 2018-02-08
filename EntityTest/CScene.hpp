@@ -40,7 +40,7 @@ public:
 	
 		auto it = componentContainer.find( entity.Id );
 
-		if( it != std::cend( componentContainer ) )
+		if( std::cend( componentContainer ) != it )
 		{
 			CLogger::Log( "entity '" + entity.Name() + "' with id '" + std::to_string( entity.Id ) + "' already has a component of type '" + typeid( T ).name() + "'" );
 
@@ -54,15 +54,40 @@ public:
 		}
 	};
 
-	template<typename T>
+	template< typename T >
 	using Container = std::unordered_map< std::uint32_t, T >;
 
-	/* TODO
+	template<typename T>
+	bool HasComponents( const CEntity &entity ) const
+	{
+		auto &componentContainer = std::get<Container<T>>( m_components );
+
+		const auto it = componentContainer.find( entity.Id );
+
+		if( std::cend( componentContainer ) != it )
+		{
+			return( true );
+		}
+		else
+		{
+			return( false );
+		}
+	}
+
+	template< typename First, typename Second, typename ... Rest >
+	bool HasComponents( const CEntity &entity ) const
+	{
+		return( HasComponents<First>( entity ) && HasComponents<Second, Rest...>( entity ) );
+	}
+
+	/*
 	template<typename... T_Components>
 	std::vector<const CEntity &> GetEntitiesWithComponents() const
 	{
 		std::vector<const CEntity &> entities;
 		entities.reserve( m_entities.size() / 10 );
+
+		const auto it = 
 
 		for( const auto &entity : m_entities )
 		{
@@ -75,7 +100,7 @@ public:
 		return( entities );
 	};
 
-	
+	/* TODO
 	template<typename... T_Components>
 	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithAnyComponent() const
 	{
