@@ -80,7 +80,7 @@ public:
 		return( HasComponents<First>( entity ) && HasComponents<Second, Rest...>( entity ) );
 	}
 
-	/*
+	/* TODO
 	template<typename... T_Components>
 	std::vector<const CEntity &> GetEntitiesWithComponents() const
 	{
@@ -99,8 +99,7 @@ public:
 
 		return( entities );
 	};
-
-	/* TODO
+	
 	template<typename... T_Components>
 	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithAnyComponent() const
 	{
@@ -117,11 +116,12 @@ public:
 
 		return( entities );
 	};
+	*/
 
-	template<typename... T_Components>
-	void EachWithComponents( std::function<void( const std::shared_ptr<const CEntity>& )> lambda ) const
+	template<typename First, typename ... Rest>
+	void EachWithComponent( std::function<void( const std::shared_ptr<const CEntity>& )> lambda ) const
 	{
-		for( const auto &entity : m_entities )
+		for( const auto &component : auto &componentContainer = std::get<Container<T>>( m_components ); )
 		{
 			if( entity->HasComponents<T_Components...>() )
 			{
@@ -130,6 +130,7 @@ public:
 		}
 	};
 
+	/*
 	template<typename... T_Components>
 	void EachWithComponentsInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const
 	{
