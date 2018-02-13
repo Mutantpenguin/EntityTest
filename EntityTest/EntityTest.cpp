@@ -75,7 +75,7 @@ int main()
 	}
 
 	{
-		CLogger::Log( "entities with physics and player:" );
+		CLogger::Log( "entities with physics and player 1:" );
 		const auto start = std::chrono::system_clock::now();
 		const auto componentsWithPhysicsAndPlayer = scene->GetEntitiesWithComponents<CPhysicsComponent, CPlayerComponent>();
 
@@ -93,7 +93,7 @@ int main()
 	}
 
 	{
-		CLogger::Log( "entities with physics and player:" );
+		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
 		//scene->Each<CCameraFreeComponent>([](const std::shared_ptr<const CEntity> &entity)
 		std::uint16_t counter = 0;
