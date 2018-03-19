@@ -58,11 +58,11 @@ public:
 	using Container = std::unordered_map< std::uint32_t, T >;
 
 	template<typename T>
-	bool HasComponents( const CEntity &entity ) const
+	bool HasComponents( const std::uint32_t id ) const
 	{
 		auto &componentContainer = std::get<Container<T>>( m_components );
 
-		const auto it = componentContainer.find( entity.Id );
+		const auto it = componentContainer.find( id );
 
 		if( std::cend( componentContainer ) != it )
 		{
@@ -75,9 +75,26 @@ public:
 	}
 
 	template< typename First, typename Second, typename ... Rest >
-	bool HasComponents( const CEntity &entity ) const
+	bool HasComponents( const std::uint32_t id ) const
 	{
-		return( HasComponents<First>( entity ) && HasComponents<Second, Rest...>( entity ) );
+		return( HasComponents<First>( id ) && HasComponents<Second, Rest...>( id ) );
+	}
+
+	template< typename T >
+	T *GetComponent( const std::uint32_t id )
+	{
+		auto &componentContainer = std::get<Container<T>>( m_components );
+
+		const auto it = componentContainer.find( id );
+
+		if( std::cend( componentContainer ) != it )
+		{
+			return( &(*it).second );
+		}
+		else
+		{
+			return( nullptr );
+		}
 	}
 
 	/* TODO
@@ -118,15 +135,12 @@ public:
 	};
 	*/
 
-	template<typename First, typename ... Rest>
-	void EachWithComponent( std::function<void( const std::shared_ptr<const CEntity>& )> lambda ) const
+	template<typename T>
+	void EachComponent( std::function<void( const std::uint32_t id, const T& )> lambda ) const
 	{
-		for( const auto &component : auto &componentContainer = std::get<Container<T>>( m_components ); )
+		for( const auto &component : std::get<Container<T>>( m_components ) )
 		{
-			if( entity->HasComponents<T_Components...>() )
-			{
-				lambda( entity );
-			}
+			lambda( component.first, component.second );
 		}
 	};
 

@@ -16,7 +16,7 @@ int main()
 {
 	const std::uint32_t numberOfEntities = 10000;
 
-	auto scene = std::make_shared<CScene<CPhysicsComponent, CPlayerComponent>>();
+	CScene<CPhysicsComponent, CPlayerComponent> scene;
 
 	CLogger::Log( "----------------------------------------------------------------------------------------" );
 	CLogger::Log( "entity count: " + std::to_string( numberOfEntities ) );
@@ -28,18 +28,18 @@ int main()
 		const auto start = std::chrono::system_clock::now();
 		for( std::uint32_t i = 10; i < numberOfEntities; i++ )
 		{
-			auto ent = scene->CreateEntity( "entity_" + std::to_string( i ) );
+			auto ent = scene.CreateEntity( "entity_" + std::to_string( i ) );
 			
 			if( rand() % 10 == 2 )
 			{
-				scene->AddComponent<CPhysicsComponent>( ent );
+				scene.AddComponent<CPhysicsComponent>( ent );
 
 				ent.Transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
 			}
 
 			if( rand() % 10 > 4 )
 			{
-				auto comp = scene->AddComponent<CPlayerComponent>( ent );
+				auto comp = scene.AddComponent<CPlayerComponent>( ent );
 
 				if( rand() % 10 > 4 )
 				{
@@ -96,12 +96,21 @@ int main()
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint16_t counter = 0;
-		scene->EachWithComponents<CPhysicsComponent, CPlayerComponent>( [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
+		scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
 		{
-			counter++;
+			const auto blah1 = scene.GetComponent<CPlayerComponent>( id );
+
+			if( blah1 )
+			{
+				counter++;
+			}
+
+
 			//CLogger::Log("\t - " + entity->Name() + " / " + entity->Get<CPlayerComponent>()->Team);
-			const auto blah1 = entity->Get<CPlayerComponent>();
+			/*
+			const auto blah1 = scene->Get<CPlayerComponent>();
 			const auto mult = blah1->Team * blah1->Team;
+			*/
 			//const auto blah1 = entity->Get<CPlayerComponent>();
 		} );
 		const auto end = std::chrono::system_clock::now();
@@ -138,27 +147,30 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-
+	*/
 	{
 		std::uint32_t numIterations { 100 };
 
 		CLogger::Log( "test for a whole frame with '" + std::to_string( numIterations ) + "' iterations:" );
 		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
-		const float radius { 30.0f };
 		const auto start = std::chrono::system_clock::now();
 		std::uint16_t counter = 0;
 		for( std::uint16_t j = 0; j < numIterations; j++ )
 		{
-			scene->EachWithComponents<CPhysicsComponent, CPlayerComponent>( [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
+			scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
 			{
-				counter++;
+				const auto player = scene.GetComponent<CPlayerComponent>( id );
+
+				if( player )
+				{
+					counter++;
+				}
 			} );
 		}
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-	*/
 
 	return( 0 );
 }
