@@ -7,6 +7,8 @@
 
 #include <memory>
 
+#include "CPackedArray.hpp"
+
 #include "CScene.hpp"
 
 #include "CPhysicsComponent.hpp"
@@ -14,6 +16,9 @@
 
 int main()
 {
+	CPackedArray<CPhysicsComponent> blah1;
+	CPackedArray<CPlayerComponent> blah2;
+
 	const std::uint32_t numberOfEntities = 10000;
 
 	CScene<CPhysicsComponent, CPlayerComponent> scene;

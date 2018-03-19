@@ -153,12 +153,15 @@
     <ClInclude Include="CEntity.hpp" />
     <ClInclude Include="CFrustum.hpp" />
     <ClInclude Include="CLogger.hpp" />
+    <ClInclude Include="CComponent.hpp" />
     <ClInclude Include="COcTree.hpp" />
+    <ClInclude Include="CPackedArray.hpp" />
     <ClInclude Include="CPhysicsComponent.hpp" />
     <ClInclude Include="CPlane.hpp" />
     <ClInclude Include="CPlayerComponent.hpp" />
     <ClInclude Include="CScene.hpp" />
     <ClInclude Include="CSize.hpp" />
+    <ClInclude Include="ComponentId.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="CTransform.hpp" />
@@ -172,9 +175,7 @@
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="COcTree.cpp" />
-    <ClCompile Include="CPhysicsComponent.cpp" />
     <ClCompile Include="CPlane.cpp" />
-    <ClCompile Include="CPlayerComponent.cpp" />
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="stdafx.cpp" />

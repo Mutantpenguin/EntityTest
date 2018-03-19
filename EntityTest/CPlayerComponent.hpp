@@ -2,12 +2,10 @@
 
 #include <cstdint>
 
-class CPlayerComponent final
-{
-public:
-	CPlayerComponent();
-	~CPlayerComponent();
+#include "CComponent.hpp"
 
+struct CPlayerComponent final : CComponent<CPlayerComponent>
+{
 	std::uint8_t Team;
 };
 

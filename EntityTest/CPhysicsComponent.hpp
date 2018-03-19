@@ -1,9 +1,12 @@
 #pragma once
 
-class CPhysicsComponent final
+#include "CComponent.hpp"
+
+struct CPhysicsComponent final : public CComponent<CPhysicsComponent>
 {
-public:
-	CPhysicsComponent();
-	~CPhysicsComponent();
+
+	int a;
+
+	int b;
 };
 
