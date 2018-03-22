@@ -4,9 +4,6 @@
 
 struct CPhysicsComponent final : public CComponent<CPhysicsComponent>
 {
-
-	int a;
-
-	int b;
+	float mass;
 };
 

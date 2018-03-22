@@ -107,9 +107,6 @@
     <ClCompile Include="COcTree.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="CDodTest.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="CCallDodTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>

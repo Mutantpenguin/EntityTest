@@ -170,7 +170,6 @@
   <ItemGroup>
     <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="CCallDodTest.cpp" />
-    <ClCompile Include="CDodTest.cpp" />
     <ClCompile Include="CDummyComponent.cpp" />
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CFrustum.cpp" />

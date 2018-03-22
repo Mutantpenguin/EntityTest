@@ -2,5 +2,5 @@
 
 #include <cstdint>
 
-using ID = std::uint32_t;
+using ComponentID = std::uint16_t;
 

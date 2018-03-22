@@ -5,6 +5,6 @@
 template< typename T >
 struct CComponent
 {
-	ID id;
+	ComponentID id;
 };
 
