@@ -7,26 +7,17 @@
 
 #include <memory>
 
-#include "CPackedArray.hpp"
-
 #include "CScene.hpp"
 
 #include "CPhysicsComponent.hpp"
 #include "CPlayerComponent.hpp"
 
+#include "handle_map.h"
+
 int main()
 {
-	auto blah1 = std::make_unique<CPackedArray<CPhysicsComponent>>();
-	auto blah2 = std::make_unique<CPackedArray<CPlayerComponent>>();
-	/*
-	auto id1 = blah2->Add();
-	auto id2 = blah2->Add();
-	auto id3 = blah2->Add();
+	griffin::handle_map<CPlayerComponent> hMap(;
 
-	blah2->Remove( id2 );
-
-	auto id4 = blah2->Add();
-	*/
 	const std::uint32_t numberOfEntities = 10000;
 
 	CScene<CPhysicsComponent, CPlayerComponent> scene;

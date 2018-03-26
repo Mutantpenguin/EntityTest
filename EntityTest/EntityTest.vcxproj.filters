@@ -60,22 +60,19 @@
     <ClInclude Include="COcTree.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="CDodTest.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CCallDodTest.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="CDummyComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CPackedArray.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="CComponent.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ComponentId.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="handle_map.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="handle_map-inl.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -105,9 +102,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="COcTree.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CCallDodTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CDummyComponent.cpp">

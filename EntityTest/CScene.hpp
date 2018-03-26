@@ -7,6 +7,8 @@
 
 #include "CEntity.hpp"
 
+#include "handle_map.h"
+
 template <typename... Types>
 class CScene final
 {
