@@ -12,8 +12,12 @@
 #include "CPhysicsComponent.hpp"
 #include "CPlayerComponent.hpp"
 
+#include "CSlotMap.hpp"
+
 int main()
 {
+	CSlotMap<CPhysicsComponent> map;
+
 	const std::uint32_t numberOfEntities = 10000;
 
 	CScene<CPhysicsComponent, CPlayerComponent> scene( numberOfEntities );

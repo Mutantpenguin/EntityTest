@@ -22,10 +22,12 @@ public:
 
 	CScene( const std::uint32_t reserveSize )
 	{
+		/* TODO
 		TupleIterator::for_each( m_components, [&reserveSize]( auto x )
 		{
 			x.reserve( reserveSize );
 		} );
+		*/
 	}
 
 	~CScene()
@@ -53,7 +55,7 @@ public:
 	};
 
 	template< typename T >
-	using Container = rea::versioned_slot_map< T >;
+	using Container = CSlotMap< T >;
 
 	template<typename T>
 	bool HasComponents( const std::uint32_t id ) const
@@ -135,6 +137,7 @@ public:
 	};
 	*/
 
+	/* TODO
 	template<typename T>
 	void EachComponent( std::function<void( const std::uint32_t id, const T& )> lambda ) const
 	{
@@ -143,7 +146,7 @@ public:
 			lambda( component.first, component.second );
 		}
 	};
-
+	*/
 	/*
 	template<typename... T_Components>
 	void EachWithComponentsInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const
