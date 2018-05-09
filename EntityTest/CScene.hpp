@@ -71,24 +71,15 @@ public:
 		return( HasComponents<First>( id ) && HasComponents<Second, Rest...>( id ) );
 	}
 	*/
-	/* TODO
+
 	template< typename T >
 	T *GetComponent( const std::uint32_t id )
 	{
 		auto &componentContainer = std::get<Container<T>>( m_components );
 
-		const auto it = componentContainer.find( id );
-
-		if( std::cend( componentContainer ) != it )
-		{
-			return( &(*it).second );
-		}
-		else
-		{
-			return( nullptr );
-		}
+		return( componentContainer.Get( id ) );
 	}
-	*/
+
 	/* TODO
 	template<typename... T_Components>
 	std::vector<const CEntity &> GetEntitiesWithComponents() const
@@ -127,16 +118,12 @@ public:
 	};
 	*/
 
-	/* TODO
 	template<typename T>
 	void EachComponent( std::function<void( const std::uint32_t id, const T& )> lambda ) const
 	{
-		for( const auto &component : std::get<Container<T>>( m_components ) )
-		{
-			lambda( component.first, component.second );
-		}
+		std::get<Container<T>>( m_components ).Each( lambda );
 	};
-	*/
+
 	/*
 	template<typename... T_Components>
 	void EachWithComponentsInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const

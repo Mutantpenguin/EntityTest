@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <stack>
 #include <string>
+#include <functional>
 
 template< typename T >
 class CSlotMap
@@ -86,6 +87,28 @@ public:
 			m_freeIndices.push( index );
 
 			m_lastObjectIndex--;
+		}
+	}
+
+	T* Get( std::uint32_t id )
+	{
+		auto it = m_ids.find( id );
+
+		if( std::cend( m_ids ) != it )
+		{
+			return( &m_objects[ it->second ].second );
+		}
+		else
+		{
+			return( nullptr );
+		}
+	}
+
+	void Each( std::function<void( const std::uint32_t id, const T& )> lambda ) const
+	{
+		for( const auto &component : m_objects )
+		{
+			lambda( component.first, component.second );
 		}
 	}
 

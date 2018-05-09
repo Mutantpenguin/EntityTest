@@ -1,8 +1,6 @@
 #pragma once
 
-#include "CComponent.hpp"
-
-struct CPhysicsComponent final : public CComponent<CPhysicsComponent>
+struct CPhysicsComponent final
 {
 	float mass;
 };

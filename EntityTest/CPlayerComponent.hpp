@@ -2,9 +2,7 @@
 
 #include <cstdint>
 
-#include "CComponent.hpp"
-
-struct CPlayerComponent final : CComponent<CPlayerComponent>
+struct CPlayerComponent final
 {
 	std::uint8_t Team;
 };

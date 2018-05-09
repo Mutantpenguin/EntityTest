@@ -104,7 +104,7 @@ int main()
 		CLogger::Log( "Time to fill and iterate a vector of " + std::to_string( componentsWithPhysicsAndPlayer.size() ) + " : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 	*/
-	/* TODO
+
 	{
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
@@ -129,7 +129,7 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-	*/
+
 	/*
 	{
 		CLogger::Log( "entities with physics in radius:" );

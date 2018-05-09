@@ -63,9 +63,6 @@
     <ClInclude Include="CDummyComponent.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="CComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentId.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
