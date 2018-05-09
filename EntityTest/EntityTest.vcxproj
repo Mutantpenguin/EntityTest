@@ -159,12 +159,12 @@
     <ClInclude Include="CScene.hpp" />
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="ComponentId.hpp" />
-    <ClInclude Include="handle_map-inl.h" />
-    <ClInclude Include="handle_map.h" />
+    <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="CTransform.hpp" />
     <ClInclude Include="CWorld.hpp" />
+    <ClInclude Include="TupleIterator.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBoundingBox.cpp" />
@@ -173,6 +173,7 @@
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />
+    <ClCompile Include="CSlotMap.cpp" />
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="stdafx.cpp" />

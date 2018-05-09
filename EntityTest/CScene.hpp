@@ -2,12 +2,16 @@
 
 #include <unordered_map>
 #include <functional>
+#include <tuple>
+#include <utility>
 
 #include <glm/gtx/norm.hpp>
 
 #include "CEntity.hpp"
 
-#include "handle_map.h"
+#include "CSlotMap.hpp"
+
+#include "TupleIterator.hpp"
 
 template <typename... Types>
 class CScene final
@@ -16,24 +20,16 @@ public:
 	CScene()
 	{}
 
+	CScene( const std::uint32_t reserveSize )
+	{
+		TupleIterator::for_each( m_components, [&reserveSize]( auto x )
+		{
+			x.reserve( reserveSize );
+		} );
+	}
+
 	~CScene()
 	{}
-	
-	CEntity &CreateEntity( const std::string &name )
-	{
-		auto id = s_lastId++;
-
-		m_entities.insert( std::make_pair( id, CEntity( name ) ) );
-
-		return( m_entities.at( id ) );
-	}
-
-	void DeleteEntity( const std::uint32_t &id )
-	{
-		m_entities.erase( id );
-
-		// TODO iterate components and delete them
-	}
 
 	template< typename T, typename... Args >
 	T &AddComponent( const CEntity &entity, Args... args )
@@ -57,7 +53,7 @@ public:
 	};
 
 	template< typename T >
-	using Container = std::unordered_map< std::uint32_t, T >;
+	using Container = rea::versioned_slot_map< T >;
 
 	template<typename T>
 	bool HasComponents( const std::uint32_t id ) const
@@ -76,12 +72,14 @@ public:
 		}
 	}
 
+	/* TODO
 	template< typename First, typename Second, typename ... Rest >
 	bool HasComponents( const std::uint32_t id ) const
 	{
 		return( HasComponents<First>( id ) && HasComponents<Second, Rest...>( id ) );
 	}
-
+	*/
+	/* TODO
 	template< typename T >
 	T *GetComponent( const std::uint32_t id )
 	{
@@ -98,7 +96,7 @@ public:
 			return( nullptr );
 		}
 	}
-
+	*/
 	/* TODO
 	template<typename... T_Components>
 	std::vector<const CEntity &> GetEntitiesWithComponents() const
@@ -191,9 +189,5 @@ public:
 	*/
 
 private:
-	Container<CEntity> m_entities;
-	
 	std::tuple<Container<Types>...> m_components;
-
-	std::uint32_t s_lastId { 0 };
 };

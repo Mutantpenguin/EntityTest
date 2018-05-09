@@ -12,15 +12,11 @@
 #include "CPhysicsComponent.hpp"
 #include "CPlayerComponent.hpp"
 
-#include "handle_map.h"
-
 int main()
 {
-	griffin::handle_map<CPlayerComponent> hMap(;
-
 	const std::uint32_t numberOfEntities = 10000;
 
-	CScene<CPhysicsComponent, CPlayerComponent> scene;
+	CScene<CPhysicsComponent, CPlayerComponent> scene( numberOfEntities );
 
 	CLogger::Log( "----------------------------------------------------------------------------------------" );
 	CLogger::Log( "entity count: " + std::to_string( numberOfEntities ) );
@@ -28,10 +24,12 @@ int main()
 
 	CLogger::Log( "" );
 
+
 	{
 		const auto start = std::chrono::system_clock::now();
 		for( std::uint32_t i = 10; i < numberOfEntities; i++ )
 		{
+			/*
 			auto ent = scene.CreateEntity( "entity_" + std::to_string( i ) );
 			
 			if( rand() % 10 == 2 )
@@ -54,11 +52,13 @@ int main()
 					comp.Team = 2;
 				}
 			}
+			*/
 		}
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
+	
 	/* TODO
 	{
 		CLogger::Log( "entities with physics:" );
@@ -96,6 +96,7 @@ int main()
 		CLogger::Log( "Time to fill and iterate a vector of " + std::to_string( componentsWithPhysicsAndPlayer.size() ) + " : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 	*/
+	/* TODO
 	{
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
@@ -111,16 +112,16 @@ int main()
 
 
 			//CLogger::Log("\t - " + entity->Name() + " / " + entity->Get<CPlayerComponent>()->Team);
-			/*
-			const auto blah1 = scene->Get<CPlayerComponent>();
-			const auto mult = blah1->Team * blah1->Team;
-			*/
+			// TODO const auto blah1 = scene->Get<CPlayerComponent>();
+			// TODO const auto mult = blah1->Team * blah1->Team;
+
 			//const auto blah1 = entity->Get<CPlayerComponent>();
 		} );
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
+	*/
 	/*
 	{
 		CLogger::Log( "entities with physics in radius:" );
@@ -152,6 +153,7 @@ int main()
 		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 	*/
+	/* TODO
 	{
 		std::uint32_t numIterations { 100 };
 
@@ -175,6 +177,7 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
+	*/
 
 	return( 0 );
 }

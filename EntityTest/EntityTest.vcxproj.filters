@@ -69,10 +69,10 @@
     <ClInclude Include="ComponentId.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="handle_map.h">
+    <ClInclude Include="TupleIterator.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="handle_map-inl.h">
+    <ClInclude Include="CSlotMap.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -105,6 +105,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CDummyComponent.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CSlotMap.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
