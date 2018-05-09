@@ -10,13 +10,19 @@ public:
 	CSlotMap()
 	{}
 	
-	CSlotMap( std::size_t size )
+	CSlotMap( std::size_t size ) :
+		m_initialSize { size }
 	{
 		Reserve( size );
 	}
 
 	~CSlotMap()
-	{}
+	{
+		if( m_objects.capacity() > m_initialSize )
+		{
+			std::cout << "initial size was '" << m_initialSize << "', current size is '" << m_objects.capacity() << "'";
+		}
+	}
 
 	void Reserve( std::size_t size )
 	{
@@ -85,5 +91,7 @@ private:
 	std::stack<std::size_t> m_freeIndices;
 
 	std::size_t m_lastObjectIndex = -1;
+
+	const std::size_t m_initialSize = 0;
 };
 
