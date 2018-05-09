@@ -1,6 +1,5 @@
 #pragma once
 
-#include <unordered_map>
 #include <stack>
 #include <string>
 #include <functional>
@@ -28,6 +27,8 @@ public:
 
 	void Reserve( std::size_t capacity )
 	{
+		// TODO is 4 times really enough?!?
+		m_ids.reserve( capacity * 4 );
 		m_objects.reserve( capacity );
 	}
 
@@ -35,11 +36,9 @@ public:
 	{
 		std::size_t index;
 
-		auto it = m_ids.find( id );
-
-		if( std::cend( m_ids ) != it )
+		if( m_ids.size() > id )
 		{
-			index = it->second;
+			index = m_ids[ id ];
 		}
 		else
 		{
@@ -113,7 +112,7 @@ public:
 	}
 
 private:
-	std::unordered_map< std::uint32_t, std::size_t > m_ids;
+	std::vector< std::size_t > m_ids;
 
 	std::vector< std::pair< std::uint32_t, T > > m_objects;
 
