@@ -3,6 +3,7 @@
 #include <stack>
 #include <string>
 #include <functional>
+#include <vector>
 
 template< typename T >
 class CSlotMap
@@ -34,14 +35,20 @@ public:
 
 	void Add( std::uint32_t id, T& t )
 	{
-		std::size_t index;
-
-		if( m_ids.size() > id )
+		if( ( id + 1 ) > m_ids.size() )
 		{
-			index = m_ids[ id ];
+			m_ids.resize( ( id + 1 ), -1 );
+		}
+
+		if( -1 != m_ids[ id ] )
+		{
+			CLogger::Log( "component already exists" );
+			return;
 		}
 		else
 		{
+			std::size_t index;
+
 			if( !m_freeIndices.empty() )
 			{
 				index = m_freeIndices.top();
@@ -61,9 +68,9 @@ public:
 			}
 
 			m_ids[ id ] = index;
-		}
 
-		m_objects[ index ] = std::make_pair( id, t );
+			m_objects[ index ] = std::make_pair( id, t );
+		}
 	}
 
 	void Remove( std::uint32_t id )
@@ -91,11 +98,16 @@ public:
 
 	T* Get( std::uint32_t id )
 	{
-		auto it = m_ids.find( id );
-
-		if( std::cend( m_ids ) != it )
+		if( m_objects.size() > ( id + 1 ) )
 		{
-			return( &m_objects[ it->second ].second );
+			if( -1 == m_ids[ id ] )
+			{
+				return( nullptr );
+			}
+			else
+			{
+				return( &m_objects[ m_ids[ id ] ].second );
+			}
 		}
 		else
 		{
