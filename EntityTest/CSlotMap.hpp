@@ -10,23 +10,23 @@ public:
 	CSlotMap()
 	{}
 	
-	CSlotMap( std::size_t size ) :
-		m_initialSize { size }
+	CSlotMap( std::size_t capacity ) :
+		m_initialCapacity { capacity }
 	{
-		Reserve( size );
+		Reserve( capacity );
 	}
 
 	~CSlotMap()
 	{
-		if( m_objects.capacity() > m_initialSize )
+		if( m_objects.capacity() > m_initialCapacity )
 		{
-			std::cout << "initial size was '" << m_initialSize << "', current size is '" << m_objects.capacity() << "'";
+			std::cout << "initial capacity was '" << m_initialCapacity << "', current capacity is '" << m_objects.capacity() << "'";
 		}
 	}
 
-	void Reserve( std::size_t size )
+	void Reserve( std::size_t capacity )
 	{
-		m_objects.reserve( size );
+		m_objects.reserve( capacity );
 	}
 
 	void Set( std::uint32_t id, T& t )
@@ -92,6 +92,6 @@ private:
 
 	std::size_t m_lastObjectIndex = -1;
 
-	const std::size_t m_initialSize = 0;
+	const std::size_t m_initialCapacity = 0;
 };
 
