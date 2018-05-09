@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <stack>
+#include <string>
 
 template< typename T >
 class CSlotMap
@@ -20,7 +21,7 @@ public:
 	{
 		if( m_objects.capacity() > m_initialCapacity )
 		{
-			std::cout << "initial capacity was '" << m_initialCapacity << "', current capacity is '" << m_objects.capacity() << "'";
+			CLogger::Log( "initial capacity was '" + std::to_string( m_initialCapacity ) + "', current capacity is '" + std::to_string( m_objects.capacity() ) + "'" );
 		}
 	}
 
@@ -29,7 +30,7 @@ public:
 		m_objects.reserve( capacity );
 	}
 
-	void Set( std::uint32_t id, T& t )
+	void Add( std::uint32_t id, T& t )
 	{
 		std::size_t index;
 
@@ -43,15 +44,20 @@ public:
 		{
 			if( !m_freeIndices.empty() )
 			{
-				index = m_freeIndices.pop();
+				index = m_freeIndices.top();
+
+				m_freeIndices.pop();
 			}
 			else
 			{
-				m_lastObjectIndex++:
+				m_lastObjectIndex++;
 
-				//index = 
+				if( m_objects.size() <= ( m_lastObjectIndex + 1 ) )
+				{
+					m_objects.resize( m_lastObjectIndex + 1 );
+				}
 
-				m_objects.emplace_back( std::make_pair( id, t ) );
+				index = m_lastObjectIndex;
 			}
 
 			m_ids[ id ] = index;
@@ -60,7 +66,7 @@ public:
 		m_objects[ index ] = std::make_pair( id, t );
 	}
 
-	void Delete( std::uint32_t id )
+	void Remove( std::uint32_t id )
 	{
 		auto it = m_ids.find( id );
 

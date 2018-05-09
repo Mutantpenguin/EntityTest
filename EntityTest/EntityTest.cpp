@@ -16,9 +16,7 @@
 
 int main()
 {
-	CSlotMap<CPhysicsComponent> map;
-
-	const std::uint32_t numberOfEntities = 10000;
+	const std::uint32_t numberOfEntities = 100000;
 
 	CScene<CPhysicsComponent, CPlayerComponent> scene( numberOfEntities );
 
@@ -33,30 +31,36 @@ int main()
 		const auto start = std::chrono::system_clock::now();
 		for( std::uint32_t i = 10; i < numberOfEntities; i++ )
 		{
-			/*
-			auto ent = scene.CreateEntity( "entity_" + std::to_string( i ) );
+			auto id = scene.CreateEntity();
+
+			// TODO set name to "entity_" + std::to_string( i )"
 			
 			if( rand() % 10 == 2 )
 			{
-				scene.AddComponent<CPhysicsComponent>( ent );
+				CPhysicsComponent physics;
+				physics.mass = 10.0f;
 
-				ent.Transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
+				scene.AddComponent( id, physics );
+
+				// TODO ent.Transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
 			}
+
 
 			if( rand() % 10 > 4 )
 			{
-				auto comp = scene.AddComponent<CPlayerComponent>( ent );
+				CPlayerComponent playerComponent;
 
 				if( rand() % 10 > 4 )
 				{
-					comp.Team = 1;
+					playerComponent.Team = 1;
 				}
 				else
 				{
-					comp.Team = 2;
+					playerComponent.Team = 2;
 				}
+
+				scene.AddComponent( id, playerComponent );
 			}
-			*/
 		}
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;

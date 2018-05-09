@@ -22,36 +22,26 @@ public:
 
 	CScene( const std::uint32_t reserveSize )
 	{
-		/* TODO
 		TupleIterator::for_each( m_components, [&reserveSize]( auto x )
 		{
-			x.reserve( reserveSize );
+			x.Reserve( reserveSize );
 		} );
-		*/
 	}
 
 	~CScene()
 	{}
 
-	template< typename T, typename... Args >
-	T &AddComponent( const CEntity &entity, Args... args )
+	std::uint32_t CreateEntity()
+	{
+		return( m_lastId++ );
+	}
+
+	template< typename T >
+	void AddComponent( const std::uint32_t &id, T& t )
 	{
 		auto &componentContainer = std::get<Container<T>>( m_components );
 	
-		auto it = componentContainer.find( entity.Id );
-
-		if( std::cend( componentContainer ) != it )
-		{
-			CLogger::Log( "entity '" + entity.Name() + "' with id '" + std::to_string( entity.Id ) + "' already has a component of type '" + typeid( T ).name() + "'" );
-
-			return( it->second );
-		}
-		else
-		{
-			auto it = componentContainer.emplace( entity.Id, T( args... ) );
-
-			return( it.first->second );
-		}
+		componentContainer.Add( id, t );
 	};
 
 	template< typename T >
@@ -192,5 +182,7 @@ public:
 	*/
 
 private:
+	std::uint32_t m_lastId = 0;
+
 	std::tuple<Container<Types>...> m_components;
 };
