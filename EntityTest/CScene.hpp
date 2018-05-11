@@ -2,7 +2,8 @@
 
 #include <functional>
 #include <tuple>
-#include <utility>
+
+#include <stack>
 
 #include <glm/gtx/norm.hpp>
 
@@ -29,10 +30,19 @@ public:
 
 	Entity CreateEntity()
 	{
-		// TODO implement stack for freed ids
 		// TODO implement "version" in Entity when stack is used. increment "version" when popping from stack
 		// TODO use "version" in Entity to check against it in several places
-		return( Entity( m_lastId++ ) );
+
+		if( !m_freeIds.empty() )
+		{
+			auto id = m_freeIds.top();
+			m_freeIds.pop();
+			return( Entity( id ) );
+		}
+		else
+		{
+			return( Entity( m_lastId++ ) );
+		}
 	}
 
 	void DestroyEntity( const Entity &entity )
@@ -42,7 +52,7 @@ public:
 			x.Remove( entity );
 		} );
 
-		// TODO push id to stack for freed ids
+		m_freeIds.push( entity.Id() );
 	}
 
 	template< typename T >
@@ -117,6 +127,7 @@ public:
 	*/
 private:
 	std::uint32_t m_lastId = 0;
+	std::stack<std::uint32_t> m_freeIds;
 
 	std::tuple< CSlotMap< Types >... > m_components;
 };
