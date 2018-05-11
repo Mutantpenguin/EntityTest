@@ -29,7 +29,7 @@ int main()
 
 	{
 		const auto start = std::chrono::system_clock::now();
-		for( std::uint32_t i = 10; i < numberOfEntities; i++ )
+		for( std::uint32_t i = 0; i < numberOfEntities; i++ )
 		{
 			auto id = scene.CreateEntity();
 
@@ -106,7 +106,7 @@ int main()
 	{
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
-		std::uint16_t counter = 0;
+		std::uint32_t counter = 0;
 		scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
 		{
 			const auto blah1 = scene.GetComponent<CPlayerComponent>( id );
@@ -115,7 +115,6 @@ int main()
 			{
 				counter++;
 			}
-
 
 			//CLogger::Log("\t - " + entity->Name() + " / " + entity->Get<CPlayerComponent>()->Team);
 			// TODO const auto blah1 = scene->Get<CPlayerComponent>();
@@ -134,7 +133,7 @@ int main()
 		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
 		const float radius { 30.0f };
 		const auto start = std::chrono::system_clock::now();
-		std::uint16_t counter = 0;
+		std::uint32_t counter = 0;
 		scene->EachWithComponentsInRadius<CPhysicsComponent>( position, radius, [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
 		{
 			counter++;
@@ -149,7 +148,7 @@ int main()
 		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
 		const float radius { 30.0f };
 		const auto start = std::chrono::system_clock::now();
-		std::uint16_t counter = 0;
+		std::uint32_t counter = 0;
 		scene->EachWithAnyComponentsInRadius<CPhysicsComponent, CPlayerComponent>( position, radius, [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
 		{
 			counter++;
@@ -166,7 +165,7 @@ int main()
 		CLogger::Log( "test for a whole frame with '" + std::to_string( numIterations ) + "' iterations:" );
 		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
 		const auto start = std::chrono::system_clock::now();
-		std::uint16_t counter = 0;
+		std::uint32_t counter = 0;
 		for( std::uint16_t j = 0; j < numIterations; j++ )
 		{
 			scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )

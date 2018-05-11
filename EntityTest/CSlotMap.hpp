@@ -94,7 +94,7 @@ public:
 
 	T* Get( std::uint32_t id )
 	{
-		if( m_objects.size() > ( id + 1 ) )
+		if( m_objects.size() > id )
 		{
 			if( -1 == m_ids[ id ] )
 			{
