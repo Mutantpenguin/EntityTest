@@ -20,12 +20,9 @@ public:
 	CScene()
 	{}
 
-	CScene( const std::uint32_t reserveSize )
+	CScene( const std::uint32_t reserveSize ) :
+		m_components( (sizeof( Types ), reserveSize )... )
 	{
-		TupleIterator::for_each( m_components, [&reserveSize]( auto x )
-		{
-			x.Reserve( reserveSize );
-		} );
 	}
 
 	~CScene()
@@ -41,6 +38,14 @@ public:
 	{
 		auto &componentContainer = std::get<Container<T>>( m_components );
 	
+		componentContainer.Add( id, t );
+	};
+	
+	template< typename T >
+	void AddComponent( const std::uint32_t &id, T&& t )
+	{
+		auto &componentContainer = std::get<Container<T>>( m_components );
+
 		componentContainer.Add( id, t );
 	};
 

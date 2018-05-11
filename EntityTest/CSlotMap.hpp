@@ -15,22 +15,18 @@ public:
 	CSlotMap( std::size_t capacity ) :
 		m_initialCapacity { capacity }
 	{
-		Reserve( capacity );
+		m_ids.reserve( m_initialCapacity * 4 ); // TODO is 4 times really enough?!?
+		m_objects.reserve( m_initialCapacity );
 	}
 
 	~CSlotMap()
 	{
+		CLogger::Log( "size: " + std::to_string( m_objects.size() ) );
+
 		if( m_objects.capacity() > m_initialCapacity )
 		{
 			CLogger::Log( "initial capacity was '" + std::to_string( m_initialCapacity ) + "', current capacity is '" + std::to_string( m_objects.capacity() ) + "'" );
 		}
-	}
-
-	void Reserve( std::size_t capacity )
-	{
-		// TODO is 4 times really enough?!?
-		m_ids.reserve( capacity * 4 );
-		m_objects.reserve( capacity );
 	}
 
 	void Add( std::uint32_t id, T& t )

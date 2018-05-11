@@ -34,7 +34,6 @@ int main()
 			auto id = scene.CreateEntity();
 
 			// TODO set name to "entity_" + std::to_string( i )"
-			
 			if( rand() % 10 == 2 )
 			{
 				CPhysicsComponent physics;
@@ -44,7 +43,6 @@ int main()
 
 				// TODO ent.Transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
 			}
-
 
 			if( rand() % 10 > 4 )
 			{
