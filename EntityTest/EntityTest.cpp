@@ -129,6 +129,11 @@ int main()
 				//CLogger::Log( "gnah" );
 			}
 
+			if( scene.HasAnyComponents< CPlayerComponent, CDebugNameComponent >( id ) )
+			{
+				//CLogger::Log( "gnah" );
+			}
+
 			const auto blah1 = scene.GetComponent<CPlayerComponent>( id );
 
 			if( blah1 )

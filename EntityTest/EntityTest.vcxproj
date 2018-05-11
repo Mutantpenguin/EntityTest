@@ -166,12 +166,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBoundingBox.cpp" />
-    <ClCompile Include="CDummyComponent.cpp" />
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />
-    <ClCompile Include="CSlotMap.cpp" />
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="stdafx.cpp" />

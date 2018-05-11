@@ -36,7 +36,7 @@ public:
 	template< typename T >
 	void AddComponent( const std::uint32_t &id, T& t )
 	{
-		auto &componentContainer = std::get<Container<T>>( m_components );
+		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
 	
 		componentContainer.Add( id, t );
 	};
@@ -44,18 +44,15 @@ public:
 	template< typename T >
 	void AddComponent( const std::uint32_t &id, T&& t )
 	{
-		auto &componentContainer = std::get<Container<T>>( m_components );
+		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
 
 		componentContainer.Add( id, t );
 	};
 
-	template< typename T >
-	using Container = CSlotMap< T >;
-
 	template<typename T>
 	bool HasComponents( const std::uint32_t id ) const
 	{
-		auto &componentContainer = std::get<Container<T>>( m_components );
+		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
 
 		if( componentContainer.Has( id ) )
 		{
@@ -73,10 +70,16 @@ public:
 		return( HasComponents<First>( id ) && HasComponents<Second, Rest...>( id ) );
 	}
 
+	template< typename First, typename Second, typename ... Rest >
+	bool HasAnyComponents( const std::uint32_t id ) const
+	{
+		return( HasComponents<First>( id ) || HasComponents<Second, Rest...>( id ) );
+	}
+
 	template< typename T >
 	T *GetComponent( const std::uint32_t id )
 	{
-		auto &componentContainer = std::get<Container<T>>( m_components );
+		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
 
 		return( componentContainer.Get( id ) );
 	}
@@ -84,7 +87,7 @@ public:
 	template<typename T>
 	void EachComponent( std::function<void( const std::uint32_t id, const T& )> lambda ) const
 	{
-		std::get<Container<T>>( m_components ).Each( lambda );
+		std::get< CSlotMap< T > >( m_components ).Each( lambda );
 	};
 	/* TODO
 	template<typename... T_Components>
@@ -102,5 +105,5 @@ public:
 private:
 	std::uint32_t m_lastId = 0;
 
-	std::tuple<Container<Types>...> m_components;
+	std::tuple< CSlotMap< Types >... > m_components;
 };

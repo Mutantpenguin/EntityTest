@@ -95,12 +95,6 @@
     <ClCompile Include="COcTree.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="CDummyComponent.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CSlotMap.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="CTransformComponent.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
