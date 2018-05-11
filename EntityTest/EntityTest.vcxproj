@@ -171,7 +171,7 @@
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CWorld.cpp" />
-    <ClCompile Include="EntityId.hpp" />
+    <ClCompile Include="Entity.hpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="CTransformComponent.cpp" />

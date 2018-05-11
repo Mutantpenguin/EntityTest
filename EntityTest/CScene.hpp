@@ -10,6 +10,8 @@
 
 #include "TupleIterator.hpp"
 
+#include "Entity.hpp"
+
 template <typename... Types>
 class CScene final
 {
@@ -17,7 +19,7 @@ public:
 	CScene()
 	{}
 
-	CScene( const std::uint32_t reserveSize ) :
+	CScene( const std::size_t reserveSize ) :
 		m_components( (sizeof( Types ), reserveSize )... )
 	{
 	}
@@ -25,33 +27,33 @@ public:
 	~CScene()
 	{}
 
-	std::uint32_t CreateEntity()
+	Entity CreateEntity()
 	{
-		return( m_lastId++ );
+		return( Entity( m_lastId++ ) );
 	}
 
 	template< typename T >
-	void AddComponent( const std::uint32_t &id, T& t )
+	void AddComponent( const Entity &entity, T& t )
 	{
 		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
 	
-		componentContainer.Add( id, t );
+		componentContainer.Add( entity, t );
 	};
 	
 	template< typename T >
-	void AddComponent( const std::uint32_t &id, T&& t )
+	void AddComponent( const Entity &entity, T&& t )
 	{
 		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
 
-		componentContainer.Add( id, t );
+		componentContainer.Add( entity, t );
 	};
 
 	template<typename T>
-	bool HasComponents( const std::uint32_t id ) const
+	bool HasComponents( const Entity &entity ) const
 	{
 		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
 
-		if( componentContainer.Has( id ) )
+		if( componentContainer.Has( entity ) )
 		{
 			return( true );
 		}
@@ -62,33 +64,33 @@ public:
 	}
 
 	template< typename First, typename Second, typename ... Rest >
-	bool HasComponents( const std::uint32_t id ) const
+	bool HasComponents( const Entity &entity ) const
 	{
-		return( HasComponents<First>( id ) && HasComponents<Second, Rest...>( id ) );
+		return( HasComponents<First>( entity ) && HasComponents<Second, Rest...>( entity ) );
 	}
 
 	template< typename First, typename Second, typename ... Rest >
-	bool HasAnyComponents( const std::uint32_t id ) const
+	bool HasAnyComponents( const Entity &entity ) const
 	{
-		return( HasComponents<First>( id ) || HasComponents<Second, Rest...>( id ) );
+		return( HasComponents<First>( entity ) || HasComponents<Second, Rest...>( entity ) );
 	}
 
 	template< typename T >
-	T *GetComponent( const std::uint32_t id )
+	T *GetComponent( const Entity &entity )
 	{
 		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
 
-		return( componentContainer.Get( id ) );
+		return( componentContainer.Get( entity ) );
 	}
 
 	template<typename T>
-	void EachComponent( std::function<void( const std::uint32_t id, const T& )> lambda ) const
+	void EachComponent( std::function<void( const Entity &entity, const T& )> lambda ) const
 	{
 		std::get< CSlotMap< T > >( m_components ).Each( lambda );
 	};
 	/* TODO
 	template<typename... T_Components>
-	void EachWithAnyComponents( std::function<void( const std::uint32_t id, const T& )> lambda ) const
+	void EachWithAnyComponents( std::function<void( const Entity &entity, const T& )> lambda ) const
 	{
 		for( const auto &entity : m_entities )
 		{

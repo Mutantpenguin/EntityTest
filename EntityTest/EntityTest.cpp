@@ -38,20 +38,20 @@ int main()
 		const auto start = std::chrono::system_clock::now();
 		for( std::uint32_t i = 0; i < numberOfEntities; i++ )
 		{
-			auto id = scene.CreateEntity();
+			auto entity = scene.CreateEntity();
 
-			scene.AddComponent( id, CDebugNameComponent { "entity_" + std::to_string( i ) } );
+			scene.AddComponent( entity, CDebugNameComponent { "entity_" + std::to_string( i ) } );
 
 			if( rand() % 10 == 2 )
 			{
 				CPhysicsComponent physics;
 				physics.mass = 10.0f;
 
-				scene.AddComponent( id, physics );
+				scene.AddComponent( entity, physics );
 
 				CTransformComponent transform;
 				transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
-				scene.AddComponent( id, transform );
+				scene.AddComponent( entity, transform );
 			}
 
 			if( rand() % 10 > 4 )
@@ -67,7 +67,7 @@ int main()
 					playerComponent.Team = 2;
 				}
 
-				scene.AddComponent( id, playerComponent );
+				scene.AddComponent( entity, playerComponent );
 			}
 		}
 		const auto end = std::chrono::system_clock::now();
@@ -80,9 +80,9 @@ int main()
 		CLogger::Log( "entities with physics and name:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ]( const std::uint32_t id, const auto &component )
+		scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ]( const Entity &entity, const auto &component )
 		{
-			auto debugName = scene.GetComponent<CDebugNameComponent>( id );
+			auto debugName = scene.GetComponent<CDebugNameComponent>( entity );
 
 			if( debugName )
 			{
@@ -120,24 +120,24 @@ int main()
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		scene.EachComponent< CPhysicsComponent >( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
+		scene.EachComponent< CPhysicsComponent >( [ &counter, &scene ] ( const Entity &entity, const auto &component )
 		{
-			if( scene.HasComponents< CPlayerComponent >( id ) )
+			if( scene.HasComponents< CPlayerComponent >( entity ) )
 			{
 				//CLogger::Log( "gnah" );
 			}
 
-			if( scene.HasComponents< CPlayerComponent, CDebugNameComponent >( id ) )
+			if( scene.HasComponents< CPlayerComponent, CDebugNameComponent >( entity ) )
 			{
 				//CLogger::Log( "gnah" );
 			}
 
-			if( scene.HasAnyComponents< CPlayerComponent, CDebugNameComponent >( id ) )
+			if( scene.HasAnyComponents< CPlayerComponent, CDebugNameComponent >( entity ) )
 			{
 				//CLogger::Log( "gnah" );
 			}
 
-			const auto blah1 = scene.GetComponent<CPlayerComponent>( id );
+			const auto blah1 = scene.GetComponent<CPlayerComponent>( entity );
 
 			if( blah1 )
 			{

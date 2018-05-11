@@ -5,6 +5,8 @@
 #include <functional>
 #include <vector>
 
+#include "Entity.hpp"
+
 template< typename T >
 class CSlotMap
 {
@@ -35,11 +37,11 @@ public:
 		return( sizeof( T ) * m_objects.size() );
 	}
 
-	bool Has( const std::uint32_t id ) const
+	bool Has( const Entity &entity ) const
 	{
-		if( m_objects.size() > id )
+		if( m_objects.size() > entity.Id() )
 		{
-			if( nullIndex == m_ids[ id ] )
+			if( nullIndex == m_ids[ entity.Id() ] )
 			{
 				return( false );
 			}
@@ -54,14 +56,14 @@ public:
 		}
 	}
 
-	void Add( const std::uint32_t id, T& t )
+	void Add( const Entity &entity, T& t )
 	{
-		if( ( id + 1 ) > m_ids.size() )
+		if( ( entity.Id() + 1 ) > m_ids.size() )
 		{
-			m_ids.resize( ( id + 1 ), nullIndex );
+			m_ids.resize( ( entity.Id() + 1 ), nullIndex );
 		}
 
-		if( nullIndex != m_ids[ id ] )
+		if( nullIndex != m_ids[ entity.Id() ] )
 		{
 			CLogger::Log( "component already exists" );
 			return;
@@ -88,15 +90,15 @@ public:
 				index = m_lastObjectIndex;
 			}
 
-			m_ids[ id ] = index;
+			m_ids[ entity.Id() ] = index;
 
-			m_objects[ index ] = std::make_pair( id, t );
+			m_objects[ index ] = std::make_pair( entity, t );
 		}
 	}
 
-	void Remove( const std::uint32_t id )
+	void Remove( const Entity &entity )
 	{
-		auto it = m_ids.find( id );
+		auto it = m_ids.find( entity );
 
 		if( std::cend( m_ids ) != it )
 		{
@@ -117,17 +119,17 @@ public:
 		}
 	}
 
-	T* Get( const std::uint32_t id )
+	T* Get( const Entity &entity )
 	{
-		if( m_objects.size() > id )
+		if( m_objects.size() > entity )
 		{
-			if( nullIndex == m_ids[ id ] )
+			if( nullIndex == m_ids[ entity ] )
 			{
 				return( nullptr );
 			}
 			else
 			{
-				return( &m_objects[ m_ids[ id ] ].second );
+				return( &m_objects[ m_ids[ entity ] ].second );
 			}
 		}
 		else
@@ -136,7 +138,7 @@ public:
 		}
 	}
 
-	void Each( std::function<void( const std::uint32_t id, const T& )> lambda ) const
+	void Each( std::function<void( const Entity &entity, const T& )> lambda ) const
 	{
 		for( const auto &component : m_objects )
 		{
@@ -147,7 +149,7 @@ public:
 private:
 	std::vector< std::size_t > m_ids;
 
-	std::vector< std::pair< std::uint32_t, T > > m_objects;
+	std::vector< std::pair< Entity, T > > m_objects;
 
 	std::stack<std::size_t> m_freeIndices;
 

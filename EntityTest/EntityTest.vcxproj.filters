@@ -98,7 +98,7 @@
     <ClCompile Include="CTransformComponent.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="EntityId.hpp">
+    <ClCompile Include="Entity.hpp">
       <Filter>Headerdateien</Filter>
     </ClCompile>
   </ItemGroup>
