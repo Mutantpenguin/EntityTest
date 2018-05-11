@@ -29,7 +29,20 @@ public:
 
 	Entity CreateEntity()
 	{
+		// TODO implement stack for freed ids
+		// TODO implement "version" in Entity when stack is used. increment "version" when popping from stack
+		// TODO use "version" in Entity to check against it in several places
 		return( Entity( m_lastId++ ) );
+	}
+
+	void DestroyEntity( const Entity &entity )
+	{
+		TupleIterator::for_each( m_components, [ &entity ] ( auto x )
+		{
+			x.Remove( entity );
+		} );
+
+		// TODO push id to stack for freed ids
 	}
 
 	template< typename T >
