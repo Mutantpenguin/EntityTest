@@ -1,13 +1,10 @@
 #pragma once
 
-#include <unordered_map>
 #include <functional>
 #include <tuple>
 #include <utility>
 
 #include <glm/gtx/norm.hpp>
-
-#include "CEntity.hpp"
 
 #include "CSlotMap.hpp"
 

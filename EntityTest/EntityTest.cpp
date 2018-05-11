@@ -7,11 +7,14 @@
 
 #include <memory>
 
+#include "CLogger.hpp"
+
 #include "CScene.hpp"
 
 #include "CPhysicsComponent.hpp"
 #include "CPlayerComponent.hpp"
 #include "CDebugNameComponent.hpp"
+#include "CTransformComponent.hpp"
 
 #include "CSlotMap.hpp"
 

@@ -4,7 +4,6 @@
 #include <string>
 #include <memory>
 #include <array>
-#include <typeindex>
 
 #include "CLogger.hpp"
 
