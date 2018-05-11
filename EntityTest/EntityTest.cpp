@@ -16,7 +16,7 @@
 
 int main()
 {
-	const std::uint32_t numberOfEntities = 100000;
+	const std::uint32_t numberOfEntities = 35;
 
 	CScene<CPhysicsComponent, CPlayerComponent> scene( numberOfEntities );
 
