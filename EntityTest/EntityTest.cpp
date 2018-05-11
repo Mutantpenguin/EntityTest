@@ -16,8 +16,6 @@
 #include "CDebugNameComponent.hpp"
 #include "CTransformComponent.hpp"
 
-#include "CSlotMap.hpp"
-
 int main()
 {
 	const std::uint32_t numberOfEntities = 100000;

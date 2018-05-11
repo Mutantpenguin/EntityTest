@@ -88,6 +88,7 @@ public:
 	{
 		std::get< CSlotMap< T > >( m_components ).Each( lambda );
 	};
+
 	/* TODO
 	template<typename... T_Components>
 	void EachWithAnyComponents( std::function<void( const Entity &entity, const T& )> lambda ) const

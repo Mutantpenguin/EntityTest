@@ -4,10 +4,12 @@
 
 class Entity
 {
-	friend class CScene;
-	friend class CSlotMap;
+public:
+	Entity() :
+		m_id { 0 }
+	{}
 
-private:
+	// TODO allow creation only from CScene
 	Entity( const std::uint32_t id ) :
 		m_id { id }
 	{}
@@ -17,5 +19,6 @@ private:
 		return( m_id );
 	}
 
+private:
 	std::uint32_t m_id;
 };

@@ -121,15 +121,15 @@ public:
 
 	T* Get( const Entity &entity )
 	{
-		if( m_objects.size() > entity )
+		if( m_objects.size() > entity.Id() )
 		{
-			if( nullIndex == m_ids[ entity ] )
+			if( nullIndex == m_ids[ entity.Id() ] )
 			{
 				return( nullptr );
 			}
 			else
 			{
-				return( &m_objects[ m_ids[ entity ] ].second );
+				return( &m_objects[ m_ids[ entity.Id() ] ].second );
 			}
 		}
 		else
