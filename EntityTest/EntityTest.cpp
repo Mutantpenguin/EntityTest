@@ -11,14 +11,17 @@
 
 #include "CPhysicsComponent.hpp"
 #include "CPlayerComponent.hpp"
+#include "CDebugNameComponent.hpp"
 
 #include "CSlotMap.hpp"
 
 int main()
 {
-	const std::uint32_t numberOfEntities = 35;
+	const std::uint32_t numberOfEntities = 100000;
 
-	CScene<CPhysicsComponent, CPlayerComponent> scene( numberOfEntities );
+	CScene<CPhysicsComponent,
+		   CPlayerComponent,
+		   CDebugNameComponent> scene( numberOfEntities );
 
 	CLogger::Log( "----------------------------------------------------------------------------------------" );
 	CLogger::Log( "entity count: " + std::to_string( numberOfEntities ) );
@@ -33,7 +36,8 @@ int main()
 		{
 			auto id = scene.CreateEntity();
 
-			// TODO set name to "entity_" + std::to_string( i )"
+			scene.AddComponent( id, CDebugNameComponent { "entity_" + std::to_string( i ) } );
+
 			if( rand() % 10 == 2 )
 			{
 				CPhysicsComponent physics;
@@ -65,23 +69,26 @@ int main()
 		CLogger::Log( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 	
-	/* TODO
-	{
-		CLogger::Log( "entities with physics:" );
-		const auto start = std::chrono::system_clock::now();
-		const auto componentsWithPhysics = scene->GetEntitiesWithComponents<CPhysicsComponent>();
 
-		if( componentsWithPhysics.size() > 0 )
+	{
+		CLogger::Log( "entities with physics and name:" );
+		const auto start = std::chrono::system_clock::now();
+		std::uint32_t counter = 0;
+		scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ]( const std::uint32_t id, const auto &component )
 		{
-			for( const auto entity : componentsWithPhysics )
+			auto debugName = scene.GetComponent<CDebugNameComponent>( id );
+
+			if( debugName )
 			{
-				//CLogger::Log("\t - " + entity->Name());
+				//CLogger::Log( "\t - " + debugName->name );
 			}
-		}
+
+			counter++;
+		} );
 
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "Time to fill and iterate a vector of " + std::to_string( componentsWithPhysics.size() ) + " : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
+		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 	/* TODO
 	{
