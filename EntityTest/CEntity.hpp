@@ -8,7 +8,7 @@
 
 #include "CLogger.hpp"
 
-#include "CTransform.hpp"
+#include "CTransformComponent.hpp"
 #include "CBoundingBox.hpp"
 
 
@@ -22,7 +22,7 @@ public:
 
 	const std::uint32_t Id = ++s_lastId;
 
-	CTransform Transform;
+	CTransformComponent Transform;
 	CBoundingBox BoundingBox;
 
 private:

@@ -1,10 +1,9 @@
-#ifndef CTRANSFORM_HPP
-#define CTRANSFORM_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-class CTransform final
+class CTransformComponent final
 {
 public:
 	void Position( const glm::vec3 &position );
@@ -25,5 +24,3 @@ private:
 	glm::quat	m_orientation { 1.0f, 0.0f, 0.0f, 0.0f };
 	glm::vec3	m_scale { 1.0f, 1.0f, 1.0f };
 };
-
-#endif // CTRANSFORM_HPP

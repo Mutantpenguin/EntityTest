@@ -22,6 +22,7 @@ public:
 	~CSlotMap()
 	{
 		CLogger::Log( "size: " + std::to_string( m_objects.size() ) );
+		CLogger::Log( "size in KiBi: " + std::to_string( SizeInBytes() / 1024 ) );
 
 		if( m_objects.capacity() > m_initialCapacity )
 		{
@@ -29,14 +30,38 @@ public:
 		}
 	}
 
-	void Add( std::uint32_t id, T& t )
+	std::size_t SizeInBytes()
+	{
+		return( sizeof( T ) * m_objects.size() );
+	}
+
+	bool Has( const std::uint32_t id ) const
+	{
+		if( m_objects.size() > id )
+		{
+			if( nullIndex == m_ids[ id ] )
+			{
+				return( false );
+			}
+			else
+			{
+				return( true );
+			}
+		}
+		else
+		{
+			return( true );
+		}
+	}
+
+	void Add( const std::uint32_t id, T& t )
 	{
 		if( ( id + 1 ) > m_ids.size() )
 		{
-			m_ids.resize( ( id + 1 ), -1 );
+			m_ids.resize( ( id + 1 ), nullIndex );
 		}
 
-		if( -1 != m_ids[ id ] )
+		if( nullIndex != m_ids[ id ] )
 		{
 			CLogger::Log( "component already exists" );
 			return;
@@ -69,7 +94,7 @@ public:
 		}
 	}
 
-	void Remove( std::uint32_t id )
+	void Remove( const std::uint32_t id )
 	{
 		auto it = m_ids.find( id );
 
@@ -92,11 +117,11 @@ public:
 		}
 	}
 
-	T* Get( std::uint32_t id )
+	T* Get( const std::uint32_t id )
 	{
 		if( m_objects.size() > id )
 		{
-			if( -1 == m_ids[ id ] )
+			if( nullIndex == m_ids[ id ] )
 			{
 				return( nullptr );
 			}
@@ -129,5 +154,7 @@ private:
 	std::size_t m_lastObjectIndex = -1;
 
 	const std::size_t m_initialCapacity = 0;
+
+	const std::size_t nullIndex = -1;
 };
 

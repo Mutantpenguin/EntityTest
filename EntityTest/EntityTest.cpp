@@ -21,7 +21,8 @@ int main()
 
 	CScene<CPhysicsComponent,
 		   CPlayerComponent,
-		   CDebugNameComponent> scene( numberOfEntities );
+		   CDebugNameComponent,
+		   CTransformComponent> scene( numberOfEntities );
 
 	CLogger::Log( "----------------------------------------------------------------------------------------" );
 	CLogger::Log( "entity count: " + std::to_string( numberOfEntities ) );
@@ -45,7 +46,9 @@ int main()
 
 				scene.AddComponent( id, physics );
 
-				// TODO ent.Transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
+				CTransformComponent transform;
+				transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
+				scene.AddComponent( id, transform );
 			}
 
 			if( rand() % 10 > 4 )
@@ -114,20 +117,24 @@ int main()
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
+		scene.EachComponent< CPhysicsComponent >( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
 		{
+			if( scene.HasComponents< CPlayerComponent >( id ) )
+			{
+				//CLogger::Log( "gnah" );
+			}
+
+			if( scene.HasComponents< CPlayerComponent, CDebugNameComponent >( id ) )
+			{
+				//CLogger::Log( "gnah" );
+			}
+
 			const auto blah1 = scene.GetComponent<CPlayerComponent>( id );
 
 			if( blah1 )
 			{
 				counter++;
 			}
-
-			//CLogger::Log("\t - " + entity->Name() + " / " + entity->Get<CPlayerComponent>()->Team);
-			// TODO const auto blah1 = scene->Get<CPlayerComponent>();
-			// TODO const auto mult = blah1->Team * blah1->Team;
-
-			//const auto blah1 = entity->Get<CPlayerComponent>();
 		} );
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
@@ -149,14 +156,13 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-
+	*/
+	/* TODO
 	{
 		CLogger::Log( "entities with physics and/or player in radius:" );
-		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
-		const float radius { 30.0f };
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		scene->EachWithAnyComponentsInRadius<CPhysicsComponent, CPlayerComponent>( position, radius, [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
+		scene.EachWithAnyComponents<CPhysicsComponent, CPlayerComponent>( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
 		{
 			counter++;
 		} );

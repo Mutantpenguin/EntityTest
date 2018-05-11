@@ -147,7 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBoundingBox.hpp" />
-    <ClInclude Include="CDummyComponent.hpp" />
     <ClInclude Include="CEntity.hpp" />
     <ClInclude Include="CFrustum.hpp" />
     <ClInclude Include="CLogger.hpp" />
@@ -157,12 +156,11 @@
     <ClInclude Include="CPlayerComponent.hpp" />
     <ClInclude Include="CScene.hpp" />
     <ClInclude Include="CSize.hpp" />
-    <ClInclude Include="ComponentId.hpp" />
     <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="CDebugNameComponent.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="CTransform.hpp" />
+    <ClInclude Include="CTransformComponent.hpp" />
     <ClInclude Include="CWorld.hpp" />
     <ClInclude Include="TupleIterator.hpp" />
   </ItemGroup>
@@ -177,7 +175,7 @@
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="CTransform.cpp" />
+    <ClCompile Include="CTransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

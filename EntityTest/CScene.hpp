@@ -57,9 +57,7 @@ public:
 	{
 		auto &componentContainer = std::get<Container<T>>( m_components );
 
-		const auto it = componentContainer.find( id );
-
-		if( std::cend( componentContainer ) != it )
+		if( componentContainer.Has( id ) )
 		{
 			return( true );
 		}
@@ -69,13 +67,11 @@ public:
 		}
 	}
 
-	/* TODO
 	template< typename First, typename Second, typename ... Rest >
 	bool HasComponents( const std::uint32_t id ) const
 	{
 		return( HasComponents<First>( id ) && HasComponents<Second, Rest...>( id ) );
 	}
-	*/
 
 	template< typename T >
 	T *GetComponent( const std::uint32_t id )
@@ -85,68 +81,14 @@ public:
 		return( componentContainer.Get( id ) );
 	}
 
-	/* TODO
-	template<typename... T_Components>
-	std::vector<const CEntity &> GetEntitiesWithComponents() const
-	{
-		std::vector<const CEntity &> entities;
-		entities.reserve( m_entities.size() / 10 );
-
-		const auto it = 
-
-		for( const auto &entity : m_entities )
-		{
-			if( entity->HasComponents<T_Components...>() )
-			{
-				entities.push_back( entity );
-			}
-		}
-
-		return( entities );
-	};
-	
-	template<typename... T_Components>
-	std::vector<std::shared_ptr<const CEntity>> GetEntitiesWithAnyComponent() const
-	{
-		std::vector<std::shared_ptr<const CEntity>> entities;
-		entities.reserve( m_entities.size() / 4 );
-
-		for( const auto &entity : m_entities )
-		{
-			if( entity->HasAnyComponents<T_Components...>() )
-			{
-				entities.push_back( entity );
-			}
-		}
-
-		return( entities );
-	};
-	*/
-
 	template<typename T>
 	void EachComponent( std::function<void( const std::uint32_t id, const T& )> lambda ) const
 	{
 		std::get<Container<T>>( m_components ).Each( lambda );
 	};
-
-	/*
+	/* TODO
 	template<typename... T_Components>
-	void EachWithComponentsInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const
-	{
-		const auto radiusSquared = std::pow( radius, 2 );
-
-		EachWithComponents<T_Components...>( [ &position, &radiusSquared, &lambda2 ] ( const std::shared_ptr<const CEntity> &entity )
-		{
-			// TODO use OcTree
-			if( glm::length2( position - entity->Transform.Position() ) <= radiusSquared )
-			{
-				lambda2( entity );
-			}
-		} );
-	};
-
-	template<typename... T_Components>
-	void EachWithAnyComponents( std::function<void( const std::shared_ptr<const CEntity>& )> lambda ) const
+	void EachWithAnyComponents( std::function<void( const std::uint32_t id, const T& )> lambda ) const
 	{
 		for( const auto &entity : m_entities )
 		{
@@ -156,23 +98,7 @@ public:
 			}
 		}
 	};
-
-	template<typename... T_Components>
-	void EachWithAnyComponentsInRadius( const glm::vec3 &position, const float radius, std::function<void( const std::shared_ptr<const CEntity>& )> lambda2 ) const
-	{
-		const auto radiusSquared = std::pow( radius, 2 );
-
-		EachWithAnyComponents<T_Components...>( [ &position, &radiusSquared, &lambda2 ] ( const std::shared_ptr<const CEntity> &entity )
-		{
-			// TODO use OcTree
-			if( glm::length2( position - entity->Transform.Position() ) <= radiusSquared )
-			{
-				lambda2( entity );
-			}
-		} );
-	};
 	*/
-
 private:
 	std::uint32_t m_lastId = 0;
 
