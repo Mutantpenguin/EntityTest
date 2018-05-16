@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cstddef>
 
 class Entity
 {
@@ -19,6 +20,12 @@ public:
 		return( m_id );
 	}
 
+	const std::uint32_t &Version() const
+	{
+		return( m_version );
+	}
+
 private:
-	std::uint32_t m_id;
+	size_t m_id;
+	std::uint32_t m_version;
 };

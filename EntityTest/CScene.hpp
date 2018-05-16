@@ -13,17 +13,12 @@
 
 #include "Entity.hpp"
 
-template <typename... Types>
+template < size_t _Size, typename... Types >
 class CScene final
 {
 public:
 	CScene()
 	{}
-
-	CScene( const std::size_t reserveSize ) :
-		m_components( (sizeof( Types ), reserveSize )... )
-	{
-	}
 
 	~CScene()
 	{}
@@ -58,7 +53,7 @@ public:
 	template< typename T >
 	void AddComponent( const Entity &entity, T& t )
 	{
-		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< Storage< T > >( m_components );
 	
 		componentContainer.Add( entity, t );
 	};
@@ -66,7 +61,7 @@ public:
 	template< typename T >
 	void AddComponent( const Entity &entity, T&& t )
 	{
-		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< Storage< T > >( m_components );
 
 		componentContainer.Add( entity, t );
 	};
@@ -74,7 +69,7 @@ public:
 	template<typename T>
 	bool HasComponents( const Entity &entity ) const
 	{
-		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< Storage< T > >( m_components );
 
 		if( componentContainer.Has( entity ) )
 		{
@@ -101,7 +96,7 @@ public:
 	template< typename T >
 	T *GetComponent( const Entity &entity )
 	{
-		auto &componentContainer = std::get< CSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< Storage< T > >( m_components );
 
 		return( componentContainer.Get( entity ) );
 	}
@@ -109,7 +104,7 @@ public:
 	template<typename T>
 	void EachComponent( std::function<void( const Entity &entity, const T& )> lambda ) const
 	{
-		std::get< CSlotMap< T > >( m_components ).Each( lambda );
+		std::get< Storage< T > >( m_components ).Each( lambda );
 	};
 
 	/* TODO
@@ -126,8 +121,11 @@ public:
 	};
 	*/
 private:
-	std::uint32_t m_lastId = 0;
-	std::stack<std::uint32_t> m_freeIds;
+	template< typename T >
+	using Storage = CSlotMap< T, _Size >;
 
-	std::tuple< CSlotMap< Types >... > m_components;
+	size_t m_lastId = 0;
+	std::stack< size_t > m_freeIds;
+
+	std::tuple< Storage< Types >... > m_components;
 };

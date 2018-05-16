@@ -7,32 +7,23 @@
 
 #include "Entity.hpp"
 
-template< typename T >
+template< typename T, size_t _Size >
 class CSlotMap
 {
 public:
-	CSlotMap()
-	{}
-	
-	CSlotMap( std::size_t capacity ) :
-		m_initialCapacity { capacity }
+	CSlotMap() :
+		m_ids( _Size, nullIndex ),
+		m_objects( _Size )
 	{
-		m_ids.reserve( m_initialCapacity * 4 ); // TODO is 4 times really enough?!?
-		m_objects.reserve( m_initialCapacity );
 	}
 
 	~CSlotMap()
 	{
 		CLogger::Log( "size: " + std::to_string( m_objects.size() ) );
 		CLogger::Log( "size in KiBi: " + std::to_string( SizeInBytes() / 1024 ) );
-
-		if( m_objects.capacity() > m_initialCapacity )
-		{
-			CLogger::Log( "initial capacity was '" + std::to_string( m_initialCapacity ) + "', current capacity is '" + std::to_string( m_objects.capacity() ) + "'" );
-		}
 	}
 
-	std::size_t SizeInBytes()
+	size_t SizeInBytes()
 	{
 		return( sizeof( T ) * m_objects.size() );
 	}
@@ -58,11 +49,6 @@ public:
 
 	void Add( const Entity &entity, T& t )
 	{
-		if( ( entity.Id() + 1 ) > m_ids.size() )
-		{
-			m_ids.resize( ( entity.Id() + 1 ), nullIndex );
-		}
-
 		if( nullIndex != m_ids[ entity.Id() ] )
 		{
 			CLogger::Log( "component already exists" );
@@ -70,39 +56,22 @@ public:
 		}
 		else
 		{
-			std::size_t index;
+			m_lastObjectIndex++;
 
-			if( !m_freeIndices.empty() )
-			{
-				index = m_freeIndices.top();
+			m_ids[ entity.Id() ] = m_lastObjectIndex;
 
-				m_freeIndices.pop();
-			}
-			else
-			{
-				m_lastObjectIndex++;
-
-				if( m_objects.size() <= ( m_lastObjectIndex + 1 ) )
-				{
-					m_objects.resize( m_lastObjectIndex + 1 );
-				}
-
-				index = m_lastObjectIndex;
-			}
-
-			m_ids[ entity.Id() ] = index;
-
-			m_objects[ index ] = std::make_pair( entity, t );
+			m_objects[ m_lastObjectIndex ] = std::make_pair( entity, t );
 		}
 	}
 
 	void Remove( const Entity &entity )
 	{
-		auto it = m_ids.find( entity );
+		auto id = m_ids[ entity.Id() ];
 
-		if( std::cend( m_ids ) != it )
+		// TODO
+		if( id )
 		{
-			std::size_t index = it->second;
+			size_t index = it->second;
 
 			m_ids.erase( it );
 
@@ -113,50 +82,50 @@ public:
 				m_ids[ m_objects[ index ].first ].second = index;
 			}
 
-			m_freeIndices.push( index );
-
 			m_lastObjectIndex--;
 		}
 	}
 
 	T* Get( const Entity &entity )
 	{
-		if( m_objects.size() > entity.Id() )
+		if( nullIndex == m_ids[ entity.Id() ] )
 		{
-			if( nullIndex == m_ids[ entity.Id() ] )
-			{
-				return( nullptr );
-			}
-			else
-			{
-				return( &m_objects[ m_ids[ entity.Id() ] ].second );
-			}
+			return( nullptr );
 		}
 		else
 		{
-			return( nullptr );
+			// TODO rename blah
+			auto blah = &m_objects[ m_ids[ entity.Id() ] ];
+
+			if( blah->first.Version() == entity.Version() )
+			{
+				return( &blah->second );
+			}
+			else
+			{
+				return( nullptr );
+			}
 		}
 	}
 
 	void Each( std::function<void( const Entity &entity, const T& )> lambda ) const
 	{
-		for( const auto &component : m_objects )
+		for( size_t i = 0; i <= m_lastObjectIndex; i++ )
 		{
+			auto &component = m_objects[ i ];
 			lambda( component.first, component.second );
 		}
 	}
 
 private:
-	std::vector< std::size_t > m_ids;
+	std::vector< size_t > m_ids;
 
 	std::vector< std::pair< Entity, T > > m_objects;
 
-	std::stack<std::size_t> m_freeIndices;
+	size_t m_lastObjectIndex = -1;
 
-	std::size_t m_lastObjectIndex = -1;
+	const size_t m_initialCapacity = 0;
 
-	const std::size_t m_initialCapacity = 0;
-
-	const std::size_t nullIndex = -1;
+	static const size_t nullIndex = -1;
 };
 

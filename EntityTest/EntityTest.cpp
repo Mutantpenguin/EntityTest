@@ -18,12 +18,13 @@
 
 int main()
 {
-	const std::uint32_t numberOfEntities = 100000;
+	constexpr size_t numberOfEntities = 100000;
 
-	CScene<CPhysicsComponent,
-		   CPlayerComponent,
-		   CDebugNameComponent,
-		   CTransformComponent> scene( numberOfEntities );
+	CScene< numberOfEntities,
+		    CPhysicsComponent,
+		    CPlayerComponent,
+		    CDebugNameComponent,
+		    CTransformComponent > scene;
 
 	CLogger::Log( "----------------------------------------------------------------------------------------" );
 	CLogger::Log( "entity count: " + std::to_string( numberOfEntities ) );
@@ -34,7 +35,7 @@ int main()
 
 	{
 		const auto start = std::chrono::system_clock::now();
-		for( std::uint32_t i = 0; i < numberOfEntities; i++ )
+		for( size_t i = 0; i < numberOfEntities; i++ )
 		{
 			auto entity = scene.CreateEntity();
 
@@ -146,7 +147,7 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-
+	
 	/*
 	{
 		CLogger::Log( "entities with physics in radius:" );
