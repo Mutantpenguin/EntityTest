@@ -76,7 +76,7 @@ public:
 	{
 		auto &componentContainer = std::get< Storage< T > >( m_components );
 
-		componentContainer.Add( entity, t );
+		componentContainer.Add( entity, std::move( t ) );
 	};
 
 	template< typename T >
@@ -140,7 +140,7 @@ private:
 	static const size_t maxId = _Size - 1;
 	static const size_t nullId = -1;
 
-	size_t m_lastId = 0;
+	size_t m_lastId = nullId;
 	std::stack< Entity > m_freeEntities;
 
 	std::tuple< Storage< Types >... > m_components;
