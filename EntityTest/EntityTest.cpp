@@ -43,10 +43,7 @@ int main()
 
 			if( rand() % 10 == 2 )
 			{
-				CPhysicsComponent physics;
-				physics.mass = 10.0f;
-
-				scene.AddComponent( entity, physics );
+				scene.AddComponent( entity, CPhysicsComponent( 10.0f ) );
 
 				CTransformComponent transform;
 				transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
