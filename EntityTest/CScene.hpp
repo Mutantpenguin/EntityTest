@@ -3,8 +3,6 @@
 #include <functional>
 #include <tuple>
 
-#include <stack>
-
 #include <glm/gtx/norm.hpp>
 
 #include "CSlotMap.hpp"
@@ -20,7 +18,9 @@ public:
 	CScene( const CScene& ) = delete;
 
 	CScene()
-	{}
+	{
+		m_freeEntities.reserve( _Size );
+	}
 
 	~CScene()
 	{}
@@ -32,8 +32,8 @@ public:
 
 		if( !m_freeEntities.empty() )
 		{
-			auto entity = m_freeEntities.top();
-			m_freeEntities.pop();
+			auto entity = m_freeEntities.back();
+			m_freeEntities.pop_back();
 			entity.m_version++;
 			return( entity );
 		}
@@ -60,7 +60,7 @@ public:
 			x.Remove( entity );
 		} );
 
-		m_freeEntities.push( entity );
+		m_freeEntities.push_back( entity );
 	}
 
 	template< typename T >
@@ -141,7 +141,7 @@ private:
 	static const size_t nullId = -1;
 
 	size_t m_lastId = nullId;
-	std::stack< Entity > m_freeEntities;
+	std::vector< Entity > m_freeEntities;
 
 	std::tuple< Storage< Types >... > m_components;
 };
