@@ -31,18 +31,31 @@ public:
 
 	bool Has( const Entity &entity ) const
 	{
-		if( nullIndex == m_idMappings[ entity.Id() ] )
+		auto &mapping = m_idMappings[ entity.Id() ];
+
+		if( nullIndex == mapping )
 		{
 			return( false );
 		}
 		else
 		{
-			return( true );
+			auto object = &m_objects[ mapping ];
+
+			if( object->first.Version() == entity.Version() )
+			{
+				return( true );
+			}
+			else
+			{
+				return( false );
+			}
 		}
 	}
 
 	void Add( const Entity &entity, T& component )
 	{
+		// TODO only Add when version matches
+
 		auto &mapping = m_idMappings[ entity.Id() ];
 
 		if( nullIndex != mapping )
@@ -57,13 +70,15 @@ public:
 			mapping = m_lastObjectIndex;
 
 			auto &object = m_objects[ m_lastObjectIndex ];
-			object.first = entity;
+			object.first  = entity;
 			object.second = component;
 		}
 	}
 
 	void Add( const Entity &entity, T&& component )
 	{
+		// TODO only Add when version matches
+
 		auto &mapping = m_idMappings[ entity.Id() ];
 
 		if( nullIndex != mapping )
@@ -78,32 +93,36 @@ public:
 			mapping = m_lastObjectIndex;
 
 			auto &object = m_objects[ m_lastObjectIndex ];
-			object.first = entity;
+			object.first  = entity;
 			object.second = component;
 		}
 	}
 
 	void Remove( const Entity &entity )
 	{
-		const auto index = m_idMappings[ entity.Id() ];
+		auto &mapping = m_idMappings[ entity.Id() ];
 
-		if( nullIndex != index )
+		if( nullIndex != mapping )
 		{
-			m_idMappings[ entity.Id() ] = nullIndex;
+			auto &object = m_objects[ mapping ];
 
-			if( m_lastObjectIndex > 0 )
+			if( object.first.Version() == entity.Version() )
 			{
-				m_objects[ index ] = m_objects[ m_lastObjectIndex ];
+				if( m_lastObjectIndex > 0 )
+				{
+					object = m_objects[ m_lastObjectIndex ];
 
-				m_idMappings[ m_objects[ index ].first.Id() ] = index;
+					m_idMappings[ object.first.Id() ] = mapping;
 
-				m_lastObjectIndex--;
+					m_lastObjectIndex--;
+				}
+				else
+				{
+					m_lastObjectIndex = nullIndex;
+				}
+
+				mapping = nullIndex;
 			}
-			else
-			{
-				m_lastObjectIndex = nullIndex;
-			}
-			
 		}
 	}
 
@@ -117,7 +136,6 @@ public:
 		}
 		else
 		{
-			// TODO move version check up to CScene.hpp?
 			auto object = &m_objects[ mapping ];
 
 			if( object->first.Version() == entity.Version() )
