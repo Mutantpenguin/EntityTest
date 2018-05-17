@@ -3,24 +3,17 @@
 class TupleIterator
 {
 public:
-	template <typename Tuple, typename F>
-	static void for_each( Tuple&& tuple, F&& f )
-	{
-		constexpr size_t N = std::tuple_size<std::remove_reference_t<Tuple>>::value;
-		for_each_impl( std::forward<Tuple>( tuple ), std::forward<F>( f ),
-					   std::make_index_sequence<N>{} );
-	}
+	template< std::size_t I = 0, typename FuncT, typename... Types >
+	static inline typename std::enable_if<I == sizeof...( Types ), void>::type
+		for_each( std::tuple< Types... > &, FuncT ) // Unused arguments are given no names.
+	{}
 
-private:
-	template <typename Tuple, typename F, size_t ...Indices>
-	static void for_each_impl( Tuple&& tuple, F&& f, std::index_sequence<Indices...> )
+	template<std::size_t I = 0, typename FuncT, typename... Types>
+	static inline typename std::enable_if<I < sizeof...( Types ), void>::type
+		for_each( std::tuple< Types... >& t, FuncT f )
 	{
-		using swallow = int[];
-		(void)swallow
-		{
-			1,
-				( f( std::get<Indices>( std::forward<Tuple>( tuple ) ) ), void(), int {} )...
-		};
+		f( std::get<I>( t ) );
+		for_each<I + 1, FuncT, Types...>( t, f );
 	}
 };
 

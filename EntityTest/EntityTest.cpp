@@ -73,7 +73,7 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-	
+
 
 	{
 		CLogger::Log( "entities with physics and name:" );
@@ -136,9 +136,9 @@ int main()
 				//CLogger::Log( "gnah" );
 			}
 
-			const auto blah1 = scene.GetComponent<CPlayerComponent>( entity );
+			const auto playerComponent = scene.GetComponent< CPlayerComponent >( entity );
 
-			if( blah1 )
+			if( playerComponent )
 			{
 				counter++;
 			}

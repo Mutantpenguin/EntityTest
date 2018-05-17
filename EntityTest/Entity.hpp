@@ -5,6 +5,9 @@
 
 class Entity
 {
+	template < size_t _Size, typename... Types >
+	friend class CScene;
+
 public:
 	Entity() :
 		m_id { 0 }

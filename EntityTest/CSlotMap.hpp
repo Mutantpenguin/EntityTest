@@ -11,8 +11,10 @@ template< typename T, size_t _Size >
 class CSlotMap
 {
 public:
+	CSlotMap( const CSlotMap& ) = delete;
+
 	CSlotMap() :
-		m_ids( _Size, nullIndex ),
+		m_idMapping( _Size, nullIndex ),
 		m_objects( _Size )
 	{
 	}
@@ -30,16 +32,9 @@ public:
 
 	bool Has( const Entity &entity ) const
 	{
-		if( m_objects.size() > entity.Id() )
+		if( nullIndex == m_idMapping[ entity.Id() ] )
 		{
-			if( nullIndex == m_ids[ entity.Id() ] )
-			{
-				return( false );
-			}
-			else
-			{
-				return( true );
-			}
+			return( false );
 		}
 		else
 		{
@@ -47,9 +42,9 @@ public:
 		}
 	}
 
-	void Add( const Entity &entity, T& t )
+	void Add( const Entity &entity, T& component )
 	{
-		if( nullIndex != m_ids[ entity.Id() ] )
+		if( nullIndex != m_idMapping[ entity.Id() ] )
 		{
 			CLogger::Log( "component already exists" );
 			return;
@@ -58,28 +53,46 @@ public:
 		{
 			m_lastObjectIndex++;
 
-			m_ids[ entity.Id() ] = m_lastObjectIndex;
+			m_idMapping[ entity.Id() ] = m_lastObjectIndex;
 
-			m_objects[ m_lastObjectIndex ] = std::make_pair( entity, t );
+			m_objects[ m_lastObjectIndex ].first = entity;
+			m_objects[ m_lastObjectIndex ].second = component;
+		}
+	}
+
+	void Add( const Entity &entity, T&& component )
+	{
+		// TODO FIXME why is this function never reached?
+
+		if( nullIndex != m_idMapping[ entity.Id() ] )
+		{
+			CLogger::Log( "component already exists" );
+			return;
+		}
+		else
+		{
+			m_lastObjectIndex++;
+
+			m_idMapping[ entity.Id() ] = m_lastObjectIndex;
+
+			m_objects[ m_lastObjectIndex ].first = entity;
+			m_objects[ m_lastObjectIndex ].second = component;
 		}
 	}
 
 	void Remove( const Entity &entity )
 	{
-		auto id = m_ids[ entity.Id() ];
+		const auto index = m_idMapping[ entity.Id() ];
 
-		// TODO
-		if( id )
+		if( nullIndex != index )
 		{
-			size_t index = it->second;
-
-			m_ids.erase( it );
+			m_idMapping[ entity.Id() ] = nullIndex;
 
 			if( m_lastObjectIndex > 0 )
 			{
 				m_objects[ index ] = m_objects[ m_lastObjectIndex ];
 
-				m_ids[ m_objects[ index ].first ].second = index;
+				m_idMapping[ m_objects[ index ].first.Id() ] = index;
 			}
 
 			m_lastObjectIndex--;
@@ -88,14 +101,15 @@ public:
 
 	T* Get( const Entity &entity )
 	{
-		if( nullIndex == m_ids[ entity.Id() ] )
+		if( nullIndex == m_idMapping[ entity.Id() ] )
 		{
 			return( nullptr );
 		}
 		else
 		{
 			// TODO rename blah
-			auto blah = &m_objects[ m_ids[ entity.Id() ] ];
+			// TODO move version check up to CScene.hpp?
+			auto blah = &m_objects[ m_idMapping[ entity.Id() ] ];
 
 			if( blah->first.Version() == entity.Version() )
 			{
@@ -110,21 +124,22 @@ public:
 
 	void Each( std::function<void( const Entity &entity, const T& )> lambda ) const
 	{
-		for( size_t i = 0; i <= m_lastObjectIndex; i++ )
+		if( -1 != m_lastObjectIndex )
 		{
-			auto &component = m_objects[ i ];
-			lambda( component.first, component.second );
+			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
+			{
+				auto &component = m_objects[ i ];
+				lambda( component.first, component.second );
+			}
 		}
 	}
 
 private:
-	std::vector< size_t > m_ids;
+	std::vector< size_t > m_idMapping;
 
 	std::vector< std::pair< Entity, T > > m_objects;
 
 	size_t m_lastObjectIndex = -1;
-
-	const size_t m_initialCapacity = 0;
 
 	static const size_t nullIndex = -1;
 };
