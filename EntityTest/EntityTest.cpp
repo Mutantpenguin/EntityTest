@@ -39,7 +39,7 @@ int main()
 		{
 			auto entity = scene.CreateEntity();
 
-			scene.AddComponent( entity, CDebugNameComponent { "entity_" + std::to_string( i ) } );
+			scene.AddComponent( entity, CDebugNameComponent( "entity_" + std::to_string( i ) ) );
 
 			if( rand() % 10 == 2 )
 			{

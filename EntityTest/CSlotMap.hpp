@@ -4,19 +4,22 @@
 #include <functional>
 #include <vector>
 
+#include "CBaseComponent.hpp"
+
 #include "Entity.hpp"
 
 template< typename T, size_t _Size >
 class CSlotMap
 {
+	static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
 public:
 	CSlotMap( const CSlotMap& ) = delete;
 
 	CSlotMap() :
 		m_idMappings( _Size, nullIndex ),
 		m_objects( _Size )
-	{
-	}
+	{}
 
 	~CSlotMap()
 	{
