@@ -13,7 +13,7 @@ public:
 		m_id { 0 }
 	{}
 
-	const std::uint32_t &Id() const
+	const std::size_t &Id() const
 	{
 		return( m_id );
 	}
