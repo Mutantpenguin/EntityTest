@@ -44,7 +44,7 @@ public:
 			if( m_lastId > maxId )
 			{
 				CLogger::Log( "exceeded maximum entity count of '" + std::to_string( _Size ) + "'" );
-				return( Entity( nullId ) );
+				return( Entity( Entity::nullId ) );
 			}
 			else
 			{
@@ -138,9 +138,8 @@ private:
 	using Storage = CSlotMap< T, _Size >;
 
 	static const size_t maxId = _Size - 1;
-	static const size_t nullId = -1;
 
-	size_t m_lastId = nullId;
+	size_t m_lastId = Entity::nullId;
 	std::vector< Entity > m_freeEntities;
 
 	std::tuple< Storage< Types >... > m_components;

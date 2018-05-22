@@ -9,8 +9,7 @@ class Entity
 	friend class CScene;
 
 public:
-	Entity() :
-		m_id { 0 }
+	Entity()
 	{}
 
 	const std::size_t &Id() const
@@ -23,11 +22,13 @@ public:
 		return( m_version );
 	}
 
+	static const size_t nullId = -1;
+
 private:
 	Entity( const std::uint32_t id ) :
 		m_id { id }
 	{}
 
-	size_t m_id;
+	size_t m_id = nullId;
 	std::uint32_t m_version;
 };
