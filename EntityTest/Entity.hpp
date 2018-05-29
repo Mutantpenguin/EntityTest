@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <limits>
 
 class Entity
 {
@@ -22,7 +23,7 @@ public:
 		return( m_version );
 	}
 
-	static const size_t nullId = -1;
+	static const size_t nullId = std::numeric_limits< size_t >::max();
 
 private:
 	Entity( const size_t id ) :

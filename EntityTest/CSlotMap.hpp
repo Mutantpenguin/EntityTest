@@ -171,6 +171,6 @@ private:
 
 	size_t m_lastObjectIndex = nullIndex;
 
-	static const size_t nullIndex = -1;
+	static const size_t nullIndex = std::numeric_limits< size_t >::max();
 };
 
