@@ -152,7 +152,7 @@ public:
 		}
 	}
 
-	void Each( std::function<void( const Entity &entity, const T& )> lambda ) const
+	void Each( std::function< void( const Entity &entity, const T& ) > lambda ) const
 	{
 		if( nullIndex != m_lastObjectIndex )
 		{

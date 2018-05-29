@@ -25,7 +25,7 @@ public:
 	static const size_t nullId = -1;
 
 private:
-	Entity( const std::uint32_t id ) :
+	Entity( const size_t id ) :
 		m_id { id }
 	{}
 

@@ -144,38 +144,8 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-	
-	/*
-	{
-		CLogger::Log( "entities with physics in radius:" );
-		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
-		const float radius { 30.0f };
-		const auto start = std::chrono::system_clock::now();
-		std::uint32_t counter = 0;
-		scene->EachWithComponentsInRadius<CPhysicsComponent>( position, radius, [ &counter ] ( const std::shared_ptr<const CEntity> &entity )
-		{
-			counter++;
-		} );
-		const auto end = std::chrono::system_clock::now();
-		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
-	}
-	*/
-	/* TODO
-	{
-		CLogger::Log( "entities with physics and/or player in radius:" );
-		const auto start = std::chrono::system_clock::now();
-		std::uint32_t counter = 0;
-		scene.EachWithAnyComponents<CPhysicsComponent, CPlayerComponent>( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
-		{
-			counter++;
-		} );
-		const auto end = std::chrono::system_clock::now();
-		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "Time iterate " + std::to_string( counter ) + " entities: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
-	}
-	*/
-	/* TODO
+
+
 	{
 		std::uint32_t numIterations { 100 };
 
@@ -185,9 +155,9 @@ int main()
 		std::uint32_t counter = 0;
 		for( std::uint16_t j = 0; j < numIterations; j++ )
 		{
-			scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ] ( const std::uint32_t id, const auto &component )
+			scene.EachComponent<CPhysicsComponent>( [ &counter, &scene ] ( const Entity &entity, const auto &component )
 			{
-				const auto player = scene.GetComponent<CPlayerComponent>( id );
+				const auto player = scene.GetComponent<CPlayerComponent>( entity );
 
 				if( player )
 				{
@@ -199,7 +169,6 @@ int main()
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
-	*/
 
 	return( 0 );
 }

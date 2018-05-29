@@ -115,24 +115,12 @@ public:
 	}
 
 	template< typename T >
-	void EachComponent( std::function<void( const Entity &entity, const T& )> lambda ) const
+	void EachComponent( std::function< void( const Entity &entity, const T& ) > lambda ) const
 	{
 		std::get< Storage< T > >( m_components ).Each( lambda );
 	};
 
-	/* TODO
-	template< typename... T_Components >
-	void EachWithAnyComponents( std::function<void( const Entity &entity, const T& )> lambda ) const
-	{
-		for( const auto &entity : m_entities )
-		{
-			if( entity->HasAnyComponents< T_Components... >() )
-			{
-				lambda( entity );
-			}
-		}
-	};
-	*/
+
 private:
 	template< typename T >
 	using Storage = CSlotMap< T, _Size >;
