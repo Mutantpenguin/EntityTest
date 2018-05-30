@@ -24,7 +24,7 @@ public:
 	~CSlotMap()
 	{
 		CLogger::Log( "size: " + std::to_string( m_objects.size() ) );
-		CLogger::Log( "size in KiBi: " + std::to_string( SizeInBytes() / 1024 ) );
+		CLogger::Log( "size in MiBi: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) );
 	}
 
 	size_t SizeInBytes()
