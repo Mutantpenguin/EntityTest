@@ -33,9 +33,6 @@
     <ClInclude Include="CLogger.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="CScene.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="CSize.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -70,6 +67,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="CBaseComponent.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityComponentSystem.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

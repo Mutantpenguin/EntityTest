@@ -7,7 +7,7 @@
 class Entity
 {
 	template < size_t _Size, typename... Types >
-	friend class CScene;
+	friend class CEntityComponentSystem;
 
 public:
 	Entity()

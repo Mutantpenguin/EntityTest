@@ -12,20 +12,20 @@
 #include "Entity.hpp"
 
 template < size_t _Size, typename... Types >
-class CScene final
+class CEntityComponentSystem final
 {
 public:
-	CScene( const CScene& ) = delete;
+	CEntityComponentSystem( const CEntityComponentSystem& ) = delete;
 
-	CScene()
+	CEntityComponentSystem()
 	{
-		CLogger::Log( "CScene" );
+		CLogger::Log( std::string( typeid( this ).name() ) );
 		CLogger::Log( "\tmax entities: " + std::to_string( _Size ) );
 
 		m_freeEntities.reserve( _Size );
 	}
 
-	~CScene()
+	~CEntityComponentSystem()
 	{}
 
 	Entity CreateEntity()

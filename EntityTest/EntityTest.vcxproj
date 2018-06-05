@@ -155,7 +155,7 @@
     <ClInclude Include="CPhysicsComponent.hpp" />
     <ClInclude Include="CPlane.hpp" />
     <ClInclude Include="CPlayerComponent.hpp" />
-    <ClInclude Include="CScene.hpp" />
+    <ClInclude Include="CEntityComponentSystem.hpp" />
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="CDebugNameComponent.hpp" />
