@@ -167,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBoundingBox.cpp" />
-    <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />

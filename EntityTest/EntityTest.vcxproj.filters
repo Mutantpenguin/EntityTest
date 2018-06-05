@@ -80,9 +80,6 @@
     <ClCompile Include="EntityTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="CEntity.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="CWorld.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
