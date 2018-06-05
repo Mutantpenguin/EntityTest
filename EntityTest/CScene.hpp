@@ -19,6 +19,9 @@ public:
 
 	CScene()
 	{
+		CLogger::Log( "CScene" );
+		CLogger::Log( "\tmax entities: " + std::to_string( _Size ) );
+
 		m_freeEntities.reserve( _Size );
 	}
 

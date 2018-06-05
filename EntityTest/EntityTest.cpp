@@ -1,6 +1,3 @@
-// EntityTest.cpp : Definiert den Einstiegspunkt für die Konsolenanwendung.
-//
-
 #include "stdafx.h"
 
 #include <chrono>
@@ -25,10 +22,6 @@ int main()
 		    CPlayerComponent,
 		    CDebugNameComponent,
 		    CTransformComponent > scene;
-
-	CLogger::Log( "----------------------------------------------------------------------------------------" );
-	CLogger::Log( "entity count: " + std::to_string( numberOfEntities ) );
-	CLogger::Log( "----------------------------------------------------------------------------------------" );
 
 	CLogger::Log( "" );
 

@@ -19,17 +19,14 @@ public:
 	CSlotMap() :
 		m_idMappings( _Size, nullIndex ),
 		m_objects( _Size )
-	{}
-
-	~CSlotMap()
 	{
-		CLogger::Log( "size: " + std::to_string( m_objects.size() ) );
-		CLogger::Log( "size in MiBi: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) );
+		CLogger::Log( "SlotMap for '" + std::string( typeid( T ).name() ) + "'" );
+		CLogger::Log( "\tsize in MiBi: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) );
 	}
 
 	size_t SizeInBytes()
 	{
-		return( sizeof( T ) * m_objects.size() );
+		return( sizeof( T ) * _Size );
 	}
 
 	bool Has( const Entity &entity ) const
