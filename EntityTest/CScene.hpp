@@ -66,7 +66,7 @@ public:
 	template< typename T >
 	void AddComponent( const Entity &entity, T& t )
 	{
-		auto &componentContainer = std::get< Storage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 	
 		componentContainer.Add( entity, t );
 	};
@@ -74,7 +74,7 @@ public:
 	template< typename T >
 	void AddComponent( const Entity &entity, T&& t )
 	{
-		auto &componentContainer = std::get< Storage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 
 		componentContainer.Add( entity, std::move( t ) );
 	};
@@ -82,7 +82,7 @@ public:
 	template< typename T >
 	bool HasComponents( const Entity &entity ) const
 	{
-		auto &componentContainer = std::get< Storage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 
 		if( componentContainer.Has( entity ) )
 		{
@@ -109,7 +109,7 @@ public:
 	template< typename T >
 	T *GetComponent( const Entity &entity )
 	{
-		auto &componentContainer = std::get< Storage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 
 		return( componentContainer.Get( entity ) );
 	}
@@ -117,18 +117,18 @@ public:
 	template< typename T >
 	void EachComponent( std::function< void( const Entity &entity, const T& ) > lambda ) const
 	{
-		std::get< Storage< T > >( m_components ).Each( lambda );
+		std::get< ComponentStorage< T > >( m_components ).Each( lambda );
 	};
 
 
 private:
 	template< typename T >
-	using Storage = CSlotMap< T, _Size >;
+	using ComponentStorage = CSlotMap< T, _Size >;
 
 	static const size_t maxId = _Size - 1;
 
 	size_t m_lastId = Entity::nullId;
 	std::vector< Entity > m_freeEntities;
 
-	std::tuple< Storage< Types >... > m_components;
+	std::tuple< ComponentStorage< Types >... > m_components;
 };
