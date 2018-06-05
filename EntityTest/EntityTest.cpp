@@ -39,7 +39,7 @@ int main()
 				ecs.AddComponent( entity, CPhysicsComponent( 10.0f ) );
 
 				CTransformComponent transform;
-				transform.Position( { rand() % 100, rand() % 100, rand() % 100 } );
+				transform.Position = { rand() % 100, rand() % 100, rand() % 100 };
 				ecs.AddComponent( entity, transform );
 			}
 
