@@ -21,7 +21,8 @@ public:
 		m_objects( _Size )
 	{
 		CLogger::Log( "SlotMap for '" + std::string( typeid( T ).name() ) + "'" );
-		CLogger::Log( "\tsize in MiBi: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) );
+		// TODO round to 2 decimal places
+		CLogger::Log( "\tsize: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) + " MiBi" );
 	}
 
 	size_t SizeInBytes()
