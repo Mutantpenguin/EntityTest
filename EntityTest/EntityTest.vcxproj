@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBaseComponent.hpp" />
+    <ClInclude Include="CBombComponent.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
     <ClInclude Include="CEntity.hpp" />
     <ClInclude Include="CFrustum.hpp" />

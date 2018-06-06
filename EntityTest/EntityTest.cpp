@@ -13,6 +13,9 @@
 #include "CDebugNameComponent.hpp"
 #include "CTransformComponent.hpp"
 
+#include "CBombComponent.hpp"
+#include "CExplosionComponent.hpp"
+
 int main()
 {
 	constexpr size_t numberOfEntities = 100000;
@@ -21,7 +24,9 @@ int main()
 							CPhysicsComponent,
 							CPlayerComponent,
 							CDebugNameComponent,
-							CTransformComponent > ecs;
+							CTransformComponent,
+							CBombComponent,
+							CExplosionComponent> ecs;
 
 	CLogger::Log( "" );
 
@@ -161,6 +166,35 @@ int main()
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Log( "Time: " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
+	}
+
+	{
+		// test of a real mainloop
+		while( true )
+		{
+			// TODO create some CBombComponents at the start
+			ecs.EachComponent<CBombComponent>( [ &ecs ] ( const Entity &bombEntity, const auto &bombComponent )
+			{
+				const auto bombTransform = ecs.GetComponent<CTransformComponent>( bombEntity );
+
+				if( bombTransform )
+				{
+					ecs.EachComponent<CPlayerComponent>( [ &ecs, &bombTransform, &bombComponent, &bombEntity ] ( const Entity &playerEntity, const auto &playerComponent )
+					{
+						const auto playerTransform = ecs.GetComponent<CTransformComponent>( playerEntity );
+
+						if( playerTransform )
+						{
+							if( glm::length( bombTransform->Position - playerTransform->Position ) < bombComponent.activationRadius )
+							{
+								// TODO set proper radius and damage
+								ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
+							}
+						}
+					} );
+				}
+			} );
+		}
 	}
 
 	return( 0 );

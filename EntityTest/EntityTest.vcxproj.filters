@@ -72,6 +72,9 @@
     <ClInclude Include="CEntityComponentSystem.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="CBombComponent.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
