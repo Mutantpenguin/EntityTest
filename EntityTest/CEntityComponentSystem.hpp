@@ -114,7 +114,7 @@ public:
 	}
 
 	template< typename T >
-	void EachComponent( std::function< void( const Entity &entity, const T& ) > lambda ) const
+	void Each( std::function< void( const Entity &entity, const T& ) > lambda ) const
 	{
 		std::get< ComponentStorage< T > >( m_components ).Each( lambda );
 	};

@@ -74,7 +74,7 @@ int main()
 		CLogger::Log( "entities with physics and name:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		ecs.EachComponent<CPhysicsComponent>( [ &counter, &ecs ]( const Entity &entity, const auto &component )
+		ecs.Each<CPhysicsComponent>( [ &counter, &ecs ]( const Entity &entity, const auto &component )
 		{
 			auto debugName = ecs.GetComponent<CDebugNameComponent>( entity );
 
@@ -114,7 +114,7 @@ int main()
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		ecs.EachComponent< CPhysicsComponent >( [ &counter, &ecs ] ( const Entity &entity, const auto &component )
+		ecs.Each< CPhysicsComponent >( [ &counter, &ecs ] ( const Entity &entity, const auto &component )
 		{
 			if( ecs.HasComponents< CPlayerComponent >( entity ) )
 			{
@@ -153,7 +153,7 @@ int main()
 		std::uint32_t counter = 0;
 		for( std::uint16_t j = 0; j < numIterations; j++ )
 		{
-			ecs.EachComponent<CPhysicsComponent>( [ &counter, &ecs ] ( const Entity &entity, const auto &component )
+			ecs.Each<CPhysicsComponent>( [ &counter, &ecs ] ( const Entity &entity, const auto &component )
 			{
 				const auto player = ecs.GetComponent<CPlayerComponent>( entity );
 
@@ -173,13 +173,13 @@ int main()
 		while( true )
 		{
 			// TODO create some CBombComponents at the start
-			ecs.EachComponent<CBombComponent>( [ &ecs ] ( const Entity &bombEntity, const auto &bombComponent )
+			ecs.Each<CBombComponent>( [ &ecs ] ( const Entity &bombEntity, const auto &bombComponent )
 			{
 				const auto bombTransform = ecs.GetComponent<CTransformComponent>( bombEntity );
 
 				if( bombTransform )
 				{
-					ecs.EachComponent<CPlayerComponent>( [ &ecs, &bombTransform, &bombComponent, &bombEntity ] ( const Entity &playerEntity, const auto &playerComponent )
+					ecs.Each<CPlayerComponent>( [ &ecs, &bombTransform, &bombComponent, &bombEntity ] ( const Entity &playerEntity, const auto &playerComponent )
 					{
 						const auto playerTransform = ecs.GetComponent<CTransformComponent>( playerEntity );
 
