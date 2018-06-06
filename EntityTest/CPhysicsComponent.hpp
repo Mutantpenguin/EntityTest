@@ -7,7 +7,7 @@ struct CPhysicsComponent final : CBaseComponent< CPhysicsComponent >
 	CPhysicsComponent()
 	{}
 
-	CPhysicsComponent( float p_mass ) :
+	CPhysicsComponent( const float p_mass ) :
 		mass { p_mass }
 	{}
 

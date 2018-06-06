@@ -15,10 +15,11 @@
 
 #include "CBombComponent.hpp"
 #include "CExplosionComponent.hpp"
+#include "CHealthComponent.hpp"
 
 int main()
 {
-	constexpr size_t numberOfEntities = 100000;
+	constexpr size_t numberOfEntities = 10000;
 
 	CEntityComponentSystem< numberOfEntities,
 							CPhysicsComponent,
@@ -26,7 +27,8 @@ int main()
 							CDebugNameComponent,
 							CTransformComponent,
 							CBombComponent,
-							CExplosionComponent> ecs;
+							CExplosionComponent,
+							CHealthComponent > ecs;
 
 	CLogger::Log( "" );
 
@@ -63,6 +65,16 @@ int main()
 
 				ecs.AddComponent( entity, playerComponent );
 			}
+
+			if( rand() % 10 > 7 )
+			{
+				ecs.AddComponent( entity, CHealthComponent( 100.0f ) );
+			}
+
+			if( rand() % 10 > 7 )
+			{
+				ecs.AddComponent( entity, CBombComponent( 10.0f ) );
+			}
 		}
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
@@ -74,7 +86,7 @@ int main()
 		CLogger::Log( "entities with physics and name:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		ecs.Each<CPhysicsComponent>( [ &counter, &ecs ]( const Entity &entity, const auto &component )
+		ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ]( const Entity &entity, auto &component )
 		{
 			auto debugName = ecs.GetComponent<CDebugNameComponent>( entity );
 
@@ -114,7 +126,7 @@ int main()
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		ecs.Each< CPhysicsComponent >( [ &counter, &ecs ] ( const Entity &entity, const auto &component )
+		ecs.ForEach< CPhysicsComponent >( [ &counter, &ecs ] ( const Entity &entity, auto &component )
 		{
 			if( ecs.HasComponents< CPlayerComponent >( entity ) )
 			{
@@ -153,7 +165,7 @@ int main()
 		std::uint32_t counter = 0;
 		for( std::uint16_t j = 0; j < numIterations; j++ )
 		{
-			ecs.Each<CPhysicsComponent>( [ &counter, &ecs ] ( const Entity &entity, const auto &component )
+			ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ] ( const Entity &entity, auto &component )
 			{
 				const auto player = ecs.GetComponent<CPlayerComponent>( entity );
 
@@ -172,28 +184,80 @@ int main()
 		// test of a real mainloop
 		while( true )
 		{
+			const auto start = std::chrono::system_clock::now();
+
 			// TODO create some CBombComponents at the start
-			ecs.Each<CBombComponent>( [ &ecs ] ( const Entity &bombEntity, const auto &bombComponent )
+			ecs.ForEach<CBombComponent>( [ &ecs ] ( const auto &bombEntity, auto &bombComponent )
 			{
 				const auto bombTransform = ecs.GetComponent<CTransformComponent>( bombEntity );
 
 				if( bombTransform )
 				{
-					ecs.Each<CPlayerComponent>( [ &ecs, &bombTransform, &bombComponent, &bombEntity ] ( const Entity &playerEntity, const auto &playerComponent )
-					{
-						const auto playerTransform = ecs.GetComponent<CTransformComponent>( playerEntity );
+					if( ecs.Exists<CPlayerComponent>(	[ &ecs, &bombTransform, &bombComponent ]( const auto &playerEntity, const auto &playerComponent )
+														{
+															const auto playerTransform = ecs.GetComponent<CTransformComponent>( playerEntity );
+															const auto playerHealth = ecs.GetComponent<CHealthComponent>( playerEntity );
 
-						if( playerTransform )
-						{
-							if( glm::length( bombTransform->Position - playerTransform->Position ) < bombComponent.activationRadius )
-							{
-								// TODO set proper radius and damage
-								ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
-							}
-						}
-					} );
+															if( playerTransform && playerHealth )
+															{
+																if( glm::length( bombTransform->Position - playerTransform->Position ) < bombComponent.activationRadius )
+																{
+																	return( true );
+																}
+															}
+
+															return( false );
+														} ) )
+					{
+						// TODO set proper radius and damage
+						ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
+					}
 				}
 			} );
+
+			ecs.ForEach<CExplosionComponent>( [ &ecs ]( const auto &explosionEntity, auto &explosionComponent )
+											  {
+												  const auto explosionTransform = ecs.GetComponent<CTransformComponent>( explosionEntity );
+
+												  ecs.ForEach<CHealthComponent>( [ &ecs, &explosionTransform, &explosionComponent ]( const auto &healthEntity, auto &healthComponent )
+																				 {
+																					 const auto healthTransform = ecs.GetComponent<CTransformComponent>( healthEntity );
+
+																					 if( healthTransform )
+																					 {
+																						 if( glm::length( explosionTransform->Position - healthTransform->Position ) < explosionComponent.explosionRadius )
+																						 {
+																							 healthComponent.health -= explosionComponent.damage;
+																						 }
+																					 }
+																				 } );
+											  } );
+
+			std::vector<Entity> entitiesForDeletion;
+
+			ecs.ForEach<CHealthComponent>( [ &entitiesForDeletion ]( const auto &healthEntity, auto &healthComponent )
+										   {
+											   if( healthComponent.health < 0.0f )
+											   {
+												   entitiesForDeletion.push_back( healthEntity );
+											   }
+										   } );
+
+			for( const auto &entity : entitiesForDeletion )
+			{
+				ecs.DestroyEntity( entity );
+			}
+
+			if( entitiesForDeletion.size() > 0 )
+			{
+				CLogger::Log( "deleted " + std::to_string( entitiesForDeletion.size() ) + " entities" );
+			}
+
+			const auto end = std::chrono::system_clock::now();
+			const std::chrono::duration<double> diff = end - start;
+			CLogger::Log( "delta: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
+			CLogger::Log( "\t" + std::to_string( ecs.Count<CBombComponent>() ) + " remaining" );
+			CLogger::Log( "" );
 		}
 	}
 

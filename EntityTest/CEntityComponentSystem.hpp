@@ -114,10 +114,22 @@ public:
 	}
 
 	template< typename T >
-	void Each( std::function< void( const Entity &entity, const T& ) > lambda ) const
+	void ForEach( std::function< void( const Entity &entity, T& ) > lambda )
 	{
-		std::get< ComponentStorage< T > >( m_components ).Each( lambda );
+		std::get< ComponentStorage< T > >( m_components ).ForEach( lambda );
 	};
+
+	template< typename T >
+	bool Exists( std::function< bool( const Entity &entity, const T& ) > lambda ) const
+	{
+		return( std::get< ComponentStorage< T > >( m_components ).Exists( lambda ) );
+	}
+
+	template< typename T >
+	size_t Count() const
+	{
+		return( std::get< ComponentStorage< T > >( m_components ).Count() );
+	}
 
 
 private:
