@@ -23,6 +23,11 @@ public:
 		CLogger::Log( "\tmax entities: " + std::to_string( _Size ) );
 
 		m_freeEntities.reserve( _Size );
+
+		for( size_t i = 0; i < _Size; i++ )
+		{
+			m_freeEntities.push_back( Entity( i ) );
+		}
 	}
 
 	~CEntityComponentSystem()
@@ -42,17 +47,8 @@ public:
 		}
 		else
 		{
-			m_lastId++;
-
-			if( m_lastId > maxId )
-			{
-				CLogger::Log( "exceeded maximum entity count of '" + std::to_string( _Size ) + "'" );
-				return( Entity( Entity::nullId ) );
-			}
-			else
-			{
-				return( Entity( m_lastId ) );
-			}
+			CLogger::Log( "exceeded maximum entity count of '" + std::to_string( _Size ) + "'" );
+			return( Entity( Entity::nullId ) );
 		}
 	}
 
@@ -128,9 +124,6 @@ private:
 	template< typename T >
 	using ComponentStorage = CSlotMap< T, _Size >;
 
-	static const size_t maxId = _Size - 1;
-
-	size_t m_lastId = Entity::nullId;
 	std::vector< Entity > m_freeEntities;
 
 	std::tuple< ComponentStorage< Types >... > m_components;
