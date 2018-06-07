@@ -150,26 +150,26 @@ public:
 		}
 	}
 
-	void ForEach( std::function< void( const Entity &entity, T& ) > lambda )
+	void ForEach( std::function< void( const Entity &entity, T* ) > lambda )
 	{
 		if( nullIndex != m_lastObjectIndex )
 		{
 			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
 			{
 				auto &component = m_objects[ i ];
-				lambda( component.first, component.second );
+				lambda( component.first, &component.second );
 			}
 		}
 	}
 
-	bool Exists( std::function< bool( const Entity &entity, const T& ) > lambda ) const
+	bool Exists( std::function< bool( const Entity &entity, const T* ) > lambda ) const
 	{
 		if( nullIndex != m_lastObjectIndex )
 		{
 			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
 			{
 				auto &component = m_objects[ i ];
-				if( lambda( component.first, component.second ) )
+				if( lambda( component.first, &component.second ) )
 				{
 					return( true );
 				}

@@ -114,13 +114,13 @@ public:
 	}
 
 	template< typename T >
-	void ForEach( std::function< void( const Entity &entity, T& ) > lambda )
+	void ForEach( std::function< void( const Entity &entity, T* ) > lambda )
 	{
 		std::get< ComponentStorage< T > >( m_components ).ForEach( lambda );
 	};
 
 	template< typename T >
-	bool Exists( std::function< bool( const Entity &entity, const T& ) > lambda ) const
+	bool Exists( std::function< bool( const Entity &entity, const T* ) > lambda ) const
 	{
 		return( std::get< ComponentStorage< T > >( m_components ).Exists( lambda ) );
 	}

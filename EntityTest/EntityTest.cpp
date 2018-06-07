@@ -86,7 +86,7 @@ int main()
 		CLogger::Log( "entities with physics and name:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ]( const Entity &entity, auto &component )
+		ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ]( const Entity &entity, auto component )
 		{
 			auto debugName = ecs.GetComponent<CDebugNameComponent>( entity );
 
@@ -126,7 +126,7 @@ int main()
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		ecs.ForEach< CPhysicsComponent >( [ &counter, &ecs ] ( const Entity &entity, auto &component )
+		ecs.ForEach< CPhysicsComponent >( [ &counter, &ecs ] ( const Entity &entity, auto component )
 		{
 			if( ecs.HasComponents< CPlayerComponent >( entity ) )
 			{
@@ -165,7 +165,7 @@ int main()
 		std::uint32_t counter = 0;
 		for( std::uint16_t j = 0; j < numIterations; j++ )
 		{
-			ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ] ( const Entity &entity, auto &component )
+			ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ] ( const Entity &entity, auto component )
 			{
 				const auto player = ecs.GetComponent<CPlayerComponent>( entity );
 
@@ -186,7 +186,7 @@ int main()
 		{
 			const auto start = std::chrono::system_clock::now();
 
-			ecs.ForEach<CBombComponent>( [ &ecs ] ( const auto &bombEntity, auto &bombComponent )
+			ecs.ForEach<CBombComponent>( [ &ecs ] ( const auto &bombEntity, auto bombComponent )
 			{
 				if( !ecs.HasComponents<CExplosionComponent>( bombEntity ) )
 				{
@@ -194,7 +194,7 @@ int main()
 
 					if( bombTransform )
 					{
-						if( ecs.Exists<CHealthComponent>(	[ &ecs, &bombPosition = bombTransform->Position, &activationRadius = bombComponent.activationRadius ] ( const auto &healthEntity, const auto &healthComponent )
+						if( ecs.Exists<CHealthComponent>(	[ &ecs, &bombPosition = bombTransform->Position, &activationRadius = bombComponent->activationRadius ] ( const auto &healthEntity, const auto healthComponent )
 															{
 																const auto healthTransform = ecs.GetComponent<CTransformComponent>( healthEntity );
 
@@ -216,11 +216,11 @@ int main()
 				}
 			} );
 
-			ecs.ForEach<CExplosionComponent>( [ &ecs ]( const auto &explosionEntity, auto &explosionComponent )
+			ecs.ForEach<CExplosionComponent>( [ &ecs ]( const auto &explosionEntity, auto explosionComponent )
 											  {
 												  const auto explosionTransform = ecs.GetComponent<CTransformComponent>( explosionEntity );
 
-												  ecs.ForEach<CHealthComponent>( [ &ecs, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent.explosionRadius, &damage = explosionComponent.damage ]( const auto &healthEntity, auto &healthComponent )
+												  ecs.ForEach<CHealthComponent>( [ &ecs, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent->explosionRadius, &damage = explosionComponent->damage ]( const auto &healthEntity, auto healthComponent )
 																				 {
 																					 const auto healthTransform = ecs.GetComponent<CTransformComponent>( healthEntity );
 
@@ -228,7 +228,7 @@ int main()
 																					 {
 																						 if( glm::length( explosionPosition - healthTransform->Position ) < explosionRadius )
 																						 {
-																							 healthComponent.health -= damage;
+																							 healthComponent->health -= damage;
 																						 }
 																					 }
 																				 } );
@@ -236,9 +236,9 @@ int main()
 
 			std::vector<Entity> entitiesForDeletion;
 
-			ecs.ForEach<CHealthComponent>( [ &entitiesForDeletion ]( const auto &healthEntity, auto &healthComponent )
+			ecs.ForEach<CHealthComponent>( [ &entitiesForDeletion ]( const auto &healthEntity, auto healthComponent )
 										   {
-											   if( healthComponent.health < 0.0f )
+											   if( healthComponent->health < 0.0f )
 											   {
 												   entitiesForDeletion.push_back( healthEntity );
 											   }
