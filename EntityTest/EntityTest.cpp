@@ -194,14 +194,13 @@ int main()
 
 					if( bombTransform )
 					{
-						if( ecs.Exists<CPlayerComponent>(	[ &ecs, &bombTransform, &bombComponent ] ( const auto &playerEntity, const auto &playerComponent )
+						if( ecs.Exists<CHealthComponent>(	[ &ecs, &bombPosition = bombTransform->Position, &activationRadius = bombComponent.activationRadius ] ( const auto &healthEntity, const auto &healthComponent )
 															{
-																const auto playerTransform = ecs.GetComponent<CTransformComponent>( playerEntity );
-																const auto playerHealth = ecs.GetComponent<CHealthComponent>( playerEntity );
+																const auto healthTransform = ecs.GetComponent<CTransformComponent>( healthEntity );
 
-																if( playerTransform && playerHealth )
+																if( healthTransform )
 																{
-																	if( glm::length( bombTransform->Position - playerTransform->Position ) < bombComponent.activationRadius )
+																	if( glm::length( bombPosition - healthTransform->Position ) < activationRadius )
 																	{
 																		return( true );
 																	}
@@ -221,15 +220,15 @@ int main()
 											  {
 												  const auto explosionTransform = ecs.GetComponent<CTransformComponent>( explosionEntity );
 
-												  ecs.ForEach<CHealthComponent>( [ &ecs, &explosionTransform, &explosionComponent ]( const auto &healthEntity, auto &healthComponent )
+												  ecs.ForEach<CHealthComponent>( [ &ecs, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent.explosionRadius, &damage = explosionComponent.damage ]( const auto &healthEntity, auto &healthComponent )
 																				 {
 																					 const auto healthTransform = ecs.GetComponent<CTransformComponent>( healthEntity );
 
 																					 if( healthTransform )
 																					 {
-																						 if( glm::length( explosionTransform->Position - healthTransform->Position ) < explosionComponent.explosionRadius )
+																						 if( glm::length( explosionPosition - healthTransform->Position ) < explosionRadius )
 																						 {
-																							 healthComponent.health -= explosionComponent.damage;
+																							 healthComponent.health -= damage;
 																						 }
 																					 }
 																				 } );
