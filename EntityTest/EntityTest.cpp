@@ -189,28 +189,31 @@ int main()
 			// TODO create some CBombComponents at the start
 			ecs.ForEach<CBombComponent>( [ &ecs ] ( const auto &bombEntity, auto &bombComponent )
 			{
-				const auto bombTransform = ecs.GetComponent<CTransformComponent>( bombEntity );
-
-				if( bombTransform )
+				if( !ecs.HasComponents<CExplosionComponent>( bombEntity ) )
 				{
-					if( ecs.Exists<CPlayerComponent>(	[ &ecs, &bombTransform, &bombComponent ]( const auto &playerEntity, const auto &playerComponent )
-														{
-															const auto playerTransform = ecs.GetComponent<CTransformComponent>( playerEntity );
-															const auto playerHealth = ecs.GetComponent<CHealthComponent>( playerEntity );
+					const auto bombTransform = ecs.GetComponent<CTransformComponent>( bombEntity );
 
-															if( playerTransform && playerHealth )
-															{
-																if( glm::length( bombTransform->Position - playerTransform->Position ) < bombComponent.activationRadius )
-																{
-																	return( true );
-																}
-															}
-
-															return( false );
-														} ) )
+					if( bombTransform )
 					{
-						// TODO set proper radius and damage
-						ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
+						if( ecs.Exists<CPlayerComponent>(	[ &ecs, &bombTransform, &bombComponent ] ( const auto &playerEntity, const auto &playerComponent )
+															{
+																const auto playerTransform = ecs.GetComponent<CTransformComponent>( playerEntity );
+																const auto playerHealth = ecs.GetComponent<CHealthComponent>( playerEntity );
+
+																if( playerTransform && playerHealth )
+																{
+																	if( glm::length( bombTransform->Position - playerTransform->Position ) < bombComponent.activationRadius )
+																	{
+																		return( true );
+																	}
+																}
+
+																return( false );
+															} ) )
+						{
+							// TODO set proper radius and damage
+							ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
+						}
 					}
 				}
 			} );
