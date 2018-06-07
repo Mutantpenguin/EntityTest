@@ -186,7 +186,6 @@ int main()
 		{
 			const auto start = std::chrono::system_clock::now();
 
-			// TODO create some CBombComponents at the start
 			ecs.ForEach<CBombComponent>( [ &ecs ] ( const auto &bombEntity, auto &bombComponent )
 			{
 				if( !ecs.HasComponents<CExplosionComponent>( bombEntity ) )
