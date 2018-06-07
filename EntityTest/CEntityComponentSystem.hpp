@@ -24,9 +24,9 @@ public:
 
 		m_freeEntities.reserve( _Size );
 
-		for( size_t i = 0; i < _Size; i++ )
+		for( size_t i = _Size; i > 0; i-- )
 		{
-			m_freeEntities.push_back( Entity( i ) );
+			m_freeEntities.push_back( Entity( i - 1 ) );
 		}
 	}
 
