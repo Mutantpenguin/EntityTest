@@ -3,15 +3,20 @@
 #include <string>
 #include <iostream>
 
-#include <windows.h>
+#ifdef WIN32
+	#include <windows.h>
+#endif
 
 class CLogger final
 {
 public:
 	static void Log( const std::string &message )
 	{
-		//std::cout << message << std::endl;
-		OutputDebugStringA( ( message + '\n' ).c_str() );
+		#ifdef WIN32
+			OutputDebugStringA( ( message + '\n' ).c_str() );
+		#else
+			std::cout << message << std::endl;
+		#endif
 	};
 };
 

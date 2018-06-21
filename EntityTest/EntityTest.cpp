@@ -1,5 +1,3 @@
-#include "stdafx.h"
-
 #include <chrono>
 
 #include <memory>
@@ -157,10 +155,9 @@ int main()
 
 
 	{
-		std::uint32_t numIterations { 100 };
+		const std::uint32_t numIterations { 100 };
 
 		CLogger::Log( "test for a whole frame with '" + std::to_string( numIterations ) + "' iterations:" );
-		const glm::vec3 position { 0.0f, 0.0f, 0.0f };
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
 		for( std::uint16_t j = 0; j < numIterations; j++ )

@@ -185,12 +185,12 @@ public:
 	}
 
 private:
+	const size_t nullIndex = std::numeric_limits< size_t >::max();
+
 	std::vector< size_t > m_idMappings;
 
 	std::vector< std::pair< Entity, T > > m_objects;
 
 	size_t m_lastObjectIndex = nullIndex;
-
-	static const size_t nullIndex = std::numeric_limits< size_t >::max();
 };
 
