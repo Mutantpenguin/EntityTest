@@ -35,7 +35,7 @@ int main()
 		const auto start = std::chrono::system_clock::now();
 		for( size_t i = 0; i < numberOfEntities; i++ )
 		{
-			auto entity = ecs.CreateEntity();
+			auto entity = ecs.Create();
 
 			ecs.AddComponent( entity, CDebugNameComponent( "entity_" + std::to_string( i ) ) );
 
@@ -243,7 +243,7 @@ int main()
 
 			for( const auto &entity : entitiesForDeletion )
 			{
-				ecs.DestroyEntity( entity );
+				ecs.Destroy( entity );
 			}
 
 			if( entitiesForDeletion.size() > 0 )

@@ -33,7 +33,7 @@ public:
 	~CEntityComponentSystem()
 	{}
 
-	Entity CreateEntity()
+	Entity Create()
 	{
 		// TODO implement "version" in Entity when stack is used. increment "version" when popping from stack
 		// TODO use "version" in Entity to check against it in several places
@@ -52,7 +52,7 @@ public:
 		}
 	}
 
-	void DestroyEntity( const Entity &entity )
+	void Destroy( const Entity &entity )
 	{
 		TupleIterator::for_each( m_components, [ &entity ] ( auto &x )
 		{
@@ -63,8 +63,19 @@ public:
 	}
 
 	template< typename T >
+	void Destroy()
+	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
+		// destroy all components of type T
+		// TODO impl
+	}
+
+	template< typename T >
 	void AddComponent( const Entity &entity, T& t )
 	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
 		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 	
 		componentContainer.Add( entity, t );
@@ -73,14 +84,26 @@ public:
 	template< typename T >
 	void AddComponent( const Entity &entity, T&& t )
 	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
 		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 
 		componentContainer.Add( entity, std::move( t ) );
 	};
 
 	template< typename T >
+	void RemoveComponent( const Entity &entity )
+	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
+		// TODO impl
+	};
+
+	template< typename T >
 	bool HasComponents( const Entity &entity ) const
 	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
 		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 
 		if( componentContainer.Has( entity ) )
@@ -108,6 +131,8 @@ public:
 	template< typename T >
 	T *GetComponent( const Entity &entity )
 	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
 		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 
 		return( componentContainer.Get( entity ) );
@@ -116,18 +141,24 @@ public:
 	template< typename T >
 	void ForEach( std::function< void( const Entity &entity, T* ) > lambda )
 	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
 		std::get< ComponentStorage< T > >( m_components ).ForEach( lambda );
 	};
 
 	template< typename T >
 	bool Exists( std::function< bool( const Entity &entity, const T* ) > lambda ) const
 	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
 		return( std::get< ComponentStorage< T > >( m_components ).Exists( lambda ) );
 	}
 
 	template< typename T >
 	size_t Count() const
 	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
 		return( std::get< ComponentStorage< T > >( m_components ).Count() );
 	}
 
