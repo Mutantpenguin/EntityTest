@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <functional>
 #include <vector>
 
 #include "CBaseComponent.hpp"
@@ -144,7 +143,8 @@ public:
 		}
 	}
 
-	void ForEach( std::function< void( const Entity &entity, T* ) > lambda )
+	template< typename L >
+	void ForEach( L lambda )
 	{
 		if( nullIndex != m_lastObjectIndex )
 		{
@@ -155,7 +155,8 @@ public:
 		}
 	}
 
-	bool Exists( std::function< bool( const Entity &entity, const T* ) > lambda ) const
+	template< typename L >
+	bool Exists( L lambda ) const
 	{
 		if( nullIndex != m_lastObjectIndex )
 		{

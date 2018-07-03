@@ -1,6 +1,5 @@
 #pragma once
 
-#include <functional>
 #include <tuple>
 
 #include <glm/gtx/norm.hpp>
@@ -138,16 +137,16 @@ public:
 		return( componentContainer.Get( entity ) );
 	}
 
-	template< typename T >
-	void ForEach( std::function< void( const Entity &entity, T* ) > lambda )
+	template< typename T, typename L >
+	void ForEach( L lambda )
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 
 		std::get< ComponentStorage< T > >( m_components ).ForEach( lambda );
 	};
 
-	template< typename T >
-	bool Exists( std::function< bool( const Entity &entity, const T* ) > lambda ) const
+	template< typename T, typename L >
+	bool Exists( L lambda ) const
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 
