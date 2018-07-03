@@ -18,6 +18,7 @@ public:
 
 	CSlotMap() :
 		m_idMappings( _Size, nullIndex ),
+		m_entities( _Size ),
 		m_objects( _Size )
 	{
 		CLogger::Log( "SlotMap for '" + std::string( typeid( T ).name() ) + "'" );
@@ -40,9 +41,7 @@ public:
 		}
 		else
 		{
-			auto object = &m_objects[ mapping ];
-
-			if( object->first.Version() == entity.Version() )
+			if( m_entities[ mapping ].Version() == entity.Version() )
 			{
 				return( true );
 			}
@@ -70,9 +69,8 @@ public:
 
 			mapping = m_lastObjectIndex;
 
-			auto &object = m_objects[ m_lastObjectIndex ];
-			object.first  = entity;
-			object.second = component;
+			m_entities[ m_lastObjectIndex ]	= entity;
+			m_objects[ m_lastObjectIndex ]	= component;
 		}
 	}
 
@@ -93,9 +91,8 @@ public:
 
 			mapping = m_lastObjectIndex;
 
-			auto &object = m_objects[ m_lastObjectIndex ];
-			object.first  = entity;
-			object.second = component;
+			m_entities[ m_lastObjectIndex ]	= entity;
+			m_objects[ m_lastObjectIndex ]	= component;
 		}
 	}
 
@@ -105,15 +102,14 @@ public:
 
 		if( nullIndex != mapping )
 		{
-			auto &object = m_objects[ mapping ];
-
-			if( object.first.Version() == entity.Version() )
+			if( m_entities[ mapping ].Version() == entity.Version() )
 			{
 				if( m_lastObjectIndex > 0 )
 				{
-					object = m_objects[ m_lastObjectIndex ];
+					m_idMappings[ m_entities[ m_lastObjectIndex ].Id() ] = mapping;
 
-					m_idMappings[ object.first.Id() ] = mapping;
+					m_entities[ mapping ] = m_entities[ m_lastObjectIndex ];
+					m_objects[ mapping ]  = m_objects[ m_lastObjectIndex ];
 
 					m_lastObjectIndex--;
 				}
@@ -137,11 +133,9 @@ public:
 		}
 		else
 		{
-			auto object = &m_objects[ mapping ];
-
-			if( object->first.Version() == entity.Version() )
+			if( m_entities[ mapping ].Version() == entity.Version() )
 			{
-				return( &object->second );
+				return( &m_objects[ mapping ] );
 			}
 			else
 			{
@@ -156,8 +150,7 @@ public:
 		{
 			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
 			{
-				auto &component = m_objects[ i ];
-				lambda( component.first, &component.second );
+				lambda( m_entities[ i ], &m_objects[ i ] );
 			}
 		}
 	}
@@ -168,8 +161,7 @@ public:
 		{
 			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
 			{
-				auto &component = m_objects[ i ];
-				if( lambda( component.first, &component.second ) )
+				if( lambda( m_entities[ i ], &m_objects[ i ] ) )
 				{
 					return( true );
 				}
@@ -189,7 +181,8 @@ private:
 
 	std::vector< size_t > m_idMappings;
 
-	std::vector< std::pair< Entity, T > > m_objects;
+	std::vector< Entity >	m_entities;
+	std::vector< T >		m_objects;
 
 	size_t m_lastObjectIndex = nullIndex;
 };
