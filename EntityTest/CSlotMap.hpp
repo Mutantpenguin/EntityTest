@@ -7,7 +7,7 @@
 
 #include "Entity.hpp"
 
-template< typename T, size_t _Size >
+template< size_t _Size, typename T >
 class CSlotMap
 {
 	static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );

@@ -164,7 +164,7 @@ public:
 
 private:
 	template< typename T >
-	using ComponentStorage = CSlotMap< T, _Size >;
+	using ComponentStorage = CSlotMap< _Size, T >;
 
 	std::vector< Entity > m_freeEntities;
 
