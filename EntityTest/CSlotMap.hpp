@@ -32,7 +32,7 @@ public:
 
 	bool Has( const Entity &entity ) const
 	{
-		auto &mapping = m_idMappings[ entity.Id() ];
+		const auto &mapping = m_idMappings[ entity.Id() ];
 
 		if( nullIndex == mapping )
 		{
@@ -124,7 +124,7 @@ public:
 
 	T* Get( const Entity &entity )
 	{
-		auto &mapping = m_idMappings[ entity.Id() ];
+		const auto &mapping = m_idMappings[ entity.Id() ];
 
 		if( nullIndex == mapping )
 		{
