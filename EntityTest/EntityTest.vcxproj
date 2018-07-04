@@ -153,6 +153,7 @@
     <ClInclude Include="CFrustum.hpp" />
     <ClInclude Include="CHealthComponent.hpp" />
     <ClInclude Include="CLogger.hpp" />
+    <ClInclude Include="CMovementComponent.hpp" />
     <ClInclude Include="COcTree.hpp" />
     <ClInclude Include="CPhysicsComponent.hpp" />
     <ClInclude Include="CPlane.hpp" />

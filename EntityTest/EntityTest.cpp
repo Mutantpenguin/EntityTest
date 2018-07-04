@@ -11,6 +11,8 @@
 #include "CDebugNameComponent.hpp"
 #include "CTransformComponent.hpp"
 
+#include "CMovementComponent.hpp"
+
 #include "CBombComponent.hpp"
 #include "CExplosionComponent.hpp"
 #include "CHealthComponent.hpp"
@@ -26,7 +28,8 @@ int main()
 							CTransformComponent,
 							CBombComponent,
 							CExplosionComponent,
-							CHealthComponent > ecs;
+							CHealthComponent,
+							CMovementComponent > ecs;
 
 	CLogger::Log( "" );
 
@@ -72,6 +75,14 @@ int main()
 			if( rand() % 10 > 7 )
 			{
 				ecs.AddComponent( entity, CBombComponent( 10.0f ) );
+			}
+			else
+			{
+				CMovementComponent movement;
+				movement.Direction = {	static_cast< float >( rand() ) / static_cast< float >( RAND_MAX ),
+										static_cast< float >( rand() ) / static_cast< float >( RAND_MAX ),
+										static_cast< float >( rand() ) / static_cast< float >( RAND_MAX ) };
+				ecs.AddComponent( entity, movement );
 			}
 		}
 		const auto end = std::chrono::system_clock::now();
@@ -250,6 +261,15 @@ int main()
 			{
 				CLogger::Log( "deleted " + std::to_string( entitiesForDeletion.size() ) + " entities" );
 			}
+
+			ecs.ForEach<CMovementComponent>( [ &ecs ] ( const auto &entity, auto movementComponent )
+											 {
+												auto transformComponent = ecs.GetComponent<CTransformComponent>( entity );
+												if( transformComponent )
+												{
+													transformComponent->Position += movementComponent->Direction;
+												}
+											 } );
 
 			const auto end = std::chrono::system_clock::now();
 			const std::chrono::duration<double> diff = end - start;
