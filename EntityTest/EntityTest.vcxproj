@@ -162,8 +162,6 @@
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="CDebugNameComponent.hpp" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="CTransformComponent.hpp" />
     <ClInclude Include="CWorld.hpp" />
     <ClInclude Include="TupleIterator.hpp" />
@@ -176,7 +174,6 @@
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="Entity.hpp" />
     <ClCompile Include="EntityTest.cpp" />
-    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="CTransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -57,19 +57,18 @@ public:
 
 		auto &mapping = m_idMappings[ entity.Id() ];
 
-		if( nullIndex != mapping )
-		{
-			CLogger::Log( "component already exists" );
-			return;
-		}
-		else
+		if( nullIndex == mapping )
 		{
 			m_lastObjectIndex++;
 
 			mapping = m_lastObjectIndex;
 
-			m_entities[ m_lastObjectIndex ]	= entity;
-			m_objects[ m_lastObjectIndex ]	= component;
+			m_entities[ m_lastObjectIndex ] = entity;
+			m_objects[ m_lastObjectIndex ] = component;
+		}
+		else
+		{
+			CLogger::Log( "component already exists" );
 		}
 	}
 
@@ -79,19 +78,18 @@ public:
 
 		auto &mapping = m_idMappings[ entity.Id() ];
 
-		if( nullIndex != mapping )
-		{
-			CLogger::Log( "component already exists" );
-			return;
-		}
-		else
+		if( nullIndex == mapping )
 		{
 			m_lastObjectIndex++;
 
 			mapping = m_lastObjectIndex;
 
-			m_entities[ m_lastObjectIndex ]	= entity;
-			m_objects[ m_lastObjectIndex ]	= component;
+			m_entities[ m_lastObjectIndex ] = entity;
+			m_objects[ m_lastObjectIndex ] = component;
+		}
+		else
+		{
+			CLogger::Log( "component already exists" );
 		}
 	}
 

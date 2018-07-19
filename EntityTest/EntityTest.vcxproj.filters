@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Quelldateien">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Components">
+      <UniqueIdentifier>{0545f92d-8045-480e-934c-fa2858eaeea0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien">
+    <Filter Include="ECS">
+      <UniqueIdentifier>{7728da9c-d5a9-4cc8-8b71-f6215bcc3368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sonstiges">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
@@ -14,97 +16,88 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="CWorld.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CEntity.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="CLogger.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="CSize.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="CFrustum.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="CPlane.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CPhysicsComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CPlayerComponent.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="CBoundingBox.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="COcTree.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="TupleIterator.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CSlotMap.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugNameComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CTransformComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CBaseComponent.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CEntityComponentSystem.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="CBombComponent.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugNameComponent.hpp">
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="CHealthComponent.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="CMovementComponent.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CPhysicsComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransformComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityComponentSystem.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaseComponent.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="CSlotMap.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity.hpp">
+      <Filter>Sonstiges</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityTest.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CWorld.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="CBoundingBox.cpp">
+      <Filter>Sonstiges</Filter>
     </ClCompile>
     <ClCompile Include="CFrustum.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlane.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CBoundingBox.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Sonstiges</Filter>
     </ClCompile>
     <ClCompile Include="COcTree.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Sonstiges</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlane.cpp">
+      <Filter>Sonstiges</Filter>
+    </ClCompile>
+    <ClCompile Include="CWorld.cpp">
+      <Filter>Sonstiges</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityTest.cpp">
+      <Filter>Sonstiges</Filter>
     </ClCompile>
     <ClCompile Include="CTransformComponent.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Entity.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
