@@ -7,7 +7,7 @@
 class CEntity final
 {
 public:
-	CEntity()
+	CEntity() noexcept
 	{};
 
 	~CEntity()

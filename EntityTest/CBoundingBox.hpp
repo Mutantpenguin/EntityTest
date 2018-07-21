@@ -5,7 +5,7 @@
 class CBoundingBox final
 {
 public:
-	CBoundingBox();
+	CBoundingBox() noexcept;
 	CBoundingBox( const glm::vec3 &min, const glm::vec3 &max );
 
 	enum class eIntersectionType

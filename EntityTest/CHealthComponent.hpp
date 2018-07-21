@@ -6,7 +6,7 @@
 
 struct CHealthComponent final : CBaseComponent< CHealthComponent >
 {
-	CHealthComponent()
+	CHealthComponent() noexcept
 	{}
 
 	CHealthComponent( const float p_health ) :

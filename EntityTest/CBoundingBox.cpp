@@ -1,6 +1,6 @@
 #include "CBoundingBox.hpp"
 
-CBoundingBox::CBoundingBox()
+CBoundingBox::CBoundingBox() noexcept
 {}
 
 CBoundingBox::CBoundingBox( const glm::vec3 &min, const glm::vec3 &max ) :

@@ -4,13 +4,13 @@
 
 struct CPhysicsComponent final : CBaseComponent< CPhysicsComponent >
 {
-	CPhysicsComponent()
+	CPhysicsComponent() noexcept
 	{}
 
 	CPhysicsComponent( const float p_mass ) :
 		mass { p_mass }
 	{}
 
-	float mass;
+	float mass = 0.0f;
 };
 

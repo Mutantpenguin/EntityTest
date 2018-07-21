@@ -6,7 +6,7 @@
 class CPlane
 {
 public:
-	CPlane( void );
+	CPlane( void ) noexcept;
 
 	CPlane( const glm::vec3 &point, const glm::vec3 &normal );
 

@@ -1,6 +1,6 @@
 #include "CPlane.hpp"
 
-CPlane::CPlane( void )
+CPlane::CPlane( void ) noexcept
 {}
 
 CPlane::CPlane( const glm::vec3 &point, const glm::vec3 &normal ) :

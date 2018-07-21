@@ -10,7 +10,7 @@ class Entity
 	friend class CEntityComponentSystem;
 
 public:
-	Entity()
+	Entity() noexcept
 	{}
 
 	const std::size_t &Id() const
@@ -31,5 +31,5 @@ private:
 	{}
 
 	size_t m_id = nullId;
-	std::uint32_t m_version;
+	std::uint32_t m_version = 0;
 };

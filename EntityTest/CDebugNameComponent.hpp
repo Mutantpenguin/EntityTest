@@ -6,7 +6,7 @@
 
 struct CDebugNameComponent final : CBaseComponent< CDebugNameComponent >
 {
-	CDebugNameComponent()
+	CDebugNameComponent() noexcept
 	{}
 
 	CDebugNameComponent( const std::string &p_name ) :

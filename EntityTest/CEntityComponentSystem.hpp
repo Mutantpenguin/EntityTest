@@ -16,7 +16,7 @@ class CEntityComponentSystem final
 public:
 	CEntityComponentSystem( const CEntityComponentSystem& ) = delete;
 
-	CEntityComponentSystem()
+	CEntityComponentSystem() noexcept
 	{
 		CLogger::Log( std::string( typeid( this ).name() ) );
 		CLogger::Log( "\tmax entities: " + std::to_string( _Size ) );

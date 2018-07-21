@@ -15,7 +15,7 @@ class CSlotMap
 public:
 	CSlotMap( const CSlotMap& ) = delete;
 
-	CSlotMap() :
+	CSlotMap() noexcept :
 		m_idMappings( _Size, nullIndex ),
 		m_entities( _Size ),
 		m_objects( _Size )
