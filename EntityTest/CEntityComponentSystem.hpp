@@ -62,15 +62,6 @@ public:
 	}
 
 	template< typename T >
-	void Destroy()
-	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
-
-		// destroy all components of type T
-		// TODO impl
-	}
-
-	template< typename T >
 	void AddComponent( const Entity &entity, T& t )
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
@@ -94,9 +85,20 @@ public:
 	void RemoveComponent( const Entity &entity )
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		
+		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
 
-		// TODO impl
+		componentContainer.Remove( entity );
 	};
+	
+	template< typename T >
+	void RemoveAllComponents()
+	{
+		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+
+		// destroy all components of type T
+		// TODO impl
+	}
 
 	template< typename T >
 	bool HasComponents( const Entity &entity ) const
