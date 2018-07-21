@@ -92,7 +92,7 @@ public:
 	};
 	
 	template< typename T >
-	void RemoveAllComponents()
+	void RemoveComponentAll()
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 
