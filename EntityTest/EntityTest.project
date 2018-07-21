@@ -8,35 +8,40 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="TupleIterator.hpp"/>
-    <File Name="ReadMe.txt"/>
+    <VirtualDirectory Name="Sonstiges">
+      <File Name="Entity.hpp"/>
+      <File Name="EComponentIndex.hpp"/>
+      <File Name="CWorld.cpp"/>
+      <File Name="CPlane.cpp"/>
+      <File Name="COcTree.cpp"/>
+      <File Name="CFrustum.cpp"/>
+      <File Name="CBoundingBox.cpp"/>
+      <File Name="CEntity.hpp"/>
+      <File Name="CWorld.hpp"/>
+      <File Name="CSize.hpp"/>
+      <File Name="CPlane.hpp"/>
+      <File Name="COcTree.hpp"/>
+      <File Name="CLogger.hpp"/>
+      <File Name="CFrustum.hpp"/>
+      <File Name="CBoundingBox.hpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="ECS">
+      <File Name="TupleIterator.hpp"/>
+      <File Name="CSlotMap.hpp"/>
+      <File Name="CEntityComponentSystem.hpp"/>
+      <File Name="CBaseComponent.hpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Components">
+      <File Name="CTransformComponent.hpp"/>
+      <File Name="CTransformComponent.cpp"/>
+      <File Name="CPlayerComponent.hpp"/>
+      <File Name="CPhysicsComponent.hpp"/>
+      <File Name="CHealthComponent.hpp"/>
+      <File Name="CExplosionComponent.hpp"/>
+      <File Name="CDebugNameComponent.hpp"/>
+      <File Name="CBombComponent.hpp"/>
+    </VirtualDirectory>
     <File Name="EntityTest.cpp"/>
-    <File Name="Entity.hpp"/>
-    <File Name="EComponentIndex.hpp"/>
-    <File Name="CWorld.hpp"/>
-    <File Name="CWorld.cpp"/>
-    <File Name="CTransformComponent.hpp"/>
-    <File Name="CTransformComponent.cpp"/>
-    <File Name="CSlotMap.hpp"/>
-    <File Name="CSize.hpp"/>
-    <File Name="CPlayerComponent.hpp"/>
-    <File Name="CPlane.hpp"/>
-    <File Name="CPlane.cpp"/>
-    <File Name="CPhysicsComponent.hpp"/>
-    <File Name="COcTree.hpp"/>
-    <File Name="COcTree.cpp"/>
-    <File Name="CLogger.hpp"/>
-    <File Name="CHealthComponent.hpp"/>
-    <File Name="CFrustum.hpp"/>
-    <File Name="CFrustum.cpp"/>
-    <File Name="CExplosionComponent.hpp"/>
-    <File Name="CEntityComponentSystem.hpp"/>
-    <File Name="CEntity.hpp"/>
-    <File Name="CDebugNameComponent.hpp"/>
-    <File Name="CBoundingBox.hpp"/>
-    <File Name="CBoundingBox.cpp"/>
-    <File Name="CBombComponent.hpp"/>
-    <File Name="CBaseComponent.hpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
