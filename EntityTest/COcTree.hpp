@@ -6,7 +6,7 @@
 
 #include "CBoundingBox.hpp"
 
-#include "CEntity.hpp"
+#include "ObsoleteCEntity.hpp"
 
 class COcTree
 {
@@ -14,14 +14,14 @@ public:
 	COcTree( const CBoundingBox &region );
 	~COcTree();
 
-	void AddEntity( const std::shared_ptr<CEntity> &entity );
+	void AddEntity( const std::shared_ptr<ObsoleteCEntity> &entity );
 
 private:
 	CBoundingBox m_region;
 
 	std::array<std::unique_ptr<COcTree>, 8> m_childNodes;
 
-	std::set<std::shared_ptr<const CEntity>> m_entities;
+	std::set<std::shared_ptr<const ObsoleteCEntity>> m_entities;
 
 	static const float sMinSize;
 };

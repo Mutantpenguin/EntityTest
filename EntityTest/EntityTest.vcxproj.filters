@@ -75,11 +75,11 @@
     <ClInclude Include="CSlotMap.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="CEntity.hpp">
-      <Filter>Sonstiges</Filter>
-    </ClInclude>
     <ClInclude Include="MyECS.hpp">
       <Filter>TestApp</Filter>
+    </ClInclude>
+    <ClInclude Include="ObsoleteCEntity.hpp">
+      <Filter>Sonstiges</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,11 +101,11 @@
     <ClCompile Include="CTransformComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.hpp">
-      <Filter>ECS</Filter>
-    </ClCompile>
     <ClCompile Include="EntityTest.cpp">
       <Filter>TestApp</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntity.hpp">
+      <Filter>ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

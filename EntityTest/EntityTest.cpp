@@ -72,7 +72,7 @@ int main()
 		CLogger::Log( "entities with physics and name:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ]( const Entity &entity, auto component )
+		ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ]( const CEntity &entity, auto component )
 		{
 			auto debugName = ecs.GetComponent<CDebugNameComponent>( entity );
 
@@ -112,7 +112,7 @@ int main()
 		CLogger::Log( "entities with physics and player 2:" );
 		const auto start = std::chrono::system_clock::now();
 		std::uint32_t counter = 0;
-		ecs.ForEach< CPhysicsComponent >( [ &counter, &ecs ] ( const Entity &entity, auto component )
+		ecs.ForEach< CPhysicsComponent >( [ &counter, &ecs ] ( const CEntity &entity, auto component )
 		{
 			if( ecs.HasComponents< CPlayerComponent >( entity ) )
 			{
@@ -150,7 +150,7 @@ int main()
 		std::uint32_t counter = 0;
 		for( std::uint16_t j = 0; j < numIterations; j++ )
 		{
-			ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ] ( const Entity &entity, auto component )
+			ecs.ForEach<CPhysicsComponent>( [ &counter, &ecs ] ( const CEntity &entity, auto component )
 			{
 				const auto player = ecs.GetComponent<CPlayerComponent>( entity );
 
@@ -219,7 +219,7 @@ int main()
 																				 } );
 											  } );
 
-			std::vector<Entity> entitiesForDeletion;
+			std::vector<CEntity> entitiesForDeletion;
 
 			ecs.ForEach<CHealthComponent>( [ &entitiesForDeletion ]( const auto &healthEntity, auto healthComponent )
 										   {

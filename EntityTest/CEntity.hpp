@@ -1,19 +1,35 @@
-#ifndef CENTITY_HPP
-#define CENTITY_HPP
+#pragma once
 
-#include "CBoundingBox.hpp"
+#include <cstdint>
+#include <cstddef>
+#include <limits>
 
-
-class CEntity final
+class CEntity
 {
+	template < size_t _Size, typename... Types >
+	friend class CEntityComponentSystem;
+
 public:
 	CEntity() noexcept
-	{};
+	{}
 
-	~CEntity()
-	{};
+	const std::size_t &Id() const
+	{
+		return( m_id );
+	}
 
-	CBoundingBox BoundingBox;
+	const std::uint32_t &Version() const
+	{
+		return( m_version );
+	}
+
+	static const size_t nullId = std::numeric_limits< size_t >::max();
+
+private:
+	CEntity( const size_t id ) :
+		m_id { id }
+	{}
+
+	size_t m_id = nullId;
+	std::uint32_t m_version = 0;
 };
-
-#endif // COBJECT_HPP

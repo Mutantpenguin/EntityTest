@@ -10,7 +10,7 @@ COcTree::COcTree( const CBoundingBox &region ) :
 COcTree::~COcTree()
 {}
 
-void COcTree::AddEntity( const std::shared_ptr<CEntity>& entity )
+void COcTree::AddEntity( const std::shared_ptr<ObsoleteCEntity>& entity )
 {
 	const auto dimensions = m_region.Max() - m_region.Min();
 

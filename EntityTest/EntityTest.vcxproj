@@ -150,7 +150,7 @@
     <ClInclude Include="CBaseComponent.hpp" />
     <ClInclude Include="CBombComponent.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
-    <ClInclude Include="CEntity.hpp" />
+    <ClInclude Include="ObsoleteCEntity.hpp" />
     <ClInclude Include="CFrustum.hpp" />
     <ClInclude Include="CHealthComponent.hpp" />
     <ClInclude Include="CLogger.hpp" />
@@ -174,7 +174,7 @@
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CWorld.cpp" />
-    <ClCompile Include="Entity.hpp" />
+    <ClCompile Include="CEntity.hpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="CTransformComponent.cpp" />
   </ItemGroup>

@@ -5,7 +5,7 @@
 
 #include "CBaseComponent.hpp"
 
-#include "Entity.hpp"
+#include "CEntity.hpp"
 
 template< size_t _Size, typename T >
 class CSlotMap
@@ -30,7 +30,7 @@ public:
 		return( sizeof( T ) * _Size );
 	}
 
-	bool Has( const Entity &entity ) const
+	bool Has( const CEntity &entity ) const
 	{
 		const auto &mapping = m_idMappings[ entity.Id() ];
 
@@ -51,7 +51,7 @@ public:
 		}
 	}
 
-	void Add( const Entity &entity, T& component )
+	void Add( const CEntity &entity, T& component )
 	{
 		// TODO only Add when version matches
 
@@ -72,7 +72,7 @@ public:
 		}
 	}
 
-	void Add( const Entity &entity, T&& component )
+	void Add( const CEntity &entity, T&& component )
 	{
 		// TODO only Add when version matches
 
@@ -93,7 +93,7 @@ public:
 		}
 	}
 
-	void Remove( const Entity &entity )
+	void Remove( const CEntity &entity )
 	{
 		auto &mapping = m_idMappings[ entity.Id() ];
 
@@ -126,7 +126,7 @@ public:
 		throw new std::logic_error( "not implemented yet" );
 	}
 
-	T* Get( const Entity &entity )
+	T* Get( const CEntity &entity )
 	{
 		const auto &mapping = m_idMappings[ entity.Id() ];
 
@@ -186,7 +186,7 @@ private:
 
 	std::vector< size_t > m_idMappings;
 
-	std::vector< Entity >	m_entities;
+	std::vector< CEntity >	m_entities;
 	std::vector< T >		m_objects;
 
 	size_t m_lastObjectIndex = nullIndex;

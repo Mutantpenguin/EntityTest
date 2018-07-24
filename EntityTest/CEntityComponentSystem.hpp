@@ -8,7 +8,7 @@
 
 #include "TupleIterator.hpp"
 
-#include "Entity.hpp"
+#include "ObsoleteCEntity.hpp"
 
 template < size_t _Size, typename... Types >
 class CEntityComponentSystem final
@@ -25,14 +25,14 @@ public:
 
 		for( size_t i = _Size; i > 0; i-- )
 		{
-			m_freeEntities.push_back( Entity( i - 1 ) );
+			m_freeEntities.push_back( CEntity( i - 1 ) );
 		}
 	}
 
 	~CEntityComponentSystem()
 	{}
 
-	Entity Create()
+	CEntity Create()
 	{
 		// TODO implement "version" in Entity when stack is used. increment "version" when popping from stack
 		// TODO use "version" in Entity to check against it in several places
@@ -47,11 +47,11 @@ public:
 		else
 		{
 			CLogger::Log( "exceeded maximum entity count of '" + std::to_string( _Size ) + "'" );
-			return( Entity( Entity::nullId ) );
+			return( CEntity( CEntity::nullId ) );
 		}
 	}
 
-	void Destroy( const Entity &entity )
+	void Destroy( const CEntity &entity )
 	{
 		TupleIterator::for_each( m_components, [ &entity ] ( auto &x )
 		{
@@ -62,7 +62,7 @@ public:
 	}
 
 	template< typename T >
-	void AddComponent( const Entity &entity, T& t )
+	void AddComponent( const CEntity &entity, T& t )
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 
@@ -72,7 +72,7 @@ public:
 	};
 	
 	template< typename T >
-	void AddComponent( const Entity &entity, T&& t )
+	void AddComponent( const CEntity &entity, T&& t )
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 
@@ -82,7 +82,7 @@ public:
 	};
 
 	template< typename T >
-	void RemoveComponent( const Entity &entity )
+	void RemoveComponent( const CEntity &entity )
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 		
@@ -102,7 +102,7 @@ public:
 	}
 
 	template< typename T >
-	bool HasComponents( const Entity &entity ) const
+	bool HasComponents( const CEntity &entity ) const
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 
@@ -119,19 +119,19 @@ public:
 	}
 
 	template< typename First, typename Second, typename ... Rest >
-	bool HasComponents( const Entity &entity ) const
+	bool HasComponents( const CEntity &entity ) const
 	{
 		return( HasComponents< First >( entity ) && HasComponents<Second, Rest...>( entity ) );
 	}
 
 	template< typename First, typename Second, typename ... Rest >
-	bool HasAnyComponents( const Entity &entity ) const
+	bool HasAnyComponents( const CEntity &entity ) const
 	{
 		return( HasComponents< First >( entity ) || HasComponents<Second, Rest...>( entity ) );
 	}
 
 	template< typename T >
-	T *GetComponent( const Entity &entity )
+	T *GetComponent( const CEntity &entity )
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 
@@ -171,7 +171,7 @@ private:
 	template< typename T >
 	using ComponentStorage = CSlotMap< _Size, T >;
 
-	std::vector< Entity > m_freeEntities;
+	std::vector< CEntity > m_freeEntities;
 
 	std::tuple< ComponentStorage< Types >... > m_components;
 };
