@@ -81,6 +81,9 @@
     <ClInclude Include="ObsoleteCEntity.hpp">
       <Filter>Sonstiges</Filter>
     </ClInclude>
+    <ClInclude Include="CBaseSystem.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBoundingBox.cpp">

@@ -150,6 +150,7 @@
     <ClInclude Include="CBaseComponent.hpp" />
     <ClInclude Include="CBombComponent.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
+    <ClInclude Include="CBaseSystem.hpp" />
     <ClInclude Include="ObsoleteCEntity.hpp" />
     <ClInclude Include="CFrustum.hpp" />
     <ClInclude Include="CHealthComponent.hpp" />
