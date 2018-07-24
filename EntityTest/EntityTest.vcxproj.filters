@@ -9,11 +9,16 @@
     </Filter>
     <Filter Include="Sonstiges">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="TestApp">
+      <UniqueIdentifier>{d048eecc-37e2-42a8-873c-ea7826b0e843}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWorld.hpp">
@@ -73,6 +78,9 @@
     <ClInclude Include="CEntity.hpp">
       <Filter>Sonstiges</Filter>
     </ClInclude>
+    <ClInclude Include="MyECS.hpp">
+      <Filter>TestApp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBoundingBox.cpp">
@@ -90,14 +98,14 @@
     <ClCompile Include="CWorld.cpp">
       <Filter>Sonstiges</Filter>
     </ClCompile>
-    <ClCompile Include="EntityTest.cpp">
-      <Filter>Sonstiges</Filter>
-    </ClCompile>
     <ClCompile Include="CTransformComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Entity.hpp">
       <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityTest.cpp">
+      <Filter>TestApp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

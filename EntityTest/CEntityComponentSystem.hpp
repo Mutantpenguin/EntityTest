@@ -96,8 +96,9 @@ public:
 	{
 		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
 
-		// destroy all components of type T
-		// TODO impl
+		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
+
+		componentContainer.RemoveAll();
 	}
 
 	template< typename T >
@@ -163,6 +164,8 @@ public:
 		return( std::get< ComponentStorage< T > >( m_components ).Count() );
 	}
 
+public:
+	const size_t MaxSize = { _Size };
 
 private:
 	template< typename T >

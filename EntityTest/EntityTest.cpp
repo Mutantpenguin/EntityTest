@@ -1,42 +1,19 @@
 #include <chrono>
 
-#include <memory>
-
 #include "CLogger.hpp"
 
-#include "CEntityComponentSystem.hpp"
-
-#include "CPhysicsComponent.hpp"
-#include "CPlayerComponent.hpp"
-#include "CDebugNameComponent.hpp"
-#include "CTransformComponent.hpp"
-
-#include "CMovementComponent.hpp"
-
-#include "CBombComponent.hpp"
-#include "CExplosionComponent.hpp"
-#include "CHealthComponent.hpp"
+#include "MyECS.hpp"
 
 int main()
 {
-	constexpr size_t numberOfEntities = 10000;
-
-	CEntityComponentSystem< numberOfEntities,
-							CPhysicsComponent,
-							CPlayerComponent,
-							CDebugNameComponent,
-							CTransformComponent,
-							CBombComponent,
-							CExplosionComponent,
-							CHealthComponent,
-							CMovementComponent > ecs;
+	MyECS ecs;
 
 	CLogger::Log( "" );
 
 
 	{
 		const auto start = std::chrono::system_clock::now();
-		for( size_t i = 0; i < numberOfEntities; i++ )
+		for( size_t i = 0; i < ecs.MaxSize; i++ )
 		{
 			auto entity = ecs.Create();
 

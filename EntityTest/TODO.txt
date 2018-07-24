@@ -1,0 +1,4 @@
+ECS:
+	-	don't just do
+			static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		but rather check the type against our std::tuple "m_components"

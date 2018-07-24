@@ -120,6 +120,12 @@ public:
 		}
 	}
 
+	void RemoveAll()
+	{
+		// TODO implement
+		throw new std::logic_error( "not implemented yet" );
+	}
+
 	T* Get( const Entity &entity )
 	{
 		const auto &mapping = m_idMappings[ entity.Id() ];
