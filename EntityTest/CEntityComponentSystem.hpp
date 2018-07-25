@@ -2,13 +2,9 @@
 
 #include <tuple>
 
-#include <glm/gtx/norm.hpp>
-
 #include "CSlotMap.hpp"
 
 #include "TupleIterator.hpp"
-
-#include "ObsoleteCEntity.hpp"
 
 template < size_t _Size, typename... Types >
 class CEntityComponentSystem final
