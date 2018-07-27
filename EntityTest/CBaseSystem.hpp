@@ -6,7 +6,9 @@ public:
 	CBaseSystem()
 	{}
 
-	~CBaseSystem()
+	virtual ~CBaseSystem()
 	{}
+
+	virtual void Run() = 0;
 };
 

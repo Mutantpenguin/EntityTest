@@ -1,8 +1,10 @@
 #pragma once
 
 #include <tuple>
+#include <memory>
 
 #include "CSlotMap.hpp"
+#include "CBaseSystem.hpp"
 
 #include "TupleIterator.hpp"
 
@@ -170,4 +172,6 @@ private:
 	std::vector< CEntity > m_freeEntities;
 
 	std::tuple< ComponentStorage< Types >... > m_components;
+
+	std::vector< std::unique_ptr< CBaseSystem > > m_systems;
 };
