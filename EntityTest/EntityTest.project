@@ -5,10 +5,29 @@
       <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
     </Plugin>
   </Plugins>
+  <Reconciliation>
+    <Regexes/>
+    <Excludepaths/>
+    <Ignorefiles/>
+    <Extensions>
+      <![CDATA[*.cpp;*.c;*.h;*.hpp;*.xrc;*.wxcp;*.fbp]]>
+    </Extensions>
+    <Topleveldir>/home/charon/Projekte/EntityTest/EntityTest</Topleveldir>
+  </Reconciliation>
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <VirtualDirectory Name="Systems">
+      <File Name="CMovementSystem.hpp"/>
+      <File Name="CMovementSystem.cpp"/>
+      <File Name="CHealthSystem.hpp"/>
+      <File Name="CHealthSystem.cpp"/>
+      <File Name="CBombSystem.hpp"/>
+      <File Name="CBombSystem.cpp"/>
+    </VirtualDirectory>
+    <File Name="MyECS.hpp"/>
     <VirtualDirectory Name="Sonstiges">
+      <File Name="ObsoleteCEntity.hpp"/>
       <File Name="Entity.hpp"/>
       <File Name="EComponentIndex.hpp"/>
       <File Name="CWorld.cpp"/>
@@ -26,12 +45,15 @@
       <File Name="CBoundingBox.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="ECS">
+      <File Name="TupleChecker.hpp"/>
+      <File Name="CBaseSystem.hpp"/>
       <File Name="TupleIterator.hpp"/>
       <File Name="CSlotMap.hpp"/>
       <File Name="CEntityComponentSystem.hpp"/>
       <File Name="CBaseComponent.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Components">
+      <File Name="CMovementComponent.hpp"/>
       <File Name="CTransformComponent.hpp"/>
       <File Name="CTransformComponent.cpp"/>
       <File Name="CPlayerComponent.hpp"/>
