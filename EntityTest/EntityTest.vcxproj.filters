@@ -69,9 +69,6 @@
     <ClInclude Include="CEntityComponentSystem.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="CBaseComponent.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="CSlotMap.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
@@ -83,6 +80,12 @@
     </ClInclude>
     <ClInclude Include="CBaseSystem.hpp">
       <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="TupleChecker.hpp">
+      <Filter>Sonstiges</Filter>
+    </ClInclude>
+    <ClInclude Include="CExplosionComponent.hpp">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

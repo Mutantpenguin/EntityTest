@@ -2,9 +2,7 @@
 
 #include <cstdint>
 
-#include "CBaseComponent.hpp"
-
-struct CHealthComponent final : CBaseComponent< CHealthComponent >
+struct CHealthComponent final
 {
 	CHealthComponent() noexcept
 	{}

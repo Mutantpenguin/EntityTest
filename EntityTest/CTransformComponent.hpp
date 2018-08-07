@@ -3,9 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-#include "CBaseComponent.hpp"
-
-class CTransformComponent final : CBaseComponent< CTransformComponent >
+class CTransformComponent final
 {
 public:
 	glm::vec3	Position { 0.0f, 0.0f, 0.0f };

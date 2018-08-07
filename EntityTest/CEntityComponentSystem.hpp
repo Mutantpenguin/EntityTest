@@ -7,6 +7,7 @@
 #include "CBaseSystem.hpp"
 
 #include "TupleIterator.hpp"
+#include "TupleChecker.hpp"
 
 template < size_t _Size, typename... Types >
 class CEntityComponentSystem final
@@ -62,9 +63,9 @@ public:
 	template< typename T >
 	void AddComponent( const CEntity &entity, T& t )
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
 	
 		componentContainer.Add( entity, t );
 	};
@@ -72,9 +73,9 @@ public:
 	template< typename T >
 	void AddComponent( const CEntity &entity, T&& t )
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
 
 		componentContainer.Add( entity, std::move( t ) );
 	};
@@ -82,9 +83,9 @@ public:
 	template< typename T >
 	void RemoveComponent( const CEntity &entity )
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 		
-		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
 
 		componentContainer.Remove( entity );
 	};
@@ -92,9 +93,9 @@ public:
 	template< typename T >
 	void RemoveComponentAll()
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
 
 		componentContainer.RemoveAll();
 	}
@@ -102,9 +103,9 @@ public:
 	template< typename T >
 	bool HasComponents( const CEntity &entity ) const
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
 
 		if( componentContainer.Has( entity ) )
 		{
@@ -131,9 +132,9 @@ public:
 	template< typename T >
 	T *GetComponent( const CEntity &entity )
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentStorage< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
 
 		return( componentContainer.Get( entity ) );
 	}
@@ -141,25 +142,25 @@ public:
 	template< typename T, typename L >
 	void ForEach( L lambda )
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		std::get< ComponentStorage< T > >( m_components ).ForEach( lambda );
+		std::get< ComponentSlotMap< T > >( m_components ).ForEach( lambda );
 	};
 
 	template< typename T, typename L >
 	bool Exists( L lambda ) const
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		return( std::get< ComponentStorage< T > >( m_components ).Exists( lambda ) );
+		return( std::get< ComponentSlotMap< T > >( m_components ).Exists( lambda ) );
 	}
 
 	template< typename T >
 	size_t Count() const
 	{
-		static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		return( std::get< ComponentStorage< T > >( m_components ).Count() );
+		return( std::get< ComponentSlotMap< T > >( m_components ).Count() );
 	}
 
 public:
@@ -167,11 +168,13 @@ public:
 
 private:
 	template< typename T >
-	using ComponentStorage = CSlotMap< _Size, T >;
+	using ComponentSlotMap = CSlotMap< _Size, T >;
+
+	using ComponentStorage = std::tuple< ComponentSlotMap< Types >... >;
 
 	std::vector< CEntity > m_freeEntities;
 
-	std::tuple< ComponentStorage< Types >... > m_components;
+	ComponentStorage m_components;
 
 	std::vector< std::unique_ptr< CBaseSystem > > m_systems;
 };

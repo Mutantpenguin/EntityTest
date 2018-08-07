@@ -3,15 +3,11 @@
 #include <string>
 #include <vector>
 
-#include "CBaseComponent.hpp"
-
 #include "CEntity.hpp"
 
 template< size_t _Size, typename T >
 class CSlotMap
 {
-	static_assert( std::is_base_of< CBaseComponent< T >, T >::value, "not of base class 'CBaseComponent'" );
-
 public:
 	CSlotMap( const CSlotMap& ) = delete;
 

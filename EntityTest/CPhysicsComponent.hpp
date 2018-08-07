@@ -1,8 +1,6 @@
 #pragma once
 
-#include "CBaseComponent.hpp"
-
-struct CPhysicsComponent final : CBaseComponent< CPhysicsComponent >
+struct CPhysicsComponent final
 {
 	CPhysicsComponent() noexcept
 	{}

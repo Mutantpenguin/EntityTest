@@ -2,9 +2,7 @@
 
 #include <string>
 
-#include "CBaseComponent.hpp"
-
-struct CExplosionComponent final : CBaseComponent< CExplosionComponent >
+struct CExplosionComponent final
 {
 	CExplosionComponent() noexcept
 	{}

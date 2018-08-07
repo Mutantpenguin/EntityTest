@@ -4,9 +4,7 @@
 
 #include <glm/glm.hpp>
 
-#include "CBaseComponent.hpp"
-
-struct CMovementComponent final : CBaseComponent< CMovementComponent >
+struct CMovementComponent final
 {
 public:
 	glm::vec3 Direction { 0.0f, 0.0f, 0.0f };

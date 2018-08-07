@@ -2,9 +2,7 @@
 
 #include <string>
 
-#include "CBaseComponent.hpp"
-
-struct CDebugNameComponent final : CBaseComponent< CDebugNameComponent >
+struct CDebugNameComponent final
 {
 	CDebugNameComponent() noexcept
 	{}
