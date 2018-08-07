@@ -148,9 +148,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBombComponent.hpp" />
+    <ClInclude Include="CBombSystem.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
     <ClInclude Include="CBaseSystem.hpp" />
     <ClInclude Include="CExplosionComponent.hpp" />
+    <ClInclude Include="CHealthSystem.hpp" />
+    <ClInclude Include="CMovementSystem.hpp" />
     <ClInclude Include="ObsoleteCEntity.hpp" />
     <ClInclude Include="CFrustum.hpp" />
     <ClInclude Include="CHealthComponent.hpp" />
@@ -171,8 +174,11 @@
     <ClInclude Include="TupleIterator.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBombSystem.cpp" />
     <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="CFrustum.cpp" />
+    <ClCompile Include="CHealthSystem.cpp" />
+    <ClCompile Include="CMovementSystem.cpp" />
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CWorld.cpp" />

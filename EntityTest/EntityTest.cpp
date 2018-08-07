@@ -4,6 +4,10 @@
 
 #include "MyECS.hpp"
 
+#include "CBombSystem.hpp"
+#include "CHealthSystem.hpp"
+#include "CMovementSystem.hpp"
+
 int main()
 {
 	MyECS ecs;
@@ -166,87 +170,21 @@ int main()
 	}
 
 	{
+		std::vector< std::unique_ptr< CBaseSystem > > systems;
+
+		systems.emplace_back( std::make_unique< CBombSystem >( ecs ) );
+		systems.emplace_back( std::make_unique< CHealthSystem >( ecs ) );
+		systems.emplace_back( std::make_unique< CMovementSystem >( ecs ) );
+
 		// test of a real mainloop
 		while( true )
 		{
 			const auto start = std::chrono::system_clock::now();
 
-			ecs.ForEach<CBombComponent>( [ &ecs ] ( const auto &bombEntity, auto bombComponent )
+			for( auto &system : systems )
 			{
-				if( !ecs.HasComponents<CExplosionComponent>( bombEntity ) )
-				{
-					const auto bombTransform = ecs.GetComponent<CTransformComponent>( bombEntity );
-
-					if( bombTransform )
-					{
-						if( ecs.Exists<CHealthComponent>(	[ &ecs, &bombPosition = bombTransform->Position, &activationRadius = bombComponent->activationRadius ] ( const auto &healthEntity, const auto healthComponent )
-															{
-																const auto healthTransform = ecs.GetComponent<CTransformComponent>( healthEntity );
-
-																if( healthTransform )
-																{
-																	if( glm::length( bombPosition - healthTransform->Position ) < activationRadius )
-																	{
-																		return( true );
-																	}
-																}
-
-																return( false );
-															} ) )
-						{
-							// TODO set proper radius and damage
-							ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
-						}
-					}
-				}
-			} );
-
-			ecs.ForEach<CExplosionComponent>( [ &ecs ]( const auto &explosionEntity, auto explosionComponent )
-											  {
-												  const auto explosionTransform = ecs.GetComponent<CTransformComponent>( explosionEntity );
-
-												  ecs.ForEach<CHealthComponent>( [ &ecs, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent->explosionRadius, &damage = explosionComponent->damage ]( const auto &healthEntity, auto healthComponent )
-																				 {
-																					 const auto healthTransform = ecs.GetComponent<CTransformComponent>( healthEntity );
-
-																					 if( healthTransform )
-																					 {
-																						 if( glm::length( explosionPosition - healthTransform->Position ) < explosionRadius )
-																						 {
-																							 healthComponent->health -= damage;
-																						 }
-																					 }
-																				 } );
-											  } );
-
-			std::vector<CEntity> entitiesForDeletion;
-
-			ecs.ForEach<CHealthComponent>( [ &entitiesForDeletion ]( const auto &healthEntity, auto healthComponent )
-										   {
-											   if( healthComponent->health < 0.0f )
-											   {
-												   entitiesForDeletion.push_back( healthEntity );
-											   }
-										   } );
-
-			for( const auto &entity : entitiesForDeletion )
-			{
-				ecs.Destroy( entity );
+				system->Run();
 			}
-
-			if( entitiesForDeletion.size() > 0 )
-			{
-				CLogger::Log( "deleted " + std::to_string( entitiesForDeletion.size() ) + " entities" );
-			}
-
-			ecs.ForEach<CMovementComponent>( [ &ecs ] ( const auto &entity, auto movementComponent )
-											 {
-												auto transformComponent = ecs.GetComponent<CTransformComponent>( entity );
-												if( transformComponent )
-												{
-													transformComponent->Position += movementComponent->Direction;
-												}
-											 } );
 
 			const auto end = std::chrono::system_clock::now();
 			const std::chrono::duration<double> diff = end - start;

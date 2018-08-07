@@ -176,5 +176,7 @@ private:
 
 	ComponentStorage m_components;
 
+	// TODO implement this here or outside?
+	// TODO if inside, provide function to create systems and automatically pass self to it?
 	std::vector< std::unique_ptr< CBaseSystem > > m_systems;
 };

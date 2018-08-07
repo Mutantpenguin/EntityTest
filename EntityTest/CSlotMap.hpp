@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "CLogger.hpp"
+
 #include "CEntity.hpp"
 
 template< size_t _Size, typename T >

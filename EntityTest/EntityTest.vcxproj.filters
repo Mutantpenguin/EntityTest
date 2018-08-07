@@ -15,6 +15,9 @@
     <Filter Include="TestApp">
       <UniqueIdentifier>{d048eecc-37e2-42a8-873c-ea7826b0e843}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{9b6c7349-f281-402a-8b50-c764e922d848}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -87,6 +90,15 @@
     <ClInclude Include="CExplosionComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="CMovementSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CHealthSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CBombSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBoundingBox.cpp">
@@ -112,6 +124,15 @@
     </ClCompile>
     <ClCompile Include="CEntity.hpp">
       <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="CMovementSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CHealthSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CBombSystem.cpp">
+      <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
