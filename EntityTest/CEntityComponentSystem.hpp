@@ -55,7 +55,7 @@ public:
 
 	void Destroy( const CEntity &entity )
 	{
-		TupleIterator::for_each( m_components, [ &entity ] ( auto &x )
+		TupleIterator::for_each( m_componentStorage, [ &entity ] ( auto &x )
 		{
 			x.Remove( entity );
 		} );
@@ -68,7 +68,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 	
 		componentContainer.Add( entity, t );
 	};
@@ -78,7 +78,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 
 		componentContainer.Add( entity, std::move( t ) );
 	};
@@ -88,7 +88,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 		
-		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 
 		componentContainer.Remove( entity );
 	};
@@ -98,7 +98,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 
 		componentContainer.RemoveAll();
 	}
@@ -108,7 +108,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 
 		if( componentContainer.Has( entity ) )
 		{
@@ -137,7 +137,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_components );
+		auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 
 		return( componentContainer.Get( entity ) );
 	}
@@ -147,7 +147,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		std::get< ComponentSlotMap< T > >( m_components ).ForEach( lambda );
+		std::get< ComponentSlotMap< T > >( m_componentStorage ).ForEach( lambda );
 	};
 
 	template< typename T, typename L >
@@ -155,7 +155,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		return( std::get< ComponentSlotMap< T > >( m_components ).Exists( lambda ) );
+		return( std::get< ComponentSlotMap< T > >( m_componentStorage ).Exists( lambda ) );
 	}
 
 	template< typename T >
@@ -163,7 +163,7 @@ public:
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
-		return( std::get< ComponentSlotMap< T > >( m_components ).Count() );
+		return( std::get< ComponentSlotMap< T > >( m_componentStorage ).Count() );
 	}
 
 	template< typename T, typename... Args >
@@ -248,8 +248,7 @@ private:
 
 	std::vector< CEntity > m_freeEntities;
 
-	// TODO rename to componentStorage?
-	ComponentStorage m_components;
+	ComponentStorage m_componentStorage;
 
 	std::unordered_map< std::type_index, std::unique_ptr< CBaseSystem > > m_systems;
 };
