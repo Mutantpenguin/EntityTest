@@ -76,7 +76,6 @@ int main()
 		ecs.CreateSystem< CBombSystem >();
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
-		ecs.CreateSystem< CMovementSystem >();
 
 		// test of a real mainloop
 		while( true )
