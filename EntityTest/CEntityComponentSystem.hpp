@@ -1,7 +1,10 @@
 #pragma once
 
+#include <typeindex>
+#include <typeinfo>
 #include <tuple>
 #include <memory>
+#include <unordered_map>
 
 #include "CSlotMap.hpp"
 #include "CBaseSystem.hpp"
@@ -163,6 +166,77 @@ public:
 		return( std::get< ComponentSlotMap< T > >( m_components ).Count() );
 	}
 
+	template< typename T, typename... Args >
+	void CreateSystem( Args... args )
+	{
+		auto it = m_systems.find( typeid( T ) );
+
+		if( std::end( m_systems ) != it )
+		{
+			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' already exists" );
+		}
+		else
+		{
+			m_systems[ typeid( T ) ] = std::make_unique< T >( *this, args... );
+		}
+	}
+
+	template< typename T >
+	void DestroySystem()
+	{
+		auto it = m_systems.find( typeid( T ) );
+
+		if( std::end( m_systems ) != it )
+		{
+			m_systems.erase( it );
+		}
+		else
+		{
+			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+		}
+	}
+
+	template< typename T >
+	void PauseSystem()
+	{
+		auto it = m_systems.find( typeid( T ) );
+
+		if( std::end( m_systems ) != it )
+		{
+			it->second->Paused = true;
+		}
+		else
+		{
+			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+		}
+	}
+
+	template< typename T >
+	void UnPauseSystem()
+	{
+		auto it = m_systems.find( typeid( T ) );
+
+		if( std::end( m_systems ) != it )
+		{
+			it->second->Paused = false;
+		}
+		else
+		{
+			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+		}
+	}
+
+	void ProcessSystems()
+	{
+		for( auto &system : m_systems )
+		{
+			if( !system.second->Paused )
+			{
+				system.second->Process();
+			}
+		}
+	}
+
 public:
 	const size_t MaxSize = { _Size };
 
@@ -174,9 +248,8 @@ private:
 
 	std::vector< CEntity > m_freeEntities;
 
+	// TODO rename to componentStorage?
 	ComponentStorage m_components;
 
-	// TODO implement this here or outside?
-	// TODO if inside, provide function to create systems and automatically pass self to it?
-	std::vector< std::unique_ptr< CBaseSystem > > m_systems;
+	std::unordered_map< std::type_index, std::unique_ptr< CBaseSystem > > m_systems;
 };

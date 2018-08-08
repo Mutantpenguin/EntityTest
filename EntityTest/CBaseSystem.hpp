@@ -9,6 +9,8 @@ public:
 	virtual ~CBaseSystem()
 	{}
 
-	virtual void Run() = 0;
+	virtual void Process() = 0;
+
+	bool Paused = false;
 };
 

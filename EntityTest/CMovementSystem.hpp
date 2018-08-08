@@ -14,7 +14,7 @@ public:
 	~CMovementSystem()
 	{};
 
-	virtual void Run();
+	virtual void Process();
 
 private:
 	MyECS &m_ecs;

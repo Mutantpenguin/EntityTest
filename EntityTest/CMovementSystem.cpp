@@ -1,6 +1,6 @@
 #include "CMovementSystem.hpp"
 
-void CMovementSystem::Run()
+void CMovementSystem::Process()
 {
 	m_ecs.ForEach<CMovementComponent>( [ this ] ( const auto &entity, auto movementComponent )
 	{

@@ -73,21 +73,17 @@ int main()
 
 
 	{
-		std::vector< std::unique_ptr< CBaseSystem > > systems;
-
-		systems.emplace_back( std::make_unique< CBombSystem >( ecs ) );
-		systems.emplace_back( std::make_unique< CHealthSystem >( ecs ) );
-		systems.emplace_back( std::make_unique< CMovementSystem >( ecs ) );
+		ecs.CreateSystem< CBombSystem >();
+		ecs.CreateSystem< CHealthSystem >();
+		ecs.CreateSystem< CMovementSystem >();
+		ecs.CreateSystem< CMovementSystem >();
 
 		// test of a real mainloop
 		while( true )
 		{
 			const auto start = std::chrono::system_clock::now();
 
-			for( auto &system : systems )
-			{
-				system->Run();
-			}
+			ecs.ProcessSystems();
 
 			const auto end = std::chrono::system_clock::now();
 			const std::chrono::duration<double> diff = end - start;
@@ -95,6 +91,10 @@ int main()
 			CLogger::Log( "\t" + std::to_string( ecs.Count<CBombComponent>() ) + " remaining" );
 			CLogger::Log( "" );
 		}
+
+		ecs.DestroySystem< CBombSystem >();
+		ecs.DestroySystem< CHealthSystem >();
+		ecs.DestroySystem< CMovementSystem >();
 	}
 
 	return( 0 );

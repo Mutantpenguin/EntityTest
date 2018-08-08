@@ -14,7 +14,7 @@ public:
 	~CBombSystem()
 	{};
 
-	virtual void Run();
+	virtual void Process();
 
 private:
 	MyECS &m_ecs;

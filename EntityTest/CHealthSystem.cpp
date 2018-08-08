@@ -2,7 +2,7 @@
 
 #include "CLogger.hpp"
 
-void CHealthSystem::Run()
+void CHealthSystem::Process()
 {
 	std::vector< CEntity > entitiesForDeletion;
 

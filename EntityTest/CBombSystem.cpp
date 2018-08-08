@@ -1,6 +1,6 @@
 #include "CBombSystem.hpp"
 
-void CBombSystem::Run()
+void CBombSystem::Process()
 {
 	m_ecs.ForEach<CBombComponent>( [ this ] ( const auto &bombEntity, auto bombComponent )
 	{
