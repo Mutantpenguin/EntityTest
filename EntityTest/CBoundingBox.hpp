@@ -5,8 +5,10 @@
 class CBoundingBox final
 {
 public:
-	CBoundingBox() noexcept;
 	CBoundingBox( const glm::vec3 &min, const glm::vec3 &max );
+
+	CBoundingBox()
+	{}
 
 	enum class eIntersectionType
 	{
@@ -16,6 +18,7 @@ public:
 	};
 
 	eIntersectionType Intersect( const CBoundingBox &boundingBox ) const;
+	eIntersectionType Intersect( const glm::vec3 &position ) const;
 
 	const glm::vec3 &Min() const;
 	const glm::vec3 &Max() const;
@@ -23,5 +26,4 @@ public:
 private:
 	glm::vec3 m_min;
 	glm::vec3 m_max;
-
 };

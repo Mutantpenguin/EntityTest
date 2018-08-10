@@ -151,10 +151,10 @@
     <ClInclude Include="CBombSystem.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
     <ClInclude Include="CBaseSystem.hpp" />
+    <ClInclude Include="CBVHSystem.hpp" />
     <ClInclude Include="CExplosionComponent.hpp" />
     <ClInclude Include="CHealthSystem.hpp" />
     <ClInclude Include="CMovementSystem.hpp" />
-    <ClInclude Include="ObsoleteCEntity.hpp" />
     <ClInclude Include="CFrustum.hpp" />
     <ClInclude Include="CHealthComponent.hpp" />
     <ClInclude Include="CLogger.hpp" />
@@ -167,7 +167,7 @@
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="CDebugNameComponent.hpp" />
-    <ClInclude Include="CTransformComponent.hpp" />
+    <ClInclude Include="CTransform.hpp" />
     <ClInclude Include="CWorld.hpp" />
     <ClInclude Include="MyECS.hpp" />
     <ClInclude Include="TupleChecker.hpp" />
@@ -176,6 +176,7 @@
   <ItemGroup>
     <ClCompile Include="CBombSystem.cpp" />
     <ClCompile Include="CBoundingBox.cpp" />
+    <ClCompile Include="CBVHSystem.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="CHealthSystem.cpp" />
     <ClCompile Include="CMovementSystem.cpp" />
@@ -184,7 +185,7 @@
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="CEntity.hpp" />
     <ClCompile Include="EntityTest.cpp" />
-    <ClCompile Include="CTransformComponent.cpp" />
+    <ClCompile Include="CTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -5,7 +5,6 @@
 #include "CPhysicsComponent.hpp"
 #include "CPlayerComponent.hpp"
 #include "CDebugNameComponent.hpp"
-#include "CTransformComponent.hpp"
 
 #include "CMovementComponent.hpp"
 
@@ -13,11 +12,15 @@
 #include "CExplosionComponent.hpp"
 #include "CHealthComponent.hpp"
 
+#include "CTransform.hpp"
+#include "CBoundingBox.hpp"
+
 using MyECS = CEntityComponentSystem<	10000,
 										CPhysicsComponent,
 										CPlayerComponent,
 										CDebugNameComponent,
-										CTransformComponent,
+										CTransform,
+										CBoundingBox,
 										CBombComponent,
 										CExplosionComponent,
 										CHealthComponent,

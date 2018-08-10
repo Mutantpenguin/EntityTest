@@ -6,13 +6,13 @@ void CBombSystem::Process()
 	{
 		if( !m_ecs.HasComponents<CExplosionComponent>( bombEntity ) )
 		{
-			const auto bombTransform = m_ecs.GetComponent<CTransformComponent>( bombEntity );
+			const auto bombTransform = m_ecs.GetComponent<CTransform>( bombEntity );
 
 			if( bombTransform )
 			{
 				if( m_ecs.Exists<CHealthComponent>( [ this, &bombPosition = bombTransform->Position, &activationRadius = bombComponent->activationRadius ]( const auto &healthEntity, const auto healthComponent )
 				{
-					const auto healthTransform = m_ecs.GetComponent<CTransformComponent>( healthEntity );
+					const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
 
 					if( healthTransform )
 					{
@@ -34,11 +34,11 @@ void CBombSystem::Process()
 
 	m_ecs.ForEach<CExplosionComponent>( [ this ] ( const auto &explosionEntity, auto explosionComponent )
 	{
-		const auto explosionTransform = m_ecs.GetComponent<CTransformComponent>( explosionEntity );
+		const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
 
 		m_ecs.ForEach<CHealthComponent>( [ this, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent->explosionRadius, &damage = explosionComponent->damage ]( const auto &healthEntity, auto healthComponent )
 		{
-			const auto healthTransform = m_ecs.GetComponent<CTransformComponent>( healthEntity );
+			const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
 
 			if( healthTransform )
 			{

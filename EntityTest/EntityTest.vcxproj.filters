@@ -7,16 +7,19 @@
     <Filter Include="ECS">
       <UniqueIdentifier>{7728da9c-d5a9-4cc8-8b71-f6215bcc3368}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sonstiges">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>
-      </Extensions>
-    </Filter>
     <Filter Include="TestApp">
       <UniqueIdentifier>{d048eecc-37e2-42a8-873c-ea7826b0e843}</UniqueIdentifier>
     </Filter>
     <Filter Include="Systems">
       <UniqueIdentifier>{9b6c7349-f281-402a-8b50-c764e922d848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sonstiges">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Systems\BVH">
+      <UniqueIdentifier>{90aa467d-1c6f-4a16-874d-100b33e55eb7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,15 +42,6 @@
     <ClInclude Include="CPlane.hpp">
       <Filter>Sonstiges</Filter>
     </ClInclude>
-    <ClInclude Include="CBoundingBox.hpp">
-      <Filter>Sonstiges</Filter>
-    </ClInclude>
-    <ClInclude Include="COcTree.hpp">
-      <Filter>Sonstiges</Filter>
-    </ClInclude>
-    <ClInclude Include="TupleIterator.hpp">
-      <Filter>Sonstiges</Filter>
-    </ClInclude>
     <ClInclude Include="CBombComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
@@ -66,9 +60,6 @@
     <ClInclude Include="CPlayerComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="CTransformComponent.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="CEntityComponentSystem.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
@@ -78,14 +69,8 @@
     <ClInclude Include="MyECS.hpp">
       <Filter>TestApp</Filter>
     </ClInclude>
-    <ClInclude Include="ObsoleteCEntity.hpp">
-      <Filter>Sonstiges</Filter>
-    </ClInclude>
     <ClInclude Include="CBaseSystem.hpp">
       <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="TupleChecker.hpp">
-      <Filter>Sonstiges</Filter>
     </ClInclude>
     <ClInclude Include="CExplosionComponent.hpp">
       <Filter>Components</Filter>
@@ -99,15 +84,27 @@
     <ClInclude Include="CBombSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="CBVHSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoundingBox.hpp">
+      <Filter>Systems\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="COcTree.hpp">
+      <Filter>Systems\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.hpp">
+      <Filter>Systems\BVH</Filter>
+    </ClInclude>
+    <ClInclude Include="TupleIterator.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="TupleChecker.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CBoundingBox.cpp">
-      <Filter>Sonstiges</Filter>
-    </ClCompile>
     <ClCompile Include="CFrustum.cpp">
-      <Filter>Sonstiges</Filter>
-    </ClCompile>
-    <ClCompile Include="COcTree.cpp">
       <Filter>Sonstiges</Filter>
     </ClCompile>
     <ClCompile Include="CPlane.cpp">
@@ -115,9 +112,6 @@
     </ClCompile>
     <ClCompile Include="CWorld.cpp">
       <Filter>Sonstiges</Filter>
-    </ClCompile>
-    <ClCompile Include="CTransformComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="EntityTest.cpp">
       <Filter>TestApp</Filter>
@@ -133,6 +127,18 @@
     </ClCompile>
     <ClCompile Include="CBombSystem.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CBVHSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoundingBox.cpp">
+      <Filter>Systems\BVH</Filter>
+    </ClCompile>
+    <ClCompile Include="COcTree.cpp">
+      <Filter>Systems\BVH</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>Systems\BVH</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

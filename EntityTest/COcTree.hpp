@@ -2,26 +2,31 @@
 
 #include <array>
 #include <memory>
-#include <set>
+#include <vector>
 
+#include "CTransform.hpp"
 #include "CBoundingBox.hpp"
 
-#include "ObsoleteCEntity.hpp"
+#include "CEntity.hpp"
 
 class COcTree
 {
 public:
 	COcTree( const CBoundingBox &region );
-	~COcTree();
+	
+	~COcTree()
+	{};
 
-	void AddEntity( const std::shared_ptr<ObsoleteCEntity> &entity );
+	void Clear();
+
+	void Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox );
 
 private:
 	CBoundingBox m_region;
 
 	std::array<std::unique_ptr<COcTree>, 8> m_childNodes;
 
-	std::set<std::shared_ptr<const ObsoleteCEntity>> m_entities;
+	std::vector<CEntity> m_entities;
 
 	static const float sMinSize;
 };

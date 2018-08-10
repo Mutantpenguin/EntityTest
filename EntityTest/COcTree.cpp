@@ -1,22 +1,23 @@
 #include "COcTree.hpp"
 
-const float COcTree::sMinSize = 1.0f;
+const float COcTree::sMinSize = 5.0f;
 
 COcTree::COcTree( const CBoundingBox &region ) :
 	m_region { region }
 {}
 
+void COcTree::Clear()
+{
+	// TODO implement
+}
 
-COcTree::~COcTree()
-{}
-
-void COcTree::AddEntity( const std::shared_ptr<ObsoleteCEntity>& entity )
+void COcTree::Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox )
 {
 	const auto dimensions = m_region.Max() - m_region.Min();
 
 	if( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) )
 	{
-		m_entities.insert( entity );
+		m_entities.push_back( entity );
 	}
 	else
 	{
@@ -39,13 +40,25 @@ void COcTree::AddEntity( const std::shared_ptr<ObsoleteCEntity>& entity )
 
 		for( auto &node : nodes )
 		{
-			if( node->m_region.Intersect( entity->BoundingBox ) == CBoundingBox::eIntersectionType::INSIDE )
+			if( boundingBox )
 			{
-				node->AddEntity( entity );
-				break;
+				if( node->m_region.Intersect( *boundingBox ) == CBoundingBox::eIntersectionType::INSIDE )
+				{
+					node->Add( entity, transform, boundingBox );
+					break;
+				}
+			}
+			else
+			{
+				if( node->m_region.Intersect( transform.Position ) == CBoundingBox::eIntersectionType::INSIDE )
+				{
+					node->Add( entity, transform, boundingBox );
+					break;
+				}
 			}
 		}
 
+		// TODO wtf??
 		for( std::uint8_t i = 0; i < 8; i++ )
 		{
 			if( nodes[ i ]->m_entities.size() > 0 )
@@ -64,7 +77,7 @@ void COcTree::AddEntity( const std::shared_ptr<ObsoleteCEntity>& entity )
 		}
 		else
 		{
-			m_entities.insert( entity );
+			m_entities.push_back( entity );
 		}
 	}
 }

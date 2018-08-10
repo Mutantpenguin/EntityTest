@@ -7,6 +7,7 @@
 #include "CBombSystem.hpp"
 #include "CHealthSystem.hpp"
 #include "CMovementSystem.hpp"
+#include "CBVHSystem.hpp"
 
 int main()
 {
@@ -27,7 +28,7 @@ int main()
 			{
 				ecs.AddComponent( entity, CPhysicsComponent( 10.0f ) );
 
-				CTransformComponent transform;
+				CTransform transform;
 				transform.Position = { rand() % 100, rand() % 100, rand() % 100 };
 				ecs.AddComponent( entity, transform );
 			}
@@ -76,6 +77,7 @@ int main()
 		ecs.CreateSystem< CBombSystem >();
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
+		ecs.CreateSystem< CBVHSystem >( CBoundingBox( { -100.0f, -100.0f, -100.0f }, { 100.0f, 100.0f, 100.0f } ) );
 
 		// test of a real mainloop
 		while( true )
@@ -94,6 +96,7 @@ int main()
 		ecs.DestroySystem< CBombSystem >();
 		ecs.DestroySystem< CHealthSystem >();
 		ecs.DestroySystem< CMovementSystem >();
+		ecs.DestroySystem< CBVHSystem >();
 	}
 
 	return( 0 );
