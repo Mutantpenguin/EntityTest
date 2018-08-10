@@ -1,6 +1,6 @@
 #include "COcTree.hpp"
 
-const float COcTree::sMinSize = 5.0f;
+const float COcTree::sMinSize = 10.0f;
 
 COcTree::COcTree( const CBoundingBox &region ) :
 	m_region { region }
@@ -9,52 +9,24 @@ COcTree::COcTree( const CBoundingBox &region ) :
 
 	const auto dimensions = m_region.Dimensions();
 
+	// don't create child nodes if we are already at the minimal size
 	if( !( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) ) )
 	{
-		// TODO
-		m_childNodes = std::make_unique< std::array< COcTree, 8 > >();
-	}
-
-	/* TODO
-	const auto dimensions = m_region.Dimensions();
-
-	if( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) )
-	{
-		m_entities.push_back( entity );
-	}
-	else
-	{
+		const auto min = m_region.Min();
+		const auto max = m_region.Max();
 		const auto center = m_region.Center();
 
-		std::array<std::unique_ptr<COcTree>, 8> nodes;
-
-		for( std::uint8_t i = 0; i < 8; i++ )
-		{
-			if( m_childNodes[ i ] == nullptr )
-			{
-				// TODO how to correctly calculate each node?
-				nodes[ i ] = std::make_unique<COcTree>( CBoundingBox( glm::vec3 { 0.0f, 0.0f, 0.0f }, glm::vec3 { 0.0f, 0.0f, 0.0f } ) );
-			}
-			else
-			{
-				nodes[ i ] = std::move( m_childNodes[ i ] );
-			}
-		}
-
-		// TODO wtf??
-		for( std::uint8_t i = 0; i < 8; i++ )
-		{
-			if( nodes[ i ]->m_entities.size() > 0 )
-			{
-				m_childNodes[ i ] = std::move( nodes[ i ] );
-			}
-			else
-			{
-				m_childNodes[ i ] = nullptr;
-			}
-		}
+		// TODO
+		m_childNodes = std::make_unique< std::array< COcTree, 8 > >( std::array< COcTree, 8 >{
+			CBoundingBox( {                    min.x,                    min.y,                    min.z }, { center.x,                 center.y,                 center.z } ),
+			CBoundingBox( { ( min.x + max.x ) / 2.0f,                    min.y,                    min.z }, {    max.x, ( min.y + max.y ) / 2.0f, ( min.z + max.z ) / 2.0f } ),
+			CBoundingBox( {                    min.x, ( min.y + max.y ) / 2.0f, ( min.z + max.z ) / 2.0f }, { center.x,                    max.y, ( min.z + max.z ) / 2.0f } ),
+			CBoundingBox( {                 center.x,                 center.y,                    min.z }, {    max.x,                    max.y, ( min.z + max.z ) / 2.0f } ),
+			CBoundingBox( { -5.0f, -5.0f, -5.0f }, { 5.0f, 5.0f, 5.0f } ), // TODO
+			CBoundingBox( { -5.0f, -5.0f, -5.0f }, { 5.0f, 5.0f, 5.0f } ), // TODO
+			CBoundingBox( { -5.0f, -5.0f, -5.0f }, { 5.0f, 5.0f, 5.0f } ), // TODO
+			CBoundingBox( {                 center.x,                 center.y,                 center.z }, {    max.x,                     max.y,                   max.z } ) } );
 	}
-	*/
 }
 
 void COcTree::Clear()
@@ -67,7 +39,10 @@ void COcTree::Clear()
 	{
 		for( auto &node : *m_childNodes )
 		{
-			node.Clear();
+			if( node.m_containsEntities )
+			{
+				node.Clear();
+			}
 		}
 	}
 }

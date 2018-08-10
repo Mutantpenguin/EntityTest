@@ -84,7 +84,7 @@ int main()
 		ecs.CreateSystem< CBombSystem >();
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
-		ecs.CreateSystem< CBVHSystem >( CBoundingBox( { -100.0f, -100.0f, -100.0f }, { 100.0f, 100.0f, 100.0f } ) );
+		ecs.CreateSystem< CBVHSystem >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
 
 		// test of a real mainloop
 		while( true )

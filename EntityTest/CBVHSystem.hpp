@@ -22,6 +22,7 @@ public:
 private:
 	MyECS &m_ecs;
 
+	// TODO separate OCTrees for static and dynamic objects
 	COcTree m_octree;
 };
 

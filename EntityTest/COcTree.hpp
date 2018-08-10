@@ -13,9 +13,6 @@ class COcTree
 {
 public:
 	COcTree( const CBoundingBox &region );
-	
-	~COcTree()
-	{};
 
 	void Clear();
 
@@ -24,7 +21,7 @@ public:
 private:
 	CBoundingBox m_region;
 
-	std::unique_ptr< std::array<COcTree, 8> > m_childNodes;
+	std::unique_ptr< std::array< COcTree, 8 > > m_childNodes;
 
 	bool m_containsEntities = false;
 

@@ -2,6 +2,8 @@
 
 #include <chrono>
 
+#include <glm/gtx/string_cast.hpp>
+
 void CBVHSystem::Process()
 {
 	const auto start = std::chrono::system_clock::now();
@@ -14,7 +16,7 @@ void CBVHSystem::Process()
 
 		if( !m_octree.Add( transformEntity, *transformComponent, boundingBox ) )
 		{
-			CLogger::Log( "entity '" + std::to_string( transformEntity.Id() ) + "' lies outside of the OCTree" );
+			CLogger::Log( "entity '" + std::to_string( transformEntity.Id() ) + "' lies outside of the OCTree: " + glm::to_string( transformComponent->Position ) );
 		}
 	} );
 
