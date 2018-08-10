@@ -17,6 +17,11 @@ public:
 		OUTSIDE
 	};
 
+	glm::vec3 Center() const;
+	glm::vec3 Dimensions() const;
+
+	void MoveTo( const glm::vec3 &position );
+
 	eIntersectionType Intersect( const CBoundingBox &boundingBox ) const;
 	eIntersectionType Intersect( const glm::vec3 &position ) const;
 
