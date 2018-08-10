@@ -12,7 +12,10 @@ void CBVHSystem::Process()
 	{
 		auto const boundingBox = m_ecs.GetComponent< CBoundingBox >( transformEntity );
 
-		m_octree.Add( transformEntity, *transformComponent, boundingBox );
+		if( !m_octree.Add( transformEntity, *transformComponent, boundingBox ) )
+		{
+			CLogger::Log( "entity '" + std::to_string( transformEntity.Id() ) + "' lies outside of the OCTree" );
+		}
 	} );
 
 	const auto end = std::chrono::system_clock::now();

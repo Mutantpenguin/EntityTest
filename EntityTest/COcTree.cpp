@@ -4,18 +4,18 @@ const float COcTree::sMinSize = 5.0f;
 
 COcTree::COcTree( const CBoundingBox &region ) :
 	m_region { region }
-{}
-
-void COcTree::Clear()
 {
-	for( auto &note : m_childNodes )
+	// TODO create all the needed nodes here, not dynamically during runtime
+
+	const auto dimensions = m_region.Dimensions();
+
+	if( !( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) ) )
 	{
-		note.reset();
+		// TODO
+		m_childNodes = std::make_unique< std::array< COcTree, 8 > >();
 	}
-}
 
-void COcTree::Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox )
-{
+	/* TODO
 	const auto dimensions = m_region.Dimensions();
 
 	if( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) )
@@ -41,26 +41,6 @@ void COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 			}
 		}
 
-		for( auto &node : nodes )
-		{
-			if( boundingBox )
-			{
-				if( node->m_region.Intersect( *boundingBox ) == CBoundingBox::eIntersectionType::INSIDE )
-				{
-					node->Add( entity, transform, boundingBox );
-					break;
-				}
-			}
-			else
-			{
-				if( node->m_region.Intersect( transform.Position ) == CBoundingBox::eIntersectionType::INSIDE )
-				{
-					node->Add( entity, transform, boundingBox );
-					break;
-				}
-			}
-		}
-
 		// TODO wtf??
 		for( std::uint8_t i = 0; i < 8; i++ )
 		{
@@ -73,14 +53,59 @@ void COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 				m_childNodes[ i ] = nullptr;
 			}
 		}
+	}
+	*/
+}
 
-		if( 1 == 2 )
-		{
+void COcTree::Clear()
+{
+	m_containsEntities = false;
 
-		}
-		else
+	m_entities.clear();
+
+	if( m_childNodes )
+	{
+		for( auto &node : *m_childNodes )
 		{
-			m_entities.push_back( entity );
+			node.Clear();
 		}
 	}
+}
+
+bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox )
+{
+	if( boundingBox )
+	{
+		if( m_region.Intersect( *boundingBox ) != CBoundingBox::eIntersectionType::INSIDE )
+		{
+			return( false );
+		}
+	}
+	else
+	{
+		if( m_region.Intersect( transform.Position ) != CBoundingBox::eIntersectionType::INSIDE )
+		{
+			return( false );
+		}
+	}
+
+	if( m_childNodes )
+	{
+		// try to insert it into any child node
+		for( auto &node : *m_childNodes )
+		{
+			if( node.Add( entity, transform, boundingBox ) )
+			{
+				m_containsEntities = true;
+				return( true );
+			}
+		}
+	}
+
+	// didn't fit into any child node, so put it inside current one
+	m_entities.push_back( entity );
+	
+	m_containsEntities = true;
+	
+	return( true );
 }

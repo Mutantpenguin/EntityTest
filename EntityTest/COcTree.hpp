@@ -19,12 +19,14 @@ public:
 
 	void Clear();
 
-	void Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox );
+	bool Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox );
 
 private:
 	CBoundingBox m_region;
 
-	std::array<std::unique_ptr<COcTree>, 8> m_childNodes;
+	std::unique_ptr< std::array<COcTree, 8> > m_childNodes;
+
+	bool m_containsEntities = false;
 
 	std::vector<CEntity> m_entities;
 
