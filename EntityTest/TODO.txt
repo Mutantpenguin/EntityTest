@@ -1,0 +1,4 @@
+store analytics data for each system inside of the ECS
+- runtime
+- total runtime
+- avg runtime?
