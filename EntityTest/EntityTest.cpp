@@ -31,6 +31,13 @@ int main()
 				CTransform transform;
 				transform.Position = { rand() % 100, rand() % 100, rand() % 100 };
 				ecs.AddComponent( entity, transform );
+
+				if( rand() % 10 > 4 )
+				{
+					CBoundingBox boundingBox( { -5.0f, -5.0f, -5.0f }, { 5.0f, 5.0f, 5.0f } );
+					boundingBox.MoveTo( transform.Position );
+					ecs.AddComponent( entity, boundingBox );
+				}
 			}
 
 			if( rand() % 10 > 4 )
