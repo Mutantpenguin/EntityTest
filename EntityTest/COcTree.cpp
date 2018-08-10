@@ -8,12 +8,15 @@ COcTree::COcTree( const CBoundingBox &region ) :
 
 void COcTree::Clear()
 {
-	// TODO implement
+	for( auto &note : m_childNodes )
+	{
+		note.reset();
+	}
 }
 
 void COcTree::Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox )
 {
-	const auto dimensions = m_region.Max() - m_region.Min();
+	const auto dimensions = m_region.Dimensions();
 
 	if( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) )
 	{
@@ -21,7 +24,7 @@ void COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	}
 	else
 	{
-		const auto center = dimensions / 2.0f;
+		const auto center = m_region.Center();
 
 		std::array<std::unique_ptr<COcTree>, 8> nodes;
 
@@ -71,7 +74,7 @@ void COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 			}
 		}
 
-		if( 1 == 1 )
+		if( 1 == 2 )
 		{
 
 		}
