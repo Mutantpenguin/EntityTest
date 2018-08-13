@@ -5,6 +5,8 @@ const float COcTree::sMinSize = 10.0f;
 COcTree::COcTree( const CBoundingBox &region ) :
 	m_region { region }
 {
+	m_entities.reserve( 1000 );
+	
 	// TODO create all the needed nodes here, not dynamically during runtime
 
 	const auto dimensions = m_region.Dimensions();

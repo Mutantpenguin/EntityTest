@@ -18,6 +18,12 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="Systems">
+      <VirtualDirectory Name="BVH">
+        <File Name="COcTree.hpp"/>
+        <File Name="COcTree.cpp"/>
+      </VirtualDirectory>
+      <File Name="CBVHSystem.hpp"/>
+      <File Name="CBVHSystem.cpp"/>
       <File Name="CMovementSystem.hpp"/>
       <File Name="CMovementSystem.cpp"/>
       <File Name="CHealthSystem.hpp"/>
@@ -27,24 +33,17 @@
     </VirtualDirectory>
     <File Name="MyECS.hpp"/>
     <VirtualDirectory Name="Sonstiges">
-      <File Name="ObsoleteCEntity.hpp"/>
-      <File Name="Entity.hpp"/>
-      <File Name="EComponentIndex.hpp"/>
       <File Name="CWorld.cpp"/>
       <File Name="CPlane.cpp"/>
-      <File Name="COcTree.cpp"/>
       <File Name="CFrustum.cpp"/>
-      <File Name="CBoundingBox.cpp"/>
-      <File Name="CEntity.hpp"/>
       <File Name="CWorld.hpp"/>
       <File Name="CSize.hpp"/>
       <File Name="CPlane.hpp"/>
-      <File Name="COcTree.hpp"/>
       <File Name="CLogger.hpp"/>
       <File Name="CFrustum.hpp"/>
-      <File Name="CBoundingBox.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="ECS">
+      <File Name="CEntity.hpp"/>
       <File Name="TupleChecker.hpp"/>
       <File Name="CBaseSystem.hpp"/>
       <File Name="TupleIterator.hpp"/>
@@ -53,9 +52,11 @@
       <File Name="CBaseComponent.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Components">
+      <File Name="CBoundingBox.hpp"/>
+      <File Name="CBoundingBox.cpp"/>
+      <File Name="CTransform.hpp"/>
+      <File Name="CTransform.cpp"/>
       <File Name="CMovementComponent.hpp"/>
-      <File Name="CTransformComponent.hpp"/>
-      <File Name="CTransformComponent.cpp"/>
       <File Name="CPlayerComponent.hpp"/>
       <File Name="CPhysicsComponent.hpp"/>
       <File Name="CHealthComponent.hpp"/>
