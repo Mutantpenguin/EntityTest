@@ -1,7 +1,13 @@
 #include "CBombSystem.hpp"
 
+#include <vector>
+
 void CBombSystem::Process()
 {
+	CLogger::Log( "\tprocessing: CBombSystem" );	
+	
+	std::vector<CEntity> bombEntitiesForDeletion;
+
 	m_ecs.ForEach<CBombComponent>( [ this ] ( const auto &bombEntity, auto bombComponent )
 	{
 		if( !m_ecs.HasComponents<CExplosionComponent>( bombEntity ) )
@@ -32,7 +38,7 @@ void CBombSystem::Process()
 		}
 	} );
 
-	m_ecs.ForEach<CExplosionComponent>( [ this ] ( const auto &explosionEntity, auto explosionComponent )
+	m_ecs.ForEach<CExplosionComponent>( [ this, &bombEntitiesForDeletion ] ( const auto &explosionEntity, auto explosionComponent )
 	{
 		const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
 
@@ -48,5 +54,14 @@ void CBombSystem::Process()
 				}
 			}
 		} );
+		
+		bombEntitiesForDeletion.push_back( explosionEntity );
 	} );
+	
+	for( const auto &entity : bombEntitiesForDeletion )
+	{
+		m_ecs.Destroy( entity );
+	}
+	
+	CLogger::Log( std::to_string( m_ecs.Count<CBombComponent>() ) + " CBombComponent remaining" );
 }

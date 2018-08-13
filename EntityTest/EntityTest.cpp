@@ -7,6 +7,7 @@
 #include "CBombSystem.hpp"
 #include "CHealthSystem.hpp"
 #include "CMovementSystem.hpp"
+#include "CBoundingBoxSystem.hpp"
 #include "CBVHSystem.hpp"
 
 int main()
@@ -34,7 +35,7 @@ int main()
 
 				if( rand() % 10 > 4 )
 				{
-					CBoundingBox boundingBox( { -5.0f, -5.0f, -5.0f }, { 5.0f, 5.0f, 5.0f } );
+					CBoundingBox boundingBox( { -2.0f, -2.0f, -2.0f }, { 2.0f, 2.0f, 2.0f } );
 					boundingBox.MoveTo( transform.Position );
 					ecs.AddComponent( entity, boundingBox );
 				}
@@ -84,9 +85,13 @@ int main()
 		ecs.CreateSystem< CBombSystem >();
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
+		ecs.CreateSystem< CBoundingBoxSystem >();
 		ecs.CreateSystem< CBVHSystem >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
 
+		CLogger::Log( "" );
+
 		// test of a real mainloop
+		CLogger::Log( "START main loop" );
 		while( true )
 		{
 			const auto start = std::chrono::system_clock::now();
@@ -96,12 +101,13 @@ int main()
 			const auto end = std::chrono::system_clock::now();
 			const std::chrono::duration<double> diff = end - start;
 			CLogger::Log( "delta: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
-			CLogger::Log( "\t" + std::to_string( ecs.Count<CBombComponent>() ) + " remaining" );
 			CLogger::Log( "" );
 		}
+		CLogger::Log( "END main loop" );
 
 		ecs.DestroySystem< CBombSystem >();
 		ecs.DestroySystem< CHealthSystem >();
+		ecs.DestroySystem< CBoundingBoxSystem >();
 		ecs.DestroySystem< CMovementSystem >();
 		ecs.DestroySystem< CBVHSystem >();
 	}

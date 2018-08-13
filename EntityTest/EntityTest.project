@@ -18,6 +18,8 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="Systems">
+      <File Name="CBoundingBoxSystem.hpp"/>
+      <File Name="CBoundingBoxSystem.cpp"/>
       <VirtualDirectory Name="BVH">
         <File Name="COcTree.hpp"/>
         <File Name="COcTree.cpp"/>

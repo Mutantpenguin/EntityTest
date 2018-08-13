@@ -250,5 +250,6 @@ private:
 
 	ComponentStorage m_componentStorage;
 
+	// TODO change this, because the systems get iterated in the wrong order!!!
 	std::unordered_map< std::type_index, std::unique_ptr< CBaseSystem > > m_systems;
 };

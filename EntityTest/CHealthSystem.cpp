@@ -4,6 +4,8 @@
 
 void CHealthSystem::Process()
 {
+	CLogger::Log( "\tprocessing: CHealthSystem" );
+	
 	std::vector< CEntity > entitiesForDeletion;
 
 	m_ecs.ForEach< CHealthComponent >( [ &entitiesForDeletion ] ( const auto &healthEntity, auto healthComponent )
@@ -21,6 +23,6 @@ void CHealthSystem::Process()
 
 	if( entitiesForDeletion.size() > 0 )
 	{
-		CLogger::Log( "deleted " + std::to_string( entitiesForDeletion.size() ) + " entities" );
+		CLogger::Log( "destroyed " + std::to_string( entitiesForDeletion.size() ) + " entities" );
 	}
 }
