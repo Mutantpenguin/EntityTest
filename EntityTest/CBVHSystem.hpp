@@ -12,7 +12,9 @@ public:
 	CBVHSystem( MyECS &ecs, const CBoundingBox &region ) :
 		m_ecs { ecs },
 		m_octree( region )
-	{}
+	{
+		Process();
+	}
 
 	~CBVHSystem()
 	{};
