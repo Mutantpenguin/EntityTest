@@ -1,13 +1,15 @@
 #include "COcTree.hpp"
 
+#include "CLogger.hpp"
+
 const float COcTree::sMinSize = 10.0f;
 
 COcTree::COcTree( const CBoundingBox &region ) :
 	m_region { region }
 {
-	m_entities.reserve( 1000 );
+	// create all the needed nodes here, not dynamically during runtime
 	
-	// TODO create all the needed nodes here, not dynamically during runtime
+	m_entities.reserve( 1000 );
 
 	const auto dimensions = m_region.Dimensions();
 
@@ -18,16 +20,16 @@ COcTree::COcTree( const CBoundingBox &region ) :
 		const auto max = m_region.Max();
 		const auto center = m_region.Center();
 
-		// TODO
 		m_childNodes = std::make_unique< std::array< COcTree, 8 > >( std::array< COcTree, 8 >{
-			CBoundingBox( {                    min.x,                    min.y,                    min.z }, { center.x,                 center.y,                 center.z } ),
-			CBoundingBox( { ( min.x + max.x ) / 2.0f,                    min.y,                    min.z }, {    max.x, ( min.y + max.y ) / 2.0f, ( min.z + max.z ) / 2.0f } ),
-			CBoundingBox( {                    min.x, ( min.y + max.y ) / 2.0f, ( min.z + max.z ) / 2.0f }, { center.x,                    max.y, ( min.z + max.z ) / 2.0f } ),
-			CBoundingBox( {                 center.x,                 center.y,                    min.z }, {    max.x,                    max.y, ( min.z + max.z ) / 2.0f } ),
-			CBoundingBox( { -5.0f, -5.0f, -5.0f }, { 5.0f, 5.0f, 5.0f } ), // TODO
-			CBoundingBox( { -5.0f, -5.0f, -5.0f }, { 5.0f, 5.0f, 5.0f } ), // TODO
-			CBoundingBox( { -5.0f, -5.0f, -5.0f }, { 5.0f, 5.0f, 5.0f } ), // TODO
-			CBoundingBox( {                 center.x,                 center.y,                 center.z }, {    max.x,                     max.y,                   max.z } ) } );
+			CBoundingBox( {    min.x,    min.y,    min.z }, { center.x, center.y, center.z } ), //  left, lower, front
+			CBoundingBox( { center.x,    min.y,    min.z }, {    max.x, center.y, center.z } ), // right, lower, front
+			CBoundingBox( {    min.x,    min.y, center.z }, { center.x, center.y,    max.z } ), //  left, lower, back
+			CBoundingBox( { center.x,    min.y, center.z }, {    max.x, center.y,    max.z } ), // right, lower, back
+			CBoundingBox( {    min.x, center.y,    min.z }, { center.x,    max.y, center.z } ), //  left, upper, front
+			CBoundingBox( { center.x, center.y,    min.z }, {    max.x,    max.y, center.z } ), // right, upper, front
+			CBoundingBox( {    min.x, center.y, center.z }, { center.x,    max.y,    max.z } ), //  left, upper, back
+			CBoundingBox( { center.x, center.y, center.z }, {    max.x,    max.y,    max.z } )  // right, upper, back
+			} );
 	}
 }
 
@@ -65,6 +67,8 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 			return( false );
 		}
 	}
+	
+	m_containsEntities = true;
 
 	if( m_childNodes )
 	{
@@ -73,7 +77,6 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 		{
 			if( node.Add( entity, transform, boundingBox ) )
 			{
-				m_containsEntities = true;
 				return( true );
 			}
 		}
@@ -81,8 +84,6 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 
 	// didn't fit into any child node, so put it inside current one
 	m_entities.push_back( entity );
-	
-	m_containsEntities = true;
 	
 	return( true );
 }
