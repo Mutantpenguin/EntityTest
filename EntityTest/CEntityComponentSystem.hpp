@@ -7,7 +7,7 @@
 #include <unordered_map>
 
 #include "CSlotMap.hpp"
-#include "CBaseSystem.hpp"
+#include "CComponentSystem.hpp"
 
 #include "TupleIterator.hpp"
 #include "TupleChecker.hpp"
@@ -251,5 +251,5 @@ private:
 	ComponentStorage m_componentStorage;
 
 	// TODO change this, because the systems get iterated in the wrong order!!!
-	std::unordered_map< std::type_index, std::unique_ptr< CBaseSystem > > m_systems;
+	std::unordered_map< std::type_index, std::unique_ptr< CComponentSystem > > m_systems;
 };

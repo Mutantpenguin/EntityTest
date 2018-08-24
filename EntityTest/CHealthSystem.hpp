@@ -1,10 +1,10 @@
 #pragma once
 
-#include "CBaseSystem.hpp"
+#include "CComponentSystem.hpp"
 
 #include "MyECS.hpp"
 
-class CHealthSystem : public CBaseSystem
+class CHealthSystem : public CComponentSystem
 {
 public:
 	CHealthSystem( MyECS &ecs ) :

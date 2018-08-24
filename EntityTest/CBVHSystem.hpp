@@ -1,12 +1,12 @@
 #pragma once
 
-#include "CBaseSystem.hpp"
+#include "CComponentSystem.hpp"
 
 #include "MyECS.hpp"
 
 #include "COcTree.hpp"
 
-class CBVHSystem : public CBaseSystem
+class CBVHSystem : public CComponentSystem
 {
 public:
 	CBVHSystem( MyECS &ecs, const CBoundingBox &region ) :

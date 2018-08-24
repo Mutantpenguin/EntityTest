@@ -1,10 +1,10 @@
 #pragma once
 
-#include "CBaseSystem.hpp"
+#include "CComponentSystem.hpp"
 
 #include "MyECS.hpp"
 
-class CBoundingBoxSystem : public CBaseSystem
+class CBoundingBoxSystem : public CComponentSystem
 {
 public:
 	CBoundingBoxSystem( MyECS &ecs ) :

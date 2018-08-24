@@ -45,13 +45,12 @@
       <File Name="CFrustum.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="ECS">
+      <File Name="CComponentSystem.hpp"/>
       <File Name="CEntity.hpp"/>
       <File Name="TupleChecker.hpp"/>
-      <File Name="CBaseSystem.hpp"/>
       <File Name="TupleIterator.hpp"/>
       <File Name="CSlotMap.hpp"/>
       <File Name="CEntityComponentSystem.hpp"/>
-      <File Name="CBaseComponent.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Components">
       <File Name="CBoundingBox.hpp"/>
