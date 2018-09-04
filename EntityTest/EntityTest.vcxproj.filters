@@ -69,9 +69,6 @@
     <ClInclude Include="MyECS.hpp">
       <Filter>TestApp</Filter>
     </ClInclude>
-    <ClInclude Include="CBaseSystem.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="CExplosionComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
@@ -101,6 +98,12 @@
     </ClInclude>
     <ClInclude Include="TupleChecker.hpp">
       <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="CComponentSystem.hpp">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoundingBoxSystem.hpp">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="CTransform.cpp">
       <Filter>Systems\BVH</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoundingBoxSystem.cpp">
+      <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

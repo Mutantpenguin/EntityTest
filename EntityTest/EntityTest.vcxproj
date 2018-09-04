@@ -150,8 +150,9 @@
     <ClInclude Include="CBombComponent.hpp" />
     <ClInclude Include="CBombSystem.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
-    <ClInclude Include="CBaseSystem.hpp" />
+    <ClInclude Include="CBoundingBoxSystem.hpp" />
     <ClInclude Include="CBVHSystem.hpp" />
+    <ClInclude Include="CComponentSystem.hpp" />
     <ClInclude Include="CExplosionComponent.hpp" />
     <ClInclude Include="CHealthSystem.hpp" />
     <ClInclude Include="CMovementSystem.hpp" />
@@ -176,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="CBombSystem.cpp" />
     <ClCompile Include="CBoundingBox.cpp" />
+    <ClCompile Include="CBoundingBoxSystem.cpp" />
     <ClCompile Include="CBVHSystem.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="CHealthSystem.cpp" />
