@@ -120,8 +120,17 @@ public:
 
 	void RemoveAll()
 	{
-		// TODO implement
-		throw new std::logic_error( "not implemented yet" );
+		// TODO test this
+		if( nullIndex != m_lastObjectIndex )
+		{
+			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
+			{
+				const auto &entity = m_entities[ i ];
+				m_idMappings[ entity ] = nullIndex;
+			}
+
+			m_lastObjectIndex = nullIndex;
+		}
 	}
 
 	T* Get( const CEntity &entity )
