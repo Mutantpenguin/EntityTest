@@ -4,6 +4,7 @@
 #include <typeinfo>
 #include <tuple>
 #include <memory>
+#include <map>
 #include <unordered_map>
 
 #include "CSlotMap.hpp"
@@ -169,26 +170,31 @@ public:
 	template< typename T, typename... Args >
 	void CreateSystem( Args... args )
 	{
-		auto it = m_systems.find( typeid( T ) );
+		auto it = m_systemTypes.find( typeid( T ) );
 
-		if( std::end( m_systems ) != it )
+		if( std::end( m_systemTypes ) != it )
 		{
 			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' already exists" );
 		}
 		else
 		{
-			m_systems[ typeid( T ) ] = std::make_unique< T >( *this, args... );
+			m_systemTypes[ typeid( T ) ] = m_systemId;
+
+			m_systems[ m_systemId ] = std::make_unique< T >( *this, args... );
+
+			m_systemId++;
 		}
 	}
 
 	template< typename T >
 	void DestroySystem()
 	{
-		auto it = m_systems.find( typeid( T ) );
+		auto it = m_systemTypes.find( typeid( T ) );
 
-		if( std::end( m_systems ) != it )
+		if( std::end( m_systemTypes ) != it )
 		{
-			m_systems.erase( it );
+			m_systems.erase( it->second );
+			m_systemTypes.erase( it );
 		}
 		else
 		{
@@ -199,11 +205,11 @@ public:
 	template< typename T >
 	void PauseSystem()
 	{
-		auto it = m_systems.find( typeid( T ) );
+		auto it = m_systemTypes.find( typeid( T ) );
 
-		if( std::end( m_systems ) != it )
+		if( std::end( m_systemTypes ) != it )
 		{
-			it->second->Paused = true;
+			m_systems[ it->second ]->Paused = true;
 		}
 		else
 		{
@@ -250,6 +256,9 @@ private:
 
 	ComponentStorage m_componentStorage;
 
-	// TODO change this, because the systems get iterated in the wrong order!!!
-	std::unordered_map< std::type_index, std::unique_ptr< CComponentSystem > > m_systems;
+	std::uint16_t m_systemId = 0;
+
+	// two structures needed, so we can check against the type AND have a proper order
+	std::unordered_map< std::type_index, std::uint16_t > m_systemTypes;
+	std::map< std::uint16_t, std::unique_ptr< CComponentSystem > > m_systems;
 };
