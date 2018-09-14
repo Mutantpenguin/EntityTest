@@ -22,12 +22,7 @@ void CBombSystem::Process()
 				//*
 				if( m_spatial->ExistsIn( CSphere( bombTransform->Position, bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
 				{
-					if( m_ecs.HasComponents< CHealthComponent >( entity ) )
-					{
-						return( true );
-					}
-					
-					return( false );
+					return( m_ecs.HasComponents< CHealthComponent >( entity ) );
 				} ) )
 				{
 					// TODO set proper radius and damage
