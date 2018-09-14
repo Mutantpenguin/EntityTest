@@ -87,3 +87,19 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	
 	return( true );
 }
+
+void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda )
+{
+	// TODO implement
+}
+
+bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const CEntity &entity ) > lambda ) const
+{
+	// TODO implement
+	/*
+	if( lambda( m_entities[ i ], &m_objects[ i ] ) )
+	{
+		return( true );
+	}*/
+	return( false );
+}
