@@ -86,7 +86,7 @@ int main()
 	{
 		auto spatial = std::make_shared< COcTree >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
 
-		ecs.CreateSystem< CBombSystem >();
+		ecs.CreateSystem< CBombSystem >( spatial );
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
 		ecs.CreateSystem< CBoundingBoxSystem >();

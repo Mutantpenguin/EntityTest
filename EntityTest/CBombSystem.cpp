@@ -16,6 +16,7 @@ void CBombSystem::Process()
 
 			if( bombTransform )
 			{
+				// TODO use the spatial partitioning to find out if such an entity exists
 				if( m_ecs.Exists<CHealthComponent>( [ this, &bombPosition = bombTransform->Position, &activationRadius = bombComponent->activationRadius ]( const auto &healthEntity, const auto healthComponent )
 				{
 					const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
@@ -42,6 +43,7 @@ void CBombSystem::Process()
 	{
 		const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
 
+		// TODO use the spatial partitioning to find out if such an entity exists
 		m_ecs.ForEach<CHealthComponent>( [ this, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent->explosionRadius, &damage = explosionComponent->damage ]( const auto &healthEntity, auto healthComponent )
 		{
 			const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
