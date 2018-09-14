@@ -1,23 +1,23 @@
-#include "CBVHSystem.hpp"
+#include "CSpatialSystem.hpp"
 
 #include <chrono>
 
 #include <glm/gtx/string_cast.hpp>
 
-CBVHSystem::CBVHSystem( MyECS &ecs, const std::shared_ptr< CBVHBase > &bvh ) :
+CSpatialSystem::CSpatialSystem( MyECS &ecs, const std::shared_ptr< CSpatialBase > &spatial ) :
 	m_ecs { ecs },
-	m_bvh( bvh)
+	m_spatial { spatial }
 {
 	Process();
 }
 
-void CBVHSystem::Process()
+void CSpatialSystem::Process()
 {
-	CLogger::Log( "\tprocessing: CBVHSystem" );
+	CLogger::Log( "\tprocessing: CSpatialSystem" );
 	
 	const auto start = std::chrono::system_clock::now();
 
-	m_bvh->Clear();
+	m_spatial->Clear();
 	
 	std::vector< CEntity > entitiesForDeletion;
 
@@ -25,10 +25,10 @@ void CBVHSystem::Process()
 	{
 		auto const boundingBox = m_ecs.GetComponent< CBoundingBox >( transformEntity );
 
-		if( !m_bvh->Add( transformEntity, *transformComponent, boundingBox ) )
+		if( !m_spatial->Add( transformEntity, *transformComponent, boundingBox ) )
 		{
 			entitiesForDeletion.push_back( transformEntity );
-			CLogger::Log( "entity '" + std::to_string( transformEntity.Id() ) + "' lies outside of the BVH: " + glm::to_string( transformComponent->Position ) );
+			CLogger::Log( "entity '" + std::to_string( transformEntity.Id() ) + "' lies outside of this spatial system: " + glm::to_string( transformComponent->Position ) );
 		}
 	} );
 	
@@ -44,5 +44,5 @@ void CBVHSystem::Process()
 
 	const auto end = std::chrono::system_clock::now();
 	const std::chrono::duration<double> diff = end - start;
-	CLogger::Log( "rebuilding BVH: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
+	CLogger::Log( "rebuilding spatial system: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
 }

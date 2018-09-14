@@ -10,7 +10,7 @@
 #include "CHealthSystem.hpp"
 #include "CMovementSystem.hpp"
 #include "CBoundingBoxSystem.hpp"
-#include "CBVHSystem.hpp"
+#include "CSpatialSystem.hpp"
 
 int main()
 {
@@ -84,13 +84,13 @@ int main()
 
 
 	{
-		auto bvh = std::make_shared< COcTree >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
+		auto spatial = std::make_shared< COcTree >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
 
 		ecs.CreateSystem< CBombSystem >();
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
 		ecs.CreateSystem< CBoundingBoxSystem >();
-		ecs.CreateSystem< CBVHSystem >( bvh );
+		ecs.CreateSystem< CSpatialSystem >( spatial );
 
 		CLogger::Log( "" );
 
@@ -113,7 +113,7 @@ int main()
 		ecs.DestroySystem< CHealthSystem >();
 		ecs.DestroySystem< CBoundingBoxSystem >();
 		ecs.DestroySystem< CMovementSystem >();
-		ecs.DestroySystem< CBVHSystem >();
+		ecs.DestroySystem< CSpatialSystem >();
 	}
 
 	return( 0 );

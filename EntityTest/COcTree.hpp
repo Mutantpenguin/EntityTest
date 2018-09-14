@@ -4,9 +4,9 @@
 #include <memory>
 #include <vector>
 
-#include "CBVHBase.hpp"
+#include "CSpatialBase.hpp"
 
-class COcTree final : public CBVHBase
+class COcTree final : public CSpatialBase
 {
 public:
 	COcTree( const CBoundingBox &region );

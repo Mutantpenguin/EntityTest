@@ -18,7 +18,7 @@
       <Extensions>
       </Extensions>
     </Filter>
-    <Filter Include="Systems\BVH">
+    <Filter Include="Spatial">
       <UniqueIdentifier>{90aa467d-1c6f-4a16-874d-100b33e55eb7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -81,17 +81,14 @@
     <ClInclude Include="CBombSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="CBVHSystem.hpp">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="CBoundingBox.hpp">
-      <Filter>Systems\BVH</Filter>
+      <Filter>Spatial</Filter>
     </ClInclude>
     <ClInclude Include="COcTree.hpp">
-      <Filter>Systems\BVH</Filter>
+      <Filter>Spatial</Filter>
     </ClInclude>
     <ClInclude Include="CTransform.hpp">
-      <Filter>Systems\BVH</Filter>
+      <Filter>Spatial</Filter>
     </ClInclude>
     <ClInclude Include="TupleIterator.hpp">
       <Filter>ECS</Filter>
@@ -105,11 +102,14 @@
     <ClInclude Include="CBoundingBoxSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="CBVHBase.hpp">
-      <Filter>Systems\BVH</Filter>
-    </ClInclude>
     <ClInclude Include="CSphere.hpp">
       <Filter>Sonstiges</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpatialBase.hpp">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpatialSystem.hpp">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,19 +137,19 @@
     <ClCompile Include="CBombSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="CBVHSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="CBoundingBox.cpp">
-      <Filter>Systems\BVH</Filter>
+      <Filter>Spatial</Filter>
     </ClCompile>
     <ClCompile Include="COcTree.cpp">
-      <Filter>Systems\BVH</Filter>
+      <Filter>Spatial</Filter>
     </ClCompile>
     <ClCompile Include="CTransform.cpp">
-      <Filter>Systems\BVH</Filter>
+      <Filter>Spatial</Filter>
     </ClCompile>
     <ClCompile Include="CBoundingBoxSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpatialSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>

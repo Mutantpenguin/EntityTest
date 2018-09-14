@@ -5,13 +5,13 @@
 
 #include "CEntity.hpp"
 
-class CBVHBase
+class CSpatialBase
 {
 public:
-	CBVHBase()
+	CSpatialBase()
 	{};
 	
-	virtual ~CBVHBase()
+	virtual ~CSpatialBase()
 	{};
 
 	virtual void Clear() = 0;
