@@ -17,15 +17,18 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <VirtualDirectory Name="Spatial">
+      <File Name="CBoundingBox.hpp"/>
+      <File Name="CBoundingBox.cpp"/>
+      <File Name="CSpatialBase.hpp"/>
+      <File Name="COcTree.hpp"/>
+      <File Name="COcTree.cpp"/>
+    </VirtualDirectory>
     <VirtualDirectory Name="Systems">
+      <File Name="CSpatialSystem.hpp"/>
+      <File Name="CSpatialSystem.cpp"/>
       <File Name="CBoundingBoxSystem.hpp"/>
       <File Name="CBoundingBoxSystem.cpp"/>
-      <VirtualDirectory Name="BVH">
-        <File Name="COcTree.hpp"/>
-        <File Name="COcTree.cpp"/>
-      </VirtualDirectory>
-      <File Name="CBVHSystem.hpp"/>
-      <File Name="CBVHSystem.cpp"/>
       <File Name="CMovementSystem.hpp"/>
       <File Name="CMovementSystem.cpp"/>
       <File Name="CHealthSystem.hpp"/>
@@ -35,6 +38,8 @@
     </VirtualDirectory>
     <File Name="MyECS.hpp"/>
     <VirtualDirectory Name="Sonstiges">
+      <File Name="CSphere.hpp"/>
+      <File Name="CSphere.cpp"/>
       <File Name="CWorld.cpp"/>
       <File Name="CPlane.cpp"/>
       <File Name="CFrustum.cpp"/>
@@ -53,8 +58,6 @@
       <File Name="CEntityComponentSystem.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Components">
-      <File Name="CBoundingBox.hpp"/>
-      <File Name="CBoundingBox.cpp"/>
       <File Name="CTransform.hpp"/>
       <File Name="CTransform.cpp"/>
       <File Name="CMovementComponent.hpp"/>
