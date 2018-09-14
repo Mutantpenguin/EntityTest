@@ -58,7 +58,7 @@ CBoundingBox::eIntersectionType CBoundingBox::Intersect( const CBoundingBox & bo
 	return( eIntersectionType::INTERSECT );
 }
 
-CBoundingBox::eIntersectionType CBoundingBox::Intersect( const glm::vec3 &position ) const
+bool CBoundingBox::Contains( const glm::vec3 &position ) const
 {
 	if( ( m_max.x < position.x )
 		||
@@ -72,10 +72,10 @@ CBoundingBox::eIntersectionType CBoundingBox::Intersect( const glm::vec3 &positi
 		||
 		( m_min.z > position.z ) )
 	{
-		return( eIntersectionType::OUTSIDE );
+		return( false );
 	}
 
-	return( eIntersectionType::INSIDE );
+	return( true );
 }
 
 const glm::vec3 &CBoundingBox::Min() const

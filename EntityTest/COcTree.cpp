@@ -62,7 +62,7 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	}
 	else
 	{
-		if( m_region.Intersect( transform.Position ) != CBoundingBox::eIntersectionType::INSIDE )
+		if( m_region.Contains( transform.Position ) )
 		{
 			return( false );
 		}

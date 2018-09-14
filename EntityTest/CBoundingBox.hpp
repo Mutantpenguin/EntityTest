@@ -23,7 +23,7 @@ public:
 	void MoveTo( const glm::vec3 &position );
 
 	eIntersectionType Intersect( const CBoundingBox &boundingBox ) const;
-	eIntersectionType Intersect( const glm::vec3 &position ) const;
+	bool Contains( const glm::vec3 &position ) const;
 
 	const glm::vec3 &Min() const;
 	const glm::vec3 &Max() const;
