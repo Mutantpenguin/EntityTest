@@ -4,13 +4,20 @@
 
 #include <glm/gtx/string_cast.hpp>
 
+CBVHSystem::CBVHSystem( MyECS &ecs, const std::shared_ptr< CBVHBase > &bvh ) :
+	m_ecs { ecs },
+	m_bvh( bvh)
+{
+	Process();
+}
+
 void CBVHSystem::Process()
 {
 	CLogger::Log( "\tprocessing: CBVHSystem" );
 	
 	const auto start = std::chrono::system_clock::now();
 
-	m_octree.Clear();
+	m_bvh->Clear();
 	
 	std::vector< CEntity > entitiesForDeletion;
 
@@ -18,7 +25,7 @@ void CBVHSystem::Process()
 	{
 		auto const boundingBox = m_ecs.GetComponent< CBoundingBox >( transformEntity );
 
-		if( !m_octree.Add( transformEntity, *transformComponent, boundingBox ) )
+		if( !m_bvh->Add( transformEntity, *transformComponent, boundingBox ) )
 		{
 			entitiesForDeletion.push_back( transformEntity );
 			CLogger::Log( "entity '" + std::to_string( transformEntity.Id() ) + "' lies outside of the OCTree: " + glm::to_string( transformComponent->Position ) );

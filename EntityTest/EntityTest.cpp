@@ -4,6 +4,8 @@
 
 #include "MyECS.hpp"
 
+#include "COcTree.hpp"
+
 #include "CBombSystem.hpp"
 #include "CHealthSystem.hpp"
 #include "CMovementSystem.hpp"
@@ -82,11 +84,13 @@ int main()
 
 
 	{
+		auto bvh = std::make_shared< COcTree >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
+
 		ecs.CreateSystem< CBombSystem >();
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
 		ecs.CreateSystem< CBoundingBoxSystem >();
-		ecs.CreateSystem< CBVHSystem >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
+		ecs.CreateSystem< CBVHSystem >( bvh );
 
 		CLogger::Log( "" );
 

@@ -105,6 +105,9 @@
     <ClInclude Include="CBoundingBoxSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="CBVHBase.hpp">
+      <Filter>Systems\BVH</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
@@ -145,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="CBoundingBoxSystem.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CBVHBase.cpp">
+      <Filter>Systems\BVH</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,28 +4,23 @@
 #include <memory>
 #include <vector>
 
-#include "CTransform.hpp"
-#include "CBoundingBox.hpp"
+#include "CBVHBase.hpp"
 
-#include "CEntity.hpp"
-
-class COcTree
+class COcTree final : public CBVHBase
 {
 public:
 	COcTree( const CBoundingBox &region );
 
-	void Clear();
+	void Clear() override;
 
-	bool Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox );
+	bool Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox ) override;
 
 private:
-	CBoundingBox m_region;
-
 	std::unique_ptr< std::array< COcTree, 8 > > m_childNodes;
 
 	bool m_containsEntities = false;
 
-	std::vector<CEntity> m_entities;
+	std::vector< CEntity > m_entities;
 
 	static const float sMinSize;
 };
