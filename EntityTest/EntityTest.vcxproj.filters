@@ -152,6 +152,9 @@
     <ClCompile Include="CSpatialSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="CSphere.cpp">
+      <Filter>Sonstiges</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
