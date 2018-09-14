@@ -108,6 +108,9 @@
     <ClInclude Include="CBVHBase.hpp">
       <Filter>Systems\BVH</Filter>
     </ClInclude>
+    <ClInclude Include="CSphere.hpp">
+      <Filter>Sonstiges</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">

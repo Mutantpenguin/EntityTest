@@ -172,6 +172,7 @@
     <ClInclude Include="CTransform.hpp" />
     <ClInclude Include="CWorld.hpp" />
     <ClInclude Include="MyECS.hpp" />
+    <ClInclude Include="CSphere.hpp" />
     <ClInclude Include="TupleChecker.hpp" />
     <ClInclude Include="TupleIterator.hpp" />
   </ItemGroup>
