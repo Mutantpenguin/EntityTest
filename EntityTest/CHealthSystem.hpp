@@ -4,7 +4,7 @@
 
 #include "MyECS.hpp"
 
-class CHealthSystem : public CComponentSystem
+class CHealthSystem final : public CComponentSystem
 {
 public:
 	CHealthSystem( MyECS &ecs ) :
@@ -14,7 +14,7 @@ public:
 	~CHealthSystem()
 	{};
 
-	virtual void Process();
+	virtual void Process() override;
 
 private:
 	MyECS &m_ecs;

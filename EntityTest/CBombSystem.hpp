@@ -4,7 +4,7 @@
 
 #include "MyECS.hpp"
 
-class CBombSystem : public CComponentSystem
+class CBombSystem final : public CComponentSystem
 {
 public:
 	CBombSystem( MyECS &ecs ) :
@@ -14,7 +14,7 @@ public:
 	~CBombSystem()
 	{};
 
-	virtual void Process();
+	virtual void Process() override;
 
 private:
 	MyECS &m_ecs;

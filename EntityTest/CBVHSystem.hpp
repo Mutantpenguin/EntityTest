@@ -8,7 +8,7 @@
 
 #include "CBVHBase.hpp"
 
-class CBVHSystem : public CComponentSystem
+class CBVHSystem final : public CComponentSystem
 {
 public:
 	CBVHSystem( MyECS &ecs, const std::shared_ptr< CBVHBase > &bvh );
@@ -16,7 +16,7 @@ public:
 	~CBVHSystem()
 	{};
 
-	virtual void Process();
+	virtual void Process() override;
 
 private:
 	MyECS &m_ecs;

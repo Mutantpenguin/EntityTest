@@ -4,7 +4,7 @@
 
 #include "MyECS.hpp"
 
-class CMovementSystem : public CComponentSystem
+class CMovementSystem final : public CComponentSystem
 {
 public:
 	CMovementSystem( MyECS &ecs ) :
@@ -14,7 +14,7 @@ public:
 	~CMovementSystem()
 	{};
 
-	virtual void Process();
+	virtual void Process() override;
 
 private:
 	MyECS &m_ecs;

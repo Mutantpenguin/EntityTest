@@ -4,7 +4,7 @@
 
 #include "MyECS.hpp"
 
-class CBoundingBoxSystem : public CComponentSystem
+class CBoundingBoxSystem final : public CComponentSystem
 {
 public:
 	CBoundingBoxSystem( MyECS &ecs ) :
@@ -14,7 +14,7 @@ public:
 	~CBoundingBoxSystem()
 	{};
 
-	virtual void Process();
+	virtual void Process() override;
 
 private:
 	MyECS &m_ecs;
