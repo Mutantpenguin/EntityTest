@@ -61,7 +61,7 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	}
 	else
 	{
-		if( m_region.Contains( transform.Position ) )
+		if( !m_region.Contains( transform.Position ) )
 		{
 			return( false );
 		}
