@@ -22,7 +22,7 @@ public:
 private:
 	const CBoundingBox m_region;
 
-	std::unique_ptr< std::array< COcTree, 8 > > m_childNodes;
+	std::unique_ptr< std::array< COcTree, 8 > > m_octants;
 
 	bool m_containsEntities = false;
 

@@ -20,7 +20,7 @@ COcTree::COcTree( const CBoundingBox &region ) :
 		const auto max = m_region.Max();
 		const auto center = m_region.Center();
 
-		m_childNodes = std::make_unique< std::array< COcTree, 8 > >( std::array< COcTree, 8 >{
+		m_octants = std::make_unique< std::array< COcTree, 8 > >( std::array< COcTree, 8 >{
 			CBoundingBox( {    min.x,    min.y,    min.z }, { center.x, center.y, center.z } ), //  left, lower, front
 			CBoundingBox( { center.x,    min.y,    min.z }, {    max.x, center.y, center.z } ), // right, lower, front
 			CBoundingBox( {    min.x,    min.y, center.z }, { center.x, center.y,    max.z } ), //  left, lower, back
@@ -39,9 +39,9 @@ void COcTree::Clear()
 
 	m_entities.clear();
 
-	if( m_childNodes )
+	if( m_octants )
 	{
-		for( auto &node : *m_childNodes )
+		for( auto &node : *m_octants )
 		{
 			if( node.m_containsEntities )
 			{
@@ -70,10 +70,10 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	
 	m_containsEntities = true;
 
-	if( m_childNodes )
+	if( m_octants )
 	{
 		// try to insert it into any child node
-		for( auto &node : *m_childNodes )
+		for( auto &node : *m_octants )
 		{
 			if( node.Add( entity, transform, boundingBox ) )
 			{
