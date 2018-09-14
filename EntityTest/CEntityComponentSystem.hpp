@@ -220,11 +220,11 @@ public:
 	template< typename T >
 	void UnPauseSystem()
 	{
-		auto it = m_systems.find( typeid( T ) );
+		auto it = m_systemTypes.find( typeid( T ) );
 
-		if( std::end( m_systems ) != it )
+		if( std::end( m_systemTypes ) != it )
 		{
-			it->second->Paused = false;
+			m_systems[ it->second ]->Paused = false;
 		}
 		else
 		{
