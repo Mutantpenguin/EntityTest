@@ -7,13 +7,12 @@ const float COcTree::sMinSize = 10.0f;
 COcTree::COcTree( const CBoundingBox &region ) :
 	m_region { region }
 {
-	// create all the needed nodes here, not dynamically during runtime
-	
 	m_entities.reserve( 1000 );
 
+	// create all the needed nodes here, not dynamically during runtime
 	const auto dimensions = m_region.Dimensions();
 
-	// don't create child nodes if we are already at the minimal size
+	// don't create octants if we are already at the minimal size
 	if( !( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) ) )
 	{
 		const auto min = m_region.Min();
@@ -41,11 +40,11 @@ void COcTree::Clear()
 
 	if( m_octants )
 	{
-		for( auto &node : *m_octants )
+		for( auto &octant : *m_octants )
 		{
-			if( node.m_containsEntities )
+			if( octant.m_containsEntities )
 			{
-				node.Clear();
+				octant.Clear();
 			}
 		}
 	}
@@ -72,17 +71,17 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 
 	if( m_octants )
 	{
-		// try to insert it into any child node
-		for( auto &node : *m_octants )
+		// try to insert it into the first fitting octant
+		for( auto &octant : *m_octants )
 		{
-			if( node.Add( entity, transform, boundingBox ) )
+			if( octant.Add( entity, transform, boundingBox ) )
 			{
 				return( true );
 			}
 		}
 	}
 
-	// didn't fit into any child node, so put it inside current one
+	// didn't fit into any octant, so put it inside current one
 	m_entities.push_back( entity );
 	
 	return( true );
