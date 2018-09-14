@@ -5,7 +5,7 @@
 const float COcTree::sMinSize = 10.0f;
 
 COcTree::COcTree( const CBoundingBox &region ) :
-	CBVHBase( region )
+	m_region { region }
 {
 	// create all the needed nodes here, not dynamically during runtime
 	

@@ -16,6 +16,8 @@ public:
 	bool Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox ) override;
 
 private:
+	CBoundingBox m_region;
+
 	std::unique_ptr< std::array< COcTree, 8 > > m_childNodes;
 
 	bool m_containsEntities = false;

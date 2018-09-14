@@ -8,7 +8,8 @@
 class CBVHBase
 {
 public:
-	CBVHBase( const CBoundingBox &region );
+	CBVHBase()
+	{};
 	
 	virtual ~CBVHBase()
 	{};
@@ -16,8 +17,5 @@ public:
 	virtual void Clear() = 0;
 
 	virtual bool Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox ) = 0;
-
-protected:
-	CBoundingBox m_region;
 };
 

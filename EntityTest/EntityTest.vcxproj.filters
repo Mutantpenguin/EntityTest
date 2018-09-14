@@ -152,9 +152,6 @@
     <ClCompile Include="CBoundingBoxSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="CBVHBase.cpp">
-      <Filter>Systems\BVH</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
