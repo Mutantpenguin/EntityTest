@@ -28,7 +28,7 @@ void CBVHSystem::Process()
 		if( !m_bvh->Add( transformEntity, *transformComponent, boundingBox ) )
 		{
 			entitiesForDeletion.push_back( transformEntity );
-			CLogger::Log( "entity '" + std::to_string( transformEntity.Id() ) + "' lies outside of the OCTree: " + glm::to_string( transformComponent->Position ) );
+			CLogger::Log( "entity '" + std::to_string( transformEntity.Id() ) + "' lies outside of the BVH: " + glm::to_string( transformComponent->Position ) );
 		}
 	} );
 	
