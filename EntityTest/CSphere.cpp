@@ -1,5 +1,7 @@
 #include "CSphere.hpp"
 
+#include <glm/gtx/norm.hpp>
+
 CSphere::CSphere( const glm::vec3 &position, const float radius ) :
 	m_position { position },
 	m_radius { radius }
@@ -17,7 +19,7 @@ const float &CSphere::Radius() const
 
 bool CSphere::Contains( const glm::vec3 &position ) const
 {
-	if( glm::length( m_position - position ) <= m_radius )
+	if( glm::length2( m_position - position ) <= std::pow( m_radius, 2 ) )
 	{
 		return( true );
 	}
