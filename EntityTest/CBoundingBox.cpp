@@ -78,6 +78,52 @@ bool CBoundingBox::Contains( const glm::vec3 &position ) const
 	return( true );
 }
 
+glm::vec3 CBoundingBox::ClosestPoint( const glm::vec3 &position ) const
+{
+	glm::vec3 result;
+
+	if( position.x > m_max.x )
+	{
+		result.x = m_max.x;
+	}
+	else if( position.x < m_min.x )
+	{
+		result.x = m_min.x;
+	}
+	else
+	{
+		result.x = position.x;
+	}
+
+	if( position.y > m_max.y )
+	{
+		result.y = m_max.y;
+	}
+	else if( position.y < m_min.y )
+	{
+		result.y = m_min.y;
+	}
+	else
+	{
+		result.y = position.y;
+	}
+
+	if( position.z > m_max.z )
+	{
+		result.z = m_max.z;
+	}
+	else if( position.z < m_min.z )
+	{
+		result.z = m_min.z;
+	}
+	else
+	{
+		result.z = position.z;
+	}
+
+	return( result );
+}
+
 const glm::vec3 &CBoundingBox::Min() const
 {
 	return( m_min );
