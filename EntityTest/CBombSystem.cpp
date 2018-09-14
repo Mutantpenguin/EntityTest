@@ -99,5 +99,5 @@ void CBombSystem::Process()
 		m_ecs.Destroy( entity );
 	}
 	
-	CLogger::Log( std::to_string( m_ecs.Count<CBombComponent>() ) + " CBombComponent remaining" );
+	CLogger::Log( "\t\t" + std::to_string( m_ecs.Count<CBombComponent>() ) + " CBombComponent remaining" );
 }
