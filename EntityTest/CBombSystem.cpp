@@ -17,6 +17,21 @@ void CBombSystem::Process()
 			if( bombTransform )
 			{
 				// TODO use the spatial partitioning to find out if such an entity exists
+				if( m_spatial->ExistsIn( CSphere( bombTransform->Position, bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
+				{
+					if( m_ecs.HasComponents< CHealthComponent >( entity ) )
+					{
+						return( true );
+					}
+					
+					return( false );
+				} ) )
+				{
+					// TODO set proper radius and damage
+					m_ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
+				}
+
+				/* TODO old, needed for timing the execution time after conversion
 				if( m_ecs.Exists<CHealthComponent>( [ this, &bombPosition = bombTransform->Position, &activationRadius = bombComponent->activationRadius ]( const auto &healthEntity, const auto healthComponent )
 				{
 					const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
@@ -35,6 +50,7 @@ void CBombSystem::Process()
 					// TODO set proper radius and damage
 					m_ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
 				}
+				*/
 			}
 		}
 	} );
@@ -44,6 +60,18 @@ void CBombSystem::Process()
 		const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
 
 		// TODO use the spatial partitioning to find out if such an entity exists
+		m_spatial->ForEachIn( CSphere( explosionTransform->Position, explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ] ( const CEntity &entity )
+		{
+			auto healthComponent = m_ecs.GetComponent< CHealthComponent >( entity );
+
+			if( healthComponent )
+			{
+				healthComponent->health -= damage;
+			}
+		} );
+
+
+		/* TODO old, needed for timing the execution time after conversion
 		m_ecs.ForEach<CHealthComponent>( [ this, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent->explosionRadius, &damage = explosionComponent->damage ]( const auto &healthEntity, auto healthComponent )
 		{
 			const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
@@ -56,6 +84,7 @@ void CBombSystem::Process()
 				}
 			}
 		} );
+		*/
 		
 		bombEntitiesForDeletion.push_back( explosionEntity );
 	} );
