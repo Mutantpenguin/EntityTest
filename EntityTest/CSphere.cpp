@@ -26,3 +26,8 @@ bool CSphere::Contains( const glm::vec3 &position ) const
 
 	return( false );
 }
+
+glm::vec3 CSphere::ClosestPoint( const glm::vec3 &position ) const
+{
+	return( m_position + ( glm::normalize( position - m_position ) * m_radius ) );
+}
