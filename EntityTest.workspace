@@ -10,7 +10,7 @@
       <Project Name="EntityTest" ConfigName="Debug"/>
       <Project Name="UnitTests" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="yes">
+    <WorkspaceConfiguration Name="Release" Selected="no">
       <Environment/>
       <Project Name="EntityTest" ConfigName="Release"/>
       <Project Name="UnitTests" ConfigName="Release"/>

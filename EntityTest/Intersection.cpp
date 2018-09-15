@@ -58,3 +58,22 @@ eIntersectionType Intersection( const CSphere &a, const CSphere &b )
 	
 	return( eIntersectionType::OUTSIDE );
 }
+
+eIntersectionType Intersection( const CSphere &sphere, const CBoundingBox &box )
+{
+	const auto radiusSquared = std::pow( sphere.Radius(), 2 );
+	
+	if( radiusSquared >= glm::length2( sphere.Position() - box.ClosestPoint( sphere.Position() ) ) )
+	{
+		if( ( radiusSquared >= glm::length2( sphere.Position() - box.Min() ) )
+			&&
+			( radiusSquared >= glm::length2( sphere.Position() - box.Max() ) ) )
+		{
+			return( eIntersectionType::INSIDE );
+		}
+		
+		return( eIntersectionType::INTERSECT );
+	}
+	
+	return( eIntersectionType::OUTSIDE );
+}
