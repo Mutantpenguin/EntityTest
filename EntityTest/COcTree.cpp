@@ -3,6 +3,7 @@
 #include "CLogger.hpp"
 
 #include "Intersection.hpp"
+#include "Contains.hpp"
 
 const float COcTree::sMinSize = 10.0f;
 
@@ -63,7 +64,7 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	}
 	else
 	{
-		if( !m_region.Contains( transform.Position ) )
+		if( !Contains( m_region, transform.Position ) )
 		{
 			return( false );
 		}

@@ -2,6 +2,8 @@
 
 #include <glm/gtx/norm.hpp>
 
+#include "ClosestPoint.hpp"
+
 eIntersectionType Intersection( const CBoundingBox &a, const CBoundingBox &b )
 {
 	if( ( a.Max().x < b.Min().x )
@@ -63,7 +65,7 @@ eIntersectionType Intersection( const CSphere &sphere, const CBoundingBox &box )
 {
 	const auto radiusSquared = std::pow( sphere.Radius(), 2 );
 	
-	if( radiusSquared >= glm::length2( sphere.Position() - box.ClosestPoint( sphere.Position() ) ) )
+	if( radiusSquared >= glm::length2( sphere.Position() - ClosestPoint( box, sphere.Position() ) ) )
 	{
 		if( ( radiusSquared >= glm::length2( sphere.Position() - box.Min() ) )
 			&&

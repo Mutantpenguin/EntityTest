@@ -18,6 +18,10 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="Primitives">
+      <File Name="ClosestPoint.cpp"/>
+      <File Name="ClosestPoint.hpp"/>
+      <File Name="Contains.cpp"/>
+      <File Name="Contains.hpp"/>
       <File Name="Intersection.cpp"/>
       <File Name="Intersection.hpp"/>
       <File Name="CBoundingBox.hpp"/>

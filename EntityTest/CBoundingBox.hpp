@@ -15,10 +15,6 @@ public:
 
 	void MoveTo( const glm::vec3 &position );
 
-	bool Contains( const glm::vec3 &position ) const;
-
-	glm::vec3 ClosestPoint( const glm::vec3 &position ) const;
-
 	const glm::vec3 &Min() const;
 	const glm::vec3 &Max() const;
 

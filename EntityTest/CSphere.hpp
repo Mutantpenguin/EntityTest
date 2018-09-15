@@ -11,10 +11,6 @@ public:
 
 	const float &Radius() const;
 
-	bool Contains( const glm::vec3 &position ) const;
-
-	glm::vec3 ClosestPoint( const glm::vec3 &position ) const;
-
 private:
 	const glm::vec3	m_position { 0.0f, 0.0f, 0.0f };
 	const float		m_radius { 0.0f };
