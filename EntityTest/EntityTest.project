@@ -17,9 +17,17 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <VirtualDirectory Name="Spatial">
+    <VirtualDirectory Name="Primitives">
+      <File Name="Intersection.cpp"/>
+      <File Name="Intersection.hpp"/>
       <File Name="CBoundingBox.hpp"/>
       <File Name="CBoundingBox.cpp"/>
+      <File Name="CSphere.hpp"/>
+      <File Name="CSphere.cpp"/>
+      <File Name="CPlane.hpp"/>
+      <File Name="CPlane.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Spatial">
       <File Name="CSpatialBase.hpp"/>
       <File Name="COcTree.hpp"/>
       <File Name="COcTree.cpp"/>
@@ -38,14 +46,10 @@
     </VirtualDirectory>
     <File Name="MyECS.hpp"/>
     <VirtualDirectory Name="Sonstiges">
-      <File Name="CSphere.hpp"/>
-      <File Name="CSphere.cpp"/>
       <File Name="CWorld.cpp"/>
-      <File Name="CPlane.cpp"/>
       <File Name="CFrustum.cpp"/>
       <File Name="CWorld.hpp"/>
       <File Name="CSize.hpp"/>
-      <File Name="CPlane.hpp"/>
       <File Name="CLogger.hpp"/>
       <File Name="CFrustum.hpp"/>
     </VirtualDirectory>

@@ -3,14 +3,17 @@
   <WorkspaceParserMacros/>
   <WorkspaceParserPaths/>
   <Project Name="EntityTest" Path="EntityTest/EntityTest.project" Active="Yes"/>
+  <Project Name="UnitTests" Path="UnitTests/UnitTests.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="EntityTest" ConfigName="Debug"/>
+      <Project Name="UnitTests" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="no">
+    <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="EntityTest" ConfigName="Release"/>
+      <Project Name="UnitTests" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

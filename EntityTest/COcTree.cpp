@@ -2,6 +2,8 @@
 
 #include "CLogger.hpp"
 
+#include "Intersection.hpp"
+
 const float COcTree::sMinSize = 10.0f;
 
 COcTree::COcTree( const CBoundingBox &region ) :
@@ -54,7 +56,7 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 {
 	if( boundingBox )
 	{
-		if( m_region.Intersect( *boundingBox ) != CBoundingBox::eIntersectionType::INSIDE )
+		if( Intersection( m_region, *boundingBox ) != eIntersectionType::INSIDE )
 		{
 			return( false );
 		}
