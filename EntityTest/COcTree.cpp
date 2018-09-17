@@ -37,15 +37,15 @@ COcTree::COcTree( const CBoundingBox &region ) :
 
 void COcTree::Clear()
 {
-	m_containsEntities = false;
-
-	m_entities.clear();
-
-	if( m_octants )
+	if( m_containsEntities )
 	{
-		for( auto &octant : *m_octants )
+		m_containsEntities = false;
+
+		m_entities.clear();
+
+		if( m_octants )
 		{
-			if( octant.m_containsEntities )
+			for( auto &octant : *m_octants )
 			{
 				octant.Clear();
 			}
@@ -90,9 +90,49 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	return( true );
 }
 
+void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lambda )
+{
+	if( m_containsEntities )
+	{
+		for( const auto &entity : m_entities )
+		{
+			lambda( entity );
+		}
+
+		if( m_octants )
+		{
+			for( auto &octant : *m_octants )
+			{
+				octant.ForEach( lambda );
+			}
+		}
+	}
+}
+
 void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda )
 {
 	// TODO implement
+	if( m_containsEntities )
+	{
+		switch( Intersection( sphere, m_region ) )
+		{
+		case eIntersectionType::INSIDE:
+			ForEach( lambda );
+			break;
+
+		case eIntersectionType::INTERSECT:
+			for( const auto &entity : m_entities )
+			{
+				// TODO
+			}
+
+			for( auto &octant : *m_octants )
+			{
+				octant.ForEachIn( sphere, lambda );
+			}
+			break;
+		}
+	}
 }
 
 bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const CEntity &entity ) > lambda ) const

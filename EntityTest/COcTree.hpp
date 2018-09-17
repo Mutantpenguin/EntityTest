@@ -15,6 +15,8 @@ public:
 
 	bool Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox ) override;
 
+	virtual void ForEach( const std::function< void( const CEntity &entity ) > lambda ) override;
+	
 	virtual void ForEachIn( const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda ) override;
 
 	virtual bool ExistsIn( const CSphere &sphere, const std::function< bool( const CEntity &entity ) > lambda ) const override;

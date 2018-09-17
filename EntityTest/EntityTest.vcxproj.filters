@@ -21,6 +21,9 @@
     <Filter Include="Spatial">
       <UniqueIdentifier>{90aa467d-1c6f-4a16-874d-100b33e55eb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives">
+      <UniqueIdentifier>{38b87a44-90d3-4d51-8bf9-f28c18716319}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -81,9 +84,6 @@
     <ClInclude Include="CBombSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="CBoundingBox.hpp">
-      <Filter>Spatial</Filter>
-    </ClInclude>
     <ClInclude Include="COcTree.hpp">
       <Filter>Spatial</Filter>
     </ClInclude>
@@ -102,14 +102,26 @@
     <ClInclude Include="CBoundingBoxSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="CSphere.hpp">
-      <Filter>Sonstiges</Filter>
-    </ClInclude>
     <ClInclude Include="CSpatialBase.hpp">
       <Filter>Spatial</Filter>
     </ClInclude>
     <ClInclude Include="CSpatialSystem.hpp">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CSphere.hpp">
+      <Filter>Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoundingBox.hpp">
+      <Filter>Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="ClosestPoint.hpp">
+      <Filter>Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Contains.hpp">
+      <Filter>Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Intersection.hpp">
+      <Filter>Primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +149,6 @@
     <ClCompile Include="CBombSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="CBoundingBox.cpp">
-      <Filter>Spatial</Filter>
-    </ClCompile>
     <ClCompile Include="COcTree.cpp">
       <Filter>Spatial</Filter>
     </ClCompile>
@@ -153,7 +162,19 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="CSphere.cpp">
-      <Filter>Sonstiges</Filter>
+      <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoundingBox.cpp">
+      <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="ClosestPoint.cpp">
+      <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Contains.cpp">
+      <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Intersection.cpp">
+      <Filter>Primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

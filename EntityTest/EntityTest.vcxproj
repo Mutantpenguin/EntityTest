@@ -151,6 +151,8 @@
     <ClInclude Include="CBombSystem.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
     <ClInclude Include="CBoundingBoxSystem.hpp" />
+    <ClInclude Include="ClosestPoint.hpp" />
+    <ClInclude Include="Contains.hpp" />
     <ClInclude Include="CSpatialBase.hpp" />
     <ClInclude Include="CSpatialSystem.hpp" />
     <ClInclude Include="CComponentSystem.hpp" />
@@ -171,6 +173,7 @@
     <ClInclude Include="CDebugNameComponent.hpp" />
     <ClInclude Include="CTransform.hpp" />
     <ClInclude Include="CWorld.hpp" />
+    <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="MyECS.hpp" />
     <ClInclude Include="CSphere.hpp" />
     <ClInclude Include="TupleChecker.hpp" />
@@ -180,6 +183,8 @@
     <ClCompile Include="CBombSystem.cpp" />
     <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="CBoundingBoxSystem.cpp" />
+    <ClCompile Include="ClosestPoint.cpp" />
+    <ClCompile Include="Contains.cpp" />
     <ClCompile Include="CSpatialSystem.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="CHealthSystem.cpp" />
@@ -191,6 +196,7 @@
     <ClCompile Include="CEntity.hpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="CTransform.cpp" />
+    <ClCompile Include="Intersection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
