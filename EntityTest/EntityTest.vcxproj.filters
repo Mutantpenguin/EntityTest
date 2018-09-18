@@ -178,7 +178,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="perftest.xlsx" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
