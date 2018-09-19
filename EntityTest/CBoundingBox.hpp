@@ -8,6 +8,8 @@ public:
 	CBoundingBox()
 	{}
 	
+	CBoundingBox( const CBoundingBox &box );
+
 	CBoundingBox( const glm::vec3 &min, const glm::vec3 &max );
 
 	glm::vec3 Center() const;

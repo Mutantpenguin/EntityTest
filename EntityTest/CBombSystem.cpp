@@ -18,7 +18,7 @@ void CBombSystem::Process()
 
 			if( bombTransform )
 			{
-				// TODO use the spatial partitioning to find out if such an entity exists
+				// TODO this does not work like the old version
 				//*
 				if( m_spatial->ExistsIn( CSphere( bombTransform->Position, bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
 				{
@@ -58,7 +58,7 @@ void CBombSystem::Process()
 	{
 		const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
 
-		// TODO use the spatial partitioning to find out if such an entity exists
+		// TODO this does not work like the old version
 		//*
 		m_spatial->ForEachIn( CSphere( explosionTransform->Position, explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ] ( const CEntity &entity )
 		{

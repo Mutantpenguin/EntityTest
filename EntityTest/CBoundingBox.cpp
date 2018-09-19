@@ -1,5 +1,10 @@
 #include "CBoundingBox.hpp"
 
+CBoundingBox::CBoundingBox( const CBoundingBox &box ) :
+	m_min { box.m_min },
+	m_max { box.m_max }
+{}
+
 CBoundingBox::CBoundingBox( const glm::vec3 &min, const glm::vec3 &max ) :
 	m_min { min },
 	m_max { max }
