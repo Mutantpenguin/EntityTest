@@ -37,9 +37,6 @@ public:
 
 	CEntity Create()
 	{
-		// TODO implement "version" in Entity when stack is used. increment "version" when popping from stack
-		// TODO use "version" in Entity to check against it in several places
-
 		if( !m_freeEntities.empty() )
 		{
 			auto entity = m_freeEntities.back();

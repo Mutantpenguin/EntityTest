@@ -51,8 +51,6 @@ public:
 
 	void Add( const CEntity &entity, T& component )
 	{
-		// TODO only Add when version matches
-
 		auto &mapping = m_idMappings[ entity.Id() ];
 
 		if( nullIndex == mapping )
@@ -66,14 +64,21 @@ public:
 		}
 		else
 		{
-			CLogger::Log( "component already exists" );
+			if( m_entities[ mapping ].Version() == entity.Version() )
+			{
+				m_objects[ mapping ] = component;
+			}
+#ifndef NDEBUG
+			else
+			{
+				CLogger::Log( "using stale entity id" );
+			}
+#endif
 		}
 	}
 
 	void Add( const CEntity &entity, T&& component )
 	{
-		// TODO only Add when version matches
-
 		auto &mapping = m_idMappings[ entity.Id() ];
 
 		if( nullIndex == mapping )
@@ -87,7 +92,16 @@ public:
 		}
 		else
 		{
-			CLogger::Log( "component already exists" );
+			if( m_entities[ mapping ].Version() == entity.Version() )
+			{
+				m_objects[ mapping ] = component;
+			}
+#ifndef NDEBUG
+			else
+			{
+				CLogger::Log( "using stale entity id" );
+			}
+#endif
 		}
 	}
 
@@ -115,6 +129,12 @@ public:
 
 				mapping = nullIndex;
 			}
+#ifndef NDEBUG
+			else
+			{
+				CLogger::Log( "using stale entity id" );
+			}
+#endif
 		}
 	}
 
