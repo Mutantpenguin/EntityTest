@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <limits>
 
-class CEntity
+class CEntity final
 {
 	template < size_t _Size, typename... Types >
 	friend class CEntityComponentSystem;
