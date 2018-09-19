@@ -2,6 +2,7 @@
 
 #include <glm/gtx/norm.hpp>
 
+#include "Contains.hpp"
 #include "ClosestPoint.hpp"
 
 eIntersectionType Intersection( const CBoundingBox &a, const CBoundingBox &b )
@@ -37,6 +38,23 @@ eIntersectionType Intersection( const CBoundingBox &a, const CBoundingBox &b )
 	}
 
 	return( eIntersectionType::INTERSECT );
+}
+
+eIntersectionType Intersection( const CBoundingBox &box, const CSphere &sphere )
+{
+	if( std::pow( sphere.Radius(), 2 ) >= glm::length2( sphere.Position() - ClosestPoint( box, sphere.Position() ) ) )
+	{
+		if( Contains( sphere, box.Min() )
+			&&
+			Contains( sphere, box.Max() ) )
+		{
+			return( eIntersectionType::INSIDE );
+		}
+
+		return( eIntersectionType::INTERSECT );
+	}
+
+	return( eIntersectionType::OUTSIDE );
 }
 
 eIntersectionType Intersection( const CSphere &a, const CSphere &b )
