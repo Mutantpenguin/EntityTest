@@ -118,8 +118,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NOMINMAX;GLM_ENABLE_EXPERIMENTAL;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;GLM_ENABLE_EXPERIMENTAL;WIN32;NDEBUG;_CONSOLE;MTR_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -178,6 +179,7 @@
     <ClInclude Include="CTransform.hpp" />
     <ClInclude Include="CWorld.hpp" />
     <ClInclude Include="Intersection.hpp" />
+    <ClInclude Include="minitrace.h" />
     <ClInclude Include="MyECS.hpp" />
     <ClInclude Include="CSphere.hpp" />
     <ClInclude Include="TupleChecker.hpp" />
@@ -201,6 +203,7 @@
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="Intersection.cpp" />
+    <ClCompile Include="minitrace.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -5,8 +5,13 @@
 #include "Contains.hpp"
 #include "ClosestPoint.hpp"
 
+#include "minitrace.h"
+
 eIntersectionType Intersection( const CBoundingBox &a, const CBoundingBox &b )
 {
+	MTR_SCOPE( "Intersection", "Intersection box <-> box" );
+
+
 	if( ( a.Max().x < b.Min().x )
 		||
 		( a.Min().x > b.Max().x )
@@ -42,6 +47,8 @@ eIntersectionType Intersection( const CBoundingBox &a, const CBoundingBox &b )
 
 eIntersectionType Intersection( const CBoundingBox &box, const CSphere &sphere )
 {
+	MTR_SCOPE( "Intersection", "Intersection box <-> sphere" );
+
 	if( std::pow( sphere.Radius(), 2 ) >= glm::length2( sphere.Position() - ClosestPoint( box, sphere.Position() ) ) )
 	{
 		if( Contains( sphere, box.Min() )
@@ -59,6 +66,8 @@ eIntersectionType Intersection( const CBoundingBox &box, const CSphere &sphere )
 
 eIntersectionType Intersection( const CSphere &a, const CSphere &b )
 {
+	MTR_SCOPE( "Intersection", "Intersection sphere <-> sphere" );
+
     const glm::vec3 distance = a.Position() - b.Position();
 	
 	if( a.Radius() >= ( glm::length( distance ) + b.Radius() ) )
@@ -81,6 +90,8 @@ eIntersectionType Intersection( const CSphere &a, const CSphere &b )
 
 eIntersectionType Intersection( const CSphere &sphere, const CBoundingBox &box )
 {
+	MTR_SCOPE( "Intersection", "Intersection sphere <-> box" );
+
 	const auto radiusSquared = std::pow( sphere.Radius(), 2 );
 	
 	if( radiusSquared >= glm::length2( sphere.Position() - ClosestPoint( box, sphere.Position() ) ) )

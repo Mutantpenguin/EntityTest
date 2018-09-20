@@ -4,6 +4,8 @@
 
 #include <glm/gtx/string_cast.hpp>
 
+#include "minitrace.h"
+
 CSpatialSystem::CSpatialSystem( MyECS &ecs, const std::shared_ptr< CSpatialBase > &spatial ) :
 	m_ecs { ecs },
 	m_spatial { spatial }
@@ -13,6 +15,8 @@ CSpatialSystem::CSpatialSystem( MyECS &ecs, const std::shared_ptr< CSpatialBase 
 
 void CSpatialSystem::Process()
 {
+	MTR_SCOPE( "CSpatialSystem", "CSpatialSystem::Process" );
+
 	CLogger::Log( "\tprocessing: CSpatialSystem" );
 	
 	const auto start = std::chrono::system_clock::now();

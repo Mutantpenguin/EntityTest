@@ -5,7 +5,9 @@
 #include "Intersection.hpp"
 #include "Contains.hpp"
 
-const float COcTree::sMinSize = 10.0f;
+#include "minitrace.h"
+
+const float COcTree::sMinSize = 50.0f;
 
 COcTree::COcTree( const CBoundingBox &region ) :
 	m_region { region }
@@ -18,19 +20,19 @@ COcTree::COcTree( const CBoundingBox &region ) :
 	// don't create octants if we are already at the minimal size
 	if( !( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) ) )
 	{
-		const auto min = m_region.Min();
-		const auto max = m_region.Max();
+		const auto &min = m_region.Min();
+		const auto &max = m_region.Max();
 		const auto center = m_region.Center();
 
 		m_octants = std::make_unique< std::array< COcTree, 8 > >( std::array< COcTree, 8 >{
-			CBoundingBox( {    min.x,    min.y,    min.z }, { center.x, center.y, center.z } ), //  left, lower, front
-			CBoundingBox( { center.x,    min.y,    min.z }, {    max.x, center.y, center.z } ), // right, lower, front
-			CBoundingBox( {    min.x,    min.y, center.z }, { center.x, center.y,    max.z } ), //  left, lower, back
-			CBoundingBox( { center.x,    min.y, center.z }, {    max.x, center.y,    max.z } ), // right, lower, back
-			CBoundingBox( {    min.x, center.y,    min.z }, { center.x,    max.y, center.z } ), //  left, upper, front
-			CBoundingBox( { center.x, center.y,    min.z }, {    max.x,    max.y, center.z } ), // right, upper, front
-			CBoundingBox( {    min.x, center.y, center.z }, { center.x,    max.y,    max.z } ), //  left, upper, back
-			CBoundingBox( { center.x, center.y, center.z }, {    max.x,    max.y,    max.z } )  // right, upper, back
+				COcTree( CBoundingBox( {    min.x,    min.y,    min.z }, { center.x, center.y, center.z } ) ), //  left, lower, front
+				COcTree( CBoundingBox( { center.x,    min.y,    min.z }, {    max.x, center.y, center.z } ) ), // right, lower, front
+				COcTree( CBoundingBox( {    min.x,    min.y, center.z }, { center.x, center.y,    max.z } ) ), //  left, lower, back
+				COcTree( CBoundingBox( { center.x,    min.y, center.z }, {    max.x, center.y,    max.z } ) ), // right, lower, back
+				COcTree( CBoundingBox( {    min.x, center.y,    min.z }, { center.x,    max.y, center.z } ) ), //  left, upper, front
+				COcTree( CBoundingBox( { center.x, center.y,    min.z }, {    max.x,    max.y, center.z } ) ), // right, upper, front
+				COcTree( CBoundingBox( {    min.x, center.y, center.z }, { center.x,    max.y,    max.z } ) ), //  left, upper, back
+				COcTree( CBoundingBox( { center.x, center.y, center.z }, {    max.x,    max.y,    max.z } ) )  // right, upper, back
 			} );
 	}
 }
@@ -92,6 +94,8 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 
 void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lambda )
 {
+	MTR_SCOPE( "COcTree", "COcTree::ForEach" );
+
 	if( m_containsEntities )
 	{
 		for( const auto &child : m_children )
@@ -111,6 +115,8 @@ void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lamb
 
 void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda )
 {
+	MTR_SCOPE( "COcTree", "COcTree::ForEachIn" );
+
 	if( m_containsEntities )
 	{
 		switch( Intersection( sphere, m_region ) )
@@ -147,6 +153,7 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 					octant.ForEachIn( sphere, lambda );
 				}
 			}
+
 			break;
 		}
 	}
@@ -154,6 +161,8 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 
 bool COcTree::Exists( const std::function< bool( const CEntity &entity ) > lambda ) const
 {
+	MTR_SCOPE( "COcTree", "COcTree::Exists" );
+
 	if( m_containsEntities )
 	{
 		for( const auto &child : m_children )
@@ -181,6 +190,8 @@ bool COcTree::Exists( const std::function< bool( const CEntity &entity ) > lambd
 
 bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const CEntity &entity ) > lambda ) const
 {
+	MTR_SCOPE( "COcTree", "COcTree::ExistsIn" );
+
 	if( m_containsEntities )
 	{
 		switch( Intersection( sphere, m_region ) )
@@ -220,9 +231,13 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 			{
 				for( auto &octant : *m_octants )
 				{
-					octant.ForEachIn( sphere, lambda );
+					if( octant.ExistsIn( sphere, lambda ) )
+					{
+						return( true );
+					}
 				}
 			}
+
 			break;
 		}
 	}

@@ -2,8 +2,12 @@
 
 #include "CLogger.hpp"
 
+#include "minitrace.h"
+
 void CHealthSystem::Process()
 {
+	MTR_SCOPE( "CHealthSystem", "CHealthSystem::Process" );
+	
 	CLogger::Log( "\tprocessing: CHealthSystem" );
 	
 	std::vector< CEntity > entitiesForDeletion;
@@ -23,6 +27,6 @@ void CHealthSystem::Process()
 
 	if( entitiesForDeletion.size() > 0 )
 	{
-		CLogger::Log( "destroyed " + std::to_string( entitiesForDeletion.size() ) + " entities" );
+		CLogger::Log( "\t\tdestroyed " + std::to_string( entitiesForDeletion.size() ) + " entities" );
 	}
 }

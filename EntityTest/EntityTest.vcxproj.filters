@@ -24,6 +24,9 @@
     <Filter Include="Primitives">
       <UniqueIdentifier>{38b87a44-90d3-4d51-8bf9-f28c18716319}</UniqueIdentifier>
     </Filter>
+    <Filter Include="minitrace">
+      <UniqueIdentifier>{a296cd7e-42c2-4b8f-bed2-5bff88f19d4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -123,6 +126,9 @@
     <ClInclude Include="Intersection.hpp">
       <Filter>Primitives</Filter>
     </ClInclude>
+    <ClInclude Include="minitrace.h">
+      <Filter>minitrace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
@@ -175,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="Intersection.cpp">
       <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="minitrace.c">
+      <Filter>minitrace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,93 +1,110 @@
 #include "CBombSystem.hpp"
 
 #include <vector>
+#include <chrono>
 
 #include <glm/gtx/norm.hpp>
 
+#include "minitrace.h"
+
 void CBombSystem::Process()
 {
+	MTR_SCOPE( "CBombSystem", "CBombSystem::Process" );
+
 	CLogger::Log( "\tprocessing: CBombSystem" );	
 	
 	std::vector<CEntity> bombEntitiesForDeletion;
 
-	m_ecs.ForEach<CBombComponent>( [ this ] ( const auto &bombEntity, auto bombComponent )
 	{
-		if( !m_ecs.HasComponents<CExplosionComponent>( bombEntity ) )
+		const auto start = std::chrono::system_clock::now();
+
+		MTR_BEGIN( "CBombSystem", "ForEach<CBombComponent>" );
+		m_ecs.ForEach<CBombComponent>( [ this ] ( const auto &bombEntity, auto bombComponent )
 		{
-			const auto bombTransform = m_ecs.GetComponent<CTransform>( bombEntity );
-
-			if( bombTransform )
+			if( !m_ecs.HasComponents<CExplosionComponent>( bombEntity ) )
 			{
-				// TODO this does not work like the old version
-				//*
-				if( m_spatial->ExistsIn( CSphere( bombTransform->Position, bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
-				{
-					return( m_ecs.HasComponents< CHealthComponent >( entity ) );
-				} ) )
-				{
-					// TODO set proper radius and damage
-					m_ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
-				}
-				//*/
+				const auto bombTransform = m_ecs.GetComponent<CTransform>( bombEntity );
 
-				/* TODO old, needed for timing the execution time after conversion
-				if( m_ecs.Exists<CHealthComponent>( [ this, &bombPosition = bombTransform->Position, &activationRadius = bombComponent->activationRadius ]( const auto &healthEntity, const auto healthComponent )
+				if( bombTransform )
 				{
-					const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
-
-					if( healthTransform )
+					//* TODO this does not work like the old version
+					if( m_spatial->ExistsIn( CSphere( bombTransform->Position, bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
 					{
-						if( glm::length2( bombPosition - healthTransform->Position ) < std::pow( activationRadius, 2 ) )
+						return( m_ecs.HasComponents< CHealthComponent >( entity ) );
+					} ) )
+					//*/
+					/* TODO old, needed for timing the execution time after conversion
+					if( m_ecs.Exists<CHealthComponent>( [ this, &bombPosition = bombTransform->Position, &activationRadius = bombComponent->activationRadius ]( const auto &healthEntity, const auto healthComponent )
+					{
+						const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
+
+						if( healthTransform )
 						{
-							return( true );
+							if( glm::length2( bombPosition - healthTransform->Position ) < std::pow( activationRadius, 2 ) )
+							{
+								return( true );
+							}
 						}
+
+						return( false );
+					} ) )
+					//*/
+					{
+						// TODO set proper radius and damage
+						m_ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
 					}
-
-					return( false );
-				} ) )
-				{
-					// TODO set proper radius and damage
-					m_ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
 				}
-				//*/
-			}
-		}
-	} );
-
-	m_ecs.ForEach<CExplosionComponent>( [ this, &bombEntitiesForDeletion ] ( const auto &explosionEntity, auto explosionComponent )
-	{
-		const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
-
-		// TODO this does not work like the old version
-		//*
-		m_spatial->ForEachIn( CSphere( explosionTransform->Position, explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ] ( const CEntity &entity )
-		{
-			auto healthComponent = m_ecs.GetComponent< CHealthComponent >( entity );
-
-			if( healthComponent )
-			{
-				healthComponent->health -= damage;
 			}
 		} );
-		//*/
+		MTR_END( "CBombSystem", "ForEach<CBombComponent>" );
 
-		/* TODO old, needed for timing the execution time after conversion
-		m_ecs.ForEach<CHealthComponent>( [ this, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent->explosionRadius, &damage = explosionComponent->damage ]( const auto &healthEntity, auto healthComponent )
+		const auto end = std::chrono::system_clock::now();
+		const std::chrono::duration<double> diff = end - start;
+		CLogger::Log( "\t\titerating bombs: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
+	}
+
+	{
+		const auto start = std::chrono::system_clock::now();
+		MTR_BEGIN( "CBombSystem", "ForEach<CExplosionComponent>" );
+		m_ecs.ForEach<CExplosionComponent>( [ this, &bombEntitiesForDeletion ] ( const auto &explosionEntity, auto explosionComponent )
 		{
-			const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
+			const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
 
-			if( healthTransform )
+			//* TODO this does not work like the old version
+			m_spatial->ForEachIn( CSphere( explosionTransform->Position, explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const CEntity &entity )
 			{
-				if( glm::length2( explosionPosition - healthTransform->Position ) < std::pow( explosionRadius, 2 ) )
+				auto healthComponent = m_ecs.GetComponent< CHealthComponent >( entity );
+
+				if( healthComponent )
 				{
 					healthComponent->health -= damage;
 				}
-			}
+			} );
+			//*/
+
+			/* TODO old, needed for timing the execution time after conversion
+			m_ecs.ForEach<CHealthComponent>( [ this, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent->explosionRadius, &damage = explosionComponent->damage ]( const auto &healthEntity, auto healthComponent )
+			{
+				const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
+
+				if( healthTransform )
+				{
+					if( glm::length2( explosionPosition - healthTransform->Position ) < std::pow( explosionRadius, 2 ) )
+					{
+						healthComponent->health -= damage;
+					}
+				}
+			} );
+			//*/
+
+			bombEntitiesForDeletion.push_back( explosionEntity );
 		} );
-		//*/
-		
-		bombEntitiesForDeletion.push_back( explosionEntity );
-	} );
+		MTR_END( "CBombSystem", "each CExplosionComponent" );
+
+		const auto end = std::chrono::system_clock::now();
+		const std::chrono::duration<double> diff = end - start;
+		CLogger::Log( "\t\titerating explosions: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
+	}
 	
 	for( const auto &entity : bombEntitiesForDeletion )
 	{
