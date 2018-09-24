@@ -104,9 +104,11 @@ int main()
 
 		// test of a real mainloop
 		CLogger::Log( "START main loop" );
-		std::uint16_t i = 0;
-		while( i < 500 )
+
+		for( std::uint16_t i = 0; i < 500; i++ )
 		{
+			MTR_SCOPE( "main", "Frame" );
+
 			const auto start = std::chrono::system_clock::now();
 
 			ecs.ProcessSystems();
@@ -115,8 +117,6 @@ int main()
 			const std::chrono::duration<double> diff = end - start;
 			CLogger::Log( "delta: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
 			CLogger::Log( "" );
-
-			i++;
 		}
 		CLogger::Log( "END main loop" );
 
