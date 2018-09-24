@@ -129,6 +129,9 @@
     <ClInclude Include="minitrace.h">
       <Filter>minitrace</Filter>
     </ClInclude>
+    <ClInclude Include="CQuadTree.hpp">
+      <Filter>Spatial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
@@ -184,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="minitrace.c">
       <Filter>minitrace</Filter>
+    </ClCompile>
+    <ClCompile Include="CQuadTree.cpp">
+      <Filter>Spatial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

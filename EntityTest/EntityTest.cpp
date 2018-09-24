@@ -5,6 +5,7 @@
 #include "MyECS.hpp"
 
 #include "COcTree.hpp"
+#include "CQuadTree.hpp"
 
 #include "CBombSystem.hpp"
 #include "CHealthSystem.hpp"
@@ -92,7 +93,8 @@ int main()
 
 
 	{
-		auto spatial = std::make_shared< COcTree >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
+		// TODO auto spatial = std::make_shared< COcTree >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
+		auto spatial = std::make_shared< CQuadTree >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
 
 		ecs.CreateSystem< CBombSystem >( spatial );
 		ecs.CreateSystem< CHealthSystem >();
