@@ -141,13 +141,12 @@ public:
 
 	void RemoveAll()
 	{
-		// TODO test this
 		if( nullIndex != m_lastObjectIndex )
 		{
 			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
 			{
 				const auto &entity = m_entities[ i ];
-				m_idMappings[ entity ] = nullIndex;
+				m_idMappings[ entity.Id() ] = nullIndex;
 			}
 
 			m_lastObjectIndex = nullIndex;
