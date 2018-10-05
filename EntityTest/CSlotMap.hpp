@@ -115,6 +115,7 @@ public:
 			{
 				if( m_lastObjectIndex > 0 )
 				{
+					// TODO explain what this line does
 					m_idMappings[ m_entities[ m_lastObjectIndex ].Id() ] = mapping;
 
 					m_entities[ mapping ] = m_entities[ m_lastObjectIndex ];
