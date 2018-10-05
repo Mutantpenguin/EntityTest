@@ -167,6 +167,8 @@ public:
 	template< typename T, typename... Args >
 	void CreateSystem( Args... args )
 	{
+		static_assert( std::is_base_of< CComponentSystem, T >::value, "must derive from CComponentSystem" );
+
 		auto it = m_systemTypes.find( typeid( T ) );
 
 		if( std::end( m_systemTypes ) != it )
@@ -186,6 +188,8 @@ public:
 	template< typename T >
 	void DestroySystem()
 	{
+		static_assert( std::is_base_of< CComponentSystem, T >::value, "must derive from CComponentSystem" );
+
 		auto it = m_systemTypes.find( typeid( T ) );
 
 		if( std::end( m_systemTypes ) != it )
@@ -202,6 +206,8 @@ public:
 	template< typename T >
 	void PauseSystem()
 	{
+		static_assert( std::is_base_of< CComponentSystem, T >::value, "must derive from CComponentSystem" );
+
 		auto it = m_systemTypes.find( typeid( T ) );
 
 		if( std::end( m_systemTypes ) != it )
@@ -217,6 +223,8 @@ public:
 	template< typename T >
 	void UnPauseSystem()
 	{
+		static_assert( std::is_base_of< CComponentSystem, T >::value, "must derive from CComponentSystem" );
+
 		auto it = m_systemTypes.find( typeid( T ) );
 
 		if( std::end( m_systemTypes ) != it )
