@@ -32,7 +32,6 @@ void CSpatialSystem::Process()
 		if( !m_spatial->Add( transformEntity, *transformComponent, boundingBox ) )
 		{
 			entitiesForDeletion.push_back( transformEntity );
-			CLogger::Log( "\t\tentity '" + std::to_string( transformEntity.Id() ) + "' lies outside of this spatial system: " + glm::to_string( transformComponent->Position ) );
 		}
 	} );
 	
