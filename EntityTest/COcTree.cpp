@@ -155,6 +155,9 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 			}
 
 			break;
+		
+		case eIntersectionType::OUTSIDE:
+			break;
 		}
 	}
 }
@@ -238,6 +241,9 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 				}
 			}
 
+			break;
+		
+		case eIntersectionType::OUTSIDE:
 			break;
 		}
 	}

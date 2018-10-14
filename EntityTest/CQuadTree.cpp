@@ -151,6 +151,9 @@ void CQuadTree::ForEachIn( const CSphere &sphere, const std::function< void( con
 			}
 
 			break;
+		
+		case eIntersectionType::OUTSIDE:
+			break;
 		}
 	}
 }
@@ -234,6 +237,9 @@ bool CQuadTree::ExistsIn( const CSphere &sphere, const std::function< bool( cons
 				}
 			}
 
+			break;
+		
+		case eIntersectionType::OUTSIDE:
 			break;
 		}
 	}
