@@ -115,9 +115,10 @@ public:
 			{
 				if( m_lastObjectIndex > 0 )
 				{
-					// TODO explain what this line does
+					// let the entity which lied at the lastObjectIndex point to the one we deleted
 					m_idMappings[ m_entities[ m_lastObjectIndex ].Id() ] = mapping;
 
+					//then copy over the data of the last entity
 					m_entities[ mapping ] = m_entities[ m_lastObjectIndex ];
 					m_objects[ mapping ]  = m_objects[ m_lastObjectIndex ];
 
