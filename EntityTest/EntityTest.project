@@ -17,6 +17,12 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <VirtualDirectory Name="ext">
+      <VirtualDirectory Name="minitrace">
+        <File Name="minitrace.h"/>
+        <File Name="minitrace.c"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
     <VirtualDirectory Name="Primitives">
       <File Name="ClosestPoint.cpp"/>
       <File Name="ClosestPoint.hpp"/>
@@ -32,6 +38,8 @@
       <File Name="CPlane.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Spatial">
+      <File Name="CQuadTree.hpp"/>
+      <File Name="CQuadTree.cpp"/>
       <File Name="CSpatialBase.hpp"/>
       <File Name="COcTree.hpp"/>
       <File Name="COcTree.cpp"/>
@@ -92,6 +100,7 @@
     <Configuration Name="Debug" CompilerType="clang" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-fno-omit-frame-pointer" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
+        <Preprocessor Value="MTR_ENABLED"/>
       </Compiler>
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
