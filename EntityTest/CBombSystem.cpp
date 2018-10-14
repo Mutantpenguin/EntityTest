@@ -24,30 +24,11 @@ void CBombSystem::Process()
 
 			if( bombTransform )
 			{
-				//* TODO this does not work like the old version
 				if( m_spatial->ExistsIn( CSphere( bombTransform->Position, bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
 				{
 					return( m_ecs.HasComponents< CHealthComponent >( entity ) );
 				} ) )
-				//*/
-				/* TODO old, needed for timing the execution time after conversion
-				if( m_ecs.Exists<CHealthComponent>( [ this, &bombPosition = bombTransform->Position, &activationRadius = bombComponent->activationRadius ]( const auto &healthEntity, const auto healthComponent )
 				{
-					const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
-
-					if( healthTransform )
-					{
-						if( glm::length2( bombPosition - healthTransform->Position ) < std::pow( activationRadius, 2 ) )
-						{
-							return( true );
-						}
-					}
-
-					return( false );
-				} ) )
-				//*/
-				{
-					// TODO set proper radius and damage
 					m_ecs.AddComponent( bombEntity, CExplosionComponent( 20.0f, 15.0f ) );
 				}
 			}
@@ -60,7 +41,6 @@ void CBombSystem::Process()
 	{
 		const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
 
-		//* TODO this does not work like the old version
 		m_spatial->ForEachIn( CSphere( explosionTransform->Position, explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const CEntity &entity )
 		{
 			auto healthComponent = m_ecs.GetComponent< CHealthComponent >( entity );
@@ -70,22 +50,6 @@ void CBombSystem::Process()
 				healthComponent->health -= damage;
 			}
 		} );
-		//*/
-
-		/* TODO old, needed for timing the execution time after conversion
-		m_ecs.ForEach<CHealthComponent>( [ this, &explosionPosition = explosionTransform->Position, &explosionRadius = explosionComponent->explosionRadius, &damage = explosionComponent->damage ]( const auto &healthEntity, auto healthComponent )
-		{
-			const auto healthTransform = m_ecs.GetComponent<CTransform>( healthEntity );
-
-			if( healthTransform )
-			{
-				if( glm::length2( explosionPosition - healthTransform->Position ) < std::pow( explosionRadius, 2 ) )
-				{
-					healthComponent->health -= damage;
-				}
-			}
-		} );
-		//*/
 
 		bombEntitiesForDeletion.push_back( explosionEntity );
 	} );
