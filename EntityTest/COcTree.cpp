@@ -57,9 +57,9 @@ void COcTree::Clear()
 
 bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox )
 {
-	if( spatial.Blah.has_value() )
+	if( boundingBox.has_value() )
 	{
-		if( Intersection( m_region, spatial.BoundingBox() ) != eIntersectionType::INSIDE )
+		if( Intersection( m_region, boundingBox.value() ) != eIntersectionType::INSIDE )
 		{
 			return( false );
 		}
@@ -128,7 +128,7 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 		case eIntersectionType::INTERSECT:
 			for( const auto &child : m_children )
 			{
-				const auto spatial = std::get<1>( child );
+				const auto boundingBox = std::get<2>( child );
 
 				if( boundingBox.has_value() )
 				{
@@ -206,7 +206,7 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 		case eIntersectionType::INTERSECT:
 			for( const auto &child : m_children )
 			{
-				const auto spatial = std::get<1>( child );
+				const auto boundingBox = std::get<2>( child );
 
 				if( boundingBox.has_value() )
 				{
