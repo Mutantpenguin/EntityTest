@@ -1,3 +1,4 @@
+/* TODO
 #pragma once
 
 #include <array>
@@ -34,3 +35,4 @@ private:
 
 	static const float sMinSize;
 };
+*/

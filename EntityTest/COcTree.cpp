@@ -55,7 +55,7 @@ void COcTree::Clear()
 	}
 }
 
-bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox )
+bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox )
 {
 	if( boundingBox )
 	{
@@ -66,7 +66,7 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	}
 	else
 	{
-		if( !Contains( m_region, transform.Position ) )
+		if( !Contains( m_region, position ) )
 		{
 			return( false );
 		}
@@ -79,7 +79,7 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 		// try to insert it into the first fitting octant
 		for( auto &octant : *m_octants )
 		{
-			if( octant.Add( entity, transform, boundingBox ) )
+			if( octant.Add( entity, position, boundingBox ) )
 			{
 				return( true );
 			}
@@ -87,7 +87,7 @@ bool COcTree::Add( const CEntity &entity, const CTransform &transform, const CBo
 	}
 
 	// didn't fit into any octant, so put it inside current one
-	m_children.push_back( std::make_tuple( entity, transform, ( nullptr == boundingBox ? nullptr : std::make_unique< CBoundingBox >( *boundingBox ) ) ) );
+	m_children.push_back( std::make_tuple( entity, position, ( nullptr == boundingBox ? nullptr : std::make_unique< CBoundingBox >( *boundingBox ) ) ) );
 	
 	return( true );
 }
@@ -139,7 +139,7 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 				}
 				else
 				{
-					if( Contains( sphere, std::get<1>( child ).Position ) )
+					if( Contains( sphere, std::get<1>( child ) ) )
 					{
 						lambda( std::get<0>( child ) );
 					}
@@ -220,7 +220,7 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 				}
 				else
 				{
-					if( Contains( sphere, std::get<1>( child ).Position ) )
+					if( Contains( sphere, std::get<1>( child ) ) )
 					{
 						if( lambda( std::get<0>( child ) ) )
 						{
