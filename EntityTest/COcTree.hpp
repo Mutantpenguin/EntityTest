@@ -14,7 +14,7 @@ public:
 
 	void Clear() override;
 
-	bool Add( const CEntity &entity, const CTransform &transform, const CBoundingBox * const boundingBox ) override;
+	bool Add( const CEntity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox ) override;
 
 	virtual void ForEachIn( const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda ) override;
 
@@ -30,7 +30,7 @@ private:
 
 	bool m_containsEntities = false;
 
-	std::vector< std::tuple< CEntity, CTransform, std::unique_ptr< CBoundingBox > > > m_children;
+	std::vector< std::tuple< CEntity, glm::vec3, std::unique_ptr< CBoundingBox > > > m_children;
 
 	static const float sMinSize;
 };

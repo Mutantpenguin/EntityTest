@@ -29,7 +29,7 @@ void CSpatialSystem::Process()
 	{
 		auto const boundingBox = m_ecs.GetComponent< CBoundingBox >( transformEntity );
 
-		if( !m_spatial->Add( transformEntity, *transformComponent, boundingBox ) )
+		if( !m_spatial->Add( transformEntity, (*transformComponent).Position, boundingBox ) )
 		{
 			entitiesForDeletion.push_back( transformEntity );
 		}

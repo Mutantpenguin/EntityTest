@@ -1,3 +1,4 @@
+/* TODO
 #include "CQuadTree.hpp"
 
 #include "CLogger.hpp"
@@ -246,3 +247,4 @@ bool CQuadTree::ExistsIn( const CSphere &sphere, const std::function< bool( cons
 
 	return( false );
 }
+*/
