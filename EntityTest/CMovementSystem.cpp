@@ -10,10 +10,10 @@ void CMovementSystem::Process()
 	
 	m_ecs.ForEach<CMovementComponent>( [ this ] ( const auto &entity, auto movementComponent )
 	{
-		auto transformComponent = m_ecs.GetComponent<CTransform>( entity );
-		if( transformComponent )
+		auto spatialComponent = m_ecs.GetComponent<CSpatial>( entity );
+		if( spatialComponent )
 		{
-			transformComponent->Position += movementComponent->Direction;
+			spatialComponent->Position += movementComponent->Direction;
 		}
 	} );
 }

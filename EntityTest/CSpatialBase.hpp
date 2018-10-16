@@ -4,11 +4,12 @@
 
 #include "CSphere.hpp"
 
-#include "CTransform.hpp"
+#include "CSpatial.hpp"
 #include "CBoundingBox.hpp"
 
 #include "CEntity.hpp"
 
+// TODO rename, conflicts with naming of CSpatial
 class CSpatialBase
 {
 public:

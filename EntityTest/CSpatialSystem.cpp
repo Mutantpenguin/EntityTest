@@ -25,7 +25,7 @@ void CSpatialSystem::Process()
 	
 	std::vector< CEntity > entitiesForDeletion;
 
-	m_ecs.ForEach<CTransform>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto transformComponent )
+	m_ecs.ForEach<CSpatial>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto spatialComponent )
 	{
 		auto const boundingBox = m_ecs.GetComponent< CBoundingBox >( transformEntity );
 

@@ -90,9 +90,6 @@
     <ClInclude Include="COcTree.hpp">
       <Filter>Spatial</Filter>
     </ClInclude>
-    <ClInclude Include="CTransform.hpp">
-      <Filter>Spatial</Filter>
-    </ClInclude>
     <ClInclude Include="TupleIterator.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
@@ -101,9 +98,6 @@
     </ClInclude>
     <ClInclude Include="CComponentSystem.hpp">
       <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="CBoundingBoxSystem.hpp">
-      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="CSpatialBase.hpp">
       <Filter>Spatial</Filter>
@@ -130,6 +124,9 @@
       <Filter>minitrace</Filter>
     </ClInclude>
     <ClInclude Include="CQuadTree.hpp">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpatial.hpp">
       <Filter>Spatial</Filter>
     </ClInclude>
   </ItemGroup>
@@ -161,12 +158,6 @@
     <ClCompile Include="COcTree.cpp">
       <Filter>Spatial</Filter>
     </ClCompile>
-    <ClCompile Include="CTransform.cpp">
-      <Filter>Spatial</Filter>
-    </ClCompile>
-    <ClCompile Include="CBoundingBoxSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="CSpatialSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
@@ -189,6 +180,9 @@
       <Filter>minitrace</Filter>
     </ClCompile>
     <ClCompile Include="CQuadTree.cpp">
+      <Filter>Spatial</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpatial.cpp">
       <Filter>Spatial</Filter>
     </ClCompile>
   </ItemGroup>

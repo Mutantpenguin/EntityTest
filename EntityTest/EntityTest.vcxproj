@@ -158,7 +158,6 @@
     <ClInclude Include="CBombComponent.hpp" />
     <ClInclude Include="CBombSystem.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
-    <ClInclude Include="CBoundingBoxSystem.hpp" />
     <ClInclude Include="ClosestPoint.hpp" />
     <ClInclude Include="Contains.hpp" />
     <ClInclude Include="CQuadTree.hpp" />
@@ -180,7 +179,7 @@
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="CDebugNameComponent.hpp" />
-    <ClInclude Include="CTransform.hpp" />
+    <ClInclude Include="CSpatial.hpp" />
     <ClInclude Include="CWorld.hpp" />
     <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="minitrace.h" />
@@ -192,7 +191,6 @@
   <ItemGroup>
     <ClCompile Include="CBombSystem.cpp" />
     <ClCompile Include="CBoundingBox.cpp" />
-    <ClCompile Include="CBoundingBoxSystem.cpp" />
     <ClCompile Include="ClosestPoint.cpp" />
     <ClCompile Include="Contains.cpp" />
     <ClCompile Include="CQuadTree.cpp" />
@@ -206,7 +204,7 @@
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="CEntity.hpp" />
     <ClCompile Include="EntityTest.cpp" />
-    <ClCompile Include="CTransform.cpp" />
+    <ClCompile Include="CSpatial.cpp" />
     <ClCompile Include="Intersection.cpp" />
     <ClCompile Include="minitrace.c" />
   </ItemGroup>

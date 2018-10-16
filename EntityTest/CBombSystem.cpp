@@ -20,7 +20,7 @@ void CBombSystem::Process()
 	{
 		if( !m_ecs.HasComponents<CExplosionComponent>( bombEntity ) )
 		{
-			const auto bombTransform = m_ecs.GetComponent<CTransform>( bombEntity );
+			const auto bombTransform = m_ecs.GetComponent<CSpatial>( bombEntity );
 
 			if( bombTransform )
 			{
@@ -39,7 +39,7 @@ void CBombSystem::Process()
 	MTR_BEGIN( "CBombSystem", "ForEach<CExplosionComponent>" );
 	m_ecs.ForEach<CExplosionComponent>( [ this, &bombEntitiesForDeletion ] ( const auto &explosionEntity, auto explosionComponent )
 	{
-		const auto explosionTransform = m_ecs.GetComponent<CTransform>( explosionEntity );
+		const auto explosionTransform = m_ecs.GetComponent<CSpatial>( explosionEntity );
 
 		m_spatial->ForEachIn( CSphere( explosionTransform->Position, explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const CEntity &entity )
 		{

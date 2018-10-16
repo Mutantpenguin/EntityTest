@@ -5,12 +5,10 @@
 #include "MyECS.hpp"
 
 #include "COcTree.hpp"
-#include "CQuadTree.hpp"
 
 #include "CBombSystem.hpp"
 #include "CHealthSystem.hpp"
 #include "CMovementSystem.hpp"
-#include "CBoundingBoxSystem.hpp"
 #include "CSpatialSystem.hpp"
 
 #include "minitrace.h"
@@ -40,16 +38,15 @@ int main()
 			{
 				ecs.AddComponent( entity, CPhysicsComponent( 10.0f ) );
 
-				CTransform transform;
+				CSpatial transform;
 				transform.Position = { rand() % 100, rand() % 100, rand() % 100 };
-				ecs.AddComponent( entity, transform );
 
 				if( rand() % 10 > 4 )
 				{
-					CBoundingBox boundingBox( { -2.0f, -2.0f, -2.0f }, { 2.0f, 2.0f, 2.0f } );
-					boundingBox.MoveTo( transform.Position );
-					ecs.AddComponent( entity, boundingBox );
+					transform.Size = { 2.0f, 2.0f, 2.0f };
 				}
+
+				ecs.AddComponent( entity, transform );
 			}
 
 			if( rand() % 10 > 4 )
@@ -98,7 +95,6 @@ int main()
 		ecs.CreateSystem< CBombSystem >( spatial );
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
-		ecs.CreateSystem< CBoundingBoxSystem >();
 		ecs.CreateSystem< CSpatialSystem >( spatial );
 
 		CLogger::Log( "" );
@@ -123,7 +119,6 @@ int main()
 
 		ecs.DestroySystem< CBombSystem >();
 		ecs.DestroySystem< CHealthSystem >();
-		ecs.DestroySystem< CBoundingBoxSystem >();
 		ecs.DestroySystem< CMovementSystem >();
 		ecs.DestroySystem< CSpatialSystem >();
 	}
