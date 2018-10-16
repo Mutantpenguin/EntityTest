@@ -57,7 +57,7 @@ void COcTree::Clear()
 
 bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox )
 {
-	if( spatial.Size != glm::vec3( 0.0f ) )
+	if( spatial.Blah.has_value() )
 	{
 		if( Intersection( m_region, spatial.BoundingBox() ) != eIntersectionType::INSIDE )
 		{

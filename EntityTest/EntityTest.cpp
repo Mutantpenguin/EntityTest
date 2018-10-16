@@ -43,7 +43,7 @@ int main()
 
 				if( rand() % 10 > 4 )
 				{
-					transform.Size = { 2.0f, 2.0f, 2.0f };
+					transform.Blah = { 2.0f, 2.0f, 2.0f };
 				}
 
 				ecs.AddComponent( entity, transform );

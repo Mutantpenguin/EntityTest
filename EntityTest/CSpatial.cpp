@@ -14,7 +14,7 @@ void CSpatial::Rotate( const float pitchAngle, const float yawAngle, const float
 
 CBoundingBox CSpatial::BoundingBox() const
 {
-	return( CBoundingBox( Position - Size, Position + Size ) );
+	return( CBoundingBox( Position - Blah.value(), Position + Blah.value() ) );
 }
 
 const glm::mat4 CSpatial::ViewMatrix( void ) const
