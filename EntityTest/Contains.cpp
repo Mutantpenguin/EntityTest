@@ -4,21 +4,24 @@
 
 #include "minitrace.h"
 
-bool Contains( const CBoundingBox &box, const glm::vec3 &position )
+bool Contains( const glm::vec3 &position, const CBoundingBox &box, const glm::vec3 &point )
 {
-	MTR_SCOPE( "Contains", "Contains box <-> position" );
+	MTR_SCOPE( "Contains", "Contains box <-> point" );
 
-	if( ( box.Max().x < position.x )
+	const glm::vec3 max = box.Max( position );
+	const glm::vec3 min = box.Min( position );
+
+	if( ( max.x < point.x )
 		||
-		( box.Min().x > position.x )
+		( min.x > point.x )
 		||
-		( box.Max().y < position.y )
+		( max.y < point.y )
 		||
-		( box.Min().y > position.y )
+		( min.y > point.y )
 		||
-		( box.Max().z < position.z )
+		( max.z < point.z )
 		||
-		( box.Min().z > position.z ) )
+		( min.z > point.z ) )
 	{
 		return( false );
 	}
@@ -26,11 +29,11 @@ bool Contains( const CBoundingBox &box, const glm::vec3 &position )
 	return( true );
 }
 
-bool Contains( const CSphere &sphere, const glm::vec3 &position )
+bool Contains( const CSphere &sphere, const glm::vec3 &point )
 {
-	MTR_SCOPE( "Contains", "Contains sphere <-> position" );
+	MTR_SCOPE( "Contains", "Contains sphere <-> point" );
 
-	if( glm::length2( sphere.Position() - position ) <= std::pow( sphere.Radius(), 2 ) )
+	if( glm::length2( sphere.Position() - point ) <= std::pow( sphere.Radius(), 2 ) )
 	{
 		return( true );
 	}

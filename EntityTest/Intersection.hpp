@@ -8,10 +8,10 @@ enum class eIntersectionType : std::uint8_t
 	OUTSIDE
 };
 
-eIntersectionType Intersection( const CBoundingBox &a, const CBoundingBox &b );
+eIntersectionType Intersection( const glm::vec3 &positionA, const CBoundingBox &boxA, const glm::vec3 &positionB, const CBoundingBox &boxB );
 
-eIntersectionType Intersection( const CBoundingBox &box, const CSphere &sphere );
+eIntersectionType Intersection( const glm::vec3 &positionBox, const CBoundingBox &box, const CSphere &sphere );
 
 eIntersectionType Intersection( const CSphere &a, const CSphere &b );
 
-eIntersectionType Intersection( const CSphere &sphere, const CBoundingBox &box );
+eIntersectionType Intersection( const CSphere &sphere, const glm::vec3 &positionBox, const CBoundingBox &box );

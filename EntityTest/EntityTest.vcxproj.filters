@@ -108,12 +108,6 @@
     <ClInclude Include="CSphere.hpp">
       <Filter>Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="CBoundingBox.hpp">
-      <Filter>Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="ClosestPoint.hpp">
-      <Filter>Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="Contains.hpp">
       <Filter>Primitives</Filter>
     </ClInclude>
@@ -128,6 +122,12 @@
     </ClInclude>
     <ClInclude Include="CSpatial.hpp">
       <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="ClosestPoint.hpp">
+      <Filter>Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoundingBox.hpp">
+      <Filter>Primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -164,12 +164,6 @@
     <ClCompile Include="CSphere.cpp">
       <Filter>Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="CBoundingBox.cpp">
-      <Filter>Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="ClosestPoint.cpp">
-      <Filter>Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="Contains.cpp">
       <Filter>Primitives</Filter>
     </ClCompile>
@@ -184,6 +178,12 @@
     </ClCompile>
     <ClCompile Include="CSpatial.cpp">
       <Filter>Spatial</Filter>
+    </ClCompile>
+    <ClCompile Include="ClosestPoint.cpp">
+      <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoundingBox.cpp">
+      <Filter>Primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

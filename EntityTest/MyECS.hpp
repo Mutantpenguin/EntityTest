@@ -12,6 +12,8 @@
 #include "CExplosionComponent.hpp"
 #include "CHealthComponent.hpp"
 
+#include "CBoundingBox.hpp"
+
 #include "CSpatial.hpp"
 
 using MyECS = CEntityComponentSystem<	10000,
@@ -20,6 +22,7 @@ using MyECS = CEntityComponentSystem<	10000,
 										CDebugNameComponent,
 										CSpatial,
 										CBombComponent,
+										CBoundingBox,
 										CExplosionComponent,
 										CHealthComponent,
 										CMovementComponent >;

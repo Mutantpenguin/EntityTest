@@ -9,7 +9,8 @@
 
 const float COcTree::sMinSize = 50.0f;
 
-COcTree::COcTree( const CBoundingBox &region ) :
+COcTree::COcTree( const glm::vec3 &position, const CBoundingBox &region ) :
+	m_position { position },
 	m_region { region }
 {
 	m_children.reserve( 1000 );
@@ -20,19 +21,18 @@ COcTree::COcTree( const CBoundingBox &region ) :
 	// don't create octants if we are already at the minimal size
 	if( !( ( dimensions.x <= sMinSize ) && ( dimensions.y <= sMinSize ) && ( dimensions.z <= sMinSize ) ) )
 	{
-		const auto &min = m_region.Min();
-		const auto &max = m_region.Max();
-		const auto center = m_region.Center();
+		const auto childsize = m_region.Size() / 2.0f;
 
 		m_octants = std::make_unique< std::array< COcTree, 8 > >( std::array< COcTree, 8 >{
-				COcTree( CBoundingBox( {    min.x,    min.y,    min.z }, { center.x, center.y, center.z } ) ), //  left, lower, front
-				COcTree( CBoundingBox( { center.x,    min.y,    min.z }, {    max.x, center.y, center.z } ) ), // right, lower, front
-				COcTree( CBoundingBox( {    min.x,    min.y, center.z }, { center.x, center.y,    max.z } ) ), //  left, lower, back
-				COcTree( CBoundingBox( { center.x,    min.y, center.z }, {    max.x, center.y,    max.z } ) ), // right, lower, back
-				COcTree( CBoundingBox( {    min.x, center.y,    min.z }, { center.x,    max.y, center.z } ) ), //  left, upper, front
-				COcTree( CBoundingBox( { center.x, center.y,    min.z }, {    max.x,    max.y, center.z } ) ), // right, upper, front
-				COcTree( CBoundingBox( {    min.x, center.y, center.z }, { center.x,    max.y,    max.z } ) ), //  left, upper, back
-				COcTree( CBoundingBox( { center.x, center.y, center.z }, {    max.x,    max.y,    max.z } ) )  // right, upper, back
+			// totally wrong but compiles	
+				COcTree( position + glm::vec3( -childsize.x, -childsize.y, -childsize.z ), CBoundingBox( childsize ) ), //  left, lower, front
+				COcTree( position + glm::vec3(  childsize.x, -childsize.y, -childsize.z ), CBoundingBox( childsize ) ), // right, lower, front
+				COcTree( position + glm::vec3( -childsize.x, -childsize.y,  childsize.z ), CBoundingBox( childsize ) ), //  left, lower, back
+				COcTree( position + glm::vec3(  childsize.x, -childsize.y,  childsize.z ), CBoundingBox( childsize ) ), // right, lower, back
+				COcTree( position + glm::vec3( -childsize.x,  childsize.y, -childsize.z ), CBoundingBox( childsize ) ), //  left, upper, front
+				COcTree( position + glm::vec3(  childsize.x,  childsize.y, -childsize.z ), CBoundingBox( childsize ) ), // right, upper, front
+				COcTree( position + glm::vec3( -childsize.x,  childsize.y,  childsize.z ), CBoundingBox( childsize ) ), //  left, upper, back
+				COcTree( position + glm::vec3(  childsize.x,  childsize.y,  childsize.z ), CBoundingBox( childsize ) )  // right, upper, back
 			} );
 	}
 }
@@ -57,16 +57,16 @@ void COcTree::Clear()
 
 bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox )
 {
-	if( boundingBox.has_value() )
+	if( boundingBox )
 	{
-		if( Intersection( m_region, boundingBox.value() ) != eIntersectionType::INSIDE )
+		if( Intersection( m_position, m_region, position, *boundingBox ) != eIntersectionType::INSIDE )
 		{
 			return( false );
 		}
 	}
 	else
 	{
-		if( !Contains( m_region, position ) )
+		if( !Contains( m_position, m_region, position ) )
 		{
 			return( false );
 		}
@@ -119,7 +119,7 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 
 	if( m_containsEntities )
 	{
-		switch( Intersection( sphere, m_region ) )
+		switch( Intersection( sphere, m_position, m_region ) )
 		{
 		case eIntersectionType::INSIDE:
 			ForEach( lambda );
@@ -128,18 +128,19 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 		case eIntersectionType::INTERSECT:
 			for( const auto &child : m_children )
 			{
-				const auto boundingBox = std::get<2>( child );
+				const auto &position = std::get<1>( child );
+				const auto &boundingBox = std::get<2>( child );
 
-				if( boundingBox.has_value() )
+				if( boundingBox )
 				{
-					if( Intersection( sphere, boundingBox.value() ) != eIntersectionType::OUTSIDE )
+					if( Intersection( sphere, position, *boundingBox ) != eIntersectionType::OUTSIDE )
 					{
 						lambda( std::get<0>( child ) );
 					}
 				}
 				else
 				{
-					if( Contains( sphere, std::get<1>( child ) ) )
+					if( Contains( sphere, position ) )
 					{
 						lambda( std::get<0>( child ) );
 					}
@@ -197,7 +198,7 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 
 	if( m_containsEntities )
 	{
-		switch( Intersection( sphere, m_region ) )
+		switch( Intersection( sphere, m_position, m_region ) )
 		{
 		case eIntersectionType::INSIDE:
 			return( Exists( lambda ) );
@@ -206,11 +207,12 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 		case eIntersectionType::INTERSECT:
 			for( const auto &child : m_children )
 			{
-				const auto boundingBox = std::get<2>( child );
+				const auto &position = std::get<1>( child );
+				const auto &boundingBox = std::get<2>( child );
 
-				if( boundingBox.has_value() )
+				if( boundingBox )
 				{
-					if( Intersection( sphere, boundingBox.value() ) != eIntersectionType::OUTSIDE )
+					if( Intersection( sphere, position, *boundingBox ) != eIntersectionType::OUTSIDE )
 					{
 						if( lambda( std::get<0>( child ) ) )
 						{
@@ -220,7 +222,7 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 				}
 				else
 				{
-					if( Contains( sphere, std::get<1>( child ) ) )
+					if( Contains( sphere, position ) )
 					{
 						if( lambda( std::get<0>( child ) ) )
 						{

@@ -10,17 +10,15 @@ public:
 	
 	CBoundingBox( const CBoundingBox &box );
 
-	CBoundingBox( const glm::vec3 &min, const glm::vec3 &max );
+	CBoundingBox( const glm::vec3 &size );
 
-	glm::vec3 Center() const;
+	const glm::vec3 &Size() const;
+
 	glm::vec3 Dimensions() const;
 
-	void MoveTo( const glm::vec3 &position );
-
-	const glm::vec3 &Min() const;
-	const glm::vec3 &Max() const;
+	glm::vec3 Min( const glm::vec3 &position ) const;
+	glm::vec3 Max( const glm::vec3 &position ) const;
 
 private:
-	glm::vec3 m_min;
-	glm::vec3 m_max;
+	glm::vec3 m_size;
 };

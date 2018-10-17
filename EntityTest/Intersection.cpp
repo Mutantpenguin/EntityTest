@@ -7,37 +7,42 @@
 
 #include "minitrace.h"
 
-eIntersectionType Intersection( const CBoundingBox &a, const CBoundingBox &b )
+eIntersectionType Intersection( const glm::vec3 &positionA, const CBoundingBox &boxA, const glm::vec3 &positionB, const CBoundingBox &boxB )
 {
 	MTR_SCOPE( "Intersection", "Intersection box <-> box" );
 
+	const glm::vec3 maxA = boxA.Max( positionA );
+	const glm::vec3 minA = boxA.Min( positionA );
 
-	if( ( a.Max().x < b.Min().x )
+	const glm::vec3 maxB = boxB.Max( positionB );
+	const glm::vec3 minB = boxB.Min( positionB );
+
+	if( ( maxA.x < minB.x )
 		||
-		( a.Min().x > b.Max().x )
+		( minA.x > maxB.x )
 		||
-		( a.Max().y < b.Min().y )
+		( maxA.y < minB.y )
 		||
-		( a.Min().y > b.Max().y )
+		( minA.y > maxB.y )
 		||
-		( a.Max().z < b.Min().z )
+		( maxA.z < minB.z )
 		||
-		( a.Min().z > b.Max().z ) )
+		( minA.z > maxB.z ) )
 	{
 		return( eIntersectionType::OUTSIDE );
 	}
 
-	if( ( a.Min().x <= b.Min().x )
+	if( ( minA.x <= minB.x )
 		&&
-		( a.Max().x >= b.Max().x )
+		( maxA.x >= maxB.x )
 		&&
-		( a.Min().y <= b.Min().y )
+		( minA.y <= minB.y )
 		&&
-		( a.Max().y >= b.Max().y )
+		( maxA.y >= maxB.y )
 		&&
-		( a.Min().z <= b.Min().z )
+		( minA.z <= minB.z )
 		&&
-		( a.Max().z >= b.Max().z ) )
+		( maxA.z >= maxB.z ) )
 	{
 		return( eIntersectionType::INSIDE );
 	}
@@ -45,15 +50,15 @@ eIntersectionType Intersection( const CBoundingBox &a, const CBoundingBox &b )
 	return( eIntersectionType::INTERSECT );
 }
 
-eIntersectionType Intersection( const CBoundingBox &box, const CSphere &sphere )
+eIntersectionType Intersection( const glm::vec3 &positionBox, const CBoundingBox &box, const CSphere &sphere )
 {
 	MTR_SCOPE( "Intersection", "Intersection box <-> sphere" );
 
-	if( std::pow( sphere.Radius(), 2 ) >= glm::length2( sphere.Position() - ClosestPoint( box, sphere.Position() ) ) )
+	if( std::pow( sphere.Radius(), 2 ) >= glm::length2( sphere.Position() - ClosestPoint( positionBox, box, sphere.Position() ) ) )
 	{
-		if( Contains( sphere, box.Min() )
+		if( Contains( sphere, box.Min( positionBox ) )
 			&&
-			Contains( sphere, box.Max() ) )
+			Contains( sphere, box.Max( positionBox ) ) )
 		{
 			return( eIntersectionType::INSIDE );
 		}
@@ -88,17 +93,17 @@ eIntersectionType Intersection( const CSphere &a, const CSphere &b )
 	return( eIntersectionType::OUTSIDE );
 }
 
-eIntersectionType Intersection( const CSphere &sphere, const CBoundingBox &box )
+eIntersectionType Intersection( const CSphere &sphere, const glm::vec3 &positionBox, const CBoundingBox &box )
 {
 	MTR_SCOPE( "Intersection", "Intersection sphere <-> box" );
 
 	const auto radiusSquared = std::pow( sphere.Radius(), 2 );
 	
-	if( radiusSquared >= glm::length2( sphere.Position() - ClosestPoint( box, sphere.Position() ) ) )
+	if( radiusSquared >= glm::length2( sphere.Position() - ClosestPoint( positionBox, box, sphere.Position() ) ) )
 	{
-		if( ( radiusSquared >= glm::length2( sphere.Position() - box.Min() ) )
+		if( ( radiusSquared >= glm::length2( sphere.Position() - box.Min( positionBox ) ) )
 			&&
-			( radiusSquared >= glm::length2( sphere.Position() - box.Max() ) ) )
+			( radiusSquared >= glm::length2( sphere.Position() - box.Max( positionBox ) ) ) )
 		{
 			return( eIntersectionType::INSIDE );
 		}

@@ -40,13 +40,12 @@ int main()
 
 				CSpatial transform;
 				transform.Position = { rand() % 100, rand() % 100, rand() % 100 };
+				ecs.AddComponent( entity, transform );
 
 				if( rand() % 10 > 4 )
 				{
-					transform.Size = { 2.0f, 2.0f, 2.0f };
+					ecs.AddComponent( entity, CBoundingBox( { 2.0f, 2.0f, 2.0f } ) );
 				}
-
-				ecs.AddComponent( entity, transform );
 			}
 
 			if( rand() % 10 > 4 )
@@ -90,7 +89,7 @@ int main()
 
 
 	{
-		auto spatial = std::make_shared< COcTree >( CBoundingBox( { -110.0f, -110.0f, -110.0f }, { 110.0f, 110.0f, 110.0f } ) );
+		auto spatial = std::make_shared< COcTree >( glm::vec3( 0.0f, 0.0f, 0.0f ), CBoundingBox( { 110.0f, 110.0f, 110.0f } ) );
 
 		ecs.CreateSystem< CBombSystem >( spatial );
 		ecs.CreateSystem< CHealthSystem >();

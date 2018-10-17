@@ -12,10 +12,12 @@ void CSpatial::Rotate( const float pitchAngle, const float yawAngle, const float
 	Orientation = glm::angleAxis( glm::radians( rollAngle ), CWorld::Z ) * Orientation;
 }
 
+/* TODO
 CBoundingBox CSpatial::BoundingBox() const
 {
 	return( CBoundingBox( Position - Size.value(), Position + Size.value() ) );
 }
+*/
 
 const glm::mat4 CSpatial::ViewMatrix( void ) const
 {

@@ -11,7 +11,7 @@
 class COcTree final : public CSpatialBase
 {
 public:
-	COcTree( const CBoundingBox &region );
+	COcTree( const glm::vec3 &position, const CBoundingBox &region );
 
 	void Clear() override;
 
@@ -25,7 +25,8 @@ private:
 	void ForEach( const std::function< void( const CEntity &entity ) > lambda );
 	bool Exists( const std::function< bool( const CEntity &entity ) > lambda ) const;
 	
-	const CBoundingBox m_region;
+	const glm::vec3			m_position;
+	const CBoundingBox	m_region;
 
 	std::unique_ptr< std::array< COcTree, 8 > > m_octants;
 

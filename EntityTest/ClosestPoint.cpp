@@ -1,46 +1,49 @@
 #include "ClosestPoint.hpp"
 
-glm::vec3 ClosestPoint( const CBoundingBox &box, const glm::vec3 &position )
+glm::vec3 ClosestPoint( const glm::vec3 &position, const CBoundingBox &box, const glm::vec3 &point )
 {
+	const glm::vec3 max = box.Max( position );
+	const glm::vec3 min = box.Min( position );
+
 	glm::vec3 result;
 
-	if( position.x > box.Max().x )
+	if( point.x > max.x )
 	{
-		result.x = box.Max().x;
+		result.x = max.x;
 	}
-	else if( position.x < box.Min().x )
+	else if( point.x < min.x )
 	{
-		result.x = box.Min().x;
+		result.x = min.x;
 	}
 	else
 	{
-		result.x = position.x;
+		result.x = point.x;
 	}
 
-	if( position.y > box.Max().y )
+	if( point.y > max.y )
 	{
-		result.y = box.Max().y;
+		result.y = max.y;
 	}
-	else if( position.y < box.Min().y )
+	else if( point.y < min.y )
 	{
-		result.y = box.Min().y;
+		result.y = min.y;
 	}
 	else
 	{
-		result.y = position.y;
+		result.y = point.y;
 	}
 
-	if( position.z > box.Max().z )
+	if( point.z > max.z )
 	{
-		result.z = box.Max().z;
+		result.z = max.z;
 	}
-	else if( position.z < box.Min().z )
+	else if( point.z < min.z )
 	{
-		result.z = box.Min().z;
+		result.z = min.z;
 	}
 	else
 	{
-		result.z = position.z;
+		result.z = point.z;
 	}
 
 	return( result );
