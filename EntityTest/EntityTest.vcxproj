@@ -160,7 +160,6 @@
     <ClInclude Include="CBoundingBox.hpp" />
     <ClInclude Include="ClosestPoint.hpp" />
     <ClInclude Include="Contains.hpp" />
-    <ClInclude Include="CQuadTree.hpp" />
     <ClInclude Include="CBVHBase.hpp" />
     <ClInclude Include="CBVHSystem.hpp" />
     <ClInclude Include="CComponentSystem.hpp" />
@@ -194,7 +193,6 @@
     <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="ClosestPoint.cpp" />
     <ClCompile Include="Contains.cpp" />
-    <ClCompile Include="CQuadTree.cpp" />
     <ClCompile Include="CBVHSystem.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="CHealthSystem.cpp" />
