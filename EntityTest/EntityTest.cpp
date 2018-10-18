@@ -9,7 +9,7 @@
 #include "CBombSystem.hpp"
 #include "CHealthSystem.hpp"
 #include "CMovementSystem.hpp"
-#include "CSpatialSystem.hpp"
+#include "CBVHSystem.hpp"
 
 #include "minitrace.h"
 
@@ -38,13 +38,13 @@ int main()
 			{
 				ecs.AddComponent( entity, CPhysicsComponent( 10.0f ) );
 
-				CSpatial transform;
+				CTransformComponent transform;
 				transform.Position = { rand() % 100, rand() % 100, rand() % 100 };
 				ecs.AddComponent( entity, transform );
 
 				if( rand() % 10 > 4 )
 				{
-					ecs.AddComponent( entity, CBoundingBox( { 2.0f, 2.0f, 2.0f } ) );
+					ecs.AddComponent( entity, CBoundingBoxComponent( { 2.0f, 2.0f, 2.0f } ) );
 				}
 			}
 
@@ -94,7 +94,7 @@ int main()
 		ecs.CreateSystem< CBombSystem >( spatial );
 		ecs.CreateSystem< CHealthSystem >();
 		ecs.CreateSystem< CMovementSystem >();
-		ecs.CreateSystem< CSpatialSystem >( spatial );
+		ecs.CreateSystem< CBVHSystem >( spatial );
 
 		CLogger::Log( "" );
 
@@ -119,7 +119,7 @@ int main()
 		ecs.DestroySystem< CBombSystem >();
 		ecs.DestroySystem< CHealthSystem >();
 		ecs.DestroySystem< CMovementSystem >();
-		ecs.DestroySystem< CSpatialSystem >();
+		ecs.DestroySystem< CBVHSystem >();
 	}
 
 	mtr_flush();

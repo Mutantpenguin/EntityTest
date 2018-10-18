@@ -161,8 +161,8 @@
     <ClInclude Include="ClosestPoint.hpp" />
     <ClInclude Include="Contains.hpp" />
     <ClInclude Include="CQuadTree.hpp" />
-    <ClInclude Include="CSpatialBase.hpp" />
-    <ClInclude Include="CSpatialSystem.hpp" />
+    <ClInclude Include="CBVHBase.hpp" />
+    <ClInclude Include="CBVHSystem.hpp" />
     <ClInclude Include="CComponentSystem.hpp" />
     <ClInclude Include="CExplosionComponent.hpp" />
     <ClInclude Include="CHealthSystem.hpp" />
@@ -179,8 +179,9 @@
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="CDebugNameComponent.hpp" />
-    <ClInclude Include="CSpatial.hpp" />
+    <ClInclude Include="CTransformComponent.hpp" />
     <ClInclude Include="CWorld.hpp" />
+    <ClInclude Include="CBoundingBoxComponent.hpp" />
     <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="minitrace.h" />
     <ClInclude Include="MyECS.hpp" />
@@ -194,7 +195,7 @@
     <ClCompile Include="ClosestPoint.cpp" />
     <ClCompile Include="Contains.cpp" />
     <ClCompile Include="CQuadTree.cpp" />
-    <ClCompile Include="CSpatialSystem.cpp" />
+    <ClCompile Include="CBVHSystem.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="CHealthSystem.cpp" />
     <ClCompile Include="CMovementSystem.cpp" />
@@ -204,7 +205,7 @@
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="CEntity.hpp" />
     <ClCompile Include="EntityTest.cpp" />
-    <ClCompile Include="CSpatial.cpp" />
+    <ClCompile Include="CTransformComponent.cpp" />
     <ClCompile Include="Intersection.cpp" />
     <ClCompile Include="minitrace.c" />
   </ItemGroup>

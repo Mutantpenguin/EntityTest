@@ -99,12 +99,6 @@
     <ClInclude Include="CComponentSystem.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="CSpatialBase.hpp">
-      <Filter>Spatial</Filter>
-    </ClInclude>
-    <ClInclude Include="CSpatialSystem.hpp">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="CSphere.hpp">
       <Filter>Primitives</Filter>
     </ClInclude>
@@ -120,14 +114,23 @@
     <ClInclude Include="CQuadTree.hpp">
       <Filter>Spatial</Filter>
     </ClInclude>
-    <ClInclude Include="CSpatial.hpp">
-      <Filter>Spatial</Filter>
-    </ClInclude>
     <ClInclude Include="ClosestPoint.hpp">
       <Filter>Primitives</Filter>
     </ClInclude>
     <ClInclude Include="CBoundingBox.hpp">
       <Filter>Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoundingBoxComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CBVHBase.hpp">
+      <Filter>Spatial</Filter>
+    </ClInclude>
+    <ClInclude Include="CBVHSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransformComponent.hpp">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +161,6 @@
     <ClCompile Include="COcTree.cpp">
       <Filter>Spatial</Filter>
     </ClCompile>
-    <ClCompile Include="CSpatialSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="CSphere.cpp">
       <Filter>Primitives</Filter>
     </ClCompile>
@@ -176,14 +176,17 @@
     <ClCompile Include="CQuadTree.cpp">
       <Filter>Spatial</Filter>
     </ClCompile>
-    <ClCompile Include="CSpatial.cpp">
-      <Filter>Spatial</Filter>
-    </ClCompile>
     <ClCompile Include="ClosestPoint.cpp">
       <Filter>Primitives</Filter>
     </ClCompile>
     <ClCompile Include="CBoundingBox.cpp">
       <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="CBVHSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransformComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

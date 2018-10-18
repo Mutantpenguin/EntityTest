@@ -52,7 +52,7 @@ void CQuadTree::Clear()
 	}
 }
 
-bool CQuadTree::Add( const CEntity &entity, const CSpatial &transform, const CBoundingBox * const boundingBox )
+bool CQuadTree::Add( const CEntity &entity, const CTransformComponent &transform, const CBoundingBox * const boundingBox )
 {
 	if( boundingBox )
 	{

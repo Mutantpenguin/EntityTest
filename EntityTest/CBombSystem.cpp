@@ -20,11 +20,9 @@ void CBombSystem::Process()
 	{
 		if( !m_ecs.HasComponents<CExplosionComponent>( bombEntity ) )
 		{
-			const auto bombTransform = m_ecs.GetComponent<CSpatial>( bombEntity );
-
-			if( bombTransform )
+			if( const auto bombTransform = m_ecs.GetComponent<CTransformComponent>( bombEntity ) )
 			{
-				if( m_spatial->ExistsIn( bombTransform->Position, CSphere( bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
+				if( m_bvh->ExistsIn( bombTransform->Position, CSphere( bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
 				{
 					return( m_ecs.HasComponents< CHealthComponent >( entity ) );
 				} ) )
@@ -39,13 +37,11 @@ void CBombSystem::Process()
 	MTR_BEGIN( "CBombSystem", "ForEach<CExplosionComponent>" );
 	m_ecs.ForEach<CExplosionComponent>( [ this, &bombEntitiesForDeletion ] ( const auto &explosionEntity, auto explosionComponent )
 	{
-		const auto explosionTransform = m_ecs.GetComponent<CSpatial>( explosionEntity );
+		const auto explosionTransform = m_ecs.GetComponent<CTransformComponent>( explosionEntity );
 
-		m_spatial->ForEachIn( explosionTransform->Position, CSphere( explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const CEntity &entity )
+		m_bvh->ForEachIn( explosionTransform->Position, CSphere( explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const CEntity &entity )
 		{
-			auto healthComponent = m_ecs.GetComponent< CHealthComponent >( entity );
-
-			if( healthComponent )
+			if( auto healthComponent = m_ecs.GetComponent< CHealthComponent >( entity ) )
 			{
 				healthComponent->health -= damage;
 			}

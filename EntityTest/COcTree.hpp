@@ -6,9 +6,9 @@
 #include <tuple>
 #include <optional>
 
-#include "CSpatialBase.hpp"
+#include "CBVHBase.hpp"
 
-class COcTree final : public CSpatialBase
+class COcTree final : public CBVHBase
 {
 public:
 	COcTree( const glm::vec3 &position, const CBoundingBox &region );

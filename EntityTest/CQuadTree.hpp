@@ -6,16 +6,16 @@
 #include <vector>
 #include <tuple>
 
-#include "CSpatialBase.hpp"
+#include "CBVHBase.hpp"
 
-class CQuadTree final : public CSpatialBase
+class CQuadTree final : public CBVHBase
 {
 public:
 	CQuadTree( const CBoundingBox &region );
 
 	void Clear() override;
 
-	bool Add( const CEntity &entity, const CSpatial &transform, const CBoundingBox * const boundingBox ) override;
+	bool Add( const CEntity &entity, const CTransformComponent &transform, const CBoundingBox * const boundingBox ) override;
 
 	virtual void ForEachIn( const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda ) override;
 
@@ -31,7 +31,7 @@ private:
 
 	bool m_containsEntities = false;
 
-	std::vector< std::tuple< CEntity, CSpatial, std::unique_ptr< CBoundingBox > > > m_children;
+	std::vector< std::tuple< CEntity, CTransformComponent, std::unique_ptr< CBoundingBox > > > m_children;
 
 	static const float sMinSize;
 };

@@ -2,18 +2,14 @@
 
 #include <functional>
 
+#include "CEntity.hpp"
 #include "CSphere.hpp"
-
-#include "CSpatial.hpp"
 #include "CBoundingBox.hpp"
 
-#include "CEntity.hpp"
-
-// TODO rename, conflicts with naming of CSpatial
-class CSpatialBase
+class CBVHBase
 {
 public:
-	virtual ~CSpatialBase()
+	virtual ~CBVHBase()
 	{};
 
 	virtual void Clear() = 0;

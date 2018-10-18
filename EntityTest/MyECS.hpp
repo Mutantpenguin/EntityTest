@@ -12,17 +12,17 @@
 #include "CExplosionComponent.hpp"
 #include "CHealthComponent.hpp"
 
-#include "CBoundingBox.hpp"
+#include "CBoundingBoxComponent.hpp"
 
-#include "CSpatial.hpp"
+#include "CTransformComponent.hpp"
 
 using MyECS = CEntityComponentSystem<	10000,
 										CPhysicsComponent,
 										CPlayerComponent,
 										CDebugNameComponent,
-										CSpatial,
+										CTransformComponent,
 										CBombComponent,
-										CBoundingBox,
+										CBoundingBoxComponent,
 										CExplosionComponent,
 										CHealthComponent,
 										CMovementComponent >;

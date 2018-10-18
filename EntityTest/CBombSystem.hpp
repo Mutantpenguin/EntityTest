@@ -2,16 +2,16 @@
 
 #include "CComponentSystem.hpp"
 
-#include "CSpatialBase.hpp"
+#include "CBVHBase.hpp"
 
 #include "MyECS.hpp"
 
 class CBombSystem final : public CComponentSystem
 {
 public:
-	CBombSystem( MyECS &ecs, const std::shared_ptr< CSpatialBase > &spatial ) :
+	CBombSystem( MyECS &ecs, const std::shared_ptr< CBVHBase > &bvh ) :
 		m_ecs { ecs },
-		m_spatial { spatial }
+		m_bvh { bvh }
 	{}
 
 	~CBombSystem()
@@ -22,6 +22,6 @@ public:
 private:
 	MyECS &m_ecs;
 
-	const std::shared_ptr< CSpatialBase > m_spatial;
+	const std::shared_ptr< CBVHBase > m_bvh;
 };
 
