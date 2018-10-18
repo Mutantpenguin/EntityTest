@@ -24,7 +24,6 @@ COcTree::COcTree( const glm::vec3 &position, const CBoundingBox &region ) :
 		const auto childsize = m_region.Size() / 2.0f;
 
 		m_octants = std::make_unique< std::array< COcTree, 8 > >( std::array< COcTree, 8 >{
-			// totally wrong but compiles	
 				COcTree( position + glm::vec3( -childsize.x, -childsize.y, -childsize.z ), CBoundingBox( childsize ) ), //  left, lower, front
 				COcTree( position + glm::vec3(  childsize.x, -childsize.y, -childsize.z ), CBoundingBox( childsize ) ), // right, lower, front
 				COcTree( position + glm::vec3( -childsize.x, -childsize.y,  childsize.z ), CBoundingBox( childsize ) ), //  left, lower, back
