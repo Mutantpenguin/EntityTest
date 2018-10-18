@@ -25,7 +25,7 @@ private:
 	void ForEach( const std::function< void( const CEntity &entity ) > lambda );
 	bool Exists( const std::function< bool( const CEntity &entity ) > lambda ) const;
 	
-	const glm::vec3			m_position;
+	const glm::vec3		m_position;
 	const CBoundingBox	m_region;
 
 	std::unique_ptr< std::array< COcTree, 8 > > m_octants;
