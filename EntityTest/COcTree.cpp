@@ -99,7 +99,7 @@ void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lamb
 	{
 		for( const auto &child : m_children )
 		{
-			lambda( std::get<0>( child) );
+			lambda( std::get<0>( child ) );
 		}
 
 		if( m_octants )
@@ -127,12 +127,11 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 		case eIntersectionType::INTERSECT:
 			for( const auto &child : m_children )
 			{
-				const auto &position = std::get<1>( child );
-				const auto &boundingBox = std::get<2>( child );
+				const auto & [ _, position, boundingBox ] = child;
 
-				if( boundingBox )
+				if( boundingBox.has_value() )
 				{
-					if( Intersection( sphere, position, *boundingBox ) != eIntersectionType::OUTSIDE )
+					if( Intersection( sphere, position, boundingBox.value() ) != eIntersectionType::OUTSIDE )
 					{
 						lambda( std::get<0>( child ) );
 					}
@@ -206,14 +205,13 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 		case eIntersectionType::INTERSECT:
 			for( const auto &child : m_children )
 			{
-				const auto &position = std::get<1>( child );
-				const auto &boundingBox = std::get<2>( child );
+				const auto &[ entity, position, boundingBox ] = child;
 
-				if( boundingBox )
+				if( boundingBox.has_value() )
 				{
-					if( Intersection( sphere, position, *boundingBox ) != eIntersectionType::OUTSIDE )
+					if( Intersection( sphere, position, boundingBox.value() ) != eIntersectionType::OUTSIDE )
 					{
-						if( lambda( std::get<0>( child ) ) )
+						if( lambda( entity ) )
 						{
 							return( true );
 						}
@@ -223,7 +221,7 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 				{
 					if( Contains( sphere, position ) )
 					{
-						if( lambda( std::get<0>( child ) ) )
+						if( lambda( entity ) )
 						{
 							return( true );
 						}
