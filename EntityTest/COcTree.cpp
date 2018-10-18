@@ -87,7 +87,7 @@ bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoun
 	}
 
 	// didn't fit into any octant, so put it inside current one
-	m_children.push_back( std::make_tuple( entity, position, ( nullptr == boundingBox ? nullptr : std::make_unique< CBoundingBox >( *boundingBox ) ) ) );
+	m_children.push_back( std::make_tuple( entity, position, ( boundingBox ? std::make_optional< CBoundingBox >( *boundingBox ) : std::nullopt ) ) );
 	
 	return( true );
 }
@@ -130,9 +130,9 @@ void COcTree::ForEachIn( const CSphere &sphere, const std::function< void( const
 			{
 				const auto &boundingBox = std::get<2>( child );
 
-				if( boundingBox )
+				if( boundingBox.has_value() )
 				{
-					if( Intersection( sphere, *boundingBox ) != eIntersectionType::OUTSIDE )
+					if( Intersection( sphere, boundingBox.value() ) != eIntersectionType::OUTSIDE )
 					{
 						lambda( std::get<0>( child ) );
 					}
@@ -208,9 +208,9 @@ bool COcTree::ExistsIn( const CSphere &sphere, const std::function< bool( const 
 			{
 				const auto &boundingBox = std::get<2>( child );
 
-				if( boundingBox )
+				if( boundingBox.has_value() )
 				{
-					if( Intersection( sphere, *boundingBox ) != eIntersectionType::OUTSIDE )
+					if( Intersection( sphere, boundingBox.value() ) != eIntersectionType::OUTSIDE )
 					{
 						if( lambda( std::get<0>( child ) ) )
 						{

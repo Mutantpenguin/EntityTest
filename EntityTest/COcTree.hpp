@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <tuple>
+#include <optional>
 
 #include "CSpatialBase.hpp"
 
@@ -30,7 +31,7 @@ private:
 
 	bool m_containsEntities = false;
 
-	std::vector< std::tuple< CEntity, glm::vec3, std::unique_ptr< CBoundingBox > > > m_children;
+	std::vector< std::tuple< CEntity, glm::vec3, std::optional< CBoundingBox > > > m_children;
 
 	static const float sMinSize;
 };
