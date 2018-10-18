@@ -1,9 +1,9 @@
 #include "ClosestPoint.hpp"
 
-glm::vec3 ClosestPoint( const glm::vec3 &position, const CBoundingBox &box, const glm::vec3 &point )
+glm::vec3 ClosestPoint( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm::vec3 &point )
 {
-	const glm::vec3 max = box.Max( position );
-	const glm::vec3 min = box.Min( position );
+	const glm::vec3 max = box.Max( boxPosition );
+	const glm::vec3 min = box.Min( boxPosition );
 
 	glm::vec3 result;
 

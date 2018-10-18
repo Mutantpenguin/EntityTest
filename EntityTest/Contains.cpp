@@ -4,12 +4,12 @@
 
 #include "minitrace.h"
 
-bool Contains( const glm::vec3 &position, const CBoundingBox &box, const glm::vec3 &point )
+bool Contains( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm::vec3 &point )
 {
 	MTR_SCOPE( "Contains", "Contains box <-> point" );
 
-	const glm::vec3 max = box.Max( position );
-	const glm::vec3 min = box.Min( position );
+	const glm::vec3 max = box.Max( boxPosition );
+	const glm::vec3 min = box.Min( boxPosition );
 
 	if( ( max.x < point.x )
 		||

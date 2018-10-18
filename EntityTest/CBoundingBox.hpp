@@ -16,8 +16,8 @@ public:
 
 	glm::vec3 Dimensions() const;
 
-	glm::vec3 Min( const glm::vec3 &position ) const;
-	glm::vec3 Max( const glm::vec3 &position ) const;
+	glm::vec3 Min( const glm::vec3 &boxPosition ) const;
+	glm::vec3 Max( const glm::vec3 &boxPosition ) const;
 
 private:
 	glm::vec3 m_size;

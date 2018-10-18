@@ -1,7 +1,5 @@
 #include "CBoundingBox.hpp"
 
-#include <glm/gtx/norm.hpp>
-
 CBoundingBox::CBoundingBox( const CBoundingBox &box ) :
 	m_size { box.m_size }
 {}
@@ -20,12 +18,12 @@ glm::vec3 CBoundingBox::Dimensions() const
 	return( m_size + m_size );
 }
 
-glm::vec3 CBoundingBox::Min( const glm::vec3 &position ) const
+glm::vec3 CBoundingBox::Min( const glm::vec3 &boxPosition ) const
 {
-	return( position - m_size );
+	return( boxPosition - m_size );
 }
 
-glm::vec3 CBoundingBox::Max( const glm::vec3 &position ) const
+glm::vec3 CBoundingBox::Max( const glm::vec3 &boxPosition ) const
 {
-	return( position + m_size );
+	return( boxPosition + m_size );
 }
