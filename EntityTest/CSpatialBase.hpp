@@ -20,8 +20,8 @@ public:
 
 	virtual bool Add( const CEntity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox ) = 0;
 
-	virtual void ForEachIn( const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda ) = 0;
+	virtual void ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda ) = 0;
 
-	virtual bool ExistsIn( const CSphere &sphere, const std::function< bool( const CEntity &entity ) > lambda ) const = 0;
+	virtual bool ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< bool( const CEntity &entity ) > lambda ) const = 0;
 };
 

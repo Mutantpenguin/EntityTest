@@ -24,7 +24,7 @@ void CBombSystem::Process()
 
 			if( bombTransform )
 			{
-				if( m_spatial->ExistsIn( CSphere( bombTransform->Position, bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
+				if( m_spatial->ExistsIn( bombTransform->Position, CSphere( bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
 				{
 					return( m_ecs.HasComponents< CHealthComponent >( entity ) );
 				} ) )
@@ -41,7 +41,7 @@ void CBombSystem::Process()
 	{
 		const auto explosionTransform = m_ecs.GetComponent<CSpatial>( explosionEntity );
 
-		m_spatial->ForEachIn( CSphere( explosionTransform->Position, explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const CEntity &entity )
+		m_spatial->ForEachIn( explosionTransform->Position, CSphere( explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const CEntity &entity )
 		{
 			auto healthComponent = m_ecs.GetComponent< CHealthComponent >( entity );
 

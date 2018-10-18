@@ -49,7 +49,7 @@ glm::vec3 ClosestPoint( const glm::vec3 &boxPosition, const CBoundingBox &box, c
 	return( result );
 }
 
-glm::vec3 ClosestPoint( const CSphere &sphere, const glm::vec3 &position )
+glm::vec3 ClosestPoint( const glm::vec3 &spherePosition, const CSphere &sphere, const glm::vec3 &point )
 {
-	return( sphere.Position() + ( glm::normalize( position - sphere.Position() ) * sphere.Radius() ) );
+	return( spherePosition + ( glm::normalize( point - spherePosition ) * sphere.Radius() ) );
 }

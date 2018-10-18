@@ -29,11 +29,11 @@ bool Contains( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm:
 	return( true );
 }
 
-bool Contains( const CSphere &sphere, const glm::vec3 &point )
+bool Contains( const glm::vec3 &spherePosition, const CSphere &sphere, const glm::vec3 &point )
 {
 	MTR_SCOPE( "Contains", "Contains sphere <-> point" );
 
-	if( glm::length2( sphere.Position() - point ) <= std::pow( sphere.Radius(), 2 ) )
+	if( glm::length2( spherePosition - point ) <= std::pow( sphere.Radius(), 2 ) )
 	{
 		return( true );
 	}

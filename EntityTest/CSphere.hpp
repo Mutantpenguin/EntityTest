@@ -5,13 +5,10 @@
 class CSphere final
 {
 public:
-	CSphere( const glm::vec3 &position, const float radius );
-
-	const glm::vec3 &Position() const;
+	CSphere( const float radius );
 
 	const float &Radius() const;
 
 private:
-	const glm::vec3	m_position { 0.0f, 0.0f, 0.0f };
-	const float		m_radius { 0.0f };
+	const float	m_radius { 0.0f };
 };
