@@ -71,7 +71,7 @@ public:
 #ifndef NDEBUG
 			else
 			{
-				CLogger::Log( "using stale entity id" );
+				CLogger::Info( "using stale entity id" );
 			}
 #endif
 		}
@@ -99,7 +99,7 @@ public:
 #ifndef NDEBUG
 			else
 			{
-				CLogger::Log( "using stale entity id" );
+				CLogger::Info( "using stale entity id" );
 			}
 #endif
 		}
@@ -134,7 +134,7 @@ public:
 #ifndef NDEBUG
 			else
 			{
-				CLogger::Log( "using stale entity id" );
+				CLogger::Info( "using stale entity id" );
 			}
 #endif
 		}

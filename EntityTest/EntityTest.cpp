@@ -91,7 +91,6 @@ int main()
 		CLogger::Info( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
-
 	{
 		{
 			MTR_SCOPE( "main", "Create systems" );
@@ -103,8 +102,6 @@ int main()
 			ecs.CreateSystem< CMovementSystem >();
 			ecs.CreateSystem< CBVHSystem >( spatial );
 		}
-
-		CLogger::Info( "" );
 
 		// test of a real mainloop
 		CLogger::Info( "START main loop" );
@@ -130,7 +127,11 @@ int main()
 
 		CLogger::Info( "END main loop" );
 
+		CLogger::Info( "" );
+
 		CLogger::Info( "average framtime: " + std::to_string( diffMainLoop.count() / simulateFrameCount * 1000.0f ) + " ms" );
+
+		CLogger::Info( "" );
 
 		ecs.DestroySystem< CBombSystem >();
 		ecs.DestroySystem< CHealthSystem >();
