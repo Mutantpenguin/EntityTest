@@ -1,9 +1,5 @@
 #include "CBoundingBox.hpp"
 
-CBoundingBox::CBoundingBox( const CBoundingBox &box ) :
-	m_size { box.m_size }
-{}
-
 CBoundingBox::CBoundingBox( const glm::vec3 &size ) :
 	m_size { size }
 {}

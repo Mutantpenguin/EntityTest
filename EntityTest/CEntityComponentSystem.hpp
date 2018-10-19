@@ -216,7 +216,7 @@ public:
 		}
 		else
 		{
-			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+			CLogger::Info( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
 		}
 	}
 
@@ -233,7 +233,7 @@ public:
 		}
 		else
 		{
-			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+			CLogger::Info( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
 		}
 	}
 

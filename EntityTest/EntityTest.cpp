@@ -27,7 +27,7 @@ int main()
 
 
 	{
-		MTR_SCOPE( "__FILE__", "Creating entities" );
+		MTR_SCOPE( __FILE__, "Creating entities" );
 
 		const auto start = std::chrono::system_clock::now();
 
@@ -93,7 +93,7 @@ int main()
 
 	{
 		{
-			MTR_SCOPE( "__FILE__", "Create systems" );
+			MTR_SCOPE( __FILE__, "Create systems" );
 
 			auto spatial = std::make_shared< COcTree >( glm::vec3( 0.0f, 0.0f, 0.0f ), CBoundingBox( { 110.0f, 110.0f, 110.0f } ) );
 
@@ -112,7 +112,7 @@ int main()
 
 		for( uint16_t i = 0; i < simulateFrameCount; i++ )
 		{
-			MTR_SCOPE( "__FILE__", "Frame" );
+			MTR_SCOPE( __FILE__, "Frame" );
 
 			const auto startFrame = std::chrono::system_clock::now();
 

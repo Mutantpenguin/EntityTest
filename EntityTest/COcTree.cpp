@@ -86,7 +86,7 @@ bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoun
 	}
 
 	// didn't fit into any octant, so put it inside current one
-	m_children.push_back( std::make_tuple( entity, position, ( boundingBox ? std::make_optional< CBoundingBox >( *boundingBox ) : std::nullopt ) ) );
+	m_children.emplace_back( entity, position, ( boundingBox ? std::make_optional< CBoundingBox >( *boundingBox ) : std::nullopt ) );
 	
 	return( true );
 }

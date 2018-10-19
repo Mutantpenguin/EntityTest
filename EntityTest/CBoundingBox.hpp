@@ -7,8 +7,6 @@ class CBoundingBox final
 public:
 	CBoundingBox()
 	{}
-	
-	CBoundingBox( const CBoundingBox &box );
 
 	CBoundingBox( const glm::vec3 &size );
 
