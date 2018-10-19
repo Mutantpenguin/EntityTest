@@ -15,7 +15,7 @@ CBVHSystem::CBVHSystem( MyECS &ecs, const std::shared_ptr< CBVHBase > &bvh ) :
 
 void CBVHSystem::Process()
 {
-	MTR_SCOPE_FUNC();
+	MTR_BEGIN( "CBVHSystem", "CBVHSystem::Process" );
 
 	CLogger::Debug( "\tprocessing: CBVHSystem" );
 	
@@ -48,4 +48,6 @@ void CBVHSystem::Process()
 	const auto end = std::chrono::system_clock::now();
 	const std::chrono::duration<double> diff = end - start;
 	CLogger::Debug( "\t\trebuilding bvh system: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
+	
+	MTR_END( "CBVHSystem", "CBVHSystem::Process" );
 }

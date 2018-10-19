@@ -9,7 +9,7 @@
 
 void CBombSystem::Process()
 {
-	MTR_SCOPE_FUNC();
+	MTR_BEGIN( "CBombSystem", "CBombSystem::Process" );
 
 	CLogger::Debug( "\tprocessing: CBombSystem" );	
 	
@@ -58,4 +58,6 @@ void CBombSystem::Process()
 	}
 	
 	CLogger::Debug( "\t\t" + std::to_string( m_ecs.Count<CBombComponent>() ) + " CBombComponent remaining" );
+	
+	MTR_END( "CBombSystem", "CBombSystem::Process" );
 }

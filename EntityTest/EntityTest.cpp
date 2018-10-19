@@ -112,7 +112,7 @@ int main()
 
 		for( uint16_t i = 0; i < simulateFrameCount; i++ )
 		{
-			MTR_SCOPE( __FILE__, "Frame" );
+			MTR_BEGIN( __FILE__, "Frame" );
 
 			const auto startFrame = std::chrono::system_clock::now();
 
@@ -121,6 +121,8 @@ int main()
 			const std::chrono::duration<double> diffFrame = std::chrono::system_clock::now() - startFrame;
 			CLogger::Debug( "frame delta: " + std::to_string( diffFrame.count() * 1000.0f ) + " ms" );
 			CLogger::Debug( "" );
+			
+			MTR_END( __FILE__, "Frame" );
 		}
 
 		const std::chrono::duration<double> diffMainLoop = std::chrono::system_clock::now() - startMainLoop;

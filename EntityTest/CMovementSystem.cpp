@@ -4,7 +4,7 @@
 
 void CMovementSystem::Process()
 {
-	MTR_SCOPE_FUNC();
+	MTR_BEGIN( "CMovementSystem", "CMovementSystem::Process" );
 
 	CLogger::Debug( "\tprocessing: CMovementSystem" );
 	
@@ -16,4 +16,6 @@ void CMovementSystem::Process()
 			spatialComponent->Position += movementComponent->Direction;
 		}
 	} );
+	
+	MTR_END( "CMovementSystem", "CMovementSystem::Process" );
 }

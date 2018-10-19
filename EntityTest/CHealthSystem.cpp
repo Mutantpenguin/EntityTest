@@ -6,7 +6,7 @@
 
 void CHealthSystem::Process()
 {
-	MTR_SCOPE_FUNC();
+	MTR_BEGIN( "CHealthSystem", "CHealthSystem::Process" );
 	
 	CLogger::Debug( "\tprocessing: CHealthSystem" );
 	
@@ -29,4 +29,6 @@ void CHealthSystem::Process()
 	{
 		CLogger::Debug( "\t\tdestroyed " + std::to_string( entitiesForDeletion.size() ) + " entities" );
 	}
+	
+	MTR_END( "CHealthSystem", "CHealthSystem::Process" );
 }
