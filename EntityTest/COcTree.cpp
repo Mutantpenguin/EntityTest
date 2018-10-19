@@ -93,8 +93,6 @@ bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoun
 
 void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lambda )
 {
-	MTR_SCOPE( "COcTree", "COcTree::ForEach" );
-
 	if( m_containsEntities )
 	{
 		for( const auto &child : m_children )
@@ -114,8 +112,6 @@ void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lamb
 
 void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda )
 {
-	MTR_SCOPE( "COcTree", "COcTree::ForEachIn" );
-
 	if( m_containsEntities )
 	{
 		switch( Intersection( spherePosition, sphere, m_position, m_region ) )
@@ -161,8 +157,6 @@ void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere,
 
 bool COcTree::Exists( const std::function< bool( const CEntity &entity ) > lambda ) const
 {
-	MTR_SCOPE( "COcTree", "COcTree::Exists" );
-
 	if( m_containsEntities )
 	{
 		for( const auto &child : m_children )
@@ -190,8 +184,6 @@ bool COcTree::Exists( const std::function< bool( const CEntity &entity ) > lambd
 
 bool COcTree::ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< bool( const CEntity &entity ) > lambda ) const
 {
-	MTR_SCOPE( "COcTree", "COcTree::ExistsIn" );
-
 	if( m_containsEntities )
 	{
 		switch( Intersection( spherePosition, sphere, m_position, m_region ) )

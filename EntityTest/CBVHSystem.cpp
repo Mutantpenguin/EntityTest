@@ -15,7 +15,7 @@ CBVHSystem::CBVHSystem( MyECS &ecs, const std::shared_ptr< CBVHBase > &bvh ) :
 
 void CBVHSystem::Process()
 {
-	MTR_SCOPE( "CBVHSystem", "CBVHSystem::Process" );
+	MTR_SCOPE_FUNC();
 
 	CLogger::Debug( "\tprocessing: CBVHSystem" );
 	

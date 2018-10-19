@@ -4,7 +4,7 @@
 
 void CMovementSystem::Process()
 {
-	MTR_SCOPE( "CMovementSystem", "CMovementSystem::Process" );
+	MTR_SCOPE_FUNC();
 
 	CLogger::Debug( "\tprocessing: CMovementSystem" );
 	

@@ -9,7 +9,7 @@
 
 void CBombSystem::Process()
 {
-	MTR_SCOPE( "CBombSystem", "CBombSystem::Process" );
+	MTR_SCOPE_FUNC();
 
 	CLogger::Debug( "\tprocessing: CBombSystem" );	
 	
@@ -49,7 +49,7 @@ void CBombSystem::Process()
 
 		bombEntitiesForDeletion.push_back( explosionEntity );
 	} );
-	MTR_END( "CBombSystem", "each CExplosionComponent" );
+	MTR_END( "CBombSystem", "ForEach<CExplosionComponent>" );
 
 	
 	for( const auto &entity : bombEntitiesForDeletion )

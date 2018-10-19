@@ -6,8 +6,6 @@
 
 bool Contains( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm::vec3 &point )
 {
-	MTR_SCOPE( "Contains", "Contains box <-> point" );
-
 	const glm::vec3 max = box.Max( boxPosition );
 	const glm::vec3 min = box.Min( boxPosition );
 
@@ -31,8 +29,6 @@ bool Contains( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm:
 
 bool Contains( const glm::vec3 &spherePosition, const CSphere &sphere, const glm::vec3 &point )
 {
-	MTR_SCOPE( "Contains", "Contains sphere <-> point" );
-
 	if( glm::length2( spherePosition - point ) <= std::pow( sphere.Radius(), 2 ) )
 	{
 		return( true );

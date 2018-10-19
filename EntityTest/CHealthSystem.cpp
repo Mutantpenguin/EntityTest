@@ -6,7 +6,7 @@
 
 void CHealthSystem::Process()
 {
-	MTR_SCOPE( "CHealthSystem", "CHealthSystem::Process" );
+	MTR_SCOPE_FUNC();
 	
 	CLogger::Debug( "\tprocessing: CHealthSystem" );
 	

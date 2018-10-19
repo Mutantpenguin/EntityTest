@@ -9,8 +9,6 @@
 
 eIntersectionType Intersection( const glm::vec3 &boxAPosition, const CBoundingBox &boxA, const glm::vec3 &boxBPosition, const CBoundingBox &boxB )
 {
-	MTR_SCOPE( "Intersection", "Intersection box <-> box" );
-
 	const glm::vec3 maxA = boxA.Max( boxAPosition );
 	const glm::vec3 minA = boxA.Min( boxAPosition );
 
@@ -52,8 +50,6 @@ eIntersectionType Intersection( const glm::vec3 &boxAPosition, const CBoundingBo
 
 eIntersectionType Intersection( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm::vec3 &spherePosition, const CSphere &sphere )
 {
-	MTR_SCOPE( "Intersection", "Intersection box <-> sphere" );
-
 	if( std::pow( sphere.Radius(), 2 ) >= glm::length2( spherePosition - ClosestPoint( boxPosition, box, spherePosition ) ) )
 	{
 		if( Contains( spherePosition, sphere, box.Min( boxPosition ) )
@@ -71,8 +67,6 @@ eIntersectionType Intersection( const glm::vec3 &boxPosition, const CBoundingBox
 
 eIntersectionType Intersection( const glm::vec3 &sphereAPosition, const CSphere &sphereA, const glm::vec3 &sphereBPosition, const CSphere &sphereB )
 {
-	MTR_SCOPE( "Intersection", "Intersection sphere <-> sphere" );
-
     const glm::vec3 distance = sphereAPosition - sphereBPosition;
 	
 	if( sphereA.Radius() >= ( glm::length( distance ) + sphereB.Radius() ) )
@@ -95,8 +89,6 @@ eIntersectionType Intersection( const glm::vec3 &sphereAPosition, const CSphere 
 
 eIntersectionType Intersection( const glm::vec3 &spherePosition, const CSphere &sphere, const glm::vec3 &boxPosition, const CBoundingBox &box )
 {
-	MTR_SCOPE( "Intersection", "Intersection sphere <-> box" );
-
 	const auto radiusSquared = std::pow( sphere.Radius(), 2 );
 	
 	if( radiusSquared >= glm::length2( spherePosition - ClosestPoint( boxPosition, box, spherePosition ) ) )
