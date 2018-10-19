@@ -191,6 +191,7 @@
   <ItemGroup>
     <ClCompile Include="CBombSystem.cpp" />
     <ClCompile Include="CBoundingBox.cpp" />
+    <ClCompile Include="CLogger.cpp" />
     <ClCompile Include="ClosestPoint.cpp" />
     <ClCompile Include="Contains.cpp" />
     <ClCompile Include="CBVHSystem.cpp" />

@@ -109,20 +109,28 @@ int main()
 		// test of a real mainloop
 		CLogger::Info( "START main loop" );
 
-		for( std::uint16_t i = 0; i < 500; i++ )
+		const uint16_t simulateFrameCount { 500 };
+
+		const auto startMainLoop = std::chrono::system_clock::now();
+
+		for( uint16_t i = 0; i < simulateFrameCount; i++ )
 		{
 			MTR_SCOPE( "main", "Frame" );
 
-			const auto start = std::chrono::system_clock::now();
+			const auto startFrame = std::chrono::system_clock::now();
 
 			ecs.ProcessSystems();
 
-			const auto end = std::chrono::system_clock::now();
-			const std::chrono::duration<double> diff = end - start;
-			CLogger::Info( "delta: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
-			CLogger::Info( "" );
+			const std::chrono::duration<double> diffFrame = std::chrono::system_clock::now() - startFrame;
+			CLogger::Debug( "frame delta: " + std::to_string( diffFrame.count() * 1000.0f ) + " ms" );
+			CLogger::Debug( "" );
 		}
+
+		const std::chrono::duration<double> diffMainLoop = std::chrono::system_clock::now() - startMainLoop;
+
 		CLogger::Info( "END main loop" );
+
+		CLogger::Info( "average framtime: " + std::to_string( diffMainLoop.count() / simulateFrameCount * 1000.0f ) + " ms" );
 
 		ecs.DestroySystem< CBombSystem >();
 		ecs.DestroySystem< CHealthSystem >();

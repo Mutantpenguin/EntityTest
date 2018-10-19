@@ -182,6 +182,9 @@
     <ClCompile Include="CTransformComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="CLogger.cpp">
+      <Filter>Sonstiges</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="perftest.xlsx" />
