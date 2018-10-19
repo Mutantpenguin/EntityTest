@@ -6,7 +6,7 @@ void CMovementSystem::Process()
 {
 	MTR_SCOPE( "CMovementSystem", "CMovementSystem::Process" );
 
-	CLogger::Log( "\tprocessing: CMovementSystem" );
+	CLogger::Debug( "\tprocessing: CMovementSystem" );
 	
 	m_ecs.ForEach<CMovementComponent>( [ this ] ( const auto &entity, auto movementComponent )
 	{

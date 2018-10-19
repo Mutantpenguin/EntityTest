@@ -11,7 +11,7 @@ void CBombSystem::Process()
 {
 	MTR_SCOPE( "CBombSystem", "CBombSystem::Process" );
 
-	CLogger::Log( "\tprocessing: CBombSystem" );	
+	CLogger::Debug( "\tprocessing: CBombSystem" );	
 	
 	std::vector<CEntity> bombEntitiesForDeletion;
 
@@ -57,5 +57,5 @@ void CBombSystem::Process()
 		m_ecs.Destroy( entity );
 	}
 	
-	CLogger::Log( "\t\t" + std::to_string( m_ecs.Count<CBombComponent>() ) + " CBombComponent remaining" );
+	CLogger::Debug( "\t\t" + std::to_string( m_ecs.Count<CBombComponent>() ) + " CBombComponent remaining" );
 }

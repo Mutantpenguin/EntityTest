@@ -17,7 +17,7 @@ void CBVHSystem::Process()
 {
 	MTR_SCOPE( "CBVHSystem", "CBVHSystem::Process" );
 
-	CLogger::Log( "\tprocessing: CBVHSystem" );
+	CLogger::Debug( "\tprocessing: CBVHSystem" );
 	
 	const auto start = std::chrono::system_clock::now();
 
@@ -42,10 +42,10 @@ void CBVHSystem::Process()
 
 	if( entitiesForDeletion.size() > 0 )
 	{
-		CLogger::Log( "\t\tdestroyed " + std::to_string( entitiesForDeletion.size() ) + " entities which dropped out of the world" );
+		CLogger::Debug( "\t\tdestroyed " + std::to_string( entitiesForDeletion.size() ) + " entities which dropped out of the world" );
 	}
 
 	const auto end = std::chrono::system_clock::now();
 	const std::chrono::duration<double> diff = end - start;
-	CLogger::Log( "\t\trebuilding bvh system: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
+	CLogger::Debug( "\t\trebuilding bvh system: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
 }

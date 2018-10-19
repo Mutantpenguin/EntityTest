@@ -23,15 +23,18 @@ int main()
 
 	MyECS ecs;
 
-	CLogger::Log( "" );
+	CLogger::Info( "" );
 
 
 	{
+		MTR_SCOPE( "main", "Creating entities" );
+
 		const auto start = std::chrono::system_clock::now();
+
 		for( size_t i = 0; i < ecs.MaxSize; i++ )
 		{
 			auto entity = ecs.Create();
-
+			
 			ecs.AddComponent( entity, CDebugNameComponent( "entity_" + std::to_string( i ) ) );
 
 			if( rand() % 10 == 2 )
@@ -82,24 +85,29 @@ int main()
 				ecs.AddComponent( entity, movement );
 			}
 		}
+
 		const auto end = std::chrono::system_clock::now();
 		const std::chrono::duration<double> diff = end - start;
-		CLogger::Log( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
+		CLogger::Info( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
 
 	{
-		auto spatial = std::make_shared< COcTree >( glm::vec3( 0.0f, 0.0f, 0.0f ), CBoundingBox( { 110.0f, 110.0f, 110.0f } ) );
+		{
+			MTR_SCOPE( "main", "Create systems" );
 
-		ecs.CreateSystem< CBombSystem >( spatial );
-		ecs.CreateSystem< CHealthSystem >();
-		ecs.CreateSystem< CMovementSystem >();
-		ecs.CreateSystem< CBVHSystem >( spatial );
+			auto spatial = std::make_shared< COcTree >( glm::vec3( 0.0f, 0.0f, 0.0f ), CBoundingBox( { 110.0f, 110.0f, 110.0f } ) );
 
-		CLogger::Log( "" );
+			ecs.CreateSystem< CBombSystem >( spatial );
+			ecs.CreateSystem< CHealthSystem >();
+			ecs.CreateSystem< CMovementSystem >();
+			ecs.CreateSystem< CBVHSystem >( spatial );
+		}
+
+		CLogger::Info( "" );
 
 		// test of a real mainloop
-		CLogger::Log( "START main loop" );
+		CLogger::Info( "START main loop" );
 
 		for( std::uint16_t i = 0; i < 500; i++ )
 		{
@@ -111,10 +119,10 @@ int main()
 
 			const auto end = std::chrono::system_clock::now();
 			const std::chrono::duration<double> diff = end - start;
-			CLogger::Log( "delta: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
-			CLogger::Log( "" );
+			CLogger::Info( "delta: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
+			CLogger::Info( "" );
 		}
-		CLogger::Log( "END main loop" );
+		CLogger::Info( "END main loop" );
 
 		ecs.DestroySystem< CBombSystem >();
 		ecs.DestroySystem< CHealthSystem >();

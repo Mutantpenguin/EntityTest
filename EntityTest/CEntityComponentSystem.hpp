@@ -21,8 +21,8 @@ public:
 
 	CEntityComponentSystem() noexcept
 	{
-		CLogger::Log( std::string( typeid( this ).name() ) );
-		CLogger::Log( "\tmax entities: " + std::to_string( _Size ) );
+		CLogger::Info( std::string( typeid( this ).name() ) );
+		CLogger::Info( "\tmax entities: " + std::to_string( _Size ) );
 
 		m_freeEntities.reserve( _Size );
 
@@ -46,7 +46,7 @@ public:
 		}
 		else
 		{
-			CLogger::Log( "exceeded maximum entity count of '" + std::to_string( _Size ) + "'" );
+			CLogger::Info( "exceeded maximum entity count of '" + std::to_string( _Size ) + "'" );
 			return( CEntity( CEntity::nullId ) );
 		}
 	}
@@ -173,7 +173,7 @@ public:
 
 		if( std::end( m_systemTypes ) != it )
 		{
-			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' already exists" );
+			CLogger::Info( "system '" + std::string( typeid( T ).name() ) + "' already exists" );
 		}
 		else
 		{
@@ -199,7 +199,7 @@ public:
 		}
 		else
 		{
-			CLogger::Log( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+			CLogger::Info( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
 		}
 	}
 

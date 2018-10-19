@@ -8,7 +8,7 @@ void CHealthSystem::Process()
 {
 	MTR_SCOPE( "CHealthSystem", "CHealthSystem::Process" );
 	
-	CLogger::Log( "\tprocessing: CHealthSystem" );
+	CLogger::Debug( "\tprocessing: CHealthSystem" );
 	
 	std::vector< CEntity > entitiesForDeletion;
 
@@ -27,6 +27,6 @@ void CHealthSystem::Process()
 
 	if( entitiesForDeletion.size() > 0 )
 	{
-		CLogger::Log( "\t\tdestroyed " + std::to_string( entitiesForDeletion.size() ) + " entities" );
+		CLogger::Debug( "\t\tdestroyed " + std::to_string( entitiesForDeletion.size() ) + " entities" );
 	}
 }

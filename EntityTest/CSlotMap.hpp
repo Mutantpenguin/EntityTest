@@ -18,9 +18,9 @@ public:
 		m_entities( _Size ),
 		m_objects( _Size )
 	{
-		CLogger::Log( "SlotMap for '" + std::string( typeid( T ).name() ) + "'" );
+		CLogger::Info( "SlotMap for '" + std::string( typeid( T ).name() ) + "'" );
 		// TODO round to 2 decimal places
-		CLogger::Log( "\tsize: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) + " MiBi" );
+		CLogger::Info( "\tsize: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) + " MiBi" );
 	}
 
 	size_t SizeInBytes()
