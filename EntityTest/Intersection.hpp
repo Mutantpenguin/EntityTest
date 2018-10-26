@@ -1,7 +1,9 @@
 #include "CSphere.hpp"
 #include "CBoundingBox.hpp"
 
-enum class eIntersectionType : std::uint8_t
+#include "Types.hpp"
+
+enum class eIntersectionType : u8
 {
 	INSIDE,
 	INTERSECT,

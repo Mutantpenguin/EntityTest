@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <limits>
 
+#include "Types.hpp"
+
 class CEntity final
 {
 	template < size_t _Size, typename... Types >
@@ -17,7 +19,7 @@ public:
 		return( m_id );
 	}
 
-	const std::uint32_t &Version() const
+	const u32 &Version() const
 	{
 		return( m_version );
 	}
@@ -30,5 +32,5 @@ private:
 	{}
 
 	size_t m_id = nullId;
-	std::uint32_t m_version = 0;
+	u32 m_version = 0;
 };

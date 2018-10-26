@@ -2,8 +2,10 @@
 
 #include <cstdint>
 
+#include "Types.hpp"
+
 struct CPlayerComponent final
 {
-	std::uint8_t Team;
+	u8 Team;
 };
 

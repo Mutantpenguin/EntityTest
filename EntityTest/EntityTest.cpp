@@ -1,5 +1,7 @@
 #include <chrono>
 
+#include "Types.hpp"
+
 #include "CLogger.hpp"
 
 #include "MyECS.hpp"
@@ -106,11 +108,11 @@ int main()
 		// test of a real mainloop
 		CLogger::Info( "START main loop" );
 
-		const uint16_t simulateFrameCount { 500 };
+		const u16 simulateFrameCount { 500 };
 
 		const auto startMainLoop = std::chrono::system_clock::now();
 
-		for( uint16_t i = 0; i < simulateFrameCount; i++ )
+		for( u16 i = 0; i < simulateFrameCount; i++ )
 		{
 			MTR_BEGIN( __FILE__, "Frame" );
 

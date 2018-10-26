@@ -7,6 +7,8 @@
 #include <map>
 #include <unordered_map>
 
+#include "Types.hpp"
+
 #include "CSlotMap.hpp"
 #include "CComponentSystem.hpp"
 
@@ -261,9 +263,9 @@ private:
 
 	ComponentStorage m_componentStorage;
 
-	std::uint16_t m_systemId = 0;
+	u16 m_systemId = 0;
 
 	// two structures needed, so we can check against the type AND have a proper order
-	std::unordered_map< std::type_index, std::uint16_t > m_systemTypes;
-	std::map< std::uint16_t, std::unique_ptr< CComponentSystem > > m_systems;
+	std::unordered_map< std::type_index, u16 > m_systemTypes;
+	std::map< u16, std::unique_ptr< CComponentSystem > > m_systems;
 };

@@ -4,13 +4,15 @@
 #include <utility>
 #include <cstdint>
 
+#include "Types.hpp"
+
 struct CSize
 {
 public:
 	CSize()
 	{};
 
-	CSize( const std::uint32_t p_width, const std::uint32_t p_height ) :
+	CSize( const u32 p_width, const u32 p_height ) :
 		width { p_width },
 		height { p_height }
 	{};
@@ -54,8 +56,8 @@ public:
 		return( *this );
 	}
 
-	std::uint32_t width { 0 };
-	std::uint32_t height { 0 };
+	u32 width { 0 };
+	u32 height { 0 };
 };
 
 inline CSize operator + ( CSize lhs, const CSize &rhs )

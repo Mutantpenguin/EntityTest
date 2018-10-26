@@ -187,6 +187,7 @@
     <ClInclude Include="CSphere.hpp" />
     <ClInclude Include="TupleChecker.hpp" />
     <ClInclude Include="TupleIterator.hpp" />
+    <ClInclude Include="Types.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBombSystem.cpp" />

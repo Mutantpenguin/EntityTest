@@ -129,6 +129,9 @@
     <ClInclude Include="CTransformComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Types.hpp">
+      <Filter>Sonstiges</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
