@@ -157,7 +157,48 @@ void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere,
 
 void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const CEntity &entity ) > lambda )
 {
-	// TODO stub
+	if( m_containsEntities )
+	{
+		switch( Intersection( boxPosition, box, m_position, m_region ) )
+		{
+		case eIntersectionType::INSIDE:
+			ForEach( lambda );
+			break;
+
+		case eIntersectionType::INTERSECT:
+			for( const auto &[ entity, position, boundingBox ] : m_children )
+			{
+				if( boundingBox.has_value() )
+				{
+					if( Intersection( boxPosition, box, position, boundingBox.value() ) != eIntersectionType::OUTSIDE )
+					{
+						lambda( entity );
+					}
+				}
+				else
+				{
+					if( Contains( boxPosition, box, position ) )
+					{
+						lambda( entity );
+					}
+				}
+			}
+
+			if( m_octants )
+			{
+				for( auto &octant : *m_octants )
+				{
+					octant.ForEachIn( boxPosition, box, lambda );
+				}
+			}
+
+			break;
+
+		case eIntersectionType::OUTSIDE:
+			break;
+		}
+	}
+
 }
 
 void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( const CEntity &entity ) > lambda )
@@ -251,6 +292,57 @@ bool COcTree::ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, 
 bool COcTree::ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< bool( const CEntity &entity ) > lambda ) const
 {
 	// TODO stub
+	if( m_containsEntities )
+	{
+		switch( Intersection( boxPosition, box, m_position, m_region ) )
+		{
+		case eIntersectionType::INSIDE:
+			return( Exists( lambda ) );
+			break;
+
+		case eIntersectionType::INTERSECT:
+			for( const auto &[ entity, position, boundingBox ] : m_children )
+			{
+				if( boundingBox.has_value() )
+				{
+					if( Intersection( boxPosition, box, position, boundingBox.value() ) != eIntersectionType::OUTSIDE )
+					{
+						if( lambda( entity ) )
+						{
+							return( true );
+						}
+					}
+				}
+				else
+				{
+					if( Contains( boxPosition, box, position ) )
+					{
+						if( lambda( entity ) )
+						{
+							return( true );
+						}
+					}
+				}
+			}
+
+			if( m_octants )
+			{
+				for( auto &octant : *m_octants )
+				{
+					if( octant.ExistsIn( boxPosition, box, lambda ) )
+					{
+						return( true );
+					}
+				}
+			}
+
+			break;
+
+		case eIntersectionType::OUTSIDE:
+			break;
+		}
+	}
+
 	return( false );
 }
 
