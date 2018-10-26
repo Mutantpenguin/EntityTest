@@ -1,5 +1,6 @@
 #include "CSphere.hpp"
 #include "CBoundingBox.hpp"
+#include "CFrustum.hpp"
 
 #include "Types.hpp"
 
@@ -17,3 +18,7 @@ eIntersectionType Intersection( const glm::vec3 &boxPosition, const CBoundingBox
 eIntersectionType Intersection( const glm::vec3 &sphereAPosition, const CSphere &sphereA, const glm::vec3 &sphereBPosition, const CSphere &sphereB );
 
 eIntersectionType Intersection( const glm::vec3 &spherePosition, const CSphere &sphere, const glm::vec3 &boxPosition, const CBoundingBox &box );
+
+eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &boxPosition, const CBoundingBox &box );
+
+eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &spherePosition, const CSphere &sphere );

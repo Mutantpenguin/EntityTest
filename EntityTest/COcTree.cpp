@@ -58,6 +58,7 @@ bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoun
 {
 	if( boundingBox )
 	{
+		// TODO would "Contains" be faster in this case?
 		if( Intersection( m_position, m_region, position, *boundingBox ) != eIntersectionType::INSIDE )
 		{
 			return( false );
@@ -198,12 +199,51 @@ void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, 
 			break;
 		}
 	}
-
 }
 
 void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( const CEntity &entity ) > lambda )
-{
-	// TODO stub
+{	
+	if( m_containsEntities )
+	{
+		switch( Intersection( frustum, m_position, m_region ) )
+		{
+		case eIntersectionType::INSIDE:
+			ForEach( lambda );
+			break;
+
+		case eIntersectionType::INTERSECT:
+			for( const auto &[ entity, position, boundingBox ] : m_children )
+			{
+				if( boundingBox.has_value() )
+				{
+					if( Intersection( frustum, position, boundingBox.value() ) != eIntersectionType::OUTSIDE )
+					{
+						lambda( entity );
+					}
+				}
+				else
+				{
+					if( Contains( frustum, position ) )
+					{
+						lambda( entity );
+					}
+				}
+			}
+
+			if( m_octants )
+			{
+				for( auto &octant : *m_octants )
+				{
+					octant.ForEachIn( frustum, lambda );
+				}
+			}
+
+			break;
+
+		case eIntersectionType::OUTSIDE:
+			break;
+		}
+	}
 }
 
 bool COcTree::Exists( const std::function< bool( const CEntity &entity ) > lambda ) const
@@ -291,7 +331,6 @@ bool COcTree::ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, 
 
 bool COcTree::ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< bool( const CEntity &entity ) > lambda ) const
 {
-	// TODO stub
 	if( m_containsEntities )
 	{
 		switch( Intersection( boxPosition, box, m_position, m_region ) )
@@ -348,6 +387,56 @@ bool COcTree::ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, c
 
 bool COcTree::ExistsIn( const CFrustum &frustum, const std::function< bool( const CEntity &entity ) > lambda ) const
 {
-	// TODO stub
+	if( m_containsEntities )
+	{
+		switch( Intersection( frustum, m_position, m_region ) )
+		{
+		case eIntersectionType::INSIDE:
+			return( Exists( lambda ) );
+			break;
+
+		case eIntersectionType::INTERSECT:
+			for( const auto &[ entity, position, boundingBox ] : m_children )
+			{
+				if( boundingBox.has_value() )
+				{
+					if( Intersection( frustum, position, boundingBox.value() ) != eIntersectionType::OUTSIDE )
+					{
+						if( lambda( entity ) )
+						{
+							return( true );
+						}
+					}
+				}
+				else
+				{
+					if( Contains( frustum, position ) )
+					{
+						if( lambda( entity ) )
+						{
+							return( true );
+						}
+					}
+				}
+			}
+
+			if( m_octants )
+			{
+				for( auto &octant : *m_octants )
+				{
+					if( octant.ExistsIn( frustum, lambda ) )
+					{
+						return( true );
+					}
+				}
+			}
+
+			break;
+
+		case eIntersectionType::OUTSIDE:
+			break;
+		}
+	}
+
 	return( false );
 }

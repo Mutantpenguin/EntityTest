@@ -32,9 +32,10 @@ float CPlane::Distance( void ) const
 
 void CPlane::Normalize( void )
 {
-	const float length = 1.0f / glm::length( m_normal );
-	m_normal *= length;
-	m_distance *= length;
+	const float length = glm::length( m_normal );
+	m_normal /= length;
+	// TODO is this right?
+	m_distance /= length;
 }
 
 float CPlane::DistanceToPlane( const glm::vec3 &point ) const

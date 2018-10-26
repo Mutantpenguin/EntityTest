@@ -105,3 +105,27 @@ eIntersectionType Intersection( const glm::vec3 &spherePosition, const CSphere &
 	
 	return( eIntersectionType::OUTSIDE );
 }
+
+eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &boxPosition, const CBoundingBox &box )
+{
+	// TODO stub
+	return( eIntersectionType::OUTSIDE );
+}
+
+eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &spherePosition, const CSphere &sphere )
+{
+	// TODO stub
+
+	// TODO multithreaded?
+	/*
+	for( const CPlane &plane : frustum.m_planes )
+	{
+		if( plane.DistanceToPlane( spherePosition ) < -sphere.Radius() )
+		{
+			return( false );
+		}
+	}
+	*/
+
+	return( eIntersectionType::OUTSIDE );
+}

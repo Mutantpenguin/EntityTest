@@ -7,6 +7,8 @@
 
 class CFrustum
 {
+	friend bool Contains( const CFrustum &frustum, const glm::vec3 &point );
+
 public:
 	explicit CFrustum( const glm::mat4 &viewProjectionMatrix );
 

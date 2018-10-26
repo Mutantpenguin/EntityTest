@@ -36,3 +36,17 @@ bool Contains( const glm::vec3 &spherePosition, const CSphere &sphere, const glm
 
 	return( false );
 }
+
+bool Contains( const CFrustum &frustum, const glm::vec3 &point )
+{
+	// TODO multithreaded?
+	for( const CPlane &plane : frustum.m_planes )
+	{
+		if( plane.DistanceToPlane( point ) < 0 )
+		{
+			return( false );
+		}
+	}
+
+	return( true );
+}
