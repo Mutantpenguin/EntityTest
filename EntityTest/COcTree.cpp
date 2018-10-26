@@ -155,6 +155,11 @@ void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere,
 	}
 }
 
+void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( const CEntity &entity ) > lambda )
+{
+	// TODO stub
+}
+
 bool COcTree::Exists( const std::function< bool( const CEntity &entity ) > lambda ) const
 {
 	if( m_containsEntities )
@@ -235,5 +240,11 @@ bool COcTree::ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, 
 		}
 	}
 
+	return( false );
+}
+
+bool COcTree::ExistsIn( const CFrustum &frustum, const std::function< bool( const CEntity &entity ) > lambda ) const
+{
+	// TODO stub
 	return( false );
 }
