@@ -54,6 +54,7 @@
     </VirtualDirectory>
     <File Name="MyECS.hpp"/>
     <VirtualDirectory Name="Sonstiges">
+      <File Name="Types.hpp"/>
       <File Name="CLogger.cpp"/>
       <File Name="CWorld.cpp"/>
       <File Name="CFrustum.cpp"/>

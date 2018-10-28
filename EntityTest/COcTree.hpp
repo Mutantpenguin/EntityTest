@@ -17,16 +17,16 @@ public:
 
 	bool Add( const CEntity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox ) override;
 
-	virtual void ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda ) override;
-	virtual void ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const CEntity &entity ) > lambda ) override;
-	virtual void ForEachIn( const CFrustum &frustum, const std::function< void( const CEntity &entity ) > lambda ) override;
+	virtual void ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda ) const override;
+	virtual void ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const CEntity &entity ) > lambda ) const override;
+	virtual void ForEachIn( const CFrustum &frustum, const std::function< void( const CEntity &entity ) > lambda ) const override;
 
 	virtual bool ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< bool( const CEntity &entity ) > lambda ) const override;
 	virtual bool ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< bool( const CEntity &entity ) > lambda ) const override;
 	virtual bool ExistsIn( const CFrustum &frustum, const std::function< bool( const CEntity &entity ) > lambda ) const override;
 
 private:
-	void ForEach( const std::function< void( const CEntity &entity ) > lambda );
+	void ForEach( const std::function< void( const CEntity &entity ) > lambda ) const;
 	bool Exists( const std::function< bool( const CEntity &entity ) > lambda ) const;
 	
 	const glm::vec3		m_position;

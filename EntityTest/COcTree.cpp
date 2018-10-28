@@ -92,7 +92,7 @@ bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoun
 	return( true );
 }
 
-void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lambda )
+void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -111,7 +111,7 @@ void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lamb
 	}
 }
 
-void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda )
+void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const CEntity &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -156,7 +156,7 @@ void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere,
 	}
 }
 
-void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const CEntity &entity ) > lambda )
+void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const CEntity &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -201,7 +201,7 @@ void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, 
 	}
 }
 
-void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( const CEntity &entity ) > lambda )
+void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( const CEntity &entity ) > lambda ) const
 {	
 	if( m_containsEntities )
 	{
