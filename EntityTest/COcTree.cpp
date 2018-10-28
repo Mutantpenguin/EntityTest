@@ -58,8 +58,7 @@ bool COcTree::Add( const CEntity &entity, const glm::vec3 &position, const CBoun
 {
 	if( boundingBox )
 	{
-		// TODO would "Contains" be faster in this case?
-		if( Intersection( m_position, m_region, position, *boundingBox ) != eIntersectionType::INSIDE )
+		if( !Contains( m_position, m_region, position, *boundingBox ) )
 		{
 			return( false );
 		}
