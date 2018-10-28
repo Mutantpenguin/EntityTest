@@ -93,6 +93,7 @@ int main()
 		CLogger::Info( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
+
 	{
 		{
 			MTR_SCOPE( __FILE__, "Create systems" );
@@ -104,6 +105,10 @@ int main()
 			ecs.CreateSystem< CMovementSystem >();
 			ecs.CreateSystem< CBVHSystem >( spatial );
 		}
+
+		ecs.ProcessSystems();
+		
+		MTR_INSTANT( "main", "START" );
 
 		// test of a real mainloop
 		CLogger::Info( "START main loop" );

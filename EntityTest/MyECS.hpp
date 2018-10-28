@@ -16,7 +16,7 @@
 
 #include "CTransformComponent.hpp"
 
-using MyECS = CEntityComponentSystem<	10000,
+using MyECS = CEntityComponentSystem<	100000,
 										CPhysicsComponent,
 										CPlayerComponent,
 										CDebugNameComponent,
