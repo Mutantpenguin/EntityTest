@@ -50,3 +50,29 @@ bool Contains( const CFrustum &frustum, const glm::vec3 &point )
 
 	return( true );
 }
+
+bool Contains( const glm::vec3 &boxAPosition, const CBoundingBox &boxA, const glm::vec3 &boxBPosition, const CBoundingBox &boxB )
+{
+	const glm::vec3 maxA = boxA.Max( boxAPosition );
+	const glm::vec3 minA = boxA.Min( boxAPosition );
+
+	const glm::vec3 maxB = boxB.Max( boxBPosition );
+	const glm::vec3 minB = boxB.Min( boxBPosition );
+
+	if( ( minA.x > minB.x )
+		||
+		( maxA.x < maxB.x )
+		||
+		( minA.y > minB.y )
+		||
+		( maxA.y < maxB.y )
+		||
+		( minA.z > minB.z )
+		||
+		( maxA.z < maxB.z ) )
+	{
+		return( false );
+	}
+	
+	return( true );
+}
