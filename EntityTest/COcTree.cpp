@@ -103,7 +103,7 @@ void COcTree::ForEach( const std::function< void( const CEntity &entity ) > lamb
 
 		if( m_octants )
 		{
-			for( auto &octant : *m_octants )
+			for( const auto &octant : *m_octants )
 			{
 				octant.ForEach( lambda );
 			}
@@ -142,7 +142,7 @@ void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere,
 
 			if( m_octants )
 			{
-				for( auto &octant : *m_octants )
+				for( const auto &octant : *m_octants )
 				{
 					octant.ForEachIn( spherePosition, sphere, lambda );
 				}
@@ -187,7 +187,7 @@ void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, 
 
 			if( m_octants )
 			{
-				for( auto &octant : *m_octants )
+				for( const auto &octant : *m_octants )
 				{
 					octant.ForEachIn( boxPosition, box, lambda );
 				}
@@ -232,7 +232,7 @@ void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( con
 
 			if( m_octants )
 			{
-				for( auto &octant : *m_octants )
+				for( const auto &octant : *m_octants )
 				{
 					octant.ForEachIn( frustum, lambda );
 				}
@@ -260,7 +260,7 @@ bool COcTree::Exists( const std::function< bool( const CEntity &entity ) > lambd
 
 		if( m_octants )
 		{
-			for( auto &octant : *m_octants )
+			for( const auto &octant : *m_octants )
 			{
 				if( octant.Exists( lambda ) )
 				{
@@ -310,7 +310,7 @@ bool COcTree::ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, 
 
 			if( m_octants )
 			{
-				for( auto &octant : *m_octants )
+				for( const auto &octant : *m_octants )
 				{
 					if( octant.ExistsIn( spherePosition, sphere, lambda ) )
 					{
@@ -366,7 +366,7 @@ bool COcTree::ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, c
 
 			if( m_octants )
 			{
-				for( auto &octant : *m_octants )
+				for( const auto &octant : *m_octants )
 				{
 					if( octant.ExistsIn( boxPosition, box, lambda ) )
 					{
@@ -422,7 +422,7 @@ bool COcTree::ExistsIn( const CFrustum &frustum, const std::function< bool( cons
 
 			if( m_octants )
 			{
-				for( auto &octant : *m_octants )
+				for( const auto &octant : *m_octants )
 				{
 					if( octant.ExistsIn( frustum, lambda ) )
 					{
