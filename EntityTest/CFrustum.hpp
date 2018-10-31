@@ -1,5 +1,4 @@
-#ifndef CFRUSTUM_HPP
-#define CFRUSTUM_HPP
+#pragma once
 
 #include <array>
 
@@ -17,5 +16,3 @@ public:
 private:
 	std::array< CPlane, 6 > m_planes;
 };
-
-#endif // CFRUSTUM_HPP

@@ -1,5 +1,4 @@
-#ifndef CPLANE_HPP
-#define CPLANE_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -24,5 +23,3 @@ private:
 	glm::vec3	m_normal { 0.0f, 0.0f, 0.0f };
 	float		m_distance { 0.0f };
 };
-
-#endif // CPLANE_HPP

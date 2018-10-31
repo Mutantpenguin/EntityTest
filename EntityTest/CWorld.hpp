@@ -1,5 +1,4 @@
-#ifndef CWORLD_HPP
-#define CWORLD_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -17,5 +16,3 @@ public:
 	static const glm::vec3 Y;
 	static const glm::vec3 X;
 };
-
-#endif // CWORLD_HPP
