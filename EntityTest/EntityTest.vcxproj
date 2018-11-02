@@ -179,7 +179,7 @@
     <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="CDebugNameComponent.hpp" />
     <ClInclude Include="CTransformComponent.hpp" />
-    <ClInclude Include="CWorld.hpp" />
+    <ClInclude Include="World.hpp" />
     <ClInclude Include="CBoundingBoxComponent.hpp" />
     <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="minitrace.h" />
@@ -202,7 +202,6 @@
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CSphere.cpp" />
-    <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="CEntity.hpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="CTransformComponent.cpp" />

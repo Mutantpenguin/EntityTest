@@ -33,9 +33,6 @@
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CWorld.hpp">
-      <Filter>Sonstiges</Filter>
-    </ClInclude>
     <ClInclude Include="CLogger.hpp">
       <Filter>Sonstiges</Filter>
     </ClInclude>
@@ -132,15 +129,15 @@
     <ClInclude Include="Types.hpp">
       <Filter>Sonstiges</Filter>
     </ClInclude>
+    <ClInclude Include="World.hpp">
+      <Filter>Sonstiges</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
       <Filter>Sonstiges</Filter>
     </ClCompile>
     <ClCompile Include="CPlane.cpp">
-      <Filter>Sonstiges</Filter>
-    </ClCompile>
-    <ClCompile Include="CWorld.cpp">
       <Filter>Sonstiges</Filter>
     </ClCompile>
     <ClCompile Include="EntityTest.cpp">
