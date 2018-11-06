@@ -31,7 +31,7 @@ int main()
 	{
 		MTR_SCOPE( __FILE__, "Creating entities" );
 
-		const auto start = std::chrono::system_clock::now();
+		const auto start = std::chrono::high_resolution_clock::now();
 
 		for( size_t i = 0; i < ecs.MaxSize; i++ )
 		{
@@ -88,7 +88,7 @@ int main()
 			}
 		}
 
-		const auto end = std::chrono::system_clock::now();
+		const auto end = std::chrono::high_resolution_clock::now();
 		const std::chrono::duration<double> diff = end - start;
 		CLogger::Info( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
@@ -115,24 +115,24 @@ int main()
 
 		const u16 simulateFrameCount { 500 };
 
-		const auto startMainLoop = std::chrono::system_clock::now();
+		const auto startMainLoop = std::chrono::high_resolution_clock::now();
 
 		for( u16 i = 0; i < simulateFrameCount; i++ )
 		{
 			MTR_BEGIN( __FILE__, "Frame" );
 
-			const auto startFrame = std::chrono::system_clock::now();
+			const auto startFrame = std::chrono::high_resolution_clock::now();
 
 			ecs.ProcessSystems();
 
-			const std::chrono::duration<double> diffFrame = std::chrono::system_clock::now() - startFrame;
+			const std::chrono::duration<double> diffFrame = std::chrono::high_resolution_clock::now() - startFrame;
 			CLogger::Debug( "frame delta: " + std::to_string( diffFrame.count() * 1000.0f ) + " ms" );
 			CLogger::Debug( "" );
 			
 			MTR_END( __FILE__, "Frame" );
 		}
 
-		const std::chrono::duration<double> diffMainLoop = std::chrono::system_clock::now() - startMainLoop;
+		const std::chrono::duration<double> diffMainLoop = std::chrono::high_resolution_clock::now() - startMainLoop;
 
 		CLogger::Info( "END main loop" );
 

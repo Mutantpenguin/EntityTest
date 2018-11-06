@@ -19,7 +19,7 @@ void CBVHSystem::Process()
 
 	CLogger::Debug( "\tprocessing: CBVHSystem" );
 	
-	const auto start = std::chrono::system_clock::now();
+	const auto start = std::chrono::high_resolution_clock::now();
 
 	m_bvh->Clear();
 	
@@ -45,7 +45,7 @@ void CBVHSystem::Process()
 		CLogger::Debug( "\t\tdestroyed " + std::to_string( entitiesForDeletion.size() ) + " entities which dropped out of the world" );
 	}
 
-	const auto end = std::chrono::system_clock::now();
+	const auto end = std::chrono::high_resolution_clock::now();
 	const std::chrono::duration<double> diff = end - start;
 	CLogger::Debug( "\t\trebuilding bvh system: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
 	
