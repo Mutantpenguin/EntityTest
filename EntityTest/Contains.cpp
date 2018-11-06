@@ -29,7 +29,7 @@ bool Contains( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm:
 
 bool Contains( const glm::vec3 &spherePosition, const CSphere &sphere, const glm::vec3 &point )
 {
-	if( glm::length2( spherePosition - point ) <= std::pow( sphere.Radius(), 2 ) )
+	if( glm::length2( spherePosition - point ) <= sphere.Radius2() )
 	{
 		return( true );
 	}
@@ -40,9 +40,23 @@ bool Contains( const glm::vec3 &spherePosition, const CSphere &sphere, const glm
 bool Contains( const CFrustum &frustum, const glm::vec3 &point )
 {
 	// TODO multithreaded?
-	for( const CPlane &plane : frustum.m_planes )
+	for( const CPlane &plane : frustum.Planes() )
 	{
 		if( plane.DistanceToPlane( point ) < 0 )
+		{
+			return( false );
+		}
+	}
+
+	return( true );
+}
+
+bool Contains( const CFrustum &frustum, const glm::vec3 &spherePosition, const CSphere &sphere )
+{
+	// TODO multithreaded?
+	for( const CPlane &plane : frustum.Planes() )
+	{
+		if( plane.DistanceToPlane( spherePosition ) < -sphere.Radius() )
 		{
 			return( false );
 		}

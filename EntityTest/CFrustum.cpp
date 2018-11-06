@@ -64,3 +64,8 @@ bool CFrustum::IsSphereInside( const glm::vec3 &position, const float boundingSp
 
 	return( true );
 }
+
+const std::array< CPlane, 6 > &CFrustum::Planes() const
+{
+	return( m_planes );
+}

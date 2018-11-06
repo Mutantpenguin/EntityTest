@@ -50,7 +50,7 @@ eIntersectionType Intersection( const glm::vec3 &boxAPosition, const CBoundingBo
 
 eIntersectionType Intersection( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm::vec3 &spherePosition, const CSphere &sphere )
 {
-	if( std::pow( sphere.Radius(), 2 ) >= glm::length2( spherePosition - ClosestPoint( boxPosition, box, spherePosition ) ) )
+	if( sphere.Radius2() >= glm::length2( spherePosition - ClosestPoint( boxPosition, box, spherePosition ) ) )
 	{
 		if( Contains( spherePosition, sphere, box.Min( boxPosition ) )
 			&&
@@ -89,7 +89,7 @@ eIntersectionType Intersection( const glm::vec3 &sphereAPosition, const CSphere 
 
 eIntersectionType Intersection( const glm::vec3 &spherePosition, const CSphere &sphere, const glm::vec3 &boxPosition, const CBoundingBox &box )
 {
-	const auto radiusSquared = std::pow( sphere.Radius(), 2 );
+	const auto &radiusSquared = sphere.Radius2();
 	
 	if( radiusSquared >= glm::length2( spherePosition - ClosestPoint( boxPosition, box, spherePosition ) ) )
 	{
@@ -115,17 +115,17 @@ eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &boxPos
 eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &spherePosition, const CSphere &sphere )
 {
 	// TODO stub
-
-	// TODO multithreaded?
 	/*
-	for( const CPlane &plane : frustum.m_planes )
+	// TODO multithreaded?
+	for( const CPlane &plane : frustum.Planes() )
 	{
-		if( plane.DistanceToPlane( spherePosition ) < -sphere.Radius() )
+		const auto distance = plane.DistanceToPlane( spherePosition );
+
+		if( distance < -sphere.Radius() )
 		{
-			return( false );
+			return( eIntersectionType::OUTSIDE );
 		}
 	}
 	*/
-
-	return( eIntersectionType::OUTSIDE );
+	return( eIntersectionType::INSIDE );
 }
