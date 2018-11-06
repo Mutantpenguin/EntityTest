@@ -120,6 +120,7 @@ int main()
 		for( u16 i = 0; i < simulateFrameCount; i++ )
 		{
 			MTR_SCOPE_I( __FILE__, "Frame", "no", i );
+			MTR_INSTANT_I( __FILE__, "ECS", "count", ecs.Count() );
 
 			const auto startFrame = std::chrono::high_resolution_clock::now();
 

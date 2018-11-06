@@ -63,6 +63,19 @@ public:
 		m_freeEntities.push_back( entity );
 	}
 
+	size_t Count() const
+	{
+		return( _Size - m_freeEntities.size() );
+	}
+
+	template< typename T >
+	size_t Count() const
+	{
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
+
+		return( std::get< ComponentSlotMap< T > >( m_componentStorage ).Count() );
+	}
+
 	template< typename T >
 	void AddComponent( const CEntity &entity, T& t )
 	{
@@ -156,14 +169,6 @@ public:
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
 		return( std::get< ComponentSlotMap< T > >( m_componentStorage ).Exists( lambda ) );
-	}
-
-	template< typename T >
-	size_t Count() const
-	{
-		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
-
-		return( std::get< ComponentSlotMap< T > >( m_componentStorage ).Count() );
 	}
 
 	template< typename T, typename... Args >
