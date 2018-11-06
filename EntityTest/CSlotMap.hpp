@@ -206,7 +206,7 @@ public:
 
 	size_t Count() const
 	{
-		return( m_lastObjectIndex );
+		return( m_lastObjectIndex + 1 );
 	}
 
 private:
