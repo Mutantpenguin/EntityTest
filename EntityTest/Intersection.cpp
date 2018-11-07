@@ -115,8 +115,9 @@ eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &boxPos
 eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &spherePosition, const CSphere &sphere )
 {
 	// TODO stub
-	/*
+
 	// TODO multithreaded?
+	/*
 	for( const CPlane &plane : frustum.Planes() )
 	{
 		const auto distance = plane.DistanceToPlane( spherePosition );
@@ -124,8 +125,25 @@ eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &sphere
 		if( distance < -sphere.Radius() )
 		{
 			return( eIntersectionType::OUTSIDE );
+		}		
+	}
+
+	for( const CPlane &plane : frustum.Planes() )
+	{
+		const auto distance = plane.DistanceToPlane( spherePosition );
+
+		if( std::abs( distance ) <= sphere.Radius() )
+		{
+			if( distance < -sphere.Radius() )
+			{
+				return( eIntersectionType::OUTSIDE );
+			}
+			else if( distance >= sphere.Radius() )
+			{
+				return( eIntersectionType::INTERSECT );
+			}
 		}
 	}
 	*/
-	return( eIntersectionType::INSIDE );
+	return( eIntersectionType::INTERSECT );
 }
