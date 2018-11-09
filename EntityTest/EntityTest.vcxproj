@@ -183,22 +183,18 @@
     <ClInclude Include="CBoundingBoxComponent.hpp" />
     <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="minitrace.h" />
-    <ClInclude Include="MyECS.hpp" />
+    <ClInclude Include="TestECS.hpp" />
     <ClInclude Include="CSphere.hpp" />
     <ClInclude Include="TupleChecker.hpp" />
     <ClInclude Include="TupleIterator.hpp" />
     <ClInclude Include="Types.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CBombSystem.cpp" />
     <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="CLogger.cpp" />
     <ClCompile Include="ClosestPoint.cpp" />
     <ClCompile Include="Contains.cpp" />
-    <ClCompile Include="CBVHSystem.cpp" />
     <ClCompile Include="CFrustum.cpp" />
-    <ClCompile Include="CHealthSystem.cpp" />
-    <ClCompile Include="CMovementSystem.cpp" />
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CSphere.cpp" />

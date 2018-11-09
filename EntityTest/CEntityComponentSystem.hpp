@@ -174,7 +174,7 @@ public:
 	template< typename T, typename... Args >
 	void CreateSystem( Args... args )
 	{
-		static_assert( std::is_base_of< CComponentSystem, T >::value, "must derive from CComponentSystem" );
+		static_assert( std::is_base_of< CComponentSystem< CEntityComponentSystem< _Size, Types ... > >, T >::value, "must derive from CComponentSystem" );
 
 		auto it = m_systemTypes.find( typeid( T ) );
 
@@ -195,7 +195,7 @@ public:
 	template< typename T >
 	void DestroySystem()
 	{
-		static_assert( std::is_base_of< CComponentSystem, T >::value, "must derive from CComponentSystem" );
+		static_assert( std::is_base_of< CComponentSystem< CEntityComponentSystem< _Size, Types ... > >, T >::value, "must derive from CComponentSystem" );
 
 		auto it = m_systemTypes.find( typeid( T ) );
 
@@ -210,10 +210,21 @@ public:
 		}
 	}
 
+	void DestroySystemAll()
+	{
+		for( auto &systemType : m_systemTypes )
+		{
+			m_systems.erase( systemType.second );
+		}
+
+		m_systemTypes.clear();
+	}
+
+
 	template< typename T >
 	void PauseSystem()
 	{
-		static_assert( std::is_base_of< CComponentSystem, T >::value, "must derive from CComponentSystem" );
+		static_assert( std::is_base_of< CComponenCComponentSystem< CEntityComponentSystem< _Size, Types ... > >tSystem, T >::value, "must derive from CComponentSystem" );
 
 		auto it = m_systemTypes.find( typeid( T ) );
 
@@ -230,7 +241,7 @@ public:
 	template< typename T >
 	void UnPauseSystem()
 	{
-		static_assert( std::is_base_of< CComponentSystem, T >::value, "must derive from CComponentSystem" );
+		static_assert( std::is_base_of< CComponentSystem< CEntityComponentSystem< _Size, Types ... > >, T >::value, "must derive from CComponentSystem" );
 
 		auto it = m_systemTypes.find( typeid( T ) );
 
@@ -272,5 +283,5 @@ private:
 
 	// two structures needed, so we can check against the type AND have a proper order
 	std::unordered_map< std::type_index, u16 > m_systemTypes;
-	std::map< u16, std::unique_ptr< CComponentSystem > > m_systems;
+	std::map< u16, std::unique_ptr< CComponentSystem< CEntityComponentSystem< _Size, Types ... > > > > m_systems;
 };

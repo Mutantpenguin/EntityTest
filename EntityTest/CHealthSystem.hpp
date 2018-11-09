@@ -2,21 +2,43 @@
 
 #include "CComponentSystem.hpp"
 
-#include "MyECS.hpp"
-
-class CHealthSystem final : public CComponentSystem
+template< typename T_ecs >
+class CHealthSystem final : public CComponentSystem< T_ecs >
 {
 public:
-	CHealthSystem( MyECS &ecs ) :
-		m_ecs { ecs }
+	CHealthSystem( T_ecs &ecs ) :
+		CComponentSystem( ecs )
 	{}
 
 	~CHealthSystem()
 	{};
 
-	virtual void Process() override;
+	virtual void Process() override
+	{
+		MTR_BEGIN( "CHealthSystem", "CHealthSystem::Process" );
 
-private:
-	MyECS &m_ecs;
+		CLogger::Debug( "\tprocessing: CHealthSystem" );
+
+		std::vector< CEntity > entitiesForDeletion;
+
+		m_ecs.ForEach< CHealthComponent >( [ &entitiesForDeletion ] ( const auto &healthEntity, auto healthComponent )
+		{
+			if( healthComponent->health <= 0.0f )
+			{
+				entitiesForDeletion.push_back( healthEntity );
+			}
+		} );
+
+		for( const auto &entity : entitiesForDeletion )
+		{
+			m_ecs.Destroy( entity );
+		}
+
+		if( entitiesForDeletion.size() > 0 )
+		{
+			CLogger::Debug( "\t\tdestroyed " + std::to_string( entitiesForDeletion.size() ) + " entities" );
+		}
+
+		MTR_END( "CHealthSystem", "CHealthSystem::Process" );
+	}
 };
-

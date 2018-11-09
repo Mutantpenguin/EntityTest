@@ -69,9 +69,6 @@
     <ClInclude Include="CSlotMap.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="MyECS.hpp">
-      <Filter>TestApp</Filter>
-    </ClInclude>
     <ClInclude Include="CExplosionComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
@@ -132,6 +129,9 @@
     <ClInclude Include="World.hpp">
       <Filter>Sonstiges</Filter>
     </ClInclude>
+    <ClInclude Include="TestECS.hpp">
+      <Filter>TestApp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
@@ -145,15 +145,6 @@
     </ClCompile>
     <ClCompile Include="CEntity.hpp">
       <Filter>ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="CMovementSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="CHealthSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="CBombSystem.cpp">
-      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="COcTree.cpp">
       <Filter>Spatial</Filter>
@@ -175,9 +166,6 @@
     </ClCompile>
     <ClCompile Include="CBoundingBox.cpp">
       <Filter>Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="CBVHSystem.cpp">
-      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="CTransformComponent.cpp">
       <Filter>Components</Filter>

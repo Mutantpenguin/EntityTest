@@ -1,19 +1,15 @@
 #include <chrono>
 
+#include "minitrace.h"
+
 #include "Types.hpp"
 
 #include "CLogger.hpp"
 
-#include "MyECS.hpp"
+#include "TestECS.hpp"
 
 #include "COcTree.hpp"
 
-#include "CBombSystem.hpp"
-#include "CHealthSystem.hpp"
-#include "CMovementSystem.hpp"
-#include "CBVHSystem.hpp"
-
-#include "minitrace.h"
 
 int main()
 {
@@ -23,7 +19,7 @@ int main()
 	MTR_META_THREAD_NAME( "main thread" );
 
 
-	MyECS ecs;
+	TestECS ecs;
 
 	CLogger::Info( "" );
 
@@ -100,10 +96,10 @@ int main()
 
 			auto spatial = std::make_shared< COcTree >( glm::vec3( 0.0f, 0.0f, 0.0f ), CBoundingBox( { 110.0f, 110.0f, 110.0f } ) );
 
-			ecs.CreateSystem< CBombSystem >( spatial );
-			ecs.CreateSystem< CHealthSystem >();
-			ecs.CreateSystem< CMovementSystem >();
-			ecs.CreateSystem< CBVHSystem >( spatial );
+			ecs.CreateSystem< TestBombSystem >( spatial );
+			ecs.CreateSystem< TestHealthSystem >();
+			ecs.CreateSystem< TestMovementSystem >();
+			ecs.CreateSystem< TestBVHSystem >( spatial );
 		}
 
 		ecs.ProcessSystems();
@@ -141,10 +137,7 @@ int main()
 
 		CLogger::Info( "" );
 
-		ecs.DestroySystem< CBombSystem >();
-		ecs.DestroySystem< CHealthSystem >();
-		ecs.DestroySystem< CMovementSystem >();
-		ecs.DestroySystem< CBVHSystem >();
+		ecs.DestroySystemAll();
 	}
 
 	mtr_flush();

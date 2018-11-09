@@ -16,7 +16,12 @@
 
 #include "CTransformComponent.hpp"
 
-using MyECS = CEntityComponentSystem<	100000,
+#include "CBombSystem.hpp"
+#include "CHealthSystem.hpp"
+#include "CMovementSystem.hpp"
+#include "CBVHSystem.hpp"
+
+using TestECS = CEntityComponentSystem<	100000,
 										CPhysicsComponent,
 										CPlayerComponent,
 										CDebugNameComponent,
@@ -26,3 +31,8 @@ using MyECS = CEntityComponentSystem<	100000,
 										CExplosionComponent,
 										CHealthComponent,
 										CMovementComponent >;
+
+using TestBombSystem = CBombSystem< TestECS >;
+using TestHealthSystem = CHealthSystem< TestECS >;
+using TestMovementSystem = CMovementSystem< TestECS >;
+using TestBVHSystem = CBVHSystem< TestECS >;
