@@ -2,6 +2,8 @@
 
 #include <glm/glm.hpp>
 
+#include "Types.hpp"
+
 class CPlane
 {
 public:
@@ -12,14 +14,14 @@ public:
 	void SetNormal( const glm::vec3 &normal );
 	const glm::vec3 &Normal( void ) const;
 
-	void SetDistance( float distance );
-	float Distance( void ) const;
+	void SetDistance( const f16 distance );
+	const f16 &Distance( void ) const;
 
 	void Normalize( void );
 
-	float DistanceToPlane( const glm::vec3 &point ) const;
+	f16 DistanceToPlane( const glm::vec3 &point ) const;
 
 private:
 	glm::vec3	m_normal { 0.0f, 0.0f, 0.0f };
-	float		m_distance { 0.0f };
+	f16			m_distance { 0.0f };
 };

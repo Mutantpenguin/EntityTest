@@ -1,14 +1,16 @@
 #pragma once
 
+#include "Types.hpp"
+
 struct CPhysicsComponent final
 {
 	CPhysicsComponent() noexcept
 	{}
 
-	CPhysicsComponent( const float p_mass ) :
+	CPhysicsComponent( const f16 p_mass ) :
 		mass { p_mass }
 	{}
 
-	float mass = 0.0f;
+	f16 mass = 0.0f;
 };
 

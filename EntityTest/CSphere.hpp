@@ -2,15 +2,17 @@
 
 #include <glm/glm.hpp>
 
+#include "Types.hpp"
+
 class CSphere final
 {
 public:
-	CSphere( const float radius );
+	CSphere( const f16 radius );
 
-	const float &Radius() const;
-	const float &Radius2() const;
+	const f16 &Radius() const;
+	const f16 &Radius2() const;
 
 private:
-	const float	m_radius { 0.0f };
-	const float	m_radius2 { 0.0f };
+	const f16	m_radius { 0.0f };
+	const f16	m_radius2 { 0.0f };
 };

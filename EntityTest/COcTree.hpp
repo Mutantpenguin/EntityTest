@@ -6,6 +6,8 @@
 #include <tuple>
 #include <optional>
 
+#include "Types.hpp"
+
 #include "CBVHBase.hpp"
 
 class COcTree final : public CBVHBase
@@ -38,5 +40,5 @@ private:
 
 	std::vector< std::tuple< CEntity, glm::vec3, std::optional< CBoundingBox > > > m_children;
 
-	static const float sMinSize;
+	static const f16 sMinSize;
 };

@@ -2,17 +2,19 @@
 
 #include <string>
 
+#include "Types.hpp"
+
 struct CExplosionComponent final
 {
 	CExplosionComponent() noexcept
 	{}
 
-	CExplosionComponent( const float &p_explosionRadius, const float &p_damage ) :
+	CExplosionComponent( const f16 &p_explosionRadius, const f16 &p_damage ) :
 		explosionRadius { p_explosionRadius },
 		damage { p_damage }
 	{}
 
-	float explosionRadius = 0.0f;
-	float damage = 0.0f;
+	f16 explosionRadius = 0.0f;
+	f16 damage = 0.0f;
 };
 

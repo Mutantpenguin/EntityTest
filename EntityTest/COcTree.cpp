@@ -7,7 +7,7 @@
 
 #include "minitrace.h"
 
-const float COcTree::sMinSize = 50.0f;
+const f16 COcTree::sMinSize = 50.0f;
 
 COcTree::COcTree( const glm::vec3 &position, const CBoundingBox &region ) :
 	m_position { position },

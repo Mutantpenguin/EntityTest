@@ -2,15 +2,17 @@
 
 #include <string>
 
+#include "Types.hpp"
+
 struct CBombComponent final
 {
 	CBombComponent() noexcept
 	{}
 
-	CBombComponent( const float &p_activationRadius ) :
+	CBombComponent( const f16 &p_activationRadius ) :
 		activationRadius { p_activationRadius }
 	{}
 
-	float activationRadius = 0.0f;
+	f16 activationRadius = 0.0f;
 };
 

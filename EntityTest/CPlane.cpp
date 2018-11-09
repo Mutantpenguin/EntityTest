@@ -20,25 +20,25 @@ const glm::vec3 &CPlane::Normal( void ) const
 	return( m_normal );
 }
 
-void CPlane::SetDistance( float distance )
+void CPlane::SetDistance( const f16 distance )
 {
 	m_distance = distance;
 }
 
-float CPlane::Distance( void ) const
+const f16 &CPlane::Distance( void ) const
 {
 	return( m_distance );
 }
 
 void CPlane::Normalize( void )
 {
-	const float length = glm::length( m_normal );
+	const f16 length = glm::length( m_normal );
 	m_normal /= length;
 	// TODO is this right?
 	m_distance /= length;
 }
 
-float CPlane::DistanceToPlane( const glm::vec3 &point ) const
+f16 CPlane::DistanceToPlane( const glm::vec3 &point ) const
 {
 	return( glm::dot( m_normal, point ) + m_distance );
 }

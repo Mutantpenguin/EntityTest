@@ -13,3 +13,7 @@ using i8  = int8_t;
 using i16 = int16_t;
 using i32 = int32_t;
 using i64 = int64_t;
+
+// floating point
+using f16 = float;
+using f32 = double;

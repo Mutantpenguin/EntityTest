@@ -3,9 +3,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+#include "Types.hpp"
+
 #include "World.hpp"
 
-void CTransformComponent::Rotate( const float pitchAngle, const float yawAngle, const float rollAngle )
+void CTransformComponent::Rotate( const f16 pitchAngle, const f16 yawAngle, const f16 rollAngle )
 {
 	Orientation = glm::angleAxis( glm::radians( pitchAngle ), World::X ) * Orientation;
 	Orientation = glm::angleAxis( glm::radians( yawAngle ), World::Y ) * Orientation;

@@ -51,7 +51,7 @@ CFrustum::CFrustum( const glm::mat4 &viewProjectionMatrix )
 	back.Normalize();
 }
 
-bool CFrustum::IsSphereInside( const glm::vec3 &position, const float boundingSphereRadius ) const
+bool CFrustum::IsSphereInside( const glm::vec3 &position, const f16 boundingSphereRadius ) const
 {
 	// TODO multithreaded?
 	for( const CPlane &plane : m_planes )

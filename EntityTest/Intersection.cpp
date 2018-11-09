@@ -75,7 +75,7 @@ eIntersectionType Intersection( const glm::vec3 &sphereAPosition, const CSphere 
 	}
 	else
 	{
-		const float squaredDistance = glm::dot( distance, distance ); // same as squared length of distance
+		const f16 squaredDistance = glm::dot( distance, distance ); // same as squared length of distance
 		
 		// Spheres intersect if squared distance is less than squared sum of radii
 		if( squaredDistance <= std::pow( sphereA.Radius() + sphereB.Radius(), 2 ) )

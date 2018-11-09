@@ -2,15 +2,17 @@
 
 #include <cstdint>
 
+#include "Types.hpp"
+
 struct CHealthComponent final
 {
 	CHealthComponent() noexcept
 	{}
 
-	CHealthComponent( const float p_health ) :
+	CHealthComponent( const f16 p_health ) :
 		health { p_health }
 	{}
 
-	float health = 0;
+	f16 health = 0;
 };
 

@@ -46,7 +46,7 @@ void CBVHSystem::Process()
 	}
 
 	const auto end = std::chrono::high_resolution_clock::now();
-	const std::chrono::duration<double> diff = end - start;
+	const std::chrono::duration<f32> diff = end - start;
 	CLogger::Debug( "\t\trebuilding bvh system: " + std::to_string( diff.count() * 1000.0f ) + " ms" );
 	
 	MTR_END( "CBVHSystem", "CBVHSystem::Process" );

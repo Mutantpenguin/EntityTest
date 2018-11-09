@@ -81,15 +81,15 @@ int main()
 			else
 			{
 				CMovementComponent movement;
-				movement.Direction = {	static_cast< float >( rand() ) / static_cast< float >( RAND_MAX ),
-										static_cast< float >( rand() ) / static_cast< float >( RAND_MAX ),
-										static_cast< float >( rand() ) / static_cast< float >( RAND_MAX ) };
+				movement.Direction = {	static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ),
+										static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ),
+										static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ) };
 				ecs.AddComponent( entity, movement );
 			}
 		}
 
 		const auto end = std::chrono::high_resolution_clock::now();
-		const std::chrono::duration<double> diff = end - start;
+		const std::chrono::duration<f32> diff = end - start;
 		CLogger::Info( "creating entities : " + std::to_string( diff.count() * 1000.0f ) + " ms\n" );
 	}
 
@@ -126,12 +126,12 @@ int main()
 
 			ecs.ProcessSystems();
 
-			const std::chrono::duration<double> diffFrame = std::chrono::high_resolution_clock::now() - startFrame;
+			const std::chrono::duration<f32> diffFrame = std::chrono::high_resolution_clock::now() - startFrame;
 			CLogger::Debug( "frame delta: " + std::to_string( diffFrame.count() * 1000.0f ) + " ms" );
 			CLogger::Debug( "" );
 		}
 
-		const std::chrono::duration<double> diffMainLoop = std::chrono::high_resolution_clock::now() - startMainLoop;
+		const std::chrono::duration<f32> diffMainLoop = std::chrono::high_resolution_clock::now() - startMainLoop;
 
 		CLogger::Info( "END main loop" );
 
