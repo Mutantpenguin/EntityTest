@@ -224,7 +224,7 @@ public:
 	template< typename T >
 	void PauseSystem()
 	{
-		static_assert( std::is_base_of< CComponenCComponentSystem< CEntityComponentSystem< _Size, Types ... > >tSystem, T >::value, "must derive from CComponentSystem" );
+		static_assert( std::is_base_of< CComponentSystem< CEntityComponentSystem< _Size, Types ... > >, T >::value, "must derive from CComponentSystem" );
 
 		auto it = m_systemTypes.find( typeid( T ) );
 
