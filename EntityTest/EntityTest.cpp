@@ -102,7 +102,11 @@ int main()
 			ecs.CreateSystem< TestBVHSystem >( spatial );
 		}
 
+		const auto firstIterationStart = std::chrono::high_resolution_clock::now();
 		ecs.ProcessSystems();
+		const std::chrono::duration<f32> firstIterationDiff = std::chrono::high_resolution_clock::now() - firstIterationStart;
+		CLogger::Info( "first iteration diff: " + std::to_string( firstIterationDiff.count() * 1000.0f ) + " ms" );
+		CLogger::Info( "" );
 		
 		MTR_INSTANT( "main", "START" );
 
