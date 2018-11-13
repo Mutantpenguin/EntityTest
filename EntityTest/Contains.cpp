@@ -2,6 +2,8 @@
 
 #include <glm/gtx/norm.hpp>
 
+#include "Distance.hpp"
+
 #include "minitrace.h"
 
 bool Contains( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm::vec3 &point )
@@ -42,7 +44,7 @@ bool Contains( const CFrustum &frustum, const glm::vec3 &point )
 	// TODO multithreaded?
 	for( const CPlane &plane : frustum.Planes() )
 	{
-		if( plane.DistanceToPlane( point ) < 0 )
+		if( Distance( plane, point ) < 0 )
 		{
 			return( false );
 		}
@@ -56,7 +58,7 @@ bool Contains( const CFrustum &frustum, const glm::vec3 &spherePosition, const C
 	// TODO multithreaded?
 	for( const CPlane &plane : frustum.Planes() )
 	{
-		if( plane.DistanceToPlane( spherePosition ) < -sphere.Radius() )
+		if( Distance( plane, spherePosition ) < -sphere.Radius() )
 		{
 			return( false );
 		}

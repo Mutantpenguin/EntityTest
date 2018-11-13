@@ -132,6 +132,9 @@
     <ClInclude Include="TestECS.hpp">
       <Filter>TestApp</Filter>
     </ClInclude>
+    <ClInclude Include="Distance.hpp">
+      <Filter>Primitives</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
@@ -172,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="CLogger.cpp">
       <Filter>Sonstiges</Filter>
+    </ClCompile>
+    <ClCompile Include="Distance.cpp">
+      <Filter>Primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

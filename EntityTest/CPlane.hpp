@@ -19,8 +19,6 @@ public:
 
 	void Normalize( void );
 
-	f16 DistanceToPlane( const glm::vec3 &point ) const;
-
 private:
 	glm::vec3	m_normal { 0.0f, 0.0f, 0.0f };
 	f16			m_distance { 0.0f };

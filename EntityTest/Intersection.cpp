@@ -4,6 +4,7 @@
 
 #include "Contains.hpp"
 #include "ClosestPoint.hpp"
+#include "Distance.hpp"
 
 #include "minitrace.h"
 
@@ -117,16 +118,18 @@ eIntersectionType Intersection( const CFrustum &frustum, const glm::vec3 &sphere
 	// TODO stub
 
 	// TODO multithreaded?
-	/*
+
 	for( const CPlane &plane : frustum.Planes() )
 	{
-		const auto distance = plane.DistanceToPlane( spherePosition );
+		const auto distance = Distance( plane, spherePosition );
 
 		if( distance < -sphere.Radius() )
 		{
 			return( eIntersectionType::OUTSIDE );
 		}		
 	}
+
+	/*
 
 	for( const CPlane &plane : frustum.Planes() )
 	{

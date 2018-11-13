@@ -37,8 +37,3 @@ void CPlane::Normalize( void )
 	// TODO is this right?
 	m_distance /= length;
 }
-
-f16 CPlane::DistanceToPlane( const glm::vec3 &point ) const
-{
-	return( glm::dot( m_normal, point ) + m_distance );
-}

@@ -179,6 +179,7 @@
     <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="CDebugNameComponent.hpp" />
     <ClInclude Include="CTransformComponent.hpp" />
+    <ClInclude Include="Distance.hpp" />
     <ClInclude Include="World.hpp" />
     <ClInclude Include="CBoundingBoxComponent.hpp" />
     <ClInclude Include="Intersection.hpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="CEntity.hpp" />
+    <ClCompile Include="Distance.cpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="CTransformComponent.cpp" />
     <ClCompile Include="Intersection.cpp" />

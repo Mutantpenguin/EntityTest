@@ -1,5 +1,7 @@
 #include "CFrustum.hpp"
 
+#include "Distance.hpp"
+
 CFrustum::CFrustum( const glm::mat4 &viewProjectionMatrix )
 {
 	// right
@@ -56,7 +58,7 @@ bool CFrustum::IsSphereInside( const glm::vec3 &position, const f16 boundingSphe
 	// TODO multithreaded?
 	for( const CPlane &plane : m_planes )
 	{
-		if( plane.DistanceToPlane( position ) < -boundingSphereRadius )
+		if( Distance( plane, position ) < -boundingSphereRadius )
 		{
 			return( false );
 		}
