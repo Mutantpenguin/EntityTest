@@ -186,6 +186,19 @@ public:
 			}
 		}
 	}
+	
+	template< typename L >
+	void ForEachParralel( L lambda )
+	{
+		if( nullIndex != m_lastObjectIndex )
+		{
+			#pragma omp parallel
+			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
+			{
+				lambda( m_entities[ i ], &m_objects[ i ] );
+			}
+		}
+	}
 
 	template< typename L >
 	bool Exists( L lambda ) const

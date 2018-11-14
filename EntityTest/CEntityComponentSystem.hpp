@@ -164,6 +164,14 @@ public:
 	};
 
 	template< typename T, typename L >
+	void ForEachParralel( L lambda )
+	{
+		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
+
+		std::get< ComponentSlotMap< T > >( m_componentStorage ).ForEachParralel( lambda );
+	};
+
+	template< typename T, typename L >
 	bool Exists( L lambda ) const
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
