@@ -21,13 +21,11 @@ public:
 
 		m_ecs.ForEach<CMovementComponent>( [ this ] ( const auto &entity, auto movementComponent )
 		{
-			auto spatialComponent = m_ecs.GetComponent<CTransformComponent>( entity );
-			if( spatialComponent )
+			auto transformComponent = m_ecs.GetComponent<CTransformComponent>( entity );
+			if( transformComponent )
 			{
-				spatialComponent->Position += movementComponent->Direction;
+				transformComponent->Position += movementComponent->Direction;
 			}
-
-			auto physicsComponent = m_ecs.GetComponent<CPhysicsComponent>( entity );
 		} );
 
 		MTR_END( "CMovementSystem", "CMovementSystem::Process" );
