@@ -7,18 +7,30 @@
 
 #include "CEntity.hpp"
 
+
+template<typename T>
+struct TypeParseTraits;
+
+#define REGISTER_PARSE_TYPE( X ) template <> struct TypeParseTraits<X> \
+{ static const char* name; }; const char* TypeParseTraits<X>::name = #X
+
+
+#define REGISTER_PARSE(X) const std::string ComponentName { #X };
+
 template< size_t _Size, typename T >
 class CSlotMap
 {
 public:
 	CSlotMap( const CSlotMap& ) = delete;
-
+	REGISTER_PARSE( asd );
 	CSlotMap() noexcept :
 		m_idMappings( _Size, nullIndex ),
 		m_entities( _Size ),
 		m_objects( _Size )
 	{
 		CLogger::Info( "SlotMap for '" + std::string( typeid( T ).name() ) + "'" );
+		CLogger::Info( "SlotMap for '" + ComponentName + "'" );
+		CLogger::Info( "SlotMap for '" + std::string( TypeParseTraits<u32>::name ) + "'" );
 		// TODO round to 2 decimal places
 		CLogger::Info( "\tsize: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) + " MiBi" );
 	}
