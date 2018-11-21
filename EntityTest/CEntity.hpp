@@ -7,14 +7,14 @@
 
 class CEntity final
 {
-	template < size_t _Size, typename... Types >
+	template < u32 _Size, typename... Types >
 	friend class CEntityComponentSystem;
 
 public:
 	CEntity() noexcept
 	{}
 
-	const std::size_t &Id() const
+	const u32 &Id() const
 	{
 		return( m_id );
 	}
@@ -24,13 +24,13 @@ public:
 		return( m_version );
 	}
 
-	static const size_t nullId = std::numeric_limits< size_t >::max();
+	static const u32 nullId = std::numeric_limits< u32 >::max();
 
 private:
-	CEntity( const size_t id ) :
+	CEntity( const u32 id ) :
 		m_id { id }
 	{}
 
-	size_t m_id = nullId;
+	u32 m_id = nullId;
 	u32 m_version = 0;
 };

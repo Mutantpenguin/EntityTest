@@ -29,7 +29,7 @@ int main()
 
 		const auto start = std::chrono::high_resolution_clock::now();
 
-		for( size_t i = 0; i < ecs.MaxSize; i++ )
+		for( u32 i = 0; i < ecs.MaxSize; i++ )
 		{
 			auto entity = ecs.Create();
 			

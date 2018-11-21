@@ -2,14 +2,17 @@
 
 #include <string>
 #include <vector>
+#include <limits>
 
 #include "CLogger.hpp"
 
 #include "CEntity.hpp"
 
-template< size_t _Size, typename T >
+template< u32 _Size, typename T >
 class CSlotMap
 {
+	static_assert( _Size != std::numeric_limits<u32>::max(), "a maximum of 4294967294 entities is allowed" );
+
 public:
 	CSlotMap( const CSlotMap& ) = delete;
 
@@ -144,7 +147,7 @@ public:
 	{
 		if( nullIndex != m_lastObjectIndex )
 		{
-			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
+			for( u32 i = 0; i <= m_lastObjectIndex; i++ )
 			{
 				const auto &entity = m_entities[ i ];
 				m_idMappings[ entity.Id() ] = nullIndex;
@@ -180,7 +183,7 @@ public:
 	{
 		if( nullIndex != m_lastObjectIndex )
 		{
-			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
+			for( u32 i = 0; i <= m_lastObjectIndex; i++ )
 			{
 				lambda( m_entities[ i ], &m_objects[ i ] );
 			}
@@ -193,7 +196,7 @@ public:
 		if( nullIndex != m_lastObjectIndex )
 		{
 			#pragma omp parallel
-			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
+			for( u32 i = 0; i <= m_lastObjectIndex; i++ )
 			{
 				lambda( m_entities[ i ], &m_objects[ i ] );
 			}
@@ -205,7 +208,7 @@ public:
 	{
 		if( nullIndex != m_lastObjectIndex )
 		{
-			for( size_t i = 0; i <= m_lastObjectIndex; i++ )
+			for( u32 i = 0; i <= m_lastObjectIndex; i++ )
 			{
 				if( lambda( m_entities[ i ], &m_objects[ i ] ) )
 				{
@@ -217,19 +220,19 @@ public:
 		return( false );
 	}
 
-	size_t Count() const
+	u32 Count() const
 	{
 		return( m_lastObjectIndex + 1 );
 	}
 
 private:
-	const size_t nullIndex = std::numeric_limits< size_t >::max();
+	const u32 nullIndex = std::numeric_limits< u32 >::max();
 
-	std::vector< size_t > m_idMappings;
+	std::vector< u32 > m_idMappings;
 
 	std::vector< CEntity >	m_entities;
 	std::vector< T >		m_objects;
 
-	size_t m_lastObjectIndex = nullIndex;
+	u32 m_lastObjectIndex = nullIndex;
 };
 

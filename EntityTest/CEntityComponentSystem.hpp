@@ -15,9 +15,11 @@
 #include "TupleIterator.hpp"
 #include "TupleChecker.hpp"
 
-template < size_t _Size, typename... Types >
+template < u32 _Size, typename... Types >
 class CEntityComponentSystem final
 {
+	static_assert( _Size != std::numeric_limits<u32>::max(), "a maximum of 4294967294 entities is allowed" );
+
 public:
 	CEntityComponentSystem( const CEntityComponentSystem& ) = delete;
 
@@ -28,7 +30,7 @@ public:
 
 		m_freeEntities.reserve( _Size );
 
-		for( size_t i = _Size; i > 0; i-- )
+		for( u32 i = _Size; i > 0; i-- )
 		{
 			m_freeEntities.push_back( CEntity( i - 1 ) );
 		}
@@ -63,13 +65,13 @@ public:
 		m_freeEntities.push_back( entity );
 	}
 
-	size_t Count() const
+	u32 Count() const
 	{
 		return( _Size - m_freeEntities.size() );
 	}
 
 	template< typename T >
-	size_t Count() const
+	u32 Count() const
 	{
 		static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -275,7 +277,7 @@ public:
 	}
 
 public:
-	const size_t MaxSize = { _Size };
+	const u32 MaxSize = { _Size };
 
 private:
 	template< typename T >
