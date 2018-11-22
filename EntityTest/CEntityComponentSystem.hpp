@@ -50,8 +50,7 @@ public:
 		}
 		else
 		{
-			CLogger::Info( "exceeded maximum entity count of '" + std::to_string( _Size ) + "'" );
-			return( CEntity( CEntity::nullId ) );
+			throw std::runtime_error( "exceeded maximum entity count of '" + std::to_string( _Size ) + "'" );
 		}
 	}
 
