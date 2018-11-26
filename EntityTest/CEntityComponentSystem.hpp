@@ -289,6 +289,8 @@ private:
 
 	u16 m_systemId = 0;
 
+	std::unordered_map< std::type_index, std::string > m_typeNames;
+
 	// two structures needed, so we can check against the type AND have a proper order
 	std::unordered_map< std::type_index, u16 > m_systemTypes;
 	std::map< u16, std::unique_ptr< CComponentSystem< CEntityComponentSystem< _Size, Types ... > > > > m_systems;
