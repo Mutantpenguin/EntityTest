@@ -198,6 +198,7 @@
     <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="CLogger.cpp" />
     <ClCompile Include="ClosestPoint.cpp" />
+    <ClCompile Include="ComponentTraits.hpp" />
     <ClCompile Include="Contains.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="COcTree.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="CTransformComponent.cpp" />
     <ClCompile Include="Intersection.cpp" />
     <ClCompile Include="minitrace.c" />
+    <ClCompile Include="ComponentsRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

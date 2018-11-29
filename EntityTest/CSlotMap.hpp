@@ -2,7 +2,8 @@
 
 #include <string>
 #include <vector>
-#include <limits>
+
+#include "ComponentTraits.hpp"
 
 #include "CLogger.hpp"
 
@@ -11,25 +12,16 @@
 template< u32 _Size, typename T >
 class CSlotMap
 {
-	static_assert( _Size != std::numeric_limits<u32>::max(), "a maximum of 4294967294 entities is allowed" );
-
 public:
 	CSlotMap( const CSlotMap& ) = delete;
 
 	CSlotMap() noexcept :
+		ComponentName { ComponentTraits<T>::Name },
+		SizeInBytes { sizeof( T ) * _Size },
 		m_idMappings( _Size, nullIndex ),
 		m_entities( _Size ),
 		m_objects( _Size )
-	{
-		CLogger::Info( "SlotMap for '" + std::string( typeid( T ).name() ) + "'" );
-		// TODO round to 2 decimal places
-		CLogger::Info( "\tsize: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) + " MiBi" );
-	}
-
-	size_t SizeInBytes()
-	{
-		return( sizeof( T ) * _Size );
-	}
+	{}
 
 	bool Has( const CEntity &entity ) const
 	{
@@ -225,6 +217,9 @@ public:
 		return( m_lastObjectIndex + 1 );
 	}
 
+	const std::string &ComponentName;
+	const size_t SizeInBytes;
+
 private:
 	const u32 nullIndex = std::numeric_limits< u32 >::max();
 
@@ -235,4 +230,3 @@ private:
 
 	u32 m_lastObjectIndex = nullIndex;
 };
-
