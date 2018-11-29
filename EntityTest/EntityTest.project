@@ -5,6 +5,12 @@
       <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
     </Plugin>
   </Plugins>
+  <VirtualDirectory Name="ext">
+    <VirtualDirectory Name="minitrace">
+      <File Name="minitrace.h"/>
+      <File Name="minitrace.c"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
   <Reconciliation>
     <Regexes/>
     <Excludepaths/>
@@ -17,13 +23,10 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <VirtualDirectory Name="ext">
-      <VirtualDirectory Name="minitrace">
-        <File Name="minitrace.h"/>
-        <File Name="minitrace.c"/>
-      </VirtualDirectory>
-    </VirtualDirectory>
+    <File Name="TestECS.hpp"/>
     <VirtualDirectory Name="Primitives">
+      <File Name="Distance.hpp"/>
+      <File Name="Distance.cpp"/>
       <File Name="ClosestPoint.cpp"/>
       <File Name="ClosestPoint.hpp"/>
       <File Name="Contains.cpp"/>
@@ -44,21 +47,15 @@
     </VirtualDirectory>
     <VirtualDirectory Name="Systems">
       <File Name="CBVHSystem.hpp"/>
-      <File Name="CBVHSystem.cpp"/>
       <File Name="CMovementSystem.hpp"/>
-      <File Name="CMovementSystem.cpp"/>
       <File Name="CHealthSystem.hpp"/>
-      <File Name="CHealthSystem.cpp"/>
       <File Name="CBombSystem.hpp"/>
-      <File Name="CBombSystem.cpp"/>
     </VirtualDirectory>
-    <File Name="MyECS.hpp"/>
     <VirtualDirectory Name="Sonstiges">
+      <File Name="World.hpp"/>
       <File Name="Types.hpp"/>
       <File Name="CLogger.cpp"/>
-      <File Name="CWorld.cpp"/>
       <File Name="CFrustum.cpp"/>
-      <File Name="CWorld.hpp"/>
       <File Name="CSize.hpp"/>
       <File Name="CLogger.hpp"/>
       <File Name="CFrustum.hpp"/>
