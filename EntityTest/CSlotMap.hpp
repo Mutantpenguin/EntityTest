@@ -66,7 +66,7 @@ public:
 #ifndef NDEBUG
 			else
 			{
-				CLogger::Info( "using stale entity id" );
+				throw std::runtime_error( "using stale entity id" );
 			}
 #endif
 		}
@@ -94,7 +94,7 @@ public:
 #ifndef NDEBUG
 			else
 			{
-				CLogger::Info( "using stale entity id" );
+				throw std::runtime_error( "using stale entity id" );
 			}
 #endif
 		}
@@ -129,7 +129,7 @@ public:
 #ifndef NDEBUG
 			else
 			{
-				CLogger::Info( "using stale entity id" );
+				throw std::runtime_error( "using stale entity id" );
 			}
 #endif
 		}
