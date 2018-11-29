@@ -7,6 +7,8 @@
 #include <map>
 #include <unordered_map>
 
+#include "ComponentTraits.hpp"
+
 #include "Types.hpp"
 
 #include "CSlotMap.hpp"
@@ -23,8 +25,15 @@ public:
 
 	CEntityComponentSystem() noexcept
 	{
-		CLogger::Info( std::string( typeid( this ).name() ) );
-		CLogger::Info( "\tmax entities: " + std::to_string( _Size ) );
+		CLogger::Info( "EntityComponentSystem for:" );
+		CLogger::Info( "\tup to " + std::to_string( _Size ) + " entities" );
+		CLogger::Info( "\twith these components:" );
+
+		TupleIterator::for_each( m_componentStorage, [] ( auto &slotMap )
+		{
+			// TODO round MiBi to two decimal places
+			CLogger::Info( "\t\t- " + slotMap.ComponentName + " / " + std::to_string( slotMap.SizeInBytes / 1024.0f / 1024.0f ) + " MiBi" );
+		} );
 
 		m_freeEntities.reserve( _Size );
 
@@ -55,9 +64,9 @@ public:
 
 	void Destroy( const CEntity &entity )
 	{
-		TupleIterator::for_each( m_componentStorage, [ &entity ] ( auto &x )
+		TupleIterator::for_each( m_componentStorage, [ &entity ] ( auto &slotMap )
 		{
-			x.Remove( entity );
+			slotMap.Remove( entity );
 		} );
 
 		m_freeEntities.push_back( entity );

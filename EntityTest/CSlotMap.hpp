@@ -3,46 +3,25 @@
 #include <string>
 #include <vector>
 
+#include "ComponentTraits.hpp"
+
 #include "CLogger.hpp"
 
 #include "CEntity.hpp"
-
-
-template<typename T>
-struct TypeParseTraits;
-
-#define REGISTER_PARSE_TYPE( X ) template <> struct TypeParseTraits<X> \
-{ static const char* name; }; const char* TypeParseTraits<X>::name = #X
-
-
-#define REGISTER_PARSE(X) const std::string ComponentName { #X };
-
 
 template< size_t _Size, typename T >
 class CSlotMap
 {
 public:
 	CSlotMap( const CSlotMap& ) = delete;
-	//REGISTER_PARSE( T );
-
-	static const std::string ComponentName;
 
 	CSlotMap() noexcept :
+		ComponentName { ComponentTraits<T>::Name },
+		SizeInBytes { sizeof( T ) * _Size },
 		m_idMappings( _Size, nullIndex ),
 		m_entities( _Size ),
 		m_objects( _Size )
-	{
-		CLogger::Info( "SlotMap for '" + std::string( typeid( T ).name() ) + "'" );
-		CLogger::Info( "SlotMap for '" + ComponentName + "'" );
-		//CLogger::Info( "SlotMap for '" + std::string( TypeParseTraits<T>::name ) + "'" );
-		// TODO round to 2 decimal places
-		CLogger::Info( "\tsize: " + std::to_string( SizeInBytes() / 1024.0f / 1024.0f ) + " MiBi" );
-	}
-
-	size_t SizeInBytes()
-	{
-		return( sizeof( T ) * _Size );
-	}
+	{}
 
 	bool Has( const CEntity &entity ) const
 	{
@@ -238,6 +217,9 @@ public:
 		return( m_lastObjectIndex + 1 );
 	}
 
+	const std::string &ComponentName;
+	const size_t SizeInBytes;
+
 private:
 	const size_t nullIndex = std::numeric_limits< size_t >::max();
 
@@ -248,9 +230,3 @@ private:
 
 	size_t m_lastObjectIndex = nullIndex;
 };
-
-#define REGISTER_PARSE_TYPE( X ) template <> struct TypeParseTraits<X> \
-{ static const char* name; }; const char* TypeParseTraits<X>::name = #X
-
-#define SLOTBLAH( _Size, X ) template<> struct CSlotMap< _Size, T > \
-{ static const char* name; }; const char* TypeParseTraits<X>::name = #X
