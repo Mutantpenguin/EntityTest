@@ -9,8 +9,6 @@
 
 #include "ComponentTraits.hpp"
 
-#include "Types.hpp"
-
 #include "CSlotMap.hpp"
 #include "CComponentSystem.hpp"
 
@@ -19,10 +17,10 @@
 
 namespace ecs
 {
-	template < u32 _Size, typename... Types >
+	template < std::uint32_t _Size, typename... Types >
 	class CEntityComponentSystem final
 	{
-		static_assert( _Size != std::numeric_limits<u32>::max(), "a maximum of 4294967294 entities is allowed" );
+		static_assert( _Size != std::numeric_limits<std::uint32_t>::max(), "a maximum of 4294967294 entities is allowed" );
 
 	public:
 		CEntityComponentSystem( const CEntityComponentSystem& ) = delete;
@@ -41,7 +39,7 @@ namespace ecs
 
 			m_freeEntities.reserve( _Size );
 
-			for( u32 i = _Size; i > 0; i-- )
+			for( std::uint32_t i = _Size; i > 0; i-- )
 			{
 				m_freeEntities.push_back( CEntity( i - 1 ) );
 			}
@@ -75,13 +73,13 @@ namespace ecs
 			m_freeEntities.push_back( entity );
 		}
 
-		u32 Count() const
+		std::uint32_t Count() const
 		{
 			return( _Size - m_freeEntities.size() );
 		}
 
 		template< typename T >
-		u32 Count() const
+		std::uint32_t Count() const
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -287,7 +285,7 @@ namespace ecs
 		}
 
 	public:
-		const u32 MaxSize = { _Size };
+		const std::uint32_t MaxSize = { _Size };
 
 	private:
 		template< typename T >
@@ -299,12 +297,12 @@ namespace ecs
 
 		ComponentStorage m_componentStorage;
 
-		u16 m_systemId = 0;
+		std::uint16_t m_systemId = 0;
 
 		std::unordered_map< std::type_index, std::string > m_typeNames;
 
 		// two structures needed, so we can check against the type AND have a proper order
-		std::unordered_map< std::type_index, u16 > m_systemTypes;
-		std::map< u16, std::unique_ptr< CComponentSystem< CEntityComponentSystem< _Size, Types ... > > > > m_systems;
+		std::unordered_map< std::type_index, std::uint16_t > m_systemTypes;
+		std::map< std::uint16_t, std::unique_ptr< CComponentSystem< CEntityComponentSystem< _Size, Types ... > > > > m_systems;
 	};
 }

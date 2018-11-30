@@ -5,13 +5,11 @@
 
 #include "ComponentTraits.hpp"
 
-#include "CLogger.hpp"
-
 #include "CEntity.hpp"
 
 namespace ecs
 {
-	template< u32 _Size, typename T >
+	template< std::uint32_t _Size, typename T >
 	class CSlotMap
 	{
 	public:
@@ -141,7 +139,7 @@ namespace ecs
 		{
 			if( nullIndex != m_lastObjectIndex )
 			{
-				for( u32 i = 0; i <= m_lastObjectIndex; i++ )
+				for( std::uint32_t i = 0; i <= m_lastObjectIndex; i++ )
 				{
 					const auto &entity = m_entities[ i ];
 					m_idMappings[ entity.Id() ] = nullIndex;
@@ -177,7 +175,7 @@ namespace ecs
 		{
 			if( nullIndex != m_lastObjectIndex )
 			{
-				for( u32 i = 0; i <= m_lastObjectIndex; i++ )
+				for( std::uint32_t i = 0; i <= m_lastObjectIndex; i++ )
 				{
 					lambda( m_entities[ i ], &m_objects[ i ] );
 				}
@@ -190,7 +188,7 @@ namespace ecs
 			if( nullIndex != m_lastObjectIndex )
 			{
 #pragma omp parallel
-				for( u32 i = 0; i <= m_lastObjectIndex; i++ )
+				for( std::uint32_t i = 0; i <= m_lastObjectIndex; i++ )
 				{
 					lambda( m_entities[ i ], &m_objects[ i ] );
 				}
@@ -202,7 +200,7 @@ namespace ecs
 		{
 			if( nullIndex != m_lastObjectIndex )
 			{
-				for( u32 i = 0; i <= m_lastObjectIndex; i++ )
+				for( std::uint32_t i = 0; i <= m_lastObjectIndex; i++ )
 				{
 					if( lambda( m_entities[ i ], &m_objects[ i ] ) )
 					{
@@ -214,7 +212,7 @@ namespace ecs
 			return( false );
 		}
 
-		u32 Count() const
+		std::uint32_t Count() const
 		{
 			return( m_lastObjectIndex + 1 );
 		}
@@ -223,13 +221,13 @@ namespace ecs
 		const size_t SizeInBytes;
 
 	private:
-		const u32 nullIndex = std::numeric_limits< u32 >::max();
+		const std::uint32_t nullIndex = std::numeric_limits< std::uint32_t >::max();
 
-		std::vector< u32 > m_idMappings;
+		std::vector< std::uint32_t > m_idMappings;
 
 		std::vector< CEntity >	m_entities;
 		std::vector< T >		m_objects;
 
-		u32 m_lastObjectIndex = nullIndex;
+		std::uint32_t m_lastObjectIndex = nullIndex;
 	};
 }

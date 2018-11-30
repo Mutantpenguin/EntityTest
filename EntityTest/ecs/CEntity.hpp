@@ -3,37 +3,35 @@
 #include <cstdint>
 #include <limits>
 
-#include "Types.hpp"
-
 namespace ecs
 {
 	class CEntity final
 	{
-		template < u32 _Size, typename... Types >
+		template < std::uint32_t _Size, typename... Types >
 		friend class CEntityComponentSystem;
 
 	public:
 		CEntity() noexcept
 		{}
 
-		const u32 &Id() const
+		const std::uint32_t &Id() const
 		{
 			return( m_id );
 		}
 
-		const u32 &Version() const
+		const std::uint32_t &Version() const
 		{
 			return( m_version );
 		}
 
-		static const u32 nullId = std::numeric_limits< u32 >::max();
+		static const std::uint32_t nullId = std::numeric_limits< std::uint32_t >::max();
 
 	private:
-		CEntity( const u32 id ) :
+		CEntity( const std::uint32_t id ) :
 			m_id { id }
 		{}
 
-		u32 m_id = nullId;
-		u32 m_version = 0;
+		std::uint32_t m_id		= nullId;
+		std::uint32_t m_version	= 0;
 	};
 }
