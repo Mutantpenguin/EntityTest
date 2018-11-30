@@ -189,9 +189,9 @@
     <ClInclude Include="CPlane.hpp" />
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="Distance.hpp" />
+    <ClInclude Include="ext\minitrace\minitrace.h" />
     <ClInclude Include="World.hpp" />
     <ClInclude Include="Intersection.hpp" />
-    <ClInclude Include="minitrace.h" />
     <ClInclude Include="TestECS.hpp" />
     <ClInclude Include="CSphere.hpp" />
     <ClInclude Include="Types.hpp" />
@@ -209,8 +209,8 @@
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="Distance.cpp" />
     <ClCompile Include="EntityTest.cpp" />
+    <ClCompile Include="ext\minitrace\minitrace.c" />
     <ClCompile Include="Intersection.cpp" />
-    <ClCompile Include="minitrace.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

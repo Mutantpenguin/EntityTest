@@ -1,6 +1,6 @@
 #include <chrono>
 
-#include "minitrace.h"
+#include "ext/minitrace/minitrace.h"
 
 #include "Types.hpp"
 

@@ -24,7 +24,10 @@
     <Filter Include="Primitives">
       <UniqueIdentifier>{38b87a44-90d3-4d51-8bf9-f28c18716319}</UniqueIdentifier>
     </Filter>
-    <Filter Include="minitrace">
+    <Filter Include="ext">
+      <UniqueIdentifier>{70487754-3e84-4aea-aa15-9a59f6d8e60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\minitrace">
       <UniqueIdentifier>{a296cd7e-42c2-4b8f-bed2-5bff88f19d4d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -65,9 +68,6 @@
     </ClInclude>
     <ClInclude Include="Intersection.hpp">
       <Filter>Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="minitrace.h">
-      <Filter>minitrace</Filter>
     </ClInclude>
     <ClInclude Include="ClosestPoint.hpp">
       <Filter>Primitives</Filter>
@@ -141,6 +141,9 @@
     <ClInclude Include="components\Transform.hpp">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="ext\minitrace\minitrace.h">
+      <Filter>ext\minitrace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
@@ -164,9 +167,6 @@
     <ClCompile Include="Intersection.cpp">
       <Filter>Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="minitrace.c">
-      <Filter>minitrace</Filter>
-    </ClCompile>
     <ClCompile Include="ClosestPoint.cpp">
       <Filter>Primitives</Filter>
     </ClCompile>
@@ -184,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="components\ComponentsRegistry.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\minitrace\minitrace.c">
+      <Filter>ext\minitrace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@
 #include "ClosestPoint.hpp"
 #include "Distance.hpp"
 
-#include "minitrace.h"
+#include "ext/minitrace/minitrace.h"
 
 eIntersectionType Intersection( const glm::vec3 &boxAPosition, const CBoundingBox &boxA, const glm::vec3 &boxBPosition, const CBoundingBox &boxB )
 {

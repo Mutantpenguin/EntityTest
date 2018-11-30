@@ -5,7 +5,7 @@
 #include "Intersection.hpp"
 #include "Contains.hpp"
 
-#include "minitrace.h"
+#include "ext/minitrace/minitrace.h"
 
 const f16 COcTree::sMinSize = 50.0f;
 

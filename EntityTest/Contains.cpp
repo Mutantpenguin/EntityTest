@@ -4,7 +4,7 @@
 
 #include "Distance.hpp"
 
-#include "minitrace.h"
+#include "ext/minitrace/minitrace.h"
 
 bool Contains( const glm::vec3 &boxPosition, const CBoundingBox &box, const glm::vec3 &point )
 {
