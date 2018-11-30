@@ -29,7 +29,7 @@ public:
 			}
 		} );
 
-		for( const auto &entity : entitiesForDeletion )
+		for( auto &entity : entitiesForDeletion )
 		{
 			m_ecs.Destroy( entity );
 		}

@@ -54,7 +54,6 @@ namespace ecs
 			{
 				auto entity = m_freeEntities.back();
 				m_freeEntities.pop_back();
-				entity.m_version++;
 				return( entity );
 			}
 			else
@@ -63,14 +62,19 @@ namespace ecs
 			}
 		}
 
-		void Destroy( const CEntity &entity )
+		void Destroy( CEntity &entity )
 		{
 			TupleIterator::for_each( m_componentStorage, [ &entity ] ( auto &slotMap )
 			{
 				slotMap.Remove( entity );
 			} );
 
-			m_freeEntities.push_back( entity );
+			// entities with max version can't be reused
+			if( entity.Version() != std::numeric_limits<std::uint32_t>::max() )
+			{
+				entity.m_version++;
+				m_freeEntities.push_back( entity );
+			}
 		}
 
 		std::uint32_t Count() const

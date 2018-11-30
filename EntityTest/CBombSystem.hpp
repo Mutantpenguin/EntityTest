@@ -61,7 +61,7 @@ public:
 		MTR_END( "CBombSystem", "ForEach<Explosion>" );
 
 
-		for( const auto &entity : bombEntitiesForDeletion )
+		for( auto &entity : bombEntitiesForDeletion )
 		{
 			m_ecs.Destroy( entity );
 		}
