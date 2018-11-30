@@ -17,7 +17,7 @@ public:
 		Process();
 	}
 
-	~CBVHSystem()
+	virtual ~CBVHSystem()
 	{};
 
 	virtual void Process() override

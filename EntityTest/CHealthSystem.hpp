@@ -10,7 +10,7 @@ public:
 		CComponentSystem( ecs )
 	{}
 
-	~CHealthSystem()
+	virtual ~CHealthSystem()
 	{};
 
 	virtual void Process() override

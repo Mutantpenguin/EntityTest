@@ -10,7 +10,7 @@ public:
 		CComponentSystem { ecs }
 	{}
 
-	~CMovementSystem()
+	virtual ~CMovementSystem()
 	{};
 
 	virtual void Process() override

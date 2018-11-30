@@ -13,7 +13,7 @@ public:
 		m_bvh { bvh }
 	{}
 
-	~CBombSystem()
+	virtual ~CBombSystem()
 	{};
 
 	virtual void Process() override
