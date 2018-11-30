@@ -1,4 +1,4 @@
-#include "ComponentTraits.hpp"
+#include "ecs/ComponentTraits.hpp"
 
 #include "Bomb.hpp"
 #include "BoundingBox.hpp"

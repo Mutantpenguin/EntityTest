@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CComponentSystem.hpp"
+#include "ecs/CComponentSystem.hpp"
 
 #include "CBVHBase.hpp"
 

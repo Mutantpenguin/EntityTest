@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CEntityComponentSystem.hpp"
+#include "ecs/CEntityComponentSystem.hpp"
 
 #include "Physics.hpp"
 #include "Player.hpp"

@@ -166,7 +166,13 @@
     <ClInclude Include="Contains.hpp" />
     <ClInclude Include="CBVHBase.hpp" />
     <ClInclude Include="CBVHSystem.hpp" />
-    <ClInclude Include="CComponentSystem.hpp" />
+    <ClInclude Include="ecs\CComponentSystem.hpp" />
+    <ClInclude Include="ecs\CEntity.hpp" />
+    <ClInclude Include="ecs\CEntityComponentSystem.hpp" />
+    <ClInclude Include="ecs\ComponentTraits.hpp" />
+    <ClInclude Include="ecs\CSlotMap.hpp" />
+    <ClInclude Include="ecs\TupleChecker.hpp" />
+    <ClInclude Include="ecs\TupleIterator.hpp" />
     <ClInclude Include="Explosion.hpp" />
     <ClInclude Include="CHealthSystem.hpp" />
     <ClInclude Include="CMovementSystem.hpp" />
@@ -178,9 +184,7 @@
     <ClInclude Include="Physics.hpp" />
     <ClInclude Include="CPlane.hpp" />
     <ClInclude Include="Player.hpp" />
-    <ClInclude Include="CEntityComponentSystem.hpp" />
     <ClInclude Include="CSize.hpp" />
-    <ClInclude Include="CSlotMap.hpp" />
     <ClInclude Include="DebugName.hpp" />
     <ClInclude Include="Transform.hpp" />
     <ClInclude Include="Distance.hpp" />
@@ -190,21 +194,17 @@
     <ClInclude Include="minitrace.h" />
     <ClInclude Include="TestECS.hpp" />
     <ClInclude Include="CSphere.hpp" />
-    <ClInclude Include="TupleChecker.hpp" />
-    <ClInclude Include="TupleIterator.hpp" />
     <ClInclude Include="Types.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="CLogger.cpp" />
     <ClCompile Include="ClosestPoint.cpp" />
-    <ClCompile Include="ComponentTraits.hpp" />
     <ClCompile Include="Contains.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="COcTree.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CSphere.cpp" />
-    <ClCompile Include="CEntity.hpp" />
     <ClCompile Include="Distance.cpp" />
     <ClCompile Include="EntityTest.cpp" />
     <ClCompile Include="Transform.cpp" />

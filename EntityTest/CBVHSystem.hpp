@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "CComponentSystem.hpp"
+#include "ecs/CComponentSystem.hpp"
 
 #include "CBVHBase.hpp"
 

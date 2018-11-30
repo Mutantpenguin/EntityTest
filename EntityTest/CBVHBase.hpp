@@ -2,7 +2,7 @@
 
 #include <functional>
 
-#include "CEntity.hpp"
+#include "ecs/CEntity.hpp"
 #include "CSphere.hpp"
 #include "CBoundingBox.hpp"
 

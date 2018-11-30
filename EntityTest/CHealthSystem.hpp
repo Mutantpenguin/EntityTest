@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CComponentSystem.hpp"
+#include "ecs/CComponentSystem.hpp"
 
 template< typename T_ecs >
 class CHealthSystem final : public ecs::CComponentSystem< T_ecs >
