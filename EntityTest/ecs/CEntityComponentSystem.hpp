@@ -96,7 +96,7 @@ namespace ecs
 			auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 
 			componentContainer.Add( entity, t );
-		};
+		}
 
 		template< typename T >
 		void AddComponent( const CEntity &entity, T&& t )
@@ -106,7 +106,7 @@ namespace ecs
 			auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 
 			componentContainer.Add( entity, std::move( t ) );
-		};
+		}
 
 		template< typename T >
 		void RemoveComponent( const CEntity &entity )
@@ -116,7 +116,7 @@ namespace ecs
 			auto &componentContainer = std::get< ComponentSlotMap< T > >( m_componentStorage );
 
 			componentContainer.Remove( entity );
-		};
+		}
 
 		template< typename T >
 		void RemoveComponentAll()
@@ -173,7 +173,7 @@ namespace ecs
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
 			std::get< ComponentSlotMap< T > >( m_componentStorage ).ForEach( lambda );
-		};
+		}
 
 		template< typename T, typename L >
 		void ForEachParralel( L lambda )
@@ -181,7 +181,7 @@ namespace ecs
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
 			std::get< ComponentSlotMap< T > >( m_componentStorage ).ForEachParralel( lambda );
-		};
+		}
 
 		template< typename T, typename L >
 		bool Exists( L lambda ) const
