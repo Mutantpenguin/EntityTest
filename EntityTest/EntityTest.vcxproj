@@ -189,6 +189,15 @@
     <ClInclude Include="CPlane.hpp" />
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="Distance.hpp" />
+    <ClInclude Include="ext\fmt\color.h" />
+    <ClInclude Include="ext\fmt\core.h" />
+    <ClInclude Include="ext\fmt\format-inl.h" />
+    <ClInclude Include="ext\fmt\format.h" />
+    <ClInclude Include="ext\fmt\ostream.h" />
+    <ClInclude Include="ext\fmt\posix.h" />
+    <ClInclude Include="ext\fmt\printf.h" />
+    <ClInclude Include="ext\fmt\ranges.h" />
+    <ClInclude Include="ext\fmt\time.h" />
     <ClInclude Include="ext\minitrace\minitrace.h" />
     <ClInclude Include="World.hpp" />
     <ClInclude Include="Intersection.hpp" />
@@ -209,6 +218,8 @@
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="Distance.cpp" />
     <ClCompile Include="EntityTest.cpp" />
+    <ClCompile Include="ext\fmt\format.cc" />
+    <ClCompile Include="ext\fmt\posix.cc" />
     <ClCompile Include="ext\minitrace\minitrace.c" />
     <ClCompile Include="Intersection.cpp" />
   </ItemGroup>

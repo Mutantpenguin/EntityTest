@@ -30,6 +30,9 @@
     <Filter Include="ext\minitrace">
       <UniqueIdentifier>{a296cd7e-42c2-4b8f-bed2-5bff88f19d4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ext\fmt">
+      <UniqueIdentifier>{0a553f62-1787-4f1a-b617-e63fc8da12cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -144,6 +147,33 @@
     <ClInclude Include="ext\minitrace\minitrace.h">
       <Filter>ext\minitrace</Filter>
     </ClInclude>
+    <ClInclude Include="ext\fmt\color.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\core.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\format.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\format-inl.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\ostream.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\posix.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\printf.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\ranges.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\time.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
@@ -187,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="ext\minitrace\minitrace.c">
       <Filter>ext\minitrace</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\fmt\format.cc">
+      <Filter>ext\fmt</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\fmt\posix.cc">
+      <Filter>ext\fmt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
