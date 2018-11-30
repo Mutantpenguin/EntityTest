@@ -7,7 +7,7 @@
 #include "CBVHBase.hpp"
 
 template< typename T_ecs >
-class CBVHSystem final : public CComponentSystem< T_ecs >
+class CBVHSystem final : public ecs::CComponentSystem< T_ecs >
 {
 public:
 	CBVHSystem( T_ecs &ecs, const std::shared_ptr< CBVHBase > &bvh ) :
@@ -30,7 +30,7 @@ public:
 
 		m_bvh->Clear();
 
-		std::vector< CEntity > entitiesForDeletion;
+		std::vector< ecs::CEntity > entitiesForDeletion;
 
 		m_ecs.ForEach<CTransformComponent>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto transformComponent )
 		{

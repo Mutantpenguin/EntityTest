@@ -3,7 +3,7 @@
 #include "CComponentSystem.hpp"
 
 template< typename T_ecs >
-class CHealthSystem final : public CComponentSystem< T_ecs >
+class CHealthSystem final : public ecs::CComponentSystem< T_ecs >
 {
 public:
 	CHealthSystem( T_ecs &ecs ) :
@@ -19,7 +19,7 @@ public:
 
 		CLogger::Debug( "\tprocessing: CHealthSystem" );
 
-		std::vector< CEntity > entitiesForDeletion;
+		std::vector< ecs::CEntity > entitiesForDeletion;
 
 		m_ecs.ForEach< CHealthComponent >( [ &entitiesForDeletion ] ( const auto &healthEntity, auto healthComponent )
 		{

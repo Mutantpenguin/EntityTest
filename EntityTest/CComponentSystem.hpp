@@ -1,20 +1,23 @@
 #pragma once
 
-template< typename T_ecs >
-class CComponentSystem
+namespace ecs
 {
-public:
-	CComponentSystem( T_ecs &ecs ) :
-		m_ecs { ecs }
-	{}
+	template< typename T_ecs >
+	class CComponentSystem
+	{
+	public:
+		CComponentSystem( T_ecs &ecs ) :
+			m_ecs { ecs }
+		{}
 
-	virtual ~CComponentSystem()
-	{}
+		virtual ~CComponentSystem()
+		{}
 
-	virtual void Process() = 0;
+		virtual void Process() = 0;
 
-	bool Paused = false;
+		bool Paused = false;
 
-protected:
-	T_ecs &m_ecs;
-};
+	protected:
+		T_ecs &m_ecs;
+	};
+}

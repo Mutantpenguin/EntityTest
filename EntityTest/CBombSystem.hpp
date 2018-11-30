@@ -5,7 +5,7 @@
 #include "CBVHBase.hpp"
 
 template< typename T_ecs >
-class CBombSystem final : public CComponentSystem< T_ecs >
+class CBombSystem final : public ecs::CComponentSystem< T_ecs >
 {
 public:
 	CBombSystem( T_ecs &ecs, const std::shared_ptr< CBVHBase > &bvh ) :
@@ -22,7 +22,7 @@ public:
 
 		CLogger::Debug( "\tprocessing: CBombSystem" );
 
-		std::vector<CEntity> bombEntitiesForDeletion;
+		std::vector< ecs::CEntity > bombEntitiesForDeletion;
 
 		MTR_BEGIN( "CBombSystem", "ForEach<CBombComponent>" );
 		m_ecs.ForEach<CBombComponent>( [ this ] ( const auto &bombEntity, auto bombComponent )
@@ -31,7 +31,7 @@ public:
 			{
 				if( const auto bombTransform = m_ecs.GetComponent<CTransformComponent>( bombEntity ) )
 				{
-					if( m_bvh->ExistsIn( bombTransform->Position, CSphere( bombComponent->activationRadius ), [ this ] ( const CEntity &entity )
+					if( m_bvh->ExistsIn( bombTransform->Position, CSphere( bombComponent->activationRadius ), [ this ] ( const ecs::CEntity &entity )
 					{
 						return( m_ecs.HasComponents< CHealthComponent >( entity ) );
 					} ) )
@@ -48,7 +48,7 @@ public:
 		{
 			const auto explosionTransform = m_ecs.GetComponent<CTransformComponent>( explosionEntity );
 
-			m_bvh->ForEachIn( explosionTransform->Position, CSphere( explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const CEntity &entity )
+			m_bvh->ForEachIn( explosionTransform->Position, CSphere( explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const ecs::CEntity &entity )
 			{
 				if( auto healthComponent = m_ecs.GetComponent< CHealthComponent >( entity ) )
 				{

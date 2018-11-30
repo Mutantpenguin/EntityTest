@@ -21,16 +21,16 @@
 #include "CMovementSystem.hpp"
 #include "CBVHSystem.hpp"
 
-using TestECS = CEntityComponentSystem<	100000,
-										CPhysicsComponent,
-										CPlayerComponent,
-										CDebugNameComponent,
-										CTransformComponent,
-										CBombComponent,
-										CBoundingBoxComponent,
-										CExplosionComponent,
-										CHealthComponent,
-										CMovementComponent >;
+using TestECS = ecs::CEntityComponentSystem<	100000,
+												CPhysicsComponent,
+												CPlayerComponent,
+												CDebugNameComponent,
+												CTransformComponent,
+												CBombComponent,
+												CBoundingBoxComponent,
+												CExplosionComponent,
+												CHealthComponent,
+												CMovementComponent >;
 
 using TestBombSystem = CBombSystem< TestECS >;
 using TestHealthSystem = CHealthSystem< TestECS >;

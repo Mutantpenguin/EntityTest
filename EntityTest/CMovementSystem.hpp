@@ -3,7 +3,7 @@
 #include "CComponentSystem.hpp"
 
 template< typename T_ecs >
-class CMovementSystem final : public CComponentSystem< T_ecs >
+class CMovementSystem final : public ecs::CComponentSystem< T_ecs >
 {
 public:
 	CMovementSystem( T_ecs &ecs ) :

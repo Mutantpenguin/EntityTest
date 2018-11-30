@@ -5,32 +5,35 @@
 
 #include "Types.hpp"
 
-class CEntity final
+namespace ecs
 {
-	template < u32 _Size, typename... Types >
-	friend class CEntityComponentSystem;
-
-public:
-	CEntity() noexcept
-	{}
-
-	const u32 &Id() const
+	class CEntity final
 	{
-		return( m_id );
-	}
+		template < u32 _Size, typename... Types >
+		friend class CEntityComponentSystem;
 
-	const u32 &Version() const
-	{
-		return( m_version );
-	}
+	public:
+		CEntity() noexcept
+		{}
 
-	static const u32 nullId = std::numeric_limits< u32 >::max();
+		const u32 &Id() const
+		{
+			return( m_id );
+		}
 
-private:
-	CEntity( const u32 id ) :
-		m_id { id }
-	{}
+		const u32 &Version() const
+		{
+			return( m_version );
+		}
 
-	u32 m_id = nullId;
-	u32 m_version = 0;
-};
+		static const u32 nullId = std::numeric_limits< u32 >::max();
+
+	private:
+		CEntity( const u32 id ) :
+			m_id { id }
+		{}
+
+		u32 m_id = nullId;
+		u32 m_version = 0;
+	};
+}
