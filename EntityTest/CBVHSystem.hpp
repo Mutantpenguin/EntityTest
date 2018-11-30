@@ -32,9 +32,9 @@ public:
 
 		std::vector< ecs::CEntity > entitiesForDeletion;
 
-		m_ecs.ForEach<CTransformComponent>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto transformComponent )
+		m_ecs.ForEach<cmpt::Transform>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto transformComponent )
 		{
-			auto const boundingBox = m_ecs.GetComponent<CBoundingBoxComponent>( transformEntity );
+			auto const boundingBox = m_ecs.GetComponent<cmpt::BoundingBox>( transformEntity );
 
 			if( !m_bvh->Add( transformEntity, transformComponent->Position, boundingBox ) )
 			{

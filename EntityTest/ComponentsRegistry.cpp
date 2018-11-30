@@ -1,21 +1,21 @@
 #include "ComponentTraits.hpp"
 
-#include "CBombComponent.hpp"
-#include "CBoundingBoxComponent.hpp"
-#include "CDebugNameComponent.hpp"
-#include "CExplosionComponent.hpp"
-#include "CHealthComponent.hpp"
-#include "CMovementComponent.hpp"
-#include "CPhysicsComponent.hpp"
-#include "CPlayerComponent.hpp"
-#include "CTransformComponent.hpp"
+#include "Bomb.hpp"
+#include "BoundingBox.hpp"
+#include "DebugName.hpp"
+#include "Explosion.hpp"
+#include "Health.hpp"
+#include "Movement.hpp"
+#include "Physics.hpp"
+#include "Player.hpp"
+#include "Transform.hpp"
 
-REGISTER_COMPONENT( CBombComponent )
-REGISTER_COMPONENT( CBoundingBoxComponent )
-REGISTER_COMPONENT( CDebugNameComponent )
-REGISTER_COMPONENT( CExplosionComponent )
-REGISTER_COMPONENT( CHealthComponent )
-REGISTER_COMPONENT( CMovementComponent )
-REGISTER_COMPONENT( CPhysicsComponent )
-REGISTER_COMPONENT( CPlayerComponent )
-REGISTER_COMPONENT( CTransformComponent )
+REGISTER_COMPONENT( cmpt::Bomb )
+REGISTER_COMPONENT( cmpt::BoundingBox )
+REGISTER_COMPONENT( cmpt::DebugName )
+REGISTER_COMPONENT( cmpt::Explosion )
+REGISTER_COMPONENT( cmpt::Health )
+REGISTER_COMPONENT( cmpt::Movement )
+REGISTER_COMPONENT( cmpt::Physics )
+REGISTER_COMPONENT( cmpt::Player )
+REGISTER_COMPONENT( cmpt::Transform )

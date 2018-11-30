@@ -33,25 +33,25 @@ int main()
 		{
 			auto entity = ecs.Create();
 			
-			ecs.AddComponent( entity, CDebugNameComponent( "entity_" + std::to_string( i ) ) );
+			ecs.AddComponent( entity, cmpt::DebugName( "entity_" + std::to_string( i ) ) );
 
 			if( rand() % 10 == 2 )
 			{
-				ecs.AddComponent( entity, CPhysicsComponent( 10.0f ) );
+				ecs.AddComponent( entity, cmpt::Physics( 10.0f ) );
 
-				CTransformComponent transform;
+				cmpt::Transform transform;
 				transform.Position = { rand() % 100, rand() % 100, rand() % 100 };
 				ecs.AddComponent( entity, transform );
 
 				if( rand() % 10 > 4 )
 				{
-					ecs.AddComponent( entity, CBoundingBoxComponent( { 2.0f, 2.0f, 2.0f } ) );
+					ecs.AddComponent( entity, cmpt::BoundingBox( { 2.0f, 2.0f, 2.0f } ) );
 				}
 			}
 
 			if( rand() % 10 > 4 )
 			{
-				CPlayerComponent playerComponent;
+				cmpt::Player playerComponent;
 
 				if( rand() % 10 > 4 )
 				{
@@ -67,16 +67,16 @@ int main()
 
 			if( rand() % 10 > 7 )
 			{
-				ecs.AddComponent( entity, CHealthComponent( 100.0f ) );
+				ecs.AddComponent( entity, cmpt::Health( 100.0f ) );
 			}
 
 			if( rand() % 10 > 7 )
 			{
-				ecs.AddComponent( entity, CBombComponent( 10.0f ) );
+				ecs.AddComponent( entity, cmpt::Bomb( 10.0f ) );
 			}
 			else
 			{
-				CMovementComponent movement;
+				cmpt::Movement movement;
 				movement.Direction = {	static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ),
 										static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ),
 										static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ) };

@@ -4,8 +4,10 @@
 
 #include "Types.hpp"
 
-struct CPlayerComponent final
+namespace cmpt
 {
-	u8 Team;
-};
-
+	struct Player final
+	{
+		u8 Team;
+	};
+}

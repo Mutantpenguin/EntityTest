@@ -19,9 +19,9 @@ public:
 
 		CLogger::Debug( "\tprocessing: CMovementSystem" );
 
-		m_ecs.ForEach<CMovementComponent>( [ this ] ( const auto &entity, auto movementComponent )
+		m_ecs.ForEach<cmpt::Movement>( [ this ] ( const auto &entity, auto movementComponent )
 		{
-			auto transformComponent = m_ecs.GetComponent<CTransformComponent>( entity );
+			auto transformComponent = m_ecs.GetComponent<cmpt::Transform>( entity );
 			if( transformComponent )
 			{
 				transformComponent->Position += movementComponent->Direction;

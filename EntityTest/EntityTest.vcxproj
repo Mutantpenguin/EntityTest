@@ -159,7 +159,7 @@
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CBombComponent.hpp" />
+    <ClInclude Include="Bomb.hpp" />
     <ClInclude Include="CBombSystem.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
     <ClInclude Include="ClosestPoint.hpp" />
@@ -167,25 +167,25 @@
     <ClInclude Include="CBVHBase.hpp" />
     <ClInclude Include="CBVHSystem.hpp" />
     <ClInclude Include="CComponentSystem.hpp" />
-    <ClInclude Include="CExplosionComponent.hpp" />
+    <ClInclude Include="Explosion.hpp" />
     <ClInclude Include="CHealthSystem.hpp" />
     <ClInclude Include="CMovementSystem.hpp" />
     <ClInclude Include="CFrustum.hpp" />
-    <ClInclude Include="CHealthComponent.hpp" />
+    <ClInclude Include="Health.hpp" />
     <ClInclude Include="CLogger.hpp" />
-    <ClInclude Include="CMovementComponent.hpp" />
+    <ClInclude Include="Movement.hpp" />
     <ClInclude Include="COcTree.hpp" />
-    <ClInclude Include="CPhysicsComponent.hpp" />
+    <ClInclude Include="Physics.hpp" />
     <ClInclude Include="CPlane.hpp" />
-    <ClInclude Include="CPlayerComponent.hpp" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="CEntityComponentSystem.hpp" />
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="CSlotMap.hpp" />
-    <ClInclude Include="CDebugNameComponent.hpp" />
-    <ClInclude Include="CTransformComponent.hpp" />
+    <ClInclude Include="DebugName.hpp" />
+    <ClInclude Include="Transform.hpp" />
     <ClInclude Include="Distance.hpp" />
     <ClInclude Include="World.hpp" />
-    <ClInclude Include="CBoundingBoxComponent.hpp" />
+    <ClInclude Include="BoundingBox.hpp" />
     <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="minitrace.h" />
     <ClInclude Include="TestECS.hpp" />
@@ -207,7 +207,7 @@
     <ClCompile Include="CEntity.hpp" />
     <ClCompile Include="Distance.cpp" />
     <ClCompile Include="EntityTest.cpp" />
-    <ClCompile Include="CTransformComponent.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Intersection.cpp" />
     <ClCompile Include="minitrace.c" />
     <ClCompile Include="ComponentsRegistry.cpp" />

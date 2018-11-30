@@ -2,19 +2,19 @@
 
 #include "CEntityComponentSystem.hpp"
 
-#include "CPhysicsComponent.hpp"
-#include "CPlayerComponent.hpp"
-#include "CDebugNameComponent.hpp"
+#include "Physics.hpp"
+#include "Player.hpp"
+#include "DebugName.hpp"
 
-#include "CMovementComponent.hpp"
+#include "Movement.hpp"
 
-#include "CBombComponent.hpp"
-#include "CExplosionComponent.hpp"
-#include "CHealthComponent.hpp"
+#include "Bomb.hpp"
+#include "Explosion.hpp"
+#include "Health.hpp"
 
-#include "CBoundingBoxComponent.hpp"
+#include "BoundingBox.hpp"
 
-#include "CTransformComponent.hpp"
+#include "Transform.hpp"
 
 #include "CBombSystem.hpp"
 #include "CHealthSystem.hpp"
@@ -22,15 +22,15 @@
 #include "CBVHSystem.hpp"
 
 using TestECS = ecs::CEntityComponentSystem<	100000,
-												CPhysicsComponent,
-												CPlayerComponent,
-												CDebugNameComponent,
-												CTransformComponent,
-												CBombComponent,
-												CBoundingBoxComponent,
-												CExplosionComponent,
-												CHealthComponent,
-												CMovementComponent >;
+												cmpt::Physics,
+												cmpt::Player,
+												cmpt::DebugName,
+												cmpt::Transform,
+												cmpt::Bomb,
+												cmpt::BoundingBox,
+												cmpt::Explosion,
+												cmpt::Health,
+												cmpt::Movement >;
 
 using TestBombSystem = CBombSystem< TestECS >;
 using TestHealthSystem = CHealthSystem< TestECS >;

@@ -21,7 +21,7 @@ public:
 
 		std::vector< ecs::CEntity > entitiesForDeletion;
 
-		m_ecs.ForEach< CHealthComponent >( [ &entitiesForDeletion ] ( const auto &healthEntity, auto healthComponent )
+		m_ecs.ForEach< cmpt::Health >( [ &entitiesForDeletion ] ( const auto &healthEntity, auto healthComponent )
 		{
 			if( healthComponent->health <= 0.0f )
 			{
