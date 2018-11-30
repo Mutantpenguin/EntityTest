@@ -159,10 +159,18 @@
     <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bomb.hpp" />
     <ClInclude Include="CBombSystem.hpp" />
     <ClInclude Include="CBoundingBox.hpp" />
     <ClInclude Include="ClosestPoint.hpp" />
+    <ClInclude Include="components\Bomb.hpp" />
+    <ClInclude Include="components\BoundingBox.hpp" />
+    <ClInclude Include="components\DebugName.hpp" />
+    <ClInclude Include="components\Explosion.hpp" />
+    <ClInclude Include="components\Health.hpp" />
+    <ClInclude Include="components\Movement.hpp" />
+    <ClInclude Include="components\Physics.hpp" />
+    <ClInclude Include="components\Player.hpp" />
+    <ClInclude Include="components\Transform.hpp" />
     <ClInclude Include="Contains.hpp" />
     <ClInclude Include="CBVHBase.hpp" />
     <ClInclude Include="CBVHSystem.hpp" />
@@ -173,23 +181,15 @@
     <ClInclude Include="ecs\CSlotMap.hpp" />
     <ClInclude Include="ecs\TupleChecker.hpp" />
     <ClInclude Include="ecs\TupleIterator.hpp" />
-    <ClInclude Include="Explosion.hpp" />
     <ClInclude Include="CHealthSystem.hpp" />
     <ClInclude Include="CMovementSystem.hpp" />
     <ClInclude Include="CFrustum.hpp" />
-    <ClInclude Include="Health.hpp" />
     <ClInclude Include="CLogger.hpp" />
-    <ClInclude Include="Movement.hpp" />
     <ClInclude Include="COcTree.hpp" />
-    <ClInclude Include="Physics.hpp" />
     <ClInclude Include="CPlane.hpp" />
-    <ClInclude Include="Player.hpp" />
     <ClInclude Include="CSize.hpp" />
-    <ClInclude Include="DebugName.hpp" />
-    <ClInclude Include="Transform.hpp" />
     <ClInclude Include="Distance.hpp" />
     <ClInclude Include="World.hpp" />
-    <ClInclude Include="BoundingBox.hpp" />
     <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="minitrace.h" />
     <ClInclude Include="TestECS.hpp" />
@@ -200,6 +200,8 @@
     <ClCompile Include="CBoundingBox.cpp" />
     <ClCompile Include="CLogger.cpp" />
     <ClCompile Include="ClosestPoint.cpp" />
+    <ClCompile Include="components\ComponentsRegistry.cpp" />
+    <ClCompile Include="components\Transform.cpp" />
     <ClCompile Include="Contains.cpp" />
     <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="COcTree.cpp" />
@@ -207,10 +209,8 @@
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="Distance.cpp" />
     <ClCompile Include="EntityTest.cpp" />
-    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Intersection.cpp" />
     <ClCompile Include="minitrace.c" />
-    <ClCompile Include="ComponentsRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

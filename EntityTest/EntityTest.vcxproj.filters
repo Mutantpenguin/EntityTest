@@ -93,33 +93,6 @@
     <ClInclude Include="Distance.hpp">
       <Filter>Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="Bomb.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="BoundingBox.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugName.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Explosion.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Health.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Movement.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="ecs\CComponentSystem.hpp">
       <Filter>ECS</Filter>
     </ClInclude>
@@ -140,6 +113,33 @@
     </ClInclude>
     <ClInclude Include="ecs\TupleIterator.hpp">
       <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Bomb.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\BoundingBox.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\DebugName.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Explosion.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Health.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Movement.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Physics.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Player.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Transform.hpp">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -179,10 +179,10 @@
     <ClCompile Include="Distance.cpp">
       <Filter>Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentsRegistry.cpp">
+    <ClCompile Include="components\Transform.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="components\ComponentsRegistry.cpp">
       <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
