@@ -206,11 +206,11 @@ namespace ecs
 			}
 			else
 			{
-				m_systemTypes[ typeid( T ) ] = m_systemId;
+				m_systemTypes[ typeid( T ) ] = m_systemIdNext;
 
-				m_systems[ m_systemId ] = std::make_unique< T >( *this, args... );
+				m_systems[ m_systemIdNext ] = std::make_unique< T >( *this, args... );
 
-				m_systemId++;
+				m_systemIdNext++;
 			}
 		}
 
@@ -301,7 +301,7 @@ namespace ecs
 
 		ComponentStorage m_componentStorage;
 
-		std::uint16_t m_systemId = 0;
+		std::uint16_t m_systemIdNext { 0 };
 
 		std::unordered_map< std::type_index, std::string > m_typeNames;
 
