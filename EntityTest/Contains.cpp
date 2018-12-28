@@ -67,6 +67,64 @@ bool Contains( const CFrustum &frustum, const glm::vec3 &spherePosition, const C
 	return( true );
 }
 
+bool Contains( const CFrustum &frustum, const glm::vec3 &boxPosition, const CBoundingBox &box )
+{
+	const glm::vec3 max = box.Max( boxPosition );
+	const glm::vec3 min = box.Min( boxPosition );
+
+	auto		ret = true;
+	glm::vec3	vmin, vmax;
+
+	for( const auto &plane : frustum.Planes() )
+	{
+		const auto &normal = plane.Normal();
+		const auto &distance = plane.Distance();
+
+		// X axis 
+		if( normal.x > 0 )
+		{
+			vmin.x = min.x;
+			vmax.x = max.x;
+		}
+		else
+		{
+			vmin.x = max.x;
+			vmax.x = min.x;
+		}
+
+		// Y axis 
+		if( normal.y > 0 )
+		{
+			vmin.y = min.y;
+			vmax.y = max.y;
+		}
+		else
+		{
+			vmin.y = max.y;
+			vmax.y = min.y;
+		}
+
+		// Z axis 
+		if( normal.z > 0 )
+		{
+			vmin.z = min.z;
+			vmax.z = max.z;
+		}
+		else
+		{
+			vmin.z = max.z;
+			vmax.z = min.z;
+		}
+
+		if( ( glm::dot( normal, vmin ) + distance ) > 0 )
+		{
+			return( false );
+		}
+	}
+
+	return( ret );
+}
+
 bool Contains( const glm::vec3 &boxAPosition, const CBoundingBox &boxA, const glm::vec3 &boxBPosition, const CBoundingBox &boxB )
 {
 	const glm::vec3 maxA = boxA.Max( boxAPosition );
