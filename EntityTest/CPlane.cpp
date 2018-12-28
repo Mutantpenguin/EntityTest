@@ -34,6 +34,6 @@ void CPlane::Normalize( void )
 {
 	const f16 length = glm::length( m_normal );
 	m_normal /= length;
-	// TODO is this right?
+	// TODO is this right? If not we don't need this function and can include it in "SetNormal"
 	m_distance /= length;
 }
