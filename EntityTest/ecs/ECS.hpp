@@ -199,7 +199,7 @@ namespace ecs
 
 			if( std::end( m_systemTypes ) != it )
 			{
-				CLogger::Info( "system '" + std::string( typeid( T ).name() ) + "' already exists" );
+				throw std::runtime_error( "system '" + std::string( typeid( T ).name() ) + "' already exists" );
 			}
 			else
 			{
@@ -225,7 +225,7 @@ namespace ecs
 			}
 			else
 			{
-				CLogger::Info( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+				throw std::runtime_error( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
 			}
 		}
 
@@ -253,7 +253,7 @@ namespace ecs
 			}
 			else
 			{
-				CLogger::Info( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+				throw std::runtime_error( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
 			}
 		}
 
@@ -270,7 +270,7 @@ namespace ecs
 			}
 			else
 			{
-				CLogger::Info( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
+				throw std::runtime_error( "system '" + std::string( typeid( T ).name() ) + "' does not exist" );
 			}
 		}
 
