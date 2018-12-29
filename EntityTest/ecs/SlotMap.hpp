@@ -5,17 +5,17 @@
 
 #include "ComponentTraits.hpp"
 
-#include "CEntity.hpp"
+#include "Entity.hpp"
 
 namespace ecs
 {
 	template< std::uint32_t _Size, typename T >
-	class CSlotMap
+	class SlotMap
 	{
 	public:
-		CSlotMap( const CSlotMap& ) = delete;
+		SlotMap( const SlotMap& ) = delete;
 
-		CSlotMap() noexcept :
+		SlotMap() noexcept :
 			ComponentName { ecs::ComponentTraits<T>::Name },
 			SizeInBytes { sizeof( T ) * _Size },
 			m_idMappings( _Size, nullIndex ),
@@ -23,7 +23,7 @@ namespace ecs
 			m_objects( _Size )
 		{}
 
-		bool Has( const CEntity &entity ) const
+		bool Has( const Entity &entity ) const
 		{
 			const auto &mapping = m_idMappings[ entity.Id() ];
 
@@ -44,7 +44,7 @@ namespace ecs
 			}
 		}
 
-		void Add( const CEntity &entity, T& component )
+		void Add( const Entity &entity, T& component )
 		{
 			auto &mapping = m_idMappings[ entity.Id() ];
 
@@ -72,7 +72,7 @@ namespace ecs
 			}
 		}
 
-		void Add( const CEntity &entity, T&& component )
+		void Add( const Entity &entity, T&& component )
 		{
 			auto &mapping = m_idMappings[ entity.Id() ];
 
@@ -100,7 +100,7 @@ namespace ecs
 			}
 		}
 
-		void Remove( const CEntity &entity )
+		void Remove( const Entity &entity )
 		{
 			auto &mapping = m_idMappings[ entity.Id() ];
 
@@ -149,7 +149,7 @@ namespace ecs
 			}
 		}
 
-		T* Get( const CEntity &entity )
+		T* Get( const Entity &entity )
 		{
 			const auto &mapping = m_idMappings[ entity.Id() ];
 
@@ -225,7 +225,7 @@ namespace ecs
 
 		std::vector< std::uint32_t > m_idMappings;
 
-		std::vector< CEntity >	m_entities;
+		std::vector< Entity >	m_entities;
 		std::vector< T >		m_objects;
 
 		std::uint32_t m_lastObjectIndex = nullIndex;

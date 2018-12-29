@@ -2,16 +2,16 @@
 
 #include <memory>
 
-#include "ecs/CComponentSystem.hpp"
+#include "ecs/ComponentSystemBase.hpp"
 
 #include "CBVHBase.hpp"
 
 template< typename T_ecs >
-class CBVHSystem final : public ecs::CComponentSystem< T_ecs >
+class CBVHSystem final : public ecs::ComponentSystemBase< T_ecs >
 {
 public:
 	CBVHSystem( T_ecs &ecs, const std::shared_ptr< CBVHBase > &bvh ) :
-		CComponentSystem( ecs ),
+		ComponentSystemBase( ecs ),
 		m_bvh { bvh }
 	{
 		Process();
@@ -30,7 +30,7 @@ public:
 
 		m_bvh->Clear();
 
-		std::vector< ecs::CEntity > entitiesForDeletion;
+		std::vector< ecs::Entity > entitiesForDeletion;
 
 		m_ecs.ForEach<Transform>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto transformComponent )
 		{

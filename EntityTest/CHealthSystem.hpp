@@ -1,13 +1,13 @@
 #pragma once
 
-#include "ecs/CComponentSystem.hpp"
+#include "ecs/ComponentSystemBase.hpp"
 
 template< typename T_ecs >
-class CHealthSystem final : public ecs::CComponentSystem< T_ecs >
+class CHealthSystem final : public ecs::ComponentSystemBase< T_ecs >
 {
 public:
 	CHealthSystem( T_ecs &ecs ) :
-		CComponentSystem( ecs )
+		ComponentSystemBase( ecs )
 	{}
 
 	virtual ~CHealthSystem()
@@ -19,7 +19,7 @@ public:
 
 		CLogger::Debug( "\tprocessing: CHealthSystem" );
 
-		std::vector< ecs::CEntity > entitiesForDeletion;
+		std::vector< ecs::Entity > entitiesForDeletion;
 
 		m_ecs.ForEach< Health >( [ &entitiesForDeletion ] ( const auto &healthEntity, auto healthComponent )
 		{

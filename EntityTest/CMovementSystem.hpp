@@ -1,13 +1,13 @@
 #pragma once
 
-#include "ecs/CComponentSystem.hpp"
+#include "ecs/ComponentSystemBase.hpp"
 
 template< typename T_ecs >
-class CMovementSystem final : public ecs::CComponentSystem< T_ecs >
+class CMovementSystem final : public ecs::ComponentSystemBase< T_ecs >
 {
 public:
 	CMovementSystem( T_ecs &ecs ) :
-		CComponentSystem { ecs }
+		ComponentSystemBase { ecs }
 	{}
 
 	virtual ~CMovementSystem()

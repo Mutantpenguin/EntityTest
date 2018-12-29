@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ecs/CEntityComponentSystem.hpp"
+#include "ecs/ECS.hpp"
 
 #include "components/Physics.hpp"
 #include "components/Player.hpp"
@@ -21,16 +21,16 @@
 #include "CMovementSystem.hpp"
 #include "CBVHSystem.hpp"
 
-using TestECS = ecs::CEntityComponentSystem<	100000,
-												Physics,
-												Player,
-												DebugName,
-												Transform,
-												Bomb,
-												BoundingBox,
-												Explosion,
-												Health,
-												Movement >;
+using TestECS = ecs::ECS<	100000,
+							Physics,
+							Player,
+							DebugName,
+							Transform,
+							Bomb,
+							BoundingBox,
+							Explosion,
+							Health,
+							Movement >;
 
 using TestBombSystem = CBombSystem< TestECS >;
 using TestHealthSystem = CHealthSystem< TestECS >;

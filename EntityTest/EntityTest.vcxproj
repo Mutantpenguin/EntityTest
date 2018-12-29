@@ -174,11 +174,11 @@
     <ClInclude Include="Contains.hpp" />
     <ClInclude Include="CBVHBase.hpp" />
     <ClInclude Include="CBVHSystem.hpp" />
-    <ClInclude Include="ecs\CComponentSystem.hpp" />
-    <ClInclude Include="ecs\CEntity.hpp" />
-    <ClInclude Include="ecs\CEntityComponentSystem.hpp" />
+    <ClInclude Include="ecs\ComponentSystemBase.hpp" />
+    <ClInclude Include="ecs\Entity.hpp" />
+    <ClInclude Include="ecs\ECS.hpp" />
     <ClInclude Include="ecs\ComponentTraits.hpp" />
-    <ClInclude Include="ecs\CSlotMap.hpp" />
+    <ClInclude Include="ecs\SlotMap.hpp" />
     <ClInclude Include="ecs\TupleChecker.hpp" />
     <ClInclude Include="ecs\TupleIterator.hpp" />
     <ClInclude Include="CHealthSystem.hpp" />

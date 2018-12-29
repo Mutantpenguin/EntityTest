@@ -3,14 +3,14 @@
 namespace ecs
 {
 	template< typename T_ecs >
-	class CComponentSystem
+	class ComponentSystemBase
 	{
 	public:
-		CComponentSystem( T_ecs &ecs ) :
+		ComponentSystemBase( T_ecs &ecs ) :
 			m_ecs { ecs }
 		{}
 
-		virtual ~CComponentSystem()
+		virtual ~ComponentSystemBase()
 		{}
 
 		virtual void Process() = 0;

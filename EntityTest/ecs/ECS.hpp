@@ -9,8 +9,8 @@
 
 #include "ComponentTraits.hpp"
 
-#include "CSlotMap.hpp"
-#include "CComponentSystem.hpp"
+#include "SlotMap.hpp"
+#include "ComponentSystemBase.hpp"
 
 #include "TupleIterator.hpp"
 #include "TupleChecker.hpp"
@@ -18,16 +18,16 @@
 namespace ecs
 {
 	template < std::uint32_t _Size, typename... Types >
-	class CEntityComponentSystem final
+	class ECS final
 	{
 		static_assert( _Size != std::numeric_limits<std::uint32_t>::max(), "a maximum of 4294967294 entities is allowed" );
 
 	public:
-		CEntityComponentSystem( const CEntityComponentSystem& ) = delete;
+		ECS( const ECS& ) = delete;
 
-		CEntityComponentSystem() noexcept
+		ECS() noexcept
 		{
-			CLogger::Info( "EntityComponentSystem for:" );
+			CLogger::Info( "Entity Component System for:" );
 			CLogger::Info( "\tup to " + std::to_string( _Size ) + " entities" );
 			CLogger::Info( "\twith these components:" );
 
@@ -41,14 +41,11 @@ namespace ecs
 
 			for( std::uint32_t i = _Size; i > 0; i-- )
 			{
-				m_freeEntities.push_back( CEntity( i - 1 ) );
+				m_freeEntities.push_back( Entity( i - 1 ) );
 			}
 		}
 
-		~CEntityComponentSystem()
-		{}
-
-		CEntity Create()
+		Entity Create()
 		{
 			if( !m_freeEntities.empty() )
 			{
@@ -62,7 +59,7 @@ namespace ecs
 			}
 		}
 
-		void Destroy( CEntity &entity )
+		void Destroy( Entity &entity )
 		{
 			TupleIterator::for_each( m_componentStorage, [ &entity ] ( auto &slotMap )
 			{
@@ -91,7 +88,7 @@ namespace ecs
 		}
 
 		template< typename T >
-		void AddComponent( const CEntity &entity, T& t )
+		void AddComponent( const Entity &entity, T& t )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -101,7 +98,7 @@ namespace ecs
 		}
 
 		template< typename T >
-		void AddComponent( const CEntity &entity, T&& t )
+		void AddComponent( const Entity &entity, T&& t )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -111,7 +108,7 @@ namespace ecs
 		}
 
 		template< typename T >
-		void RemoveComponent( const CEntity &entity )
+		void RemoveComponent( const Entity &entity )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -131,7 +128,7 @@ namespace ecs
 		}
 
 		template< typename T >
-		bool HasComponents( const CEntity &entity ) const
+		bool HasComponents( const Entity &entity ) const
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -148,19 +145,19 @@ namespace ecs
 		}
 
 		template< typename First, typename Second, typename ... Rest >
-		bool HasComponents( const CEntity &entity ) const
+		bool HasComponents( const Entity &entity ) const
 		{
 			return( HasComponents< First >( entity ) && HasComponents<Second, Rest...>( entity ) );
 		}
 
 		template< typename First, typename Second, typename ... Rest >
-		bool HasAnyComponents( const CEntity &entity ) const
+		bool HasAnyComponents( const Entity &entity ) const
 		{
 			return( HasComponents< First >( entity ) || HasComponents<Second, Rest...>( entity ) );
 		}
 
 		template< typename T >
-		T *GetComponent( const CEntity &entity )
+		T *GetComponent( const Entity &entity )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -196,7 +193,7 @@ namespace ecs
 		template< typename T, typename... Args >
 		void CreateSystem( Args... args )
 		{
-			static_assert( std::is_base_of< CComponentSystem< CEntityComponentSystem< _Size, Types ... > >, T >::value, "must derive from CComponentSystem" );
+			static_assert( std::is_base_of< ComponentSystemBase< ECS< _Size, Types ... > >, T >::value, "must derive from ComponentSystemBase" );
 
 			auto it = m_systemTypes.find( typeid( T ) );
 
@@ -217,7 +214,7 @@ namespace ecs
 		template< typename T >
 		void DestroySystem()
 		{
-			static_assert( std::is_base_of< CComponentSystem< CEntityComponentSystem< _Size, Types ... > >, T >::value, "must derive from CComponentSystem" );
+			static_assert( std::is_base_of< ComponentSystemBase< ECS< _Size, Types ... > >, T >::value, "must derive from ComponentSystemBase" );
 
 			auto it = m_systemTypes.find( typeid( T ) );
 
@@ -246,7 +243,7 @@ namespace ecs
 		template< typename T >
 		void PauseSystem()
 		{
-			static_assert( std::is_base_of< CComponentSystem< CEntityComponentSystem< _Size, Types ... > >, T >::value, "must derive from CComponentSystem" );
+			static_assert( std::is_base_of< ComponentSystemBase< ECS< _Size, Types ... > >, T >::value, "must derive from ComponentSystemBase" );
 
 			auto it = m_systemTypes.find( typeid( T ) );
 
@@ -263,7 +260,7 @@ namespace ecs
 		template< typename T >
 		void UnPauseSystem()
 		{
-			static_assert( std::is_base_of< CComponentSystem< CEntityComponentSystem< _Size, Types ... > >, T >::value, "must derive from CComponentSystem" );
+			static_assert( std::is_base_of< ComponentSystemBase< ECS< _Size, Types ... > >, T >::value, "must derive from ComponentSystemBase" );
 
 			auto it = m_systemTypes.find( typeid( T ) );
 
@@ -293,11 +290,11 @@ namespace ecs
 
 	private:
 		template< typename T >
-		using ComponentSlotMap = CSlotMap< _Size, T >;
+		using ComponentSlotMap = SlotMap< _Size, T >;
 
 		using ComponentStorage = std::tuple< ComponentSlotMap< Types >... >;
 
-		std::vector< CEntity > m_freeEntities;
+		std::vector< Entity > m_freeEntities;
 
 		ComponentStorage m_componentStorage;
 
@@ -307,6 +304,6 @@ namespace ecs
 
 		// two structures needed, so we can check against the type AND have a proper order
 		std::unordered_map< std::type_index, std::uint16_t > m_systemTypes;
-		std::map< std::uint16_t, std::unique_ptr< CComponentSystem< CEntityComponentSystem< _Size, Types ... > > > > m_systems;
+		std::map< std::uint16_t, std::unique_ptr< ComponentSystemBase< ECS< _Size, Types ... > > > > m_systems;
 	};
 }

@@ -5,13 +5,13 @@
 
 namespace ecs
 {
-	class CEntity final
+	class Entity final
 	{
 		template < std::uint32_t _Size, typename... Types >
-		friend class CEntityComponentSystem;
+		friend class ECS;
 
 	public:
-		CEntity() noexcept
+		Entity() noexcept
 		{}
 
 		const std::uint32_t &Id() const
@@ -27,7 +27,7 @@ namespace ecs
 		static const std::uint32_t nullId = std::numeric_limits< std::uint32_t >::max();
 
 	private:
-		CEntity( const std::uint32_t id ) :
+		Entity( const std::uint32_t id ) :
 			m_id { id }
 		{}
 

@@ -4,9 +4,6 @@
     <Filter Include="Components">
       <UniqueIdentifier>{0545f92d-8045-480e-934c-fa2858eaeea0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ECS">
-      <UniqueIdentifier>{7728da9c-d5a9-4cc8-8b71-f6215bcc3368}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TestApp">
       <UniqueIdentifier>{d048eecc-37e2-42a8-873c-ea7826b0e843}</UniqueIdentifier>
     </Filter>
@@ -32,6 +29,9 @@
     </Filter>
     <Filter Include="ext\fmt">
       <UniqueIdentifier>{0a553f62-1787-4f1a-b617-e63fc8da12cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ecs">
+      <UniqueIdentifier>{7728da9c-d5a9-4cc8-8b71-f6215bcc3368}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,26 +96,14 @@
     <ClInclude Include="Distance.hpp">
       <Filter>Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="ecs\CComponentSystem.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="ecs\CEntity.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="ecs\CEntityComponentSystem.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="ecs\ComponentTraits.hpp">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="ecs\CSlotMap.hpp">
-      <Filter>ECS</Filter>
+      <Filter>ecs</Filter>
     </ClInclude>
     <ClInclude Include="ecs\TupleChecker.hpp">
-      <Filter>ECS</Filter>
+      <Filter>ecs</Filter>
     </ClInclude>
     <ClInclude Include="ecs\TupleIterator.hpp">
-      <Filter>ECS</Filter>
+      <Filter>ecs</Filter>
     </ClInclude>
     <ClInclude Include="components\Bomb.hpp">
       <Filter>Components</Filter>
@@ -173,6 +161,18 @@
     </ClInclude>
     <ClInclude Include="ext\fmt\time.h">
       <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ecs\SlotMap.hpp">
+      <Filter>ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="ecs\ComponentSystemBase.hpp">
+      <Filter>ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="ecs\ECS.hpp">
+      <Filter>ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="ecs\Entity.hpp">
+      <Filter>ecs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
