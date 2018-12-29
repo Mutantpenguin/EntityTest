@@ -27,6 +27,7 @@ namespace ecs
 
 		ECS() noexcept
 		{
+			// TODO remove the CLogger from here so we can put the ECS into its own git submodule
 			CLogger::Info( "Entity Component System for:" );
 			CLogger::Info( "\tup to " + std::to_string( _Size ) + " entities" );
 			CLogger::Info( "\twith these components:" );
