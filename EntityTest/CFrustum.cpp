@@ -2,56 +2,69 @@
 
 #include "Distance.hpp"
 
-CFrustum::CFrustum( const glm::mat4 &viewProjectionMatrix )
-{
-	// right
-	CPlane &right = m_planes[ 0 ];
-	right.SetNormal( {	viewProjectionMatrix[ 0 ][ 3 ] - viewProjectionMatrix[ 0 ][ 0 ],
-						viewProjectionMatrix[ 1 ][ 3 ] - viewProjectionMatrix[ 1 ][ 0 ],
-						viewProjectionMatrix[ 2 ][ 3 ] - viewProjectionMatrix[ 2 ][ 0 ] } );
-	right.SetDistance( viewProjectionMatrix[ 3 ][ 3 ] - viewProjectionMatrix[ 3 ][ 0 ] );
-	right.Normalize();
+CFrustum::CFrustum( const glm::mat4 &viewProjectionMatrix ) :
+	m_planes {	{
+					// right
+					{
+						{
+							viewProjectionMatrix[ 0 ][ 3 ] - viewProjectionMatrix[ 0 ][ 0 ],
+							viewProjectionMatrix[ 1 ][ 3 ] - viewProjectionMatrix[ 1 ][ 0 ],
+							viewProjectionMatrix[ 2 ][ 3 ] - viewProjectionMatrix[ 2 ][ 0 ]
+						},
+						viewProjectionMatrix[ 3 ][ 3 ] - viewProjectionMatrix[ 3 ][ 0 ]
+					},
 
-	// left
-	CPlane &left = m_planes[ 1 ];
-	left.SetNormal( {	viewProjectionMatrix[ 0 ][ 3 ] + viewProjectionMatrix[ 0 ][ 0 ],
-						viewProjectionMatrix[ 1 ][ 3 ] + viewProjectionMatrix[ 1 ][ 0 ],
-						viewProjectionMatrix[ 2 ][ 3 ] + viewProjectionMatrix[ 2 ][ 0 ] } );
-	left.SetDistance( viewProjectionMatrix[ 3 ][ 3 ] + viewProjectionMatrix[ 3 ][ 0 ] );
-	left.Normalize();
+					// left
+					{
+						{
+							viewProjectionMatrix[ 0 ][ 3 ] + viewProjectionMatrix[ 0 ][ 0 ],
+							viewProjectionMatrix[ 1 ][ 3 ] + viewProjectionMatrix[ 1 ][ 0 ],
+							viewProjectionMatrix[ 2 ][ 3 ] + viewProjectionMatrix[ 2 ][ 0 ]
+						},
+						viewProjectionMatrix[ 3 ][ 3 ] + viewProjectionMatrix[ 3 ][ 0 ]
+					},
 
-	// top
-	CPlane &top = m_planes[ 2 ];
-	top.SetNormal( {	viewProjectionMatrix[ 0 ][ 3 ] - viewProjectionMatrix[ 0 ][ 1 ],
-						viewProjectionMatrix[ 1 ][ 3 ] - viewProjectionMatrix[ 1 ][ 1 ],
-						viewProjectionMatrix[ 2 ][ 3 ] - viewProjectionMatrix[ 2 ][ 1 ] } );
-	top.SetDistance( viewProjectionMatrix[ 3 ][ 3 ] - viewProjectionMatrix[ 3 ][ 1 ] );
-	top.Normalize();
+					// top
+					{
+						{
+							viewProjectionMatrix[ 0 ][ 3 ] - viewProjectionMatrix[ 0 ][ 1 ],
+							viewProjectionMatrix[ 1 ][ 3 ] - viewProjectionMatrix[ 1 ][ 1 ],
+							viewProjectionMatrix[ 2 ][ 3 ] - viewProjectionMatrix[ 2 ][ 1 ]
+						},
+						viewProjectionMatrix[ 3 ][ 3 ] - viewProjectionMatrix[ 3 ][ 1 ]
+					},
 
-	// bottom
-	CPlane &bottom = m_planes[ 3 ];
-	bottom.SetNormal( { viewProjectionMatrix[ 0 ][ 3 ] + viewProjectionMatrix[ 0 ][ 1 ],
-						viewProjectionMatrix[ 1 ][ 3 ] + viewProjectionMatrix[ 1 ][ 1 ],
-						viewProjectionMatrix[ 2 ][ 3 ] + viewProjectionMatrix[ 2 ][ 1 ] } );
-	bottom.SetDistance( viewProjectionMatrix[ 3 ][ 3 ] + viewProjectionMatrix[ 3 ][ 1 ] );
-	bottom.Normalize();
+					// bottom
+					{
+						{
+							viewProjectionMatrix[ 0 ][ 3 ] + viewProjectionMatrix[ 0 ][ 1 ],
+							viewProjectionMatrix[ 1 ][ 3 ] + viewProjectionMatrix[ 1 ][ 1 ],
+							viewProjectionMatrix[ 2 ][ 3 ] + viewProjectionMatrix[ 2 ][ 1 ]
+						},
+						viewProjectionMatrix[ 3 ][ 3 ] + viewProjectionMatrix[ 3 ][ 1 ]
+					},
 
-	// front
-	CPlane &front = m_planes[ 4 ];
-	front.SetNormal( {	viewProjectionMatrix[ 0 ][ 3 ] + viewProjectionMatrix[ 0 ][ 2 ],
-						viewProjectionMatrix[ 1 ][ 3 ] + viewProjectionMatrix[ 1 ][ 2 ],
-						viewProjectionMatrix[ 2 ][ 3 ] + viewProjectionMatrix[ 2 ][ 2 ] } );
-	front.SetDistance( viewProjectionMatrix[ 3 ][ 3 ] + viewProjectionMatrix[ 3 ][ 2 ] );
-	front.Normalize();
+					// front
+					{
+						{
+							viewProjectionMatrix[ 0 ][ 3 ] + viewProjectionMatrix[ 0 ][ 2 ],
+							viewProjectionMatrix[ 1 ][ 3 ] + viewProjectionMatrix[ 1 ][ 2 ],
+							viewProjectionMatrix[ 2 ][ 3 ] + viewProjectionMatrix[ 2 ][ 2 ]
+						},
+						viewProjectionMatrix[ 3 ][ 3 ] + viewProjectionMatrix[ 3 ][ 2 ]
+					},
 
-	// back
-	CPlane &back = m_planes[ 5 ];
-	back.SetNormal( {	viewProjectionMatrix[ 0 ][ 3 ] - viewProjectionMatrix[ 0 ][ 2 ],
-						viewProjectionMatrix[ 1 ][ 3 ] - viewProjectionMatrix[ 1 ][ 2 ],
-						viewProjectionMatrix[ 2 ][ 3 ] - viewProjectionMatrix[ 2 ][ 2 ] } );
-	back.SetDistance( viewProjectionMatrix[ 3 ][ 3 ] - viewProjectionMatrix[ 3 ][ 2 ] );
-	back.Normalize();
-}
+					// back
+					{
+						{
+							viewProjectionMatrix[ 0 ][ 3 ] - viewProjectionMatrix[ 0 ][ 2 ],
+							viewProjectionMatrix[ 1 ][ 3 ] - viewProjectionMatrix[ 1 ][ 2 ],
+							viewProjectionMatrix[ 2 ][ 3 ] - viewProjectionMatrix[ 2 ][ 2 ]
+						},
+						viewProjectionMatrix[ 3 ][ 3 ] - viewProjectionMatrix[ 3 ][ 2 ]
+					}
+				}	}
+{}
 
 const std::array< CPlane, 6 > &CFrustum::Planes() const
 {
