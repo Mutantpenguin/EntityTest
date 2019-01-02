@@ -1,6 +1,7 @@
 #include <chrono>
 
 #include "ext/minitrace/minitrace.h"
+#include "ext/fmt/format.h"
 
 #include "Types.hpp"
 
@@ -24,13 +25,14 @@ int main()
 	CLogger::Info( "Created ECS for:" );
 	CLogger::Info( "\tup to " + std::to_string( ecs.MaxSize ) + " entities" );
 	CLogger::Info( "\twith these components:" );
-	
-	ecs.ForEachComponentStorage(	[]( const auto &componentStorage )
-									{
-										// TODO round MiBi to two decimal places
-										CLogger::Info( "\t\t- " + componentStorage.ComponentName + " / " + std::to_string( componentStorage.SizeInBytes / 1024.0f / 1024.0f ) + " MiBi" );
-									} );
 
+	float totalComponentStorageInBytes;
+	ecs.ForEachComponentStorage(	[ &totalComponentStorageInBytes ]( const auto &componentStorage )
+									{
+										CLogger::Info( fmt::format( "\t\t- {0:<15}{1:<4.2f} MiBi", componentStorage.ComponentName, componentStorage.SizeInBytes / 1024.0f / 1024.0f ) );
+										totalComponentStorageInBytes += componentStorage.SizeInBytes;
+									} );
+	CLogger::Info( fmt::format( "\ttotal storage space: {0:.2f} MiBi", totalComponentStorageInBytes / 1024.0f / 1024.0f ) );
 	CLogger::Info( "" );
 
 
