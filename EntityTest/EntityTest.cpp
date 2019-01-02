@@ -26,7 +26,7 @@ int main()
 	CLogger::Info( "\tup to " + std::to_string( ecs.MaxSize ) + " entities" );
 	CLogger::Info( "\twith these components:" );
 
-	float totalComponentStorageInBytes;
+	f16 totalComponentStorageInBytes;
 	ecs.ForEachComponentStorage(	[ &totalComponentStorageInBytes ]( const auto &componentStorage )
 									{
 										CLogger::Info( fmt::format( "\t\t- {0:<15}{1:<4.2f} MiBi", componentStorage.ComponentName, componentStorage.SizeInBytes / 1024.0f / 1024.0f ) );
