@@ -27,23 +27,18 @@ namespace ecs
 
 		ECS() noexcept
 		{
-			// TODO remove the CLogger from here so we can put the ECS into its own git submodule
-			CLogger::Info( "Entity Component System for:" );
-			CLogger::Info( "\tup to " + std::to_string( _Size ) + " entities" );
-			CLogger::Info( "\twith these components:" );
-
-			TupleIterator::for_each( m_componentStorage, [] ( auto &slotMap )
-			{
-				// TODO round MiBi to two decimal places
-				CLogger::Info( "\t\t- " + slotMap.ComponentName + " / " + std::to_string( slotMap.SizeInBytes / 1024.0f / 1024.0f ) + " MiBi" );
-			} );
-
 			m_freeEntities.reserve( _Size );
 
 			for( std::uint32_t i = _Size; i > 0; i-- )
 			{
 				m_freeEntities.push_back( Entity( i - 1 ) );
 			}
+		}
+
+		template< typename L >
+		void ForEachComponentStorage( L lambda )
+		{
+			TupleIterator::for_each( m_componentStorage, lambda );
 		}
 
 		Entity Create()

@@ -21,6 +21,16 @@ int main()
 
 	TestECS ecs;
 
+	CLogger::Info( "Created ECS for:" );
+	CLogger::Info( "\tup to " + std::to_string( ecs.MaxSize ) + " entities" );
+	CLogger::Info( "\twith these components:" );
+	
+	ecs.ForEachComponentStorage(	[]( const auto &componentStorage )
+									{
+										// TODO round MiBi to two decimal places
+										CLogger::Info( "\t\t- " + componentStorage.ComponentName + " / " + std::to_string( componentStorage.SizeInBytes / 1024.0f / 1024.0f ) + " MiBi" );
+									} );
+
 	CLogger::Info( "" );
 
 
