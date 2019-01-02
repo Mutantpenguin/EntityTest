@@ -168,7 +168,7 @@ namespace ecs
 		}
 
 		template< typename T, typename L >
-		void ForEach( L lambda )
+		void ForEachComponent( L lambda )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -176,7 +176,7 @@ namespace ecs
 		}
 
 		template< typename T, typename L >
-		void ForEachParralel( L lambda )
+		void ForEachComponentParralel( L lambda )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 

@@ -32,7 +32,7 @@ public:
 
 		std::vector< ecs::Entity > entitiesForDeletion;
 
-		m_ecs.ForEach<Transform>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto transformComponent )
+		m_ecs.ForEachComponent<Transform>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto transformComponent )
 		{
 			auto const boundingBox = m_ecs.GetComponent<BoundingBox>( transformEntity );
 

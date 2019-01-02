@@ -24,8 +24,8 @@ public:
 
 		std::vector< ecs::Entity > bombEntitiesForDeletion;
 
-		MTR_BEGIN( "CBombSystem", "ForEach<Bomb>" );
-		m_ecs.ForEach<Bomb>( [ this ] ( const auto &bombEntity, auto bombComponent )
+		MTR_BEGIN( "CBombSystem", "ForEachComponent<Bomb>" );
+		m_ecs.ForEachComponent<Bomb>( [ this ] ( const auto &bombEntity, auto bombComponent )
 		{
 			if( !m_ecs.HasComponents<Explosion>( bombEntity ) )
 			{
@@ -41,10 +41,10 @@ public:
 				}
 			}
 		} );
-		MTR_END( "CBombSystem", "ForEach<Bomb>" );
+		MTR_END( "CBombSystem", "ForEachComponent<Bomb>" );
 
-		MTR_BEGIN( "CBombSystem", "ForEach<Explosion>" );
-		m_ecs.ForEach<Explosion>( [ this, &bombEntitiesForDeletion ] ( const auto &explosionEntity, auto explosionComponent )
+		MTR_BEGIN( "CBombSystem", "ForEachComponent<Explosion>" );
+		m_ecs.ForEachComponent<Explosion>( [ this, &bombEntitiesForDeletion ] ( const auto &explosionEntity, auto explosionComponent )
 		{
 			const auto explosionTransform = m_ecs.GetComponent<Transform>( explosionEntity );
 
@@ -58,7 +58,7 @@ public:
 
 			bombEntitiesForDeletion.push_back( explosionEntity );
 		} );
-		MTR_END( "CBombSystem", "ForEach<Explosion>" );
+		MTR_END( "CBombSystem", "ForEachComponent<Explosion>" );
 
 
 		for( auto &entity : bombEntitiesForDeletion )

@@ -19,7 +19,7 @@ public:
 
 		CLogger::Debug( "\tprocessing: CMovementSystem" );
 
-		m_ecs.ForEach<Movement>( [ this ] ( const auto &entity, auto movementComponent )
+		m_ecs.ForEachComponent<Movement>( [ this ] ( const auto &entity, auto movementComponent )
 		{
 			auto transformComponent = m_ecs.GetComponent<Transform>( entity );
 			if( transformComponent )
