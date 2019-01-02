@@ -189,10 +189,12 @@
     <ClInclude Include="CPlane.hpp" />
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="Distance.hpp" />
+    <ClInclude Include="ext\fmt\chrono.h" />
     <ClInclude Include="ext\fmt\color.h" />
     <ClInclude Include="ext\fmt\core.h" />
     <ClInclude Include="ext\fmt\format-inl.h" />
     <ClInclude Include="ext\fmt\format.h" />
+    <ClInclude Include="ext\fmt\locale.h" />
     <ClInclude Include="ext\fmt\ostream.h" />
     <ClInclude Include="ext\fmt\posix.h" />
     <ClInclude Include="ext\fmt\printf.h" />
