@@ -17,19 +17,19 @@ public:
 
 	void Clear() override;
 
-	bool Add( const ecs::Entity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox ) override;
+	bool Add( const ecs::Id &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox ) override;
 
-	virtual void ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const ecs::Entity &entity ) > lambda ) const override;
-	virtual void ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const ecs::Entity &entity ) > lambda ) const override;
-	virtual void ForEachIn( const CFrustum &frustum, const std::function< void( const ecs::Entity &entity ) > lambda ) const override;
+	virtual void ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const ecs::Id &entity ) > lambda ) const override;
+	virtual void ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const ecs::Id &entity ) > lambda ) const override;
+	virtual void ForEachIn( const CFrustum &frustum, const std::function< void( const ecs::Id &entity ) > lambda ) const override;
 
-	virtual bool ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< bool( const ecs::Entity &entity ) > lambda ) const override;
-	virtual bool ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< bool( const ecs::Entity &entity ) > lambda ) const override;
-	virtual bool ExistsIn( const CFrustum &frustum, const std::function< bool( const ecs::Entity &entity ) > lambda ) const override;
+	virtual bool ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< bool( const ecs::Id &entity ) > lambda ) const override;
+	virtual bool ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< bool( const ecs::Id &entity ) > lambda ) const override;
+	virtual bool ExistsIn( const CFrustum &frustum, const std::function< bool( const ecs::Id &entity ) > lambda ) const override;
 
 private:
-	void ForEach( const std::function< void( const ecs::Entity &entity ) > lambda ) const;
-	bool Exists( const std::function< bool( const ecs::Entity &entity ) > lambda ) const;
+	void ForEach( const std::function< void( const ecs::Id &entity ) > lambda ) const;
+	bool Exists( const std::function< bool( const ecs::Id &entity ) > lambda ) const;
 	
 	const glm::vec3		m_position;
 	const CBoundingBox	m_region;
@@ -38,7 +38,7 @@ private:
 
 	bool m_containsEntities = false;
 
-	std::vector< std::tuple< ecs::Entity, glm::vec3, std::optional< CBoundingBox > > > m_children;
+	std::vector< std::tuple< ecs::Id, glm::vec3, std::optional< CBoundingBox > > > m_children;
 
 	static const f16 sMinSize;
 };

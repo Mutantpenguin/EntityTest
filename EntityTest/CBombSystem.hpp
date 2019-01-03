@@ -22,7 +22,7 @@ public:
 
 		CLogger::Debug( "\tprocessing: CBombSystem" );
 
-		std::vector< ecs::Entity > bombEntitiesForDeletion;
+		std::vector< ecs::Id > bombEntitiesForDeletion;
 
 		MTR_BEGIN( "CBombSystem", "ForEachComponent<Bomb>" );
 		m_ecs.ForEachComponent<Bomb>( [ this ] ( const auto &bombEntity, auto bombComponent )
@@ -31,7 +31,7 @@ public:
 			{
 				if( const auto bombTransform = m_ecs.GetComponent<Transform>( bombEntity ) )
 				{
-					if( m_bvh->ExistsIn( bombTransform->Position, CSphere( bombComponent->activationRadius ), [ this ] ( const ecs::Entity &entity )
+					if( m_bvh->ExistsIn( bombTransform->Position, CSphere( bombComponent->activationRadius ), [ this ] ( const ecs::Id &entity )
 					{
 						return( m_ecs.HasComponents< Health >( entity ) );
 					} ) )
@@ -48,7 +48,7 @@ public:
 		{
 			const auto explosionTransform = m_ecs.GetComponent<Transform>( explosionEntity );
 
-			m_bvh->ForEachIn( explosionTransform->Position, CSphere( explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const ecs::Entity &entity )
+			m_bvh->ForEachIn( explosionTransform->Position, CSphere( explosionComponent->explosionRadius ), [ this, &damage = explosionComponent->damage ]( const ecs::Id &entity )
 			{
 				if( auto healthComponent = m_ecs.GetComponent< Health >( entity ) )
 				{

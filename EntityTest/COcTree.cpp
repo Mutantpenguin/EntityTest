@@ -54,7 +54,7 @@ void COcTree::Clear()
 	}
 }
 
-bool COcTree::Add( const ecs::Entity &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox )
+bool COcTree::Add( const ecs::Id &entity, const glm::vec3 &position, const CBoundingBox * const boundingBox )
 {
 	if( boundingBox )
 	{
@@ -91,7 +91,7 @@ bool COcTree::Add( const ecs::Entity &entity, const glm::vec3 &position, const C
 	return( true );
 }
 
-void COcTree::ForEach( const std::function< void( const ecs::Entity &entity ) > lambda ) const
+void COcTree::ForEach( const std::function< void( const ecs::Id &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -110,7 +110,7 @@ void COcTree::ForEach( const std::function< void( const ecs::Entity &entity ) > 
 	}
 }
 
-void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const ecs::Entity &entity ) > lambda ) const
+void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< void( const ecs::Id &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -155,7 +155,7 @@ void COcTree::ForEachIn( const glm::vec3 &spherePosition, const CSphere &sphere,
 	}
 }
 
-void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const ecs::Entity &entity ) > lambda ) const
+void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< void( const ecs::Id &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -200,7 +200,7 @@ void COcTree::ForEachIn( const glm::vec3 &boxPosition, const CBoundingBox &box, 
 	}
 }
 
-void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( const ecs::Entity &entity ) > lambda ) const
+void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( const ecs::Id &entity ) > lambda ) const
 {	
 	if( m_containsEntities )
 	{
@@ -245,7 +245,7 @@ void COcTree::ForEachIn( const CFrustum &frustum, const std::function< void( con
 	}
 }
 
-bool COcTree::Exists( const std::function< bool( const ecs::Entity &entity ) > lambda ) const
+bool COcTree::Exists( const std::function< bool( const ecs::Id &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -272,7 +272,7 @@ bool COcTree::Exists( const std::function< bool( const ecs::Entity &entity ) > l
 	return( false );
 }
 
-bool COcTree::ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< bool( const ecs::Entity &entity ) > lambda ) const
+bool COcTree::ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, const std::function< bool( const ecs::Id &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -328,7 +328,7 @@ bool COcTree::ExistsIn( const glm::vec3 &spherePosition, const CSphere &sphere, 
 	return( false );
 }
 
-bool COcTree::ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< bool( const ecs::Entity &entity ) > lambda ) const
+bool COcTree::ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, const std::function< bool( const ecs::Id &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{
@@ -384,7 +384,7 @@ bool COcTree::ExistsIn( const glm::vec3 &boxPosition, const CBoundingBox &box, c
 	return( false );
 }
 
-bool COcTree::ExistsIn( const CFrustum &frustum, const std::function< bool( const ecs::Entity &entity ) > lambda ) const
+bool COcTree::ExistsIn( const CFrustum &frustum, const std::function< bool( const ecs::Id &entity ) > lambda ) const
 {
 	if( m_containsEntities )
 	{

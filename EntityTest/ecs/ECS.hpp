@@ -20,18 +20,18 @@ namespace ecs
 	template < std::uint32_t _Size, typename... Types >
 	class ECS final
 	{
-		static_assert( _Size != std::numeric_limits<std::uint32_t>::max(), "a maximum of 4294967294 entities is allowed" );
+		static_assert( _Size != Id::nullValue, "a maximum of 4294967294 entities is allowed" );
 
 	public:
 		ECS( const ECS& ) = delete;
 
 		ECS() noexcept
 		{
-			m_freeEntities.reserve( _Size );
+			m_freeIds.reserve( _Size );
 
 			for( std::uint32_t i = _Size; i > 0; i-- )
 			{
-				m_freeEntities.push_back( Entity( i - 1 ) );
+				m_freeIds.push_back( Id( i - 1 ) );
 			}
 		}
 
@@ -41,13 +41,13 @@ namespace ecs
 			TupleIterator::for_each( m_componentStorage, lambda );
 		}
 
-		Entity Create()
+		Id Create()
 		{
-			if( !m_freeEntities.empty() )
+			if( !m_freeIds.empty() )
 			{
-				auto entity = m_freeEntities.back();
-				m_freeEntities.pop_back();
-				return( entity );
+				auto id = m_freeIds.back();
+				m_freeIds.pop_back();
+				return( id );
 			}
 			else
 			{
@@ -55,7 +55,7 @@ namespace ecs
 			}
 		}
 
-		void Destroy( Entity &entity )
+		void Destroy( Id &entity )
 		{
 			TupleIterator::for_each( m_componentStorage, [ &entity ] ( auto &slotMap )
 			{
@@ -63,16 +63,16 @@ namespace ecs
 			} );
 
 			// entities with max generation can't be reused
-			if( entity.Generation() != std::numeric_limits<std::uint32_t>::max() )
+			if( entity.Generation() != Id::nullValue )
 			{
 				entity.m_generation++;
-				m_freeEntities.push_back( entity );
+				m_freeIds.push_back( entity );
 			}
 		}
 
 		std::uint32_t Count() const
 		{
-			return( _Size - m_freeEntities.size() );
+			return( _Size - m_freeIds.size() );
 		}
 
 		template< typename T >
@@ -84,7 +84,7 @@ namespace ecs
 		}
 
 		template< typename T >
-		void AddComponent( const Entity &entity, T& t )
+		void AddComponent( const Id &entity, T& t )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -94,7 +94,7 @@ namespace ecs
 		}
 
 		template< typename T >
-		void AddComponent( const Entity &entity, T&& t )
+		void AddComponent( const Id &entity, T&& t )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -104,7 +104,7 @@ namespace ecs
 		}
 
 		template< typename T >
-		void RemoveComponent( const Entity &entity )
+		void RemoveComponent( const Id &entity )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -124,7 +124,7 @@ namespace ecs
 		}
 
 		template< typename T >
-		bool HasComponents( const Entity &entity ) const
+		bool HasComponents( const Id &entity ) const
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -141,19 +141,19 @@ namespace ecs
 		}
 
 		template< typename First, typename Second, typename ... Rest >
-		bool HasComponents( const Entity &entity ) const
+		bool HasComponents( const Id &entity ) const
 		{
 			return( HasComponents< First >( entity ) && HasComponents<Second, Rest...>( entity ) );
 		}
 
 		template< typename First, typename Second, typename ... Rest >
-		bool HasAnyComponents( const Entity &entity ) const
+		bool HasAnyComponents( const Id &entity ) const
 		{
 			return( HasComponents< First >( entity ) || HasComponents<Second, Rest...>( entity ) );
 		}
 
 		template< typename T >
-		T *GetComponent( const Entity &entity )
+		T *GetComponent( const Id &entity )
 		{
 			static_assert( tuple_contains_type< ComponentSlotMap< T >, ComponentStorage >::value, "not an allowed type for this ECS" );
 
@@ -290,7 +290,7 @@ namespace ecs
 
 		using ComponentStorage = std::tuple< ComponentSlotMap< Types >... >;
 
-		std::vector< Entity > m_freeEntities;
+		std::vector< Id > m_freeIds;
 
 		ComponentStorage m_componentStorage;
 

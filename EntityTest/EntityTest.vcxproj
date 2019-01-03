@@ -175,7 +175,7 @@
     <ClInclude Include="CBVHBase.hpp" />
     <ClInclude Include="CBVHSystem.hpp" />
     <ClInclude Include="ecs\ComponentSystemBase.hpp" />
-    <ClInclude Include="ecs\Entity.hpp" />
+    <ClInclude Include="ecs\Id.hpp" />
     <ClInclude Include="ecs\ECS.hpp" />
     <ClInclude Include="ecs\ComponentTraits.hpp" />
     <ClInclude Include="ecs\SlotMap.hpp" />

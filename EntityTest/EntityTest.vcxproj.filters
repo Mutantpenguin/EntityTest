@@ -171,14 +171,14 @@
     <ClInclude Include="ecs\ECS.hpp">
       <Filter>ecs</Filter>
     </ClInclude>
-    <ClInclude Include="ecs\Entity.hpp">
+    <ClInclude Include="ecs\Id.hpp">
       <Filter>ecs</Filter>
     </ClInclude>
     <ClInclude Include="ext\fmt\chrono.h">
-      <Filter>ext</Filter>
+      <Filter>ext\fmt</Filter>
     </ClInclude>
     <ClInclude Include="ext\fmt\locale.h">
-      <Filter>ext</Filter>
+      <Filter>ext\fmt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

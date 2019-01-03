@@ -5,7 +5,7 @@
 
 #include "ComponentTraits.hpp"
 
-#include "Entity.hpp"
+#include "Id.hpp"
 
 namespace ecs
 {
@@ -19,13 +19,13 @@ namespace ecs
 			ComponentName { ecs::ComponentTraits<T>::Name },
 			SizeInBytes { sizeof( T ) * _Size },
 			m_idMappings( _Size, nullIndex ),
-			m_entities( _Size ),
+			m_ids( _Size ),
 			m_objects( _Size )
 		{}
 
-		bool Has( const Entity &entity ) const
+		bool Has( const Id &id ) const
 		{
-			const auto &mapping = m_idMappings[ entity.Id() ];
+			const auto &mapping = m_idMappings[ id.Value() ];
 
 			if( nullIndex == mapping )
 			{
@@ -33,7 +33,7 @@ namespace ecs
 			}
 			else
 			{
-				if( m_entities[ mapping ].Generation() == entity.Generation() )
+				if( m_ids[ mapping ].Generation() == id.Generation() )
 				{
 					return( true );
 				}
@@ -44,9 +44,9 @@ namespace ecs
 			}
 		}
 
-		void Add( const Entity &entity, T& component )
+		void Add( const Id &id, T& component )
 		{
-			auto &mapping = m_idMappings[ entity.Id() ];
+			auto &mapping = m_idMappings[ id.Value() ];
 
 			if( nullIndex == mapping )
 			{
@@ -54,27 +54,27 @@ namespace ecs
 
 				mapping = m_lastObjectIndex;
 
-				m_entities[ m_lastObjectIndex ] = entity;
+				m_ids[ m_lastObjectIndex ] = id;
 				m_objects[ m_lastObjectIndex ] = component;
 			}
 			else
 			{
-				if( m_entities[ mapping ].Generation() == entity.Generation() )
+				if( m_ids[ mapping ].Generation() == id.Generation() )
 				{
 					m_objects[ mapping ] = component;
 				}
 #ifndef NDEBUG
 				else
 				{
-					throw std::runtime_error( "using stale entity id" );
+					throw std::runtime_error( "using stale id id" );
 				}
 #endif
 			}
 		}
 
-		void Add( const Entity &entity, T&& component )
+		void Add( const Id &id, T&& component )
 		{
-			auto &mapping = m_idMappings[ entity.Id() ];
+			auto &mapping = m_idMappings[ id.Value() ];
 
 			if( nullIndex == mapping )
 			{
@@ -82,40 +82,40 @@ namespace ecs
 
 				mapping = m_lastObjectIndex;
 
-				m_entities[ m_lastObjectIndex ]	= entity;
+				m_ids[ m_lastObjectIndex ]		= id;
 				m_objects[ m_lastObjectIndex ]	= component;
 			}
 			else
 			{
-				if( m_entities[ mapping ].Generation() == entity.Generation() )
+				if( m_ids[ mapping ].Generation() == id.Generation() )
 				{
 					m_objects[ mapping ] = component;
 				}
 #ifndef NDEBUG
 				else
 				{
-					throw std::runtime_error( "using stale entity id" );
+					throw std::runtime_error( "using stale id id" );
 				}
 #endif
 			}
 		}
 
-		void Remove( const Entity &entity )
+		void Remove( const Id &id )
 		{
-			auto &mapping = m_idMappings[ entity.Id() ];
+			auto &mapping = m_idMappings[ id.Value() ];
 
 			if( nullIndex != mapping )
 			{
-				if( m_entities[ mapping ].Generation() == entity.Generation() )
+				if( m_ids[ mapping ].Generation() == id.Generation() )
 				{
 					if( m_lastObjectIndex > 0 )
 					{
-						// let the entity which lied at the lastObjectIndex point to the one we deleted
-						m_idMappings[ m_entities[ m_lastObjectIndex ].Id() ] = mapping;
+						// let the id which lied at the lastObjectIndex point to the one we deleted
+						m_idMappings[ m_ids[ m_lastObjectIndex ].Value() ] = mapping;
 
-						//then copy over the data of the last entity
-						m_entities[ mapping ] = m_entities[ m_lastObjectIndex ];
-						m_objects[ mapping ] = m_objects[ m_lastObjectIndex ];
+						//then copy over the data of the last id
+						m_ids[ mapping ]		= m_ids[ m_lastObjectIndex ];
+						m_objects[ mapping ]	= m_objects[ m_lastObjectIndex ];
 
 						m_lastObjectIndex--;
 					}
@@ -129,7 +129,7 @@ namespace ecs
 #ifndef NDEBUG
 				else
 				{
-					throw std::runtime_error( "using stale entity id" );
+					throw std::runtime_error( "using stale id id" );
 				}
 #endif
 			}
@@ -141,17 +141,17 @@ namespace ecs
 			{
 				for( std::uint32_t i = 0; i <= m_lastObjectIndex; i++ )
 				{
-					const auto &entity = m_entities[ i ];
-					m_idMappings[ entity.Id() ] = nullIndex;
+					const auto &id = m_ids[ i ];
+					m_idMappings[ id.Value() ] = nullIndex;
 				}
 
 				m_lastObjectIndex = nullIndex;
 			}
 		}
 
-		T* Get( const Entity &entity )
+		T* Get( const Id &id )
 		{
-			const auto &mapping = m_idMappings[ entity.Id() ];
+			const auto &mapping = m_idMappings[ id.Value() ];
 
 			if( nullIndex == mapping )
 			{
@@ -159,7 +159,7 @@ namespace ecs
 			}
 			else
 			{
-				if( m_entities[ mapping ].Generation() == entity.Generation() )
+				if( m_ids[ mapping ].Generation() == id.Generation() )
 				{
 					return( &m_objects[ mapping ] );
 				}
@@ -177,7 +177,7 @@ namespace ecs
 			{
 				for( std::uint32_t i = 0; i <= m_lastObjectIndex; i++ )
 				{
-					lambda( m_entities[ i ], &m_objects[ i ] );
+					lambda( m_ids[ i ], &m_objects[ i ] );
 				}
 			}
 		}
@@ -190,7 +190,7 @@ namespace ecs
 #pragma omp parallel
 				for( std::uint32_t i = 0; i <= m_lastObjectIndex; i++ )
 				{
-					lambda( m_entities[ i ], &m_objects[ i ] );
+					lambda( m_ids[ i ], &m_objects[ i ] );
 				}
 			}
 		}
@@ -202,7 +202,7 @@ namespace ecs
 			{
 				for( std::uint32_t i = 0; i <= m_lastObjectIndex; i++ )
 				{
-					if( lambda( m_entities[ i ], &m_objects[ i ] ) )
+					if( lambda( m_ids[ i ], &m_objects[ i ] ) )
 					{
 						return( true );
 					}
@@ -225,8 +225,8 @@ namespace ecs
 
 		std::vector< std::uint32_t > m_idMappings;
 
-		std::vector< Entity >	m_entities;
-		std::vector< T >		m_objects;
+		std::vector< Id >	m_ids;
+		std::vector< T >	m_objects;
 
 		std::uint32_t m_lastObjectIndex = nullIndex;
 	};

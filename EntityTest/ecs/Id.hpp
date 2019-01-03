@@ -5,18 +5,18 @@
 
 namespace ecs
 {
-	class Entity final
+	class Id final
 	{
 		template < std::uint32_t _Size, typename... Types >
 		friend class ECS;
 
 	public:
-		Entity() noexcept
+		Id() noexcept
 		{}
 
-		const std::uint32_t &Id() const
+		const std::uint32_t &Value() const
 		{
-			return( m_id );
+			return( m_value );
 		}
 
 		const std::uint32_t &Generation() const
@@ -24,14 +24,14 @@ namespace ecs
 			return( m_generation );
 		}
 
-		static const std::uint32_t nullId = std::numeric_limits< std::uint32_t >::max();
+		static const std::uint32_t nullValue = std::numeric_limits< std::uint32_t >::max();
 
 	private:
-		Entity( const std::uint32_t id ) :
-			m_id { id }
+		Id( const std::uint32_t value ) :
+			m_value { value }
 		{}
 
-		std::uint32_t m_id			= nullId;
+		std::uint32_t m_value		= nullValue;
 		std::uint32_t m_generation	= 0;
 	};
 }

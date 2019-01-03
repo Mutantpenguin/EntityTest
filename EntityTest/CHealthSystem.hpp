@@ -19,7 +19,7 @@ public:
 
 		CLogger::Debug( "\tprocessing: CHealthSystem" );
 
-		std::vector< ecs::Entity > entitiesForDeletion;
+		std::vector< ecs::Id > entitiesForDeletion;
 
 		m_ecs.ForEachComponent< Health >( [ &entitiesForDeletion ] ( const auto &healthEntity, auto healthComponent )
 		{

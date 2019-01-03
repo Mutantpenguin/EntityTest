@@ -30,7 +30,7 @@ public:
 
 		m_bvh->Clear();
 
-		std::vector< ecs::Entity > entitiesForDeletion;
+		std::vector< ecs::Id > entitiesForDeletion;
 
 		m_ecs.ForEachComponent<Transform>( [ this, &entitiesForDeletion ] ( const auto &transformEntity, const auto transformComponent )
 		{
