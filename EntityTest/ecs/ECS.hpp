@@ -62,10 +62,10 @@ namespace ecs
 				slotMap.Remove( entity );
 			} );
 
-			// entities with max version can't be reused
-			if( entity.Version() != std::numeric_limits<std::uint32_t>::max() )
+			// entities with max generation can't be reused
+			if( entity.Generation() != std::numeric_limits<std::uint32_t>::max() )
 			{
-				entity.m_version++;
+				entity.m_generation++;
 				m_freeEntities.push_back( entity );
 			}
 		}

@@ -19,9 +19,9 @@ namespace ecs
 			return( m_id );
 		}
 
-		const std::uint32_t &Version() const
+		const std::uint32_t &Generation() const
 		{
-			return( m_version );
+			return( m_generation );
 		}
 
 		static const std::uint32_t nullId = std::numeric_limits< std::uint32_t >::max();
@@ -31,7 +31,7 @@ namespace ecs
 			m_id { id }
 		{}
 
-		std::uint32_t m_id		= nullId;
-		std::uint32_t m_version	= 0;
+		std::uint32_t m_id			= nullId;
+		std::uint32_t m_generation	= 0;
 	};
 }

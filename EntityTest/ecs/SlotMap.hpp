@@ -33,7 +33,7 @@ namespace ecs
 			}
 			else
 			{
-				if( m_entities[ mapping ].Version() == entity.Version() )
+				if( m_entities[ mapping ].Generation() == entity.Generation() )
 				{
 					return( true );
 				}
@@ -59,7 +59,7 @@ namespace ecs
 			}
 			else
 			{
-				if( m_entities[ mapping ].Version() == entity.Version() )
+				if( m_entities[ mapping ].Generation() == entity.Generation() )
 				{
 					m_objects[ mapping ] = component;
 				}
@@ -82,12 +82,12 @@ namespace ecs
 
 				mapping = m_lastObjectIndex;
 
-				m_entities[ m_lastObjectIndex ] = entity;
-				m_objects[ m_lastObjectIndex ] = component;
+				m_entities[ m_lastObjectIndex ]	= entity;
+				m_objects[ m_lastObjectIndex ]	= component;
 			}
 			else
 			{
-				if( m_entities[ mapping ].Version() == entity.Version() )
+				if( m_entities[ mapping ].Generation() == entity.Generation() )
 				{
 					m_objects[ mapping ] = component;
 				}
@@ -106,7 +106,7 @@ namespace ecs
 
 			if( nullIndex != mapping )
 			{
-				if( m_entities[ mapping ].Version() == entity.Version() )
+				if( m_entities[ mapping ].Generation() == entity.Generation() )
 				{
 					if( m_lastObjectIndex > 0 )
 					{
@@ -159,7 +159,7 @@ namespace ecs
 			}
 			else
 			{
-				if( m_entities[ mapping ].Version() == entity.Version() )
+				if( m_entities[ mapping ].Generation() == entity.Generation() )
 				{
 					return( &m_objects[ mapping ] );
 				}
