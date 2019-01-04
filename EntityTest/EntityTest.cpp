@@ -23,7 +23,7 @@ int main()
 	TestECS ecs;
 
 	CLogger::Info( "Created ECS for:" );
-	CLogger::Info( "\tup to " + std::to_string( ecs.MaxSize ) + " entities" );
+	CLogger::Info( fmt::format( "\tup to {0:n} entities", ecs.MaxSize ) );
 	CLogger::Info( "\twith these components:" );
 
 	f16 totalComponentStorageInBytes;
