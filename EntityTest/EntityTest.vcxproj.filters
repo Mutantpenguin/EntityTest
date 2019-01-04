@@ -33,6 +33,9 @@
     <Filter Include="ecs">
       <UniqueIdentifier>{7728da9c-d5a9-4cc8-8b71-f6215bcc3368}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ext\effolkronium">
+      <UniqueIdentifier>{b021691e-a5ce-494c-b05b-07b86415489d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="ext\fmt\locale.h">
       <Filter>ext\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\effolkronium\random.hpp">
+      <Filter>ext\effolkronium</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

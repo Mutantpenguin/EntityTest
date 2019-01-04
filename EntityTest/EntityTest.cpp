@@ -1,7 +1,10 @@
 #include <chrono>
 
 #include "ext/minitrace/minitrace.h"
+
 #include "ext/fmt/format.h"
+
+#include "ext/effolkronium/random.hpp"
 
 #include "Types.hpp"
 
@@ -10,7 +13,6 @@
 #include "TestECS.hpp"
 
 #include "COcTree.hpp"
-
 
 int main()
 {
@@ -37,6 +39,8 @@ int main()
 
 
 	{
+		using Random = effolkronium::random_static;
+
 		MTR_SCOPE( __FILE__, "Creating entities" );
 
 		const auto start = std::chrono::high_resolution_clock::now();
@@ -47,25 +51,25 @@ int main()
 			
 			ecs.AddComponent( entity, DebugName( "entity_" + std::to_string( i ) ) );
 
-			if( rand() % 10 == 2 )
+			if( Random::get( 0, 9 ) == 2 )
 			{
 				ecs.AddComponent( entity, Physics( 10.0f ) );
 
 				Transform transform;
-				transform.Position = { rand() % 100, rand() % 100, rand() % 100 };
+				transform.Position = { Random::get( 0, 99 ), Random::get( 0, 99 ), Random::get( 0, 99 ) };
 				ecs.AddComponent( entity, transform );
 
-				if( rand() % 10 > 4 )
+				if( Random::get( 0, 9 ) > 4 )
 				{
 					ecs.AddComponent( entity, BoundingBox( { 2.0f, 2.0f, 2.0f } ) );
 				}
 			}
 
-			if( rand() % 10 > 4 )
+			if( Random::get( 0, 9 ) > 4 )
 			{
 				Player playerComponent;
 
-				if( rand() % 10 > 4 )
+				if( Random::get( 0, 9 ) > 4 )
 				{
 					playerComponent.Team = 1;
 				}
@@ -77,21 +81,21 @@ int main()
 				ecs.AddComponent( entity, playerComponent );
 			}
 
-			if( rand() % 10 > 7 )
+			if( Random::get( 0, 9 ) > 7 )
 			{
 				ecs.AddComponent( entity, Health( 100.0f ) );
 			}
 
-			if( rand() % 10 > 7 )
+			if( Random::get( 0, 9 ) > 7 )
 			{
 				ecs.AddComponent( entity, Bomb( 10.0f ) );
 			}
 			else
 			{
 				Movement movement;
-				movement.Direction = {	static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ),
-										static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ),
-										static_cast< f16 >( rand() ) / static_cast< f16 >( RAND_MAX ) };
+				movement.Direction = {	Random::get( -1.0f, 1.0f ),
+										Random::get( -1.0f, 1.0f ),
+										Random::get( -1.0f, 1.0f ) };
 				ecs.AddComponent( entity, movement );
 			}
 		}

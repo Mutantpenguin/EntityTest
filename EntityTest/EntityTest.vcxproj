@@ -189,6 +189,7 @@
     <ClInclude Include="CPlane.hpp" />
     <ClInclude Include="CSize.hpp" />
     <ClInclude Include="Distance.hpp" />
+    <ClInclude Include="ext\effolkronium\random.hpp" />
     <ClInclude Include="ext\fmt\chrono.h" />
     <ClInclude Include="ext\fmt\color.h" />
     <ClInclude Include="ext\fmt\core.h" />
