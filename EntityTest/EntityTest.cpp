@@ -112,10 +112,10 @@ int main()
 
 			auto spatial = std::make_shared< COcTree >( glm::vec3( 0.0f, 0.0f, 0.0f ), CBoundingBox( { 110.0f, 110.0f, 110.0f } ) );
 
+			ecs.CreateSystem< TestBVHSystem >( spatial );
 			ecs.CreateSystem< TestBombSystem >( spatial );
 			ecs.CreateSystem< TestHealthSystem >();
 			ecs.CreateSystem< TestMovementSystem >();
-			ecs.CreateSystem< TestBVHSystem >( spatial );
 		}
 
 		const auto firstIterationStart = std::chrono::high_resolution_clock::now();
