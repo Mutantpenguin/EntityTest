@@ -296,8 +296,6 @@ namespace ecs
 
 		std::uint16_t m_systemIdNext { 0 };
 
-		std::unordered_map< std::type_index, std::string > m_typeNames;
-
 		// two structures needed, so we can check against the type AND have a proper order
 		std::unordered_map< std::type_index, std::uint16_t > m_systemTypes;
 		std::map< std::uint16_t, std::unique_ptr< ComponentSystemBase< ECS< _Size, Types ... > > > > m_systems;
