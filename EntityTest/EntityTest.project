@@ -6,9 +6,25 @@
     </Plugin>
   </Plugins>
   <VirtualDirectory Name="ext">
+    <VirtualDirectory Name="effolkronium">
+      <File Name="ext/effolkronium/random.hpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="fmt">
+      <File Name="ext/fmt/time.h"/>
+      <File Name="ext/fmt/ranges.h"/>
+      <File Name="ext/fmt/printf.h"/>
+      <File Name="ext/fmt/posix.h"/>
+      <File Name="ext/fmt/ostream.h"/>
+      <File Name="ext/fmt/locale.h"/>
+      <File Name="ext/fmt/format.h"/>
+      <File Name="ext/fmt/format-inl.h"/>
+      <File Name="ext/fmt/core.h"/>
+      <File Name="ext/fmt/color.h"/>
+      <File Name="ext/fmt/chrono.h"/>
+    </VirtualDirectory>
     <VirtualDirectory Name="minitrace">
-      <File Name="minitrace.h"/>
-      <File Name="minitrace.c"/>
+      <File Name="ext/minitrace/minitrace.h"/>
+      <File Name="ext/minitrace/minitrace.c"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Reconciliation>
@@ -61,24 +77,26 @@
       <File Name="CFrustum.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="ECS">
-      <File Name="CComponentSystem.hpp"/>
-      <File Name="CEntity.hpp"/>
-      <File Name="TupleChecker.hpp"/>
-      <File Name="TupleIterator.hpp"/>
-      <File Name="CSlotMap.hpp"/>
-      <File Name="CEntityComponentSystem.hpp"/>
+      <File Name="ecs/TupleIterator.hpp"/>
+      <File Name="ecs/TupleChecker.hpp"/>
+      <File Name="ecs/SlotMap.hpp"/>
+      <File Name="ecs/Id.hpp"/>
+      <File Name="ecs/ECS.hpp"/>
+      <File Name="ecs/ComponentTraits.hpp"/>
+      <File Name="ecs/ComponentSystemBase.hpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Components">
-      <File Name="CBoundingBoxComponent.hpp"/>
-      <File Name="CTransformComponent.hpp"/>
-      <File Name="CTransformComponent.cpp"/>
-      <File Name="CMovementComponent.hpp"/>
-      <File Name="CPlayerComponent.hpp"/>
-      <File Name="CPhysicsComponent.hpp"/>
-      <File Name="CHealthComponent.hpp"/>
-      <File Name="CExplosionComponent.hpp"/>
-      <File Name="CDebugNameComponent.hpp"/>
-      <File Name="CBombComponent.hpp"/>
+      <File Name="components/Transform.hpp"/>
+      <File Name="components/Transform.cpp"/>
+      <File Name="components/Player.hpp"/>
+      <File Name="components/Physics.hpp"/>
+      <File Name="components/Movement.hpp"/>
+      <File Name="components/Health.hpp"/>
+      <File Name="components/Explosion.hpp"/>
+      <File Name="components/DebugName.hpp"/>
+      <File Name="components/ComponentsRegistry.cpp"/>
+      <File Name="components/BoundingBox.hpp"/>
+      <File Name="components/Bomb.hpp"/>
     </VirtualDirectory>
     <File Name="EntityTest.cpp"/>
   </VirtualDirectory>
