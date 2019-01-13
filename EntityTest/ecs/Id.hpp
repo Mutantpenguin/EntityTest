@@ -24,14 +24,15 @@ namespace ecs
 			return( m_generation );
 		}
 
-		static const std::uint32_t nullValue = std::numeric_limits< std::uint32_t >::max();
+		static const std::uint32_t nullValue		= std::numeric_limits< std::uint32_t >::max();
+		static const std::uint32_t maxGeneration	= std::numeric_limits< std::uint32_t >::max();
 
 	private:
 		Id( const std::uint32_t value ) :
 			m_value { value }
 		{}
 
-		std::uint32_t m_value		= nullValue;
-		std::uint32_t m_generation	= 0;
+		std::uint32_t m_value		{ nullValue };
+		std::uint32_t m_generation	{ 0 };
 	};
 }

@@ -63,7 +63,7 @@ namespace ecs
 			} );
 
 			// entities with max generation can't be reused
-			if( entity.Generation() != Id::nullValue )
+			if( entity.Generation() != Id::maxGeneration )
 			{
 				entity.m_generation++;
 				m_freeIds.push_back( entity );
