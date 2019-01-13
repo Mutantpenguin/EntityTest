@@ -16,11 +16,6 @@
 
 #include "components/Transform.hpp"
 
-#include "CBombSystem.hpp"
-#include "CHealthSystem.hpp"
-#include "CMovementSystem.hpp"
-#include "CBVHSystem.hpp"
-
 using TestECS = ecs::ECS<	100000,
 							Physics,
 							Player,
@@ -31,8 +26,3 @@ using TestECS = ecs::ECS<	100000,
 							Explosion,
 							Health,
 							Movement >;
-
-using TestBombSystem = CBombSystem< TestECS >;
-using TestHealthSystem = CHealthSystem< TestECS >;
-using TestMovementSystem = CMovementSystem< TestECS >;
-using TestBVHSystem = CBVHSystem< TestECS >;

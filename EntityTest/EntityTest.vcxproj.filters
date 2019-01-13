@@ -186,6 +186,9 @@
     <ClInclude Include="ext\effolkronium\random.hpp">
       <Filter>ext\effolkronium</Filter>
     </ClInclude>
+    <ClInclude Include="TestSystems.hpp">
+      <Filter>TestApp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">

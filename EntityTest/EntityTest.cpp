@@ -11,6 +11,7 @@
 #include "CLogger.hpp"
 
 #include "TestECS.hpp"
+#include "TestSystems.hpp"
 
 #include "COcTree.hpp"
 

@@ -202,6 +202,7 @@
     <ClInclude Include="ext\fmt\ranges.h" />
     <ClInclude Include="ext\fmt\time.h" />
     <ClInclude Include="ext\minitrace\minitrace.h" />
+    <ClInclude Include="TestSystems.hpp" />
     <ClInclude Include="World.hpp" />
     <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="TestECS.hpp" />
