@@ -154,7 +154,13 @@ int main()
 
 		CLogger::Info( "" );
 
-		CLogger::Info( "average framtime: " + std::to_string( diffMainLoop.count() / simulateFrameCount * 1000.0f ) + " ms" );
+		auto avgFrametimeMs = diffMainLoop.count() / simulateFrameCount * 1000.0f;
+
+		CLogger::Info( fmt::format( "average frametime: {0:.2f} ms", avgFrametimeMs ) );
+
+		auto fps = 1.0f / avgFrametimeMs * 1000.0f;
+
+		CLogger::Info( fmt::format( "average fps:     : {0:.2f}", fps ) );
 
 		CLogger::Info( "" );
 
