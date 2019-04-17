@@ -20,7 +20,7 @@ namespace ecs
 	template < std::uint32_t _Size, typename... Types >
 	class ECS final
 	{
-		static_assert( _Size != Id::nullValue, "a maximum of 4294967294 entities is allowed" );
+		static_assert( _Size != Id::nullIndex, "a maximum of 4294967294 entities is allowed" );
 
 	public:
 		ECS( const ECS& ) = delete;
@@ -31,7 +31,7 @@ namespace ecs
 
 			for( std::uint32_t i = _Size; i > 0; i-- )
 			{
-				m_freeIds.push_back( Id( i - 1 ) );
+				m_freeIds.push_back( Id( i - 1, 0 ) );
 			}
 		}
 
