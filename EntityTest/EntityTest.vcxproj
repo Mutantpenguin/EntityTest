@@ -74,6 +74,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -82,6 +83,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -200,8 +202,10 @@
     <ClInclude Include="ext\fmt\posix.h" />
     <ClInclude Include="ext\fmt\printf.h" />
     <ClInclude Include="ext\fmt\ranges.h" />
+    <ClInclude Include="ext\fmt\safe-duration-cast.h" />
     <ClInclude Include="ext\fmt\time.h" />
     <ClInclude Include="ext\minitrace\minitrace.h" />
+    <ClInclude Include="progressbar\CProgressBar.hpp" />
     <ClInclude Include="TestSystems.hpp" />
     <ClInclude Include="World.hpp" />
     <ClInclude Include="Intersection.hpp" />
@@ -226,6 +230,7 @@
     <ClCompile Include="ext\fmt\posix.cc" />
     <ClCompile Include="ext\minitrace\minitrace.c" />
     <ClCompile Include="Intersection.cpp" />
+    <ClCompile Include="progressbar\CProgressBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

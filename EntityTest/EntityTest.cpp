@@ -15,6 +15,8 @@
 
 #include "COcTree.hpp"
 
+#include "progressbar/CProgressBar.hpp"
+
 int main()
 {
 	mtr_init( "trace.json" );
@@ -46,8 +48,12 @@ int main()
 
 		const auto start = std::chrono::high_resolution_clock::now();
 
+		CProgressBar progressBar;
+
 		for( u32 i = 0; i < ecs.MaxSize; i++ )
 		{
+			progressBar.Show( static_cast<float>( i + 1 ) / ecs.MaxSize * 100 );
+
 			auto entity = ecs.Create();
 			
 			ecs.AddComponent( entity, DebugName( "entity_" + std::to_string( i ) ) );
@@ -100,6 +106,8 @@ int main()
 				ecs.AddComponent( entity, movement );
 			}
 		}
+
+		progressBar.Finish();
 
 		const auto end = std::chrono::high_resolution_clock::now();
 		const std::chrono::duration<f32> diff = end - start;

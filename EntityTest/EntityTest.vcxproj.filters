@@ -36,6 +36,9 @@
     <Filter Include="ext\effolkronium">
       <UniqueIdentifier>{b021691e-a5ce-494c-b05b-07b86415489d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="progressbar">
+      <UniqueIdentifier>{8409fb57-d8f3-4671-8bab-59d22e87118b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -189,6 +192,12 @@
     <ClInclude Include="TestSystems.hpp">
       <Filter>TestApp</Filter>
     </ClInclude>
+    <ClInclude Include="progressbar\CProgressBar.hpp">
+      <Filter>progressbar</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\fmt\safe-duration-cast.h">
+      <Filter>ext\fmt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFrustum.cpp">
@@ -238,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="ext\fmt\posix.cc">
       <Filter>ext\fmt</Filter>
+    </ClCompile>
+    <ClCompile Include="progressbar\CProgressBar.cpp">
+      <Filter>progressbar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
