@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include "ext/fmt/format.h"
-#include "ext/fmt/color.h"
+#include "../ext/fmt/format.h"
+#include "../ext/fmt/color.h"
 
 #ifdef __linux__
 	#include <sys/ioctl.h>

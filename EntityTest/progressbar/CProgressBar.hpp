@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-#include "CSize.hpp"
+#include "../CSize.hpp"
 
 class CProgressBar final
 {
