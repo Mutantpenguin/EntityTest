@@ -18,5 +18,5 @@ public:
 	glm::vec3 Max( const glm::vec3 &boxPosition ) const;
 
 private:
-	glm::vec3 m_size;
+	glm::vec3 m_size { 0.0f, 0.0f, 0.0f };
 };
